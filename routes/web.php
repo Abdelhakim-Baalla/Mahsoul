@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConsultationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/consultation', function () {
-    return view('consultation');
-});
+Route::get('/consultation', [ConsultationController::class, 'index'])->name('consultation.index');
+Route::post('/api/consultations', [ConsultationController::class, 'store'])->name('consultation.store');
 
 Route::get('/formation', function () {
     return view('formation');
