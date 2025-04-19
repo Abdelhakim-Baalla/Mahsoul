@@ -32,3 +32,26 @@ Route::get('/marketplace', function () {
 Route::get('/community', function () {
     return view('community');
 });
+
+Route::get('/admin', function () {
+    return view('admin');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+
+
