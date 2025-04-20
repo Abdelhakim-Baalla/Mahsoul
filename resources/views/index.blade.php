@@ -20,10 +20,10 @@
                         Consultations avec des experts, produits agricoles de qualité et formations pour les agriculteurs et éleveurs.
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="consultation.html" class="inline-block px-8 py-4 text-center font-medium rounded-full text-white bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
+                        <a href="/consultation" class="inline-block px-8 py-4 text-center font-medium rounded-full text-white bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
                             Réserver une consultation
                         </a>
-                        <a href="products.html" class="inline-block px-8 py-4 text-center font-medium rounded-full text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-200 transform hover:-translate-y-1 transition duration-300">
+                        <a href="/marketplace" class="inline-block px-8 py-4 text-center font-medium rounded-full text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-200 transform hover:-translate-y-1 transition duration-300">
                             Voir nos produits
                         </a>
                     </div>
@@ -105,7 +105,7 @@
                         <p class="text-gray-600 mb-6">
                             Réservez des consultations avec des experts agricoles et vétérinaires pour résoudre vos problèmes.
                         </p>
-                        <a href="consultation.html" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-700 group">
+                        <a href="#" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-700 group">
                             <span>En savoir plus</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -127,7 +127,7 @@
                         <p class="text-gray-600 mb-6">
                             Découvrez notre catalogue de produits agricoles de qualité, des semences aux équipements.
                         </p>
-                        <a href="products.html" class="inline-flex items-center font-medium text-secondary-600 hover:text-secondary-700 group">
+                        <a href="#" class="inline-flex items-center font-medium text-secondary-600 hover:text-secondary-700 group">
                             <span>Voir le catalogue</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -151,7 +151,7 @@
                         <p class="text-gray-600 mb-6">
                             Améliorez vos compétences avec nos formations sur les techniques agricoles modernes.
                         </p>
-                        <a href="formation.html" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-700 group">
+                        <a href="#" class="inline-flex items-center font-medium text-blue-600 hover:text-blue-700 group">
                             <span>Découvrir les formations</span>
                             <svg class="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -299,10 +299,10 @@
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Prêt à améliorer votre exploitation?</h2>
                     <p class="text-primary-100 text-lg mb-8">Rejoignez Mahsoul aujourd'hui et transformez votre approche de l'agriculture avec nos experts et nos solutions adaptées.</p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="register.html" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-white text-primary-600 hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
+                        <a href="/register" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-white text-primary-600 hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
                             S'inscrire
                         </a>
-                        <a href="consultation.html" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-primary-500 text-white border border-primary-400 hover:bg-primary-400 transform hover:-translate-y-1 transition duration-300">
+                        <a href="/consultation" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-primary-500 text-white border border-primary-400 hover:bg-primary-400 transform hover:-translate-y-1 transition duration-300">
                             Réserver une consultation
                         </a>
                     </div>
@@ -334,5 +334,4 @@
             </div>
         </div>
     </section>
-    @endsection
-    
+@endsection
