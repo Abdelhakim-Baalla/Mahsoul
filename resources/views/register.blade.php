@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Register Section -->
     <section class="py-12 md:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-center">
-                <!-- Left Column - Image and Text -->
+            
                 <div class="w-full md:w-1/2 md:pr-12 mb-10 md:mb-0">
                     <div class="relative">
-                        <div class="blob-shape bg-primary-100 absolute top-0 right-0 w-64 h-64 -mt-10 -mr-10 z-0"></div>
                         <div class="relative z-10 overflow-hidden rounded-2xl shadow-soft">
-                            <img class="w-full h-auto" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80" alt="Agriculture landscape">
+                            <img class="w-full h-auto" src="{{ asset('images/register-pages-header.jpg') }}" alt="Agriculture Doctore">
                         </div>
                         <div class="absolute -bottom-4 -left-4 bg-white p-4 rounded-lg shadow-soft z-20">
                             <div class="flex items-center space-x-3">
@@ -105,14 +103,12 @@
                             </div>
                             
                             <div>
-                                <label for="user_type" class="block text-sm font-medium text-gray-700 mb-2">Type d'utilisateur</label>
+                                <label for="user_type" class="block text-sm font-medium text-gray-700 mb-2">Votre Rôle</label>
                                 <select id="user_type" name="user_type" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
                                     <option value="" selected disabled>Sélectionnez votre profil</option>
-                                    <option value="farmer">Agriculteur</option>
-                                    <option value="breeder">Éleveur</option>
-                                    <option value="supplier">Fournisseur</option>
-                                    <option value="expert">Expert/Consultant</option>
-                                    <option value="other">Autre</option>
+                                    <option value="Agricole">Agricole</option>
+                                    <option value="vétérinaire">vétérinaire</option>
+                                    <option value="Client">Client</option>
                                 </select>
                             </div>
                             
@@ -122,15 +118,6 @@
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label for="terms" class="text-gray-600">J'accepte les <a href="#" class="text-primary-600 hover:text-primary-700">conditions d'utilisation</a> et la <a href="/privacy" class="text-primary-600 hover:text-primary-700">politique de confidentialité</a></label>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="newsletter" name="newsletter" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="newsletter" class="text-gray-600">Je souhaite recevoir la newsletter et les offres promotionnelles</label>
                                 </div>
                             </div>
                             
