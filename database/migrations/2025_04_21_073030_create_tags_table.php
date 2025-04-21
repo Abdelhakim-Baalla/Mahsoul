@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('formation_tag_formtion', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('formation')->constrained('formation');
-            $table->foreignId('tag')->constrained('tag_formation');
+            $table->string('nom')->unique();
             $table->engine = 'InnoDB';
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formation_tag_formtion');
+        Schema::dropIfExists('tags');
     }
 };

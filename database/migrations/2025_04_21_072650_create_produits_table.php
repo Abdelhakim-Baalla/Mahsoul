@@ -13,9 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tag_formation', function (Blueprint $table) {
+        Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->text('description')->nullable();
+            $table->float('prix');
+            $table->float('quantite');
+            $table->string('unite_mesure');
+            $table->foreignId('categorie')->constrained('categories')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('en_stock')->default(true);
             $table->engine = 'InnoDB';
             $table->timestamps();
         });
@@ -28,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_formation');
+        Schema::dropIfExists('produits');
     }
 };

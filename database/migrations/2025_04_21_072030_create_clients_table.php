@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('formation', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->string('contenu');
-            $table->foreignId('categorie')->constrained('categorie_formation');
-            $table->string('photo');
+            $table->foreignId('utilisateur')->constrained('utilisateurs')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formation');
+        Schema::dropIfExists('clients');
     }
 };

@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('utilisateur', function (Blueprint $table) {
+        Schema::create('produit_tag', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('email');
-            $table->string('password');
-            $table->string('telephone');
-            $table->string('adresse');
-            $table->foreignId('role')->constrained('role');
+            $table->foreignId('produit')->constrained('produits')->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->timestamps();
         });
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('utilisateur');
+        Schema::dropIfExists('produit_tag');
     }
 };
