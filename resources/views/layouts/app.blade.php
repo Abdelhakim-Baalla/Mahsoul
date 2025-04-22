@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahsoul - Consultation Agricole et Produits</title>
+    <title>Mahsoul - Plateforme agricole</title>
+    <meta name="description" content="Mahsoul - Plateforme complète au service des agriculteurs et du secteur agricole">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,6 +37,8 @@
                             800: '#814518',
                             900: '#6c3a18',
                         },
+                        earth: '#795548',
+                        sky: '#1976D2',
                     },
                     fontFamily: {
                         sans: ['Outfit', 'sans-serif'],
@@ -42,71 +47,38 @@
             }
         }
     </script>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        .blob-shape {
-            border-radius: 60% 40% 50% 50% / 60% 30% 70% 40%;
-            animation: blob-animation 8s ease-in-out infinite;
-        }
-        
-        @keyframes blob-animation {
-            0% { border-radius: 60% 40% 50% 50% / 60% 30% 70% 40%; }
-            50% { border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%; }
-            100% { border-radius: 60% 40% 50% 50% / 60% 30% 70% 40%; }
-        }
-        
-        .diagonal-box {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .diagonal-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f3f9ee;
-            transform: skewY(-5deg);
-            transform-origin: top left;
-            z-index: -1;
-        }
-        
-        .feature-card {
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .testimonial-card {
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: scale(1.02);
-        }
-    </style>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-white">
-    <div class="flex min-h-screen flex-col">
-        @include('partials.header')
-        
-        <main class="flex-1">
-            @yield('content')
-        </main>
-        
-        @include('partials.footer')
+<body class="font-sans bg-primary-50 flex flex-col min-h-screen">
+    <!-- Navigation -->
+    <div id="navigation">
+        @include('components.navigation')
     </div>
     
-    @stack('scripts')
+    <!-- Content -->
+    <main class="flex-grow">
+        @yield('content')
+    </main>
+    
+    <!-- Footer -->
+    <div id="footer">
+        @include('components.footer')
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
