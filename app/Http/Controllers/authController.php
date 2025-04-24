@@ -18,18 +18,26 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
-     return view('auth.register');
+        if (Auth::check()) {
+            return redirect()->route('profile.show');
+        }
+
+        return view('auth.register');
     }
 
     public function showLoginForm()
     {
-     return view('auth.login');
+        if (Auth::check()) {
+            return redirect()->route('profile.show');
+        }
+        
+        return view('auth.login');
     }
 
 
     public function register(Request $request)
     {
-        
+
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
@@ -40,7 +48,7 @@ class AuthController extends Controller
             'adresse' => 'required|string',
             'type' => 'required|string|in:client,veterinaire,agricole',
             'terms' => 'required|accepted',
-            'photo' => 'required'
+            'photo' => 'string'
         ]);
 
 
@@ -63,12 +71,11 @@ class AuthController extends Controller
             $validated['password']
         );
 
-        Auth::login($utilisateur);
+        
 
-        return response()->json([
-            'message' => 'Connexion réussie',
-            'user' => $utilisateur
-        ]);
+        Auth::login($utilisateur, $request->has('remember'));
+
+        return redirect()->route('profile.show');
     }
 
 
@@ -76,8 +83,6 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return response()->json([
-         'message' => 'Déconnexion réussie',
-        ]);
+        return redirect()->route('login');
     }
 }

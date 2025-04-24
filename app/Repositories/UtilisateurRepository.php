@@ -42,9 +42,12 @@ class UtilisateurRepository implements UtilisateurRepositoryInterface
     {
         $utilisateur = $this->findByEmail($email);
         
-        if (!$utilisateur || !Hash::check($password, $utilisateur->password)) {
-            return false;
+        if (!$utilisateur || !Hash::check($password, $utilisateur->password) ){
+            throw \Illuminate\Validation\ValidationException::withMessages([
+                'errorLogin' => ['L\'émail ou le mot de passe sont incorrect.'],
+            ]);
         }
+        
         
         return $utilisateur;
     }

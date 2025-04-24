@@ -290,48 +290,29 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="relative py-20 overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-800 transform -skew-y-6 origin-top-right z-0"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row justify-between items-center">
-                <div class="lg:w-1/2 mb-10 lg:mb-0 text-white">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Prêt à améliorer votre exploitation?</h2>
-                    <p class="text-primary-100 text-lg mb-8">Rejoignez Mahsoul aujourd'hui et transformez votre approche de l'agriculture avec nos experts et nos solutions adaptées.</p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="/register" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-white text-primary-600 hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
-                            S'inscrire
-                        </a>
-                        <a href="/consultation" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-primary-500 text-white border border-primary-400 hover:bg-primary-400 transform hover:-translate-y-1 transition duration-300">
-                            Réserver une consultation
-                        </a>
-                    </div>
-                </div>
-                <div class="lg:w-2/5">
-                    <div class="bg-white rounded-2xl shadow-xl p-8">
-                        <div class="flex justify-center mb-6">
-                            <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-center mb-4">Inscrivez-vous à notre newsletter</h3>
-                        <p class="text-gray-600 text-center mb-6">Restez informés des dernières actualités agricoles et de nos promotions exclusives.</p>
-                        <form class="space-y-4">
-                            <div>
-                                <input type="text" placeholder="Votre nom" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                            <div>
-                                <input type="email" placeholder="Votre adresse email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                            </div>
-                            <button type="submit" class="w-full px-4 py-3 rounded-lg font-medium text-white bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow-lg transition duration-300">
-                                S'abonner
-                            </button>
-                        </form>
-                    </div>
+    @guest
+<section class="relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-800 transform -skew-y-6 origin-top-right z-0"></div>
+    <div class="max-w-7xl mx-auto px-2 sm:px-2 lg:px-2 relative z-10">
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+            <div class="lg:w-1/2 ">
+                <img src="{{ asset('images/personne.jpg') }}" alt="personne" class="w-full h-auto max-w-md lg:max-w-none ">
+            </div>
+            <div class="lg:w-1/2 mb-10 lg:mb-0 text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Prêt à améliorer votre exploitation?</h2>
+                <p class="text-primary-100 text-lg mb-8">Rejoignez Mahsoul aujourd'hui et transformez votre approche de l'agriculture avec nos experts et nos solutions adaptées.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="/register" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-white text-primary-600 hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
+                        S'inscrire
+                    </a>
+                    <a href="/consultation" class="inline-block px-8 py-4 text-center font-medium rounded-full bg-primary-500 text-white border border-primary-400 hover:bg-primary-400 transform hover:-translate-y-1 transition duration-300">
+                        Réserver une consultation
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+@endguest
+
 @endsection

@@ -15,20 +15,6 @@ class Utilisateur extends Authenticatable
     protected $fillable = [
         'nom', 'prenom', 'email', 'password', 'telephone', 'adresse', 'type', 'photo'
     ];
-
-
-    public function rendezVousClient()
-    {
-        return $this->hasMany(RendezVous::class, 'utilisateur');
-    }
-
-    public function rendezVousExpert()
-    {
-        return $this->hasMany(RendezVous::class, 'expert');
-    }
-
-
-
   
 }
 

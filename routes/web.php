@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,10 +34,10 @@ Route::controller(AuthController::class)->group(function () {
 Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
 Route::view('/reset-password', 'auth.reset-password')->name('password.reset');
 
-
-// Profil
-Route::view('/profile', 'profile.show')->name('profile.show');
-Route::view('/profile/edit', 'profile.edit')->name('profile.edit');
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'showProfile')->name('profile.show');
+    Route::get('/profile/edit', 'showeditProfile')->name('profile.edit');
+});
 
 // Marketplace - Utilisateur
 Route::view('/products', 'products.index')->name('products.index');
