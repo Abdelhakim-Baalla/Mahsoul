@@ -1,3 +1,4 @@
+@if (Auth::check())
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -207,3 +208,9 @@
     </script>
 </body>
 </html>
+
+@else
+    <script>
+        window.location.href = "{{ route('login') }}";
+    </script>
+@endif

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-primary-50 py-25">
+<div class="min-h-screen bg-primary-50 py-22">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="rounded-lg shadow-lg overflow-hidden bg-white">
             @if($errors->any())
