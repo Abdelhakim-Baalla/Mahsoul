@@ -1,6 +1,7 @@
 @if (Auth::check())
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,15 +49,15 @@
             }
         }
     </script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Styles supplémentaires pour l'admin -->
     <style>
         .sidebar-active {
@@ -65,6 +66,7 @@
         }
     </style>
 </head>
+
 <body class="font-sans bg-gray-100 flex h-screen">
     <!-- Sidebar -->
     <div id="sidebar" class="bg-white w-64 shadow-md flex-shrink-0 hidden md:block">
@@ -124,7 +126,7 @@
                     </a>
                 </li>
                 <li class="border-t mt-5 pt-3">
-                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+                    <a href="/" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
                         <i class="fas fa-arrow-left w-5 h-5 mr-3"></i>
                         <span>Retour au site</span>
                     </a>
@@ -172,8 +174,10 @@
         </header>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-y-auto bg-gray-100">
-            @yield('content')
+        <main class="flex-1 overflow-hidden bg-gray-100">
+            <div class="h-screen flex items-center justify-center">
+                @yield('content')
+            </div>
         </main>
     </div>
 
@@ -199,14 +203,14 @@
                 menu.classList.add('hidden');
             }
         });
-
-        </script>
-        @yield('scripts')
+    </script>
+    @yield('scripts')
 </body>
+
 </html>
 
 @else
-    <script>
-        window.location.href = "{{ route('login') }}";
-    </script>
+<script>
+    window.location.href = "{{ route('login') }}";
+</script>
 @endif
