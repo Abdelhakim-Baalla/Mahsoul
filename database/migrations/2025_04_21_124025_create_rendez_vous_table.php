@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('rendez_vous', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('utilisateur')->constrained('utilisateurs')->onDelete('cascade');
+            $table->foreignId('client')->constrained('clients')->onDelete('cascade');
             $table->foreignId('expert')->constrained('utilisateurs')->onDelete('cascade');
-            $table->string('statut')->default('En attente');
+            $table->string('statut')->default('pending');
             $table->text('description');
             $table->timestamps();
         });

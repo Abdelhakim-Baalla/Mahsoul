@@ -63,17 +63,15 @@
     </div>
 
     <!-- Liste des rendez-vous -->
-    @if(count($appointments) > 0)
         <div class="space-y-4">
-            @foreach($appointments as $appointment)
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <div class="p-6">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="flex items-center mb-4 md:mb-0">
-                            <img src="{{ $appointment->expert->profile_image }}" alt="{{ $appointment->expert->name }}" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <img src="" alt="" class="w-12 h-12 rounded-full object-cover mr-4">
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-800">{{ $appointment->expert->name }}</h3>
-                                <p class="text-gray-600">{{ $appointment->expert->specialty == 'veterinaire' ? 'Vétérinaire' : 'Expert agricole' }}</p>
+                                <h3 class="text-lg font-semibold text-gray-800"></h3>
+                                <p class="text-gray-600"></p>
                             </div>
                         </div>
                         <div class="flex flex-col items-end">
@@ -81,13 +79,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                                <span class="text-gray-700">{{ \Carbon\Carbon::parse($appointment->date)->format('d M Y') }}</span>
+                                <span class="text-gray-700"></span>
                             </div>
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span class="text-gray-700">{{ $appointment->time }}</span>
+                                <span class="text-gray-700"></span>
                             </div>
                         </div>
                     </div>
@@ -95,54 +93,40 @@
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>
-                                <h4 class="font-medium text-gray-800">{{ $appointment->subject }}</h4>
-                                <p class="text-gray-600 mt-1">{{ Str::limit($appointment->description, 100) }}</p>
+                                <h4 class="font-medium text-gray-800"></h4>
+                                <p class="text-gray-600 mt-1"></p>
                                 <div class="mt-2">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ 
-                                        $appointment->status === 'upcoming' ? 'bg-blue-100 text-blue-800' : 
-                                        ($appointment->status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800') 
-                                    }}">
-                                        {{ 
-                                            $appointment->status === 'upcoming' ? 'À venir' : 
-                                            ($appointment->status === 'completed' ? 'Terminé' : 'Annulé') 
-                                        }}
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ">
+                                       
                                     </span>
                                     <span class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        {{ $appointment->consultation_type === 'video' ? 'Consultation vidéo' : 'Consultation par message' }}
+                                        
                                     </span>
                                 </div>
                             </div>
                             <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
-                                <a href="{{ route('appointments.show', $appointment->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                <a href="{{ route('appointments.show') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                     Voir détails
                                 </a>
-                                @if($appointment->status === 'upcoming')
-                                    @if($appointment->consultation_type === 'video' && \Carbon\Carbon::parse($appointment->date . ' ' . $appointment->time)->subMinutes(5)->isPast())
-                                        <a href="{{ route('video.join', $appointment->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                        <a href="" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                             Rejoindre
                                         </a>
-                                    @endif
                                     <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                         Annuler
                                     </button>
-                                @elseif($appointment->status === 'completed' && !$appointment->has_review)
                                     <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                         Évaluer
                                     </button>
-                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
         
         <!-- Pagination -->
         <div class="mt-8">
-            {{ $appointments->links() }}
         </div>
-    @else
         <div class="bg-white rounded-lg shadow-md p-8 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -155,6 +139,5 @@
                 </a>
             </div>
         </div>
-    @endif
 </div>
 @endsection

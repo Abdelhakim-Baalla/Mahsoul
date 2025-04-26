@@ -42,17 +42,15 @@
     </div>
 
     <!-- Liste des consultations -->
-    @if(count($consultations) > 0)
         <div class="space-y-4">
-            @foreach($consultations as $consultation)
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <div class="p-6">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="flex items-center mb-4 md:mb-0">
-                            <img src="{{ $consultation->expert->profile_image }}" alt="{{ $consultation->expert->name }}" class="w-12 h-12 rounded-full object-cover mr-4">
+                            <img src="" alt="" class="w-12 h-12 rounded-full object-cover mr-4">
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-800">{{ $consultation->expert->name }}</h3>
-                                <p class="text-gray-600">{{ $consultation->expert->specialty == 'veterinaire' ? 'Vétérinaire' : 'Expert agricole' }}</p>
+                                <h3 class="text-lg font-semibold text-gray-800"></h3>
+                                <p class="text-gray-600"></p>
                             </div>
                         </div>
                         <div class="flex flex-col items-end">
@@ -60,13 +58,13 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
-                                <span class="text-gray-700">{{ \Carbon\Carbon::parse($consultation->date)->format('d M Y') }}</span>
+                                <span class="text-gray-700"></span>
                             </div>
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span class="text-gray-700">{{ $consultation->duration }} min</span>
+                                <span class="text-gray-700"> min</span>
                             </div>
                         </div>
                     </div>
@@ -74,19 +72,19 @@
                     <div class="mt-4 pt-4 border-t border-gray-100">
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                             <div>
-                                <h4 class="font-medium text-gray-800">{{ $consultation->subject }}</h4>
-                                <p class="text-gray-600 mt-1">{{ Str::limit($consultation->summary, 100) }}</p>
+                                <h4 class="font-medium text-gray-800"></h4>
+                                <p class="text-gray-600 mt-1"></p>
                                 <div class="mt-2">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                         Terminée
                                     </span>
                                     <span class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        {{ $consultation->type === 'video' ? 'Consultation vidéo' : 'Consultation par message' }}
+                                       
                                     </span>
                                 </div>
                             </div>
                             <div class="mt-4 md:mt-0">
-                                <a href="{{ route('consultations.show', $consultation->id) }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                <a href="{{ route('consultations.show') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                     Voir détails
                                 </a>
                             </div>
@@ -94,14 +92,11 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         </div>
         
         <!-- Pagination -->
         <div class="mt-8">
-            {{ $consultations->links() }}
         </div>
-    @else
         <div class="bg-white rounded-lg shadow-md p-8 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -114,6 +109,5 @@
                 </a>
             </div>
         </div>
-    @endif
 </div>
 @endsection

@@ -3,7 +3,6 @@
 @section('content')
     <div class="bg-primary-50 min-h-screen py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            &lt;!-- Breadcrumbs -->
             <nav class="flex mb-6" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
@@ -21,15 +20,12 @@
                 </ol>
             </nav>
             
-            &lt;!-- Header -->
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-primary-800">Votre panier</h1>
                 <p class="mt-2 text-lg text-gray-600">Vérifiez et modifiez les articles de votre panier</p>
             </div>
             
-            &lt;!-- Cart Content -->
             <div class="flex flex-col lg:flex-row gap-8">
-                &lt;!-- Cart Items -->
                 <div class="lg:w-2/3">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">
@@ -43,7 +39,6 @@
                         </div>
                         
                         <div class="divide-y divide-gray-200">
-                            &lt;!-- Cart Item 1 -->
                             <div class="p-6 flex flex-col sm:flex-row">
                                 <div class="sm:w-24 sm:h-24 flex-shrink-0 mb-4 sm:mb-0">
                                     <img src="/images/product-1.jpg" alt="Antibiotique Bovins Premium" class="w-full h-full object-cover rounded-md">
@@ -94,7 +89,6 @@
                                 </div>
                             </div>
                             
-                            &lt;!-- Cart Item 2 -->
                             <div class="p-6 flex flex-col sm:flex-row">
                                 <div class="sm:w-24 sm:h-24 flex-shrink-0 mb-4 sm:mb-0">
                                     <img src="/images/product-2.jpg" alt="Aliment Complet Bovins" class="w-full h-full object-cover rounded-md">
@@ -139,7 +133,6 @@
                                 </div>
                             </div>
                             
-                            &lt;!-- Cart Item 3 -->
                             <div class="p-6 flex flex-col sm:flex-row">
                                 <div class="sm:w-24 sm:h-24 flex-shrink-0 mb-4 sm:mb-0">
                                     <img src="/images/product-6.jpg" alt="Engrais Organique Premium" class="w-full h-full object-cover rounded-md">
@@ -185,7 +178,6 @@
                             </div>
                         </div>
                         
-                        &lt;!-- Continue Shopping -->
                         <div class="p-6 border-t border-gray-200">
                             <a href="/products" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
                                 <i class="fas fa-arrow-left mr-2"></i>
@@ -194,7 +186,6 @@
                         </div>
                     </div>
                     
-                    &lt;!-- Prescription Upload -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">
                             <h2 class="text-xl font-bold text-gray-800">Ordonnances requises</h2>
@@ -232,7 +223,6 @@
                     </div>
                 </div>
                 
-                &lt;!-- Order Summary -->
                 <div class="lg:w-1/3">
                     <div class="bg-white rounded-lg shadow-md overflow-hidden sticky top-6">
                         <div class="p-6 border-b border-gray-200">
@@ -253,7 +243,6 @@
                                     <span class="text-gray-800 font-medium">186 DH</span>
                                 </div>
                                 
-                                &lt;!-- Promo Code -->
                                 <div class="pt-4">
                                     <label for="promo-code" class="block text-sm font-medium text-gray-700 mb-1">Code promo</label>
                                     <div class="flex">
@@ -298,12 +287,10 @@
                 </div>
             </div>
             
-            &lt;!-- Recently Viewed Products -->
             <div class="mt-12">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Récemment consultés</h2>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    &lt;!-- Product 1 -->
                     <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                         <a href="/products/3">
                             <div class="relative">
@@ -337,7 +324,6 @@
                         </div>
                     </div>
                     
-                    &lt;!-- Product 2 -->
                     <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                         <a href="/products/4">
                             <div class="relative">
@@ -370,7 +356,6 @@
                         </div>
                     </div>
                     
-                    &lt;!-- Product 3 -->
                     <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                         <a href="/products/5">
                             <div class="relative">
@@ -403,7 +388,6 @@
                         </div>
                     </div>
                     
-                    &lt;!-- Product 4 -->
                     <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                         <a href="/products/7">
                             <div class="relative">

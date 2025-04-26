@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('titre');
             $table->text('contenu');
             $table->foreignId('auteur')->constrained('admins')->onDelete('cascade');
-            $table->string('image')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

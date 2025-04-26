@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahsoul - Plateforme agricole</title>
     <meta name="description" content="Mahsoul - Plateforme complète au service des agriculteurs et du secteur agricole">
-    
+    <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
