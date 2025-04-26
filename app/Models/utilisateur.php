@@ -15,6 +15,15 @@ class Utilisateur extends Authenticatable
     protected $fillable = [
         'nom', 'prenom', 'email', 'password', 'telephone', 'adresse', 'type', 'photo'
     ];
+
+    public function commentaire(){
+        return $this->hasMany(Commentaire::class);
+    }
+
+    public function agricole()
+    {
+        return $this->hasOne(Agricole::class, 'compte');
+    }
   
 }
 

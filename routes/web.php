@@ -21,11 +21,8 @@ Route::view('/terms', 'terms')->name('terms');
 
 // Authentification
 Route::controller(AuthController::class)->group(function () {
-    // Routes GET
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::get('/login', 'showLoginForm')->name('login');
-    
-    // Routes POST
     Route::post('/inscription', 'register')->name('register.submit');
     Route::post('/connexion', 'login')->name('login.submit');
     Route::post('/logout', 'logout')->name('logout');
@@ -37,6 +34,9 @@ Route::view('/reset-password', 'auth.reset-password')->name('password.reset');
 Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'showProfile')->name('profile.show');
     Route::get('/profile/edit', 'showeditProfile')->name('profile.edit');
+    Route::PUT('/profile/update', 'updateProfile')->name('profile.update');
+    Route::get('/profile/edit/information/agricole', 'showeditProfileInformationAgricole')->name('profile.updateAgricole');
+    Route::PUT('/agricole/information/update', 'updateProfileInformartionAgricole')->name('profile.updateAgricoleInfo');
 });
 
 // Marketplace - Utilisateur
@@ -49,7 +49,7 @@ Route::view('/orders', 'orders.index')->name('orders.index');
 Route::view('/orders/show', 'orders.show')->name('orders.show');
 
 // Consultations - Utilisateur
-Route::view('/experts', 'experts.index')->name('experts.index');
+Route::view('/experts', 'consultations.index')->name('experts.index');
 Route::view('/experts/show', 'experts.show')->name('experts.show');
 Route::view('/appointments/create', 'appointments.create')->name('appointments.create');
 Route::view('/appointments', 'appointments.index')->name('appointments.index');
@@ -78,6 +78,10 @@ Route::view('/admin/articles/create', 'admin.articles.create')->name('admin.arti
 Route::view('/admin/articles/edit', 'admin.articles.edit')->name('admin.articles.edit');
 Route::view('/admin/comments', 'admin.comments.index')->name('admin.comments.index');
 Route::view('/admin/tags', 'admin.tags.index')->name('admin.tags.index');
+Route::view('/admin/tag/create', 'admin.tags.create')->name('admin.tags.create');
+Route::view('/admin/tag/store', 'admin.tags.create')->name('admin.tags.store');
+Route::view('/admin/tag/update', 'admin.tags.update')->name('admin.tags.update');
+Route::view('/admin/tag/update/store', 'admin.tags.update')->name('admin.tags.update.store');
 
 // Dashboard Expert Agricole
 Route::view('/expert', 'expert.dashboard')->name('expert.dashboard');
@@ -101,4 +105,14 @@ Route::view('/client/appointments', 'client.appointments.index')->name('client.a
 Route::view('/client/consultations', 'client.consultations.index')->name('client.consultations.index');
 Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
 Route::view('/client/documents', 'client.documents.index')->name('client.documents.index');
+
+
+Route::view('/not-found', 'error.404')->name('error.404');
+Route::fallback(function () {
+    return redirect('/not-found');
+}); 
+
+Route::get('/maintenance', function () {
+    return view('error.maintenance');
+});
 

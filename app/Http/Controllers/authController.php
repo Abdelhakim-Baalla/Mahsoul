@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
+use App\Repositories\Interfaces\AgricoleRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
     protected $utilisateurRepository;
+    protected $agricoleRepository;
 
-    public function __construct(UtilisateurRepositoryInterface $utilisateurRepository)
+    public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
+        $this->agricoleRepository = $agricoleRepository;
     }
 
     public function showRegistrationForm()
@@ -52,7 +55,19 @@ class AuthController extends Controller
         ]);
 
 
+
         $utilisateur = $this->utilisateurRepository->inscription($validated);
+        
+        if($utilisateur['type'] == 'agricole'){
+            $utilisateurId = $utilisateur['id'];
+            $utilisateurIdToCreate = ['compte' => $utilisateurId, 
+            'ferme' => 'non spécifié',
+            'produit' => 'non spécifiée',
+            'superficie_terrain' => 'non spécifiée',
+            'region' => 'non spécifiée'
+        ];
+            $this->agricoleRepository->create($utilisateurIdToCreate);
+        }
 
         Auth::login($utilisateur);
 

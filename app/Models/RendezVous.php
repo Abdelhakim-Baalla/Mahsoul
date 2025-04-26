@@ -20,11 +20,16 @@ class RendezVous extends Model
 
     public function veterinaire()
     {
-        return $this->belongsTo(Veterinare::class);
+        return $this->belongsTo(Veterinaire::class);
     }
 
     public function agricole()
     {
         return $this->belongsTo(Agricole::class);
+    }
+
+    public function document()
+    {
+        return $this->hasMany(Document::class);
     }
 }

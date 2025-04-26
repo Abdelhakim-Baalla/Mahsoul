@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('agricoles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utilisateur')->constrained('utilisateurs')->onDelete('cascade');
+            $table->string('ferme')->nullable();
+            $table->string('produit')->nullable();
+            $table->string('superficie_terrain')->nullable();
+            $table->string('region')->nullable();
+            $table->foreignId('compte')->constrained('utilisateurs')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->timestamps();
         });

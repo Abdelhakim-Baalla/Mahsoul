@@ -10,6 +10,7 @@ class UtilisateurRepository implements UtilisateurRepositoryInterface
 {
     public function create(array $data)
     {
+       
         $data['password'] = Hash::make($data['password']);
         return Utilisateur::create($data);
     }
@@ -27,14 +28,7 @@ class UtilisateurRepository implements UtilisateurRepositoryInterface
     public function modifierProfil(int $id, array $data)
     {
         $utilisateur = $this->getById($id);
-        if (!$utilisateur) {
-            return false;
-        }
-        
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-        
+
         return $utilisateur->update($data);
     }
     

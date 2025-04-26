@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utilisateur')->constrained('utilisateurs')->onDelete('cascade');
+            $table->string('domaines_expertise')->nullable();
+            $table->string('contact_urgence')->nullable();
+            $table->foreignId('compte')->constrained('utilisateurs')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->timestamps();
         });
