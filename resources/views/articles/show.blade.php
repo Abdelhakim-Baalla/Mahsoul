@@ -23,16 +23,19 @@
                         <img src="{{$article->photo}}" alt="{{$article->titre}}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-black/10"></div>
                     </div>
-                    
+
                     <!-- Contenu de l'article -->
                     <div class="p-6">
                         <h1 class="text-3xl font-bold text-gray-900 mb-4">{{$article->titre}}</h1>
-                        
+
                         <!-- Métadonnées -->
                         <div class="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600">
                             <div class="flex items-center">
                                 <img src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}" class="w-8 h-8 rounded-full mr-2">
-                                <div class="flex gap-1"><p>Par</p><p class="text-primary-600 hover:underline">{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}</p></div>
+                                <div class="flex gap-1">
+                                    <p>Par</p>
+                                    <p class="text-primary-600 hover:underline">{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}</p>
+                                </div>
                             </div>
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,14 +53,14 @@
                         </div>
 
                         <!-- Contenu -->
-                        <div class="prose max-w-none text-gray-700">
-                            {!! $article->contenu !!}
+                        <div class="prose max-w-none text-gray-700 break-words">
+                            <div class="overflow-hidden text-ellipsis">{!! $article->contenu !!}</div>
                         </div>
-                        
+
                         <!-- Section commentaires -->
                         <div class="mt-10 border-t pt-8">
                             <h3 class="text-xl font-semibold mb-6">Commentaires (8)</h3>
-                            
+
                             <!-- Formulaire de commentaire -->
                             <div class="mb-8 bg-gray-50 p-4 rounded-xl">
                                 <h4 class="text-lg font-medium mb-4">Laisser un commentaire</h4>
@@ -70,7 +73,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
                             <!-- Liste des commentaires -->
                             <div class="space-y-6">
                                 <!-- Commentaire 1 -->
@@ -94,7 +97,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Réponse au commentaire -->
                                     <div class="ml-12 mt-4 pl-4 border-l-2 border-gray-200">
                                         <div class="flex items-start gap-4">
@@ -110,7 +113,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Commentaire 2 -->
                                 <div class="bg-gray-50 p-4 rounded-xl">
                                     <div class="flex items-start gap-4">
@@ -133,7 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Voir plus de commentaires -->
                                 <button class="w-full py-3 text-center text-primary-600 hover:text-primary-800 font-medium border border-gray-200 rounded-xl hover:bg-gray-50 transition">
                                     Voir plus de commentaires
@@ -143,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Sidebar -->
             <div class="lg:w-1/3 space-y-6">
                 <!-- Auteur -->

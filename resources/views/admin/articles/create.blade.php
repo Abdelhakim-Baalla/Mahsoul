@@ -3,149 +3,116 @@
 @section('title', 'Créer un article - Mahsoul Admin')
 
 @section('content')
-<div class="flex-1 p-6">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden max-w-6xl mx-auto">
-        <!-- En-tête -->
-        <div class="bg-primary-50 px-6 py-5 border-b border-gray-200">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800 flex items-center">
-                        <i class="fas fa-plus-circle text-primary-600 mr-3"></i>
-                        Nouvel Article
-                    </h2>
-                    <p class="text-gray-600 mt-1">Remplissez les champs pour créer un nouvel article</p>
-                </div>
-                @if($errors->any())
-            <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 animate-fade-in">
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 mt-0.5">
-                        <i class="fas fa-exclamation-circle text-red-500"></i>
+<div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Conteneur principal avec défilement -->
+    <div class="flex-1 overflow-y-auto p-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- En-tête -->
+            <div class="mb-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                            <svg class="w-6 h-6 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Nouvel Article
+                        </h1>
+                        <p class="mt-1 text-gray-600">Remplissez les champs pour créer un nouvel article</p>
                     </div>
-                    <div class="ml-3 flex-1">
-                        <h4 class="text-base font-medium text-red-800">
-                            Impossible de créer l'article
-                        </h4>
-                        <div class="mt-1 text-sm text-red-700">
-                            @if($errors->has('nom'))
-                                <p class="flex items-start">
-                                    <span class="mr-2">•</span>
-                                    <span>{{ str_replace('nom', 'Le nom', $errors->first('nom')) }}</span>
-                                </p>
-                            @else
-                                <p>Veuillez vérifier les informations saisies</p>
-                            @endif
+                    
+                    @if($errors->any())
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">Erreur dans le formulaire</h3>
+                                <div class="mt-2 text-sm text-red-700">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
-            @endif
-            </div>
-        </div>
 
-        <div class="p-6">
-            <form action="{{route('admin.articles.store')}}" method="POST">
+            <!-- Formulaire -->
+            <form action="{{route('admin.articles.store')}}" method="POST" class="space-y-6">
                 @csrf
                 
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div class="space-y-6">
-                        <!-- Titre -->
+                <!-- Section Informations -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            Informations de l'article
+                        </h2>
+                    </div>
+                    <div class="px-6 py-4 space-y-4">
                         <div>
-                            <label for="titre" class="block text-lg font-medium text-gray-700 mb-2">
-                                <i class="fas fa-heading text-primary-500 mr-2"></i>
-                                Titre de l'article
-                            </label>
+                            <label for="titre" class="block text-sm font-medium text-gray-700">Titre</label>
                             <input type="text" id="titre" name="titre"
-                                class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                                placeholder="Titre">
+                                class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                                required>
                         </div>
-
                         
                         <div>
-                            <label for="contenu" class="block text-lg font-medium text-gray-700 mb-2">
-                                <i class="fas fa-file-alt text-primary-500 mr-2"></i>
-                                Contenu 
-                            </label>
-                            <textarea id="contenu" name="contenu" rows="5"
-                                class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                                placeholder="Contenu détaillé de l'article"></textarea>
+                            <label for="photo" class="block text-sm font-medium text-gray-700">Image</label>
+                            <input type="text" id="photo" name="photo"
+                                class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                                placeholder="URL de l'image">
                         </div>
-                        <!-- tags -->
-                        <!-- <div>
-                            <label class="block text-lg font-medium text-gray-700 mb-2">
-                                <i class="fas fa-tags text-primary-500 mr-2"></i>
-                                Tags
-                            </label>
-                            <select id="tags" name="tags[]" multiple class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                                <option value="1" selected>Irrigation</option>
-                                <option value="2" selected>Économie d'eau</option>
-                                <option value="3">Agriculture durable</option>
-                                <option value="4">Technologies</option>
-                            </select>
-                        </div> -->
-                    </div>
-
-                    <!-- Colonne droite -->
-                    <div class="space-y-6">
-                        <!-- Image -->
+                        
                         <div>
-                            <label class="block text-lg font-medium text-gray-700 mb-2" for="photo">
-                                <i class="fas fa-image text-primary-500 mr-2"></i>
-                                Image principale
-                            </label>
-                                
-                                <input type="text" name="photo" id="photo" class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"  placeholder="https://example.com/image.jpg">
-                            
+                            <label class="block text-sm font-medium text-gray-700" for="statut">Statut</label>
+                            <div class="mt-1 grid grid-cols-3 gap-2">
+                                <label class="flex items-center p-2 border rounded-md cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="statut" value="brouillon" class="h-4 w-4 text-primary-600">
+                                    <span class="ml-2">Brouillon</span>
+                                </label>
+                                <label class="flex items-center p-2 border rounded-md cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="statut" value="en attente" class="h-4 w-4 text-primary-600">
+                                    <span class="ml-2">En attente</span>
+                                </label>
+                                <label class="flex items-center p-2 border rounded-md cursor-pointer bg-gray-50">
+                                    <input type="radio" name="statut" value="publié" checked class="h-4 w-4 text-primary-600">
+                                    <span class="ml-2">Publié</span>
+                                </label>
+                            </div>
                         </div>
-
-                        <!-- Catégorie -->
-                        <div>
-                            <label for="categorie" class="block text-lg font-medium text-gray-700 mb-2">
-                                <i class="fas fa-tag text-primary-500 mr-2"></i>
-                                Catégorie *
-                            </label>
-                            <select id="categorie" name="categorie" class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
-                                <option value="">Sélectionnez une catégorie</option>
-                                <option value="Techniques agricoles" selected>Techniques agricoles</option>
-                                <option value="Irrigation">Irrigation</option>
-                                <option value="Protection des cultures">Protection des cultures</option>
-                                <option value="Élevage">Élevage</option>
-                            </select>
-                        </div>
-
-
-                        <!-- Statut -->
-                        <div>
-                            <label for="statut" class="block text-lg font-medium text-gray-700 mb-2">
-                                <i class="fas fa-toggle-on text-primary-500 mr-2"></i>
-                                Statut *
-                            </label>
-                            <select id="statut" name="statut" class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
-                                <option value="brouillon">Brouillon</option>
-                                <option value="en_attente">En attente</option>
-                                <option value="publié" selected>Publié</option>
-                            </select>
-                        </div>
-
-                       
                     </div>
                 </div>
 
-                <!-- Boutons -->
-                <div class="flex justify-end space-x-4 pt-8 border-t border-gray-200 mt-8">
-                    <a href="{{ route('admin.articles.index') }}" 
-                       class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50">
-                       <i class="fas fa-times mr-2"></i> Annuler
+                <!-- Section Contenu -->
+                <div class="bg-white shadow rounded-lg">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            Contenu de l'article
+                        </h2>
+                    </div>
+                    <div class="px-6 py-4">
+                        <textarea id="contenu" name="contenu" rows="20" class="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 min-h-[400px]" placeholder="Écrivez votre contenu ici..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex justify-end space-x-3 pt-4">
+                    <a href="{{ route('admin.articles.index') }}" class="px-4 py-2 border rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                        Annuler
                     </a>
-                    <button type="submit" 
-                            class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 flex items-center">
-                        <i class="fas fa-save mr-2"></i>
-                        Enregistrer l'article
+                    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700">
+                        Enregistrer
                     </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
 @endsection
