@@ -29,7 +29,7 @@ class ArticleRepository implements ArticleRepositoryInterface
     }
     
     public function getAllArticles(){
-        return Article::paginate(4);
+        return Article::paginate(6);
     }
 
     public function getAdminById(int $id)
