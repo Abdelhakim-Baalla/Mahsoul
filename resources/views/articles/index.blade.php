@@ -60,6 +60,13 @@
                         <p class="text-gray-600 mb-4 line-clamp-2">
                             {{ Str::limit(strip_tags($article->contenu), 30) }}
                         </p>
+                        
+                        <!-- Afficher l'auteur -->
+                        <div class="flex items-center gap-2 mb-4 text-sm text-gray-600">
+                            <img src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}" class="w-6 h-6 rounded-full">
+                            <span>Par {{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}</span>
+                        </div>
+                        
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-500">Dernier Modification: {{ $article->updated_at->format('d/m/Y') }}</span>
                             <form action="{{ route('articles.show') }}" method="post">
