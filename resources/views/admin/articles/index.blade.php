@@ -37,48 +37,7 @@
     </div>
 
     <!-- Filtres et outils -->
-    <div class="bg-white rounded-lg shadow-sm p-4 mb-6 border border-gray-200">
-        <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
-            <!-- Filtre par catégorie -->
-            <div class="w-full md:w-1/4">
-                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
-                <select id="category" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-500 focus:ring-opacity-50">
-                    <option value="">Toutes catégories</option>
 
-                    <!-- <option value=""></option> -->
-                </select>
-            </div>
-
-            <!-- Filtre par statut -->
-            <div class="w-full md:w-1/4">
-                <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
-                <select id="status" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring focus:ring-primary-500 focus:ring-opacity-50">
-                    <option value="">Tous statuts</option>
-                    <option value="published">Publié</option>
-                    <option value="draft">Brouillon</option>
-                    <option value="pending">En attente</option>
-                </select>
-            </div>
-
-            <!-- Recherche -->
-            <div class="w-full md:w-1/3">
-                <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Recherche</label>
-                <div class="relative rounded-md shadow-sm">
-                    <input type="text" id="search" class="block w-full pr-10 rounded-md border-gray-300 focus:border-primary-500 focus:ring focus:ring-primary-500 focus:ring-opacity-50" placeholder="Titre, auteur...">
-                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Boutons d'action -->
-            <div class="w-full md:w-1/6 flex items-end space-x-2">
-                <button type="button" class="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                    <i class="fas fa-filter mr-2"></i> Filtrer
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- Tableau des articles -->
     <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
@@ -147,18 +106,18 @@
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 overflow-hidden">
                                     <img class="h-full w-full object-cover" src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}" title="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}">
-                                      
+
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm font-medium text-gray-900">
                                         <!-- auteur nom et prenom -->
-                                         <p>
-                                             {{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}
-                                         </p>
+                                        <p>
+                                            {{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}
+                                        </p>
 
                                     </div>
                                     <div class="text-xs text-gray-500">
-                                    {{$Utilisateuradmin->type}} 
+                                        {{$Utilisateuradmin->type}}
                                     </div>
                                 </div>
                             </div>
@@ -175,11 +134,11 @@
 
                         <!-- Colonne Statut -->
                         <td class="px-6 py-4 whitespace-nowrap">
-                            @if($article->statut === 'publié')
+                            @if(strtolower($article->statut) === 'publié')
                             <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
                                 <i class="fas fa-check-circle mr-1"></i> Publié
                             </span>
-                            @elseif($article->statut === 'brouillon')
+                            @elseif(strtolower($article->statut) === 'brouillon')
                             <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
                                 <i class="fas fa-edit mr-1"></i> Brouillon
                             </span>
@@ -204,7 +163,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
                                 <a href="{{ route('articles.show') }}"
-                                    value = "{{ $article->id }}"
+                                    value="{{ $article->id }}"
                                     class="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
                                     title="Voir l'article">
                                     <i class="fas fa-eye"></i>

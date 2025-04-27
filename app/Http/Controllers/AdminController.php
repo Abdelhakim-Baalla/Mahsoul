@@ -22,6 +22,10 @@ class AdminController extends Controller
         return $this->articleRepository->getAdminById($id);
     }
 
+    public function dashboard(){
+        return view('admin.dashboard');
+    }
+
     public function getUtilisateurAdminById(int $id)
     {
         return $this->articleRepository->getUtilisateurAdminById($id);
@@ -32,11 +36,37 @@ class AdminController extends Controller
         $articles = $this->articleRepository->getAllArticles();
         $categorie = $this->articleRepository->getCategorieById(1);
         $categorieNom = $categorie->nom;
-        $admin = $this->getAdminById($articles->toArray()['data'][0]['auteur']);
-        $Utilisateuradmin = $this->getUtilisateurAdminById($articles->toArray()['data'][0]['auteur']);
         if ($articles->isEmpty()) {
             return redirect()->route('admin.articles.create');
         }
+
+        foreach ($articles as $article) {
+            $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
+            $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
+
+            $backgroundColor = $backgroundColors[array_rand($backgroundColors)];
+            $textColor = (in_array($backgroundColor, ['000000', '4CAF50', '3F51B5'])) ? 'FFFFFF' : '000000';
+
+            $encodedTitle = urlencode($article->titre);
+            $imageUrl = $article->photo;
+
+            if (empty($imageUrl)) {
+                $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+               
+            }
+                $imageExists = @getimagesize($imageUrl);
+            
+
+            if ($imageExists) {
+                $article->photo = $imageUrl;
+            } else {
+                $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+            }
+        }
+
+        $admin = $this->getAdminById($articles->toArray()['data'][0]['auteur']);
+        $Utilisateuradmin = $this->getUtilisateurAdminById($articles->toArray()['data'][0]['auteur']);
+      
         return view('admin.articles.index', compact('articles', 'admin', 'Utilisateuradmin', 'categorieNom'));
     }
 

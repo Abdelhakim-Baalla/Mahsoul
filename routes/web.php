@@ -61,9 +61,9 @@ Route::view('/consultations/show', 'consultations.show')->name('consultations.sh
 
 // Formation
 Route::controller(ArticleController::class)->group(function () {
-    Route::get('/formation', 'articles.index')->name('articles.index');
-    Route::get('/formation/show', 'articles.show')->name('articles.show');
-    Route::get('/formation/tag', 'articles.tag')->name('articles.tag');
+    Route::get('/formation', 'articlesIndex')->name('articles.index');
+    Route::post('/formation/show', 'articlesShow')->name('articles.show');
+    Route::get('/formation/tag', 'articlesTag')->name('articles.tag');
 });
 
 

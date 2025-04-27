@@ -17,7 +17,8 @@ class ArticleRepository implements ArticleRepositoryInterface
         $this->categorieRepository = $categorieRepository;
     }
 
-    public function creeArticle(array $data){
+    public function creeArticle(array $data)
+    {
         // dd($data);
         return Article::create([
             'titre' => $data['titre'],
@@ -27,9 +28,15 @@ class ArticleRepository implements ArticleRepositoryInterface
             'categorie' => $data['categorie']
         ]);
     }
-    
-    public function getAllArticles(){
-        return Article::paginate(4);
+
+    public function getAllArticles()
+    {
+        return Article::paginate(6);
+    }
+
+    public function getPublishedArticles()
+    {
+        return Article::where('statut', 'like', 'publié')->paginate(6);
     }
 
     public function getAdminById(int $id)
@@ -46,18 +53,13 @@ class ArticleRepository implements ArticleRepositoryInterface
     {
         return $this->categorieRepository->getCategorieById($id);
     }
-    
-    public function getArticleById(int $id){
 
+    public function getArticleById(int $id)
+    {
+        return Article::find($id);
     }
-    
-    public function modifierArticle(int $id, array $data){
 
-    }
-    
-    public function supprimerArticle(int $id){
+    public function modifierArticle(int $id, array $data) {}
 
-    }
-    
-    
+    public function supprimerArticle(int $id) {}
 }
