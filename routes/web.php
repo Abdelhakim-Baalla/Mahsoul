@@ -75,9 +75,14 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/categories', 'categoriesIndex')->name('admin.categories.index');
     Route::get('/admin/orders', 'ordersIndex')->name('admin.orders.index');
     Route::get('/admin/orders/show', 'ordersShow')->name('admin.orders.show');
+
     Route::get('/admin/articles', 'articlesIndex')->name('admin.articles.index');
     Route::get('/admin/articles/create', 'articlesCreate')->name('admin.articles.create');
+    Route::post('/admin/articles/store', 'articlesStore')->name('admin.articles.store');
     Route::get('/admin/articles/edit', 'articlesEdit')->name('admin.articles.edit');
+    Route::get('/admin/articles/supprimer', 'articlesSupprimer')->name('admin.articles.supprimer');
+    Route::get('/admin/articles/tag', 'articlesTag')->name('admin.articles.tag');
+
     Route::get('/admin/comments', 'commentsIndex')->name('admin.comments.index');
     Route::get('/admin/tags', 'tagsIndex')->name('admin.tags.index');
     Route::get('/admin/tag/create', 'tagCreate')->name('admin.tags.create');
