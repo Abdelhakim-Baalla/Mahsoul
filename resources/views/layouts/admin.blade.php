@@ -69,7 +69,7 @@
 
 <body class="font-sans bg-gray-100 flex h-screen">
     <!-- Sidebar -->
-    <div id="sidebar" class="bg-white w-64 shadow-md flex-shrink-0 hidden md:block">
+    <div id="sidebar" class="bg-white w-54 shadow-md flex-shrink-0 hidden md:block">
         <div class="flex items-center justify-center h-16 border-b">
             <a href="{{ route('admin.dashboard') }}" class="text-xl font-bold text-primary-600">
                 Mahsoul Admin
