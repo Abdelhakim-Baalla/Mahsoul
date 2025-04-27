@@ -37,7 +37,7 @@
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-gray-900">Tous les articles</h2>
             </div>
-            
+
             @if($articles->isEmpty())
             <div class="text-center py-10">
                 <p class="text-gray-500">Aucun article trouvé.</p>
@@ -58,13 +58,17 @@
                             {{ Str::limit(strip_tags($article->titre), 40) }}
                         </h3>
                         <p class="text-gray-600 mb-4 line-clamp-2">
-                            {{ Str::limit(strip_tags($article->contenu), 80) }}
+                            {{ Str::limit(strip_tags($article->contenu), 30) }}
                         </p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-gray-500">Dernier Modification: {{ $article->updated_at->format('d/m/Y') }}</span>
-                            <a href="{{ route('articles.show', $article->id) }}" class="text-primary-600 hover:text-primary-800 font-medium text-sm">
-                                Lire l'article →
-                            </a>
+                            <form action="{{ route('articles.show') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $article->id }}">
+                                <button type="submit" class="text-primary-600 hover:text-primary-800 font-medium text-sm">
+                                    Lire l'article →
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -74,7 +78,7 @@
         </div>
 
         <div class="flex justify-center mt-8">
-            {{ $articles->links() }}
+            {{ $articles->links('pagination::tailwind') }}
         </div>
     </div>
 </section>
