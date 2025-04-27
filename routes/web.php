@@ -83,6 +83,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/articles', 'articlesIndex')->name('admin.articles.index');
     Route::get('/admin/articles/create', 'articlesCreate')->name('admin.articles.create');
     Route::post('/admin/articles/store', 'articlesStore')->name('admin.articles.store');
+    // Route::post('/admin/articles/store-with-categorie', 'articlesStorewithCategorie')->name('admin.articles.add-categorie');
+    Route::post('/admin/articles/store-with-categorie', 'articlesStorewithCategorie')->name('admin.articles.store.submit');
     Route::get('/admin/articles/edit', 'articlesEdit')->name('admin.articles.edit');
     Route::get('/admin/articles/supprimer', 'articlesSupprimer')->name('admin.articles.supprimer');
     Route::get('/admin/articles/tag', 'articlesTag')->name('admin.articles.tag');

@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\ArticleRepositoryInterface;
+use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     private $tagRepository;
     private $articleRepository;
+    private $categorieRepository;
 
-    public function __construct(TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository)
+    public function __construct(TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository)
     {
         $this->tagRepository = $tagRepository;
         $this->articleRepository = $articleRepository;
+        $this->categorieRepository = $categorieRepository;
     }
 
     public function getAdminById(int $id)
@@ -22,7 +25,8 @@ class AdminController extends Controller
         return $this->articleRepository->getAdminById($id);
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('admin.dashboard');
     }
 
@@ -52,10 +56,9 @@ class AdminController extends Controller
 
             if (empty($imageUrl)) {
                 $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-               
             }
-                $imageExists = @getimagesize($imageUrl);
-            
+            $imageExists = @getimagesize($imageUrl);
+
 
             if ($imageExists) {
                 $article->photo = $imageUrl;
@@ -66,7 +69,7 @@ class AdminController extends Controller
 
         $admin = $this->getAdminById($articles->toArray()['data'][0]['auteur']);
         $Utilisateuradmin = $this->getUtilisateurAdminById($articles->toArray()['data'][0]['auteur']);
-      
+
         return view('admin.articles.index', compact('articles', 'admin', 'Utilisateuradmin', 'categorieNom'));
     }
 
@@ -80,16 +83,30 @@ class AdminController extends Controller
         // dd($request->all());
         $validated = $request->validate([
             'titre' => 'required|string|max:255',
-            'contenu' => 'required|string',
             'photo' => 'required|string',
-            'categorie' => 'required|string',
             'statut' => 'required|string',
+            'contenu' => 'required|string'
+        ]);
+
+        $categories = $this->categorieRepository->getAllCategories();
+        
+        return view('admin.articles.add-categorie', compact('validated', 'categories'));
+    }
+
+    public function articlesStorewithCategorie(Request $request)
+    {
+        $validated = $request->validate([
+            'titre' => 'required|string|max:255',
+            'photo' => 'required|string',
+            'statut' => 'required|string',
+            'contenu' => 'required|string',
+            'categorie_id' => 'required|integer|exists:categories,id',
+            'categorie' => 'required|string'
         ]);
 
         $this->articleRepository->creeArticle($validated);
         return redirect()->route('admin.articles.index')->with('success', 'Article ajouter avec succès !');
     }
-
     public function articlesUpdate()
     {
         return view('admin.articles.update');
@@ -151,5 +168,11 @@ class AdminController extends Controller
 
         $this->tagRepository->supprimerTag($validated['id']);
         return redirect()->route('admin.tags.index')->with('success', 'Tag supprimé avec succès !');
+    }
+
+    public function categoriesIndex()
+    {
+        $categories = $this->categorieRepository->getAllCategories();
+        return view('admin.categories.index', compact('categories'));
     }
 }

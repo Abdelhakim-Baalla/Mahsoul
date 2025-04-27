@@ -25,7 +25,8 @@ class ArticleRepository implements ArticleRepositoryInterface
             'photo' => $data['photo'],
             'contenu' => $data['contenu'],
             'statut' => $data['statut'],
-            'categorie' => $data['categorie']
+            'categorie' => $data['categorie'],
+            'categorie_id' => $data['categorie_id']
         ]);
     }
 
