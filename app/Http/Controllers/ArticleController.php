@@ -16,7 +16,20 @@ class ArticleController extends Controller
 
     public function articlesIndex()
     {
-        $articles = $this->articleRepository->getAllArticles();
+        $articles = $this->articleRepository->getPublishedArticles();
+
         return view('articles.index', compact('articles'));
+    }
+
+    public function articlesShow(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:articles,id',
+        ]);
+        $articleId = $validated['id'];
+
+        $article = $this->articleRepository->getArticleById($articleId);
+        // dd($article);
+        return view('articles.show', compact('article'));
     }
 }

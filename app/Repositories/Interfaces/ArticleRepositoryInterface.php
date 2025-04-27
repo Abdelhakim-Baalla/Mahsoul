@@ -12,4 +12,5 @@ interface ArticleRepositoryInterface
     public function getAdminById(int $id);
     public function getUtilisateurAdminById(int $id);
     public function getCategorieById(int $id);
+    public function getPublishedArticles();
 }
