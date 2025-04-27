@@ -1,48 +1,96 @@
 @extends('layouts.admin')
 
-@section('title', 'Gestion des tags - Mahsoul Admin')
+@section('title', 'Édition de tag - Mahsoul Admin')
 
 @section('content')
-
-<div id="tagModal" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-        <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-            <div>
-                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                    <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+<div class="flex-1 p-6 md:p-8">
+    <!-- Carte principale -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden max-w-4xl mx-auto">
+        <!-- En-tête -->
+        <div class="bg-primary-50 px-6 md:px-8 py-5 border-b border-gray-200">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="mb-3 md:mb-0">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-hashtag text-primary-600 mr-3"></i>
+                        Éditer <span class="text-primary-600">{{ $tag['nom'] }}</span>
+                    </h2>
+                    <p class="text-gray-600 mt-1 text-sm md:text-base">Modifiez les propriétés de ce mot-clé</p>
                 </div>
-                <div class="mt-3 text-center sm:mt-5">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                        Modifier le tag
-                    </h3>
-                    <div class="mt-2">
-                        <form id="tagForm" action="{{ route('admin.tags.update.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" id="tagId" name="id">
-                            <div class="mb-4">
-                                <label for="tagName" class="block text-sm font-medium text-gray-700 text-left">Nom du tag</label>
-                                <input type="text" name="name" id="tagName" class="mt-1 border border-gray-400 block w-full shadow-lg sm:text-sm rounded-md">
-                            </div>
-                            <div class="flex items-center justify-between gap-4">
-                                <input type="submit" value="Enregisstrer" id="saveTagBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm">
-                                <a href="{{ route('admin.tags.index') }}" id="cancelTagBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:col-start-1 sm:text-sm">
-                                    Annuler
-                                </a>
-                            </div>
+            </div>
+        </div>
 
-                        </form>
+        <!-- Contenu du formulaire -->
+        <div class="p-6 md:p-8">
+            <!-- Affichage des erreurs -->
+            @if($errors->any())
+            <div class="mb-6 bg-red-50 border border-red-200 rounded-lg p-4 animate-fade-in">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mt-0.5">
+                        <i class="fas fa-exclamation-circle text-red-500"></i>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <h4 class="text-base font-medium text-red-800">
+                            Impossible d'enregistrer les modifications
+                        </h4>
+                        <div class="mt-1 text-sm text-red-700">
+                            @if($errors->has('nom'))
+                                <p class="flex items-start">
+                                    <span class="mr-2">•</span>
+                                    <span>{{ str_replace('nom', 'Le nom', $errors->first('nom')) }}</span>
+                                </p>
+                            @else
+                                <p>Veuillez vérifier les informations saisies</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
+            @endif
 
+            <form action="{{ route('admin.tags.update.store') }}" method="POST" class="space-y-6">
+                @csrf
+                @method('PUT')
+
+                <!-- Champ de formulaire -->
+                <div class="space-y-2">
+                    <label for="edit-nom" class="block text-base md:text-lg font-medium text-gray-700 flex items-center">
+                        <i class="fas fa-tag text-primary-500 mr-2 text-lg"></i>
+                        Nom du tag
+                    </label>
+                    
+                    <div class="relative">
+                        <input type="text" id="edit-nom" name="nom" value="{{ old('nom', $tag['nom']) }}"
+                            class="block w-full px-4 py-3 text-base md:text-lg border {{ $errors->has('nom') ? 'border-red-300 focus:ring-red-200' : 'border-gray-300 focus:ring-primary-200' }} rounded-lg focus:ring-2 focus:border-primary-500 transition"
+                            placeholder="Ex: Agriculture biologique">
+                        
+                        @if($errors->has('nom'))
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-exclamation-circle text-red-500"></i>
+                        </div>
+                        @endif
+                    </div>
+                    
+                    <p class="text-sm text-gray-500 mt-1">
+                            Le nom doit être unique (3-50 caractères)
+                    </p>
+                </div>
+
+                <input type="hidden" name="id" value="{{ $tag['id'] }}">
+
+                <!-- Boutons d'action -->
+                <div class="flex flex-col-reverse sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200">
+                    <a href="{{ route('admin.tags.index') }}"
+                        class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 text-center transition">
+                        <i class="fas fa-arrow-left mr-2"></i> Retour à la liste
+                    </a>
+                    <button type="submit"
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition flex items-center justify-center">
+                        <i class="fas fa-save mr-2"></i>
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
 @endsection

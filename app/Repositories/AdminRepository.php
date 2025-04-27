@@ -4,9 +4,17 @@ namespace App\Repositories;
 
 use App\Models\Admin;
 use App\Repositories\Interfaces\AdminRepositoryInterface;
+use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 
 class AdminRepository implements AdminRepositoryInterface
 {
+
+    protected $utilisateurRepository;
+    public function __construct(UtilisateurRepositoryInterface $utilisateurRepository)
+    {
+        $this->utilisateurRepository = $utilisateurRepository;
+    }
+
     public function create(array $data)
     {
         return Admin::create($data);
@@ -17,6 +25,13 @@ class AdminRepository implements AdminRepositoryInterface
     {
         return Admin::find($id);
     }
+
+    public function getUtilisateurById(int $id)
+    {
+        $admin = $this->getById($id);
+        return $this->utilisateurRepository->getById($admin->compte);
+    }
+
 
     public function modifierProfilAdmin(int $id, array $data)
     {

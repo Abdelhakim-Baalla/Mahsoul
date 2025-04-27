@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,30 +60,41 @@ Route::view('/consultations', 'consultations.index')->name('consultations.index'
 Route::view('/consultations/show', 'consultations.show')->name('consultations.show');
 
 // Formation
-Route::view('/formation', 'articles.index')->name('articles.index');
-Route::view('/formation/show', 'articles.show')->name('articles.show');
-Route::view('/formation/tag', 'articles.tag')->name('articles.tag');
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('/formation', 'articles.index')->name('articles.index');
+    Route::get('/formation/show', 'articles.show')->name('articles.show');
+    Route::get('/formation/tag', 'articles.tag')->name('articles.tag');
+});
+
 
 // Dashboard Admin
-Route::view('/admin', 'admin.dashboard')->name('admin.dashboard');
-Route::view('/admin/users', 'admin.users.index')->name('admin.users.index');
-Route::view('/admin/users/show', 'admin.users.show')->name('admin.users.show');
-Route::view('/admin/users/edit', 'admin.users.edit')->name('admin.users.edit');
-Route::view('/admin/products', 'admin.products.index')->name('admin.products.index');
-Route::view('/admin/products/create', 'admin.products.create')->name('admin.products.create');
-Route::view('/admin/products/edit', 'admin.products.edit')->name('admin.products.edit');
-Route::view('/admin/categories', 'admin.categories.index')->name('admin.categories.index');
-Route::view('/admin/orders', 'admin.orders.index')->name('admin.orders.index');
-Route::view('/admin/orders/show', 'admin.orders.show')->name('admin.orders.show');
-Route::view('/admin/articles', 'admin.articles.index')->name('admin.articles.index');
-Route::view('/admin/articles/create', 'admin.articles.create')->name('admin.articles.create');
-Route::view('/admin/articles/edit', 'admin.articles.edit')->name('admin.articles.edit');
-Route::view('/admin/comments', 'admin.comments.index')->name('admin.comments.index');
-Route::view('/admin/tags', 'admin.tags.index')->name('admin.tags.index');
-Route::view('/admin/tag/create', 'admin.tags.create')->name('admin.tags.create');
-Route::view('/admin/tag/store', 'admin.tags.create')->name('admin.tags.store');
-Route::view('/admin/tag/update', 'admin.tags.update')->name('admin.tags.update');
-Route::view('/admin/tag/update/store', 'admin.tags.update')->name('admin.tags.update.store');
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin', 'dashboard')->name('admin.dashboard');
+    Route::get('/admin/users', 'usersIndex')->name('admin.users.index');
+    Route::get('/admin/users/show', 'usersShow')->name('admin.users.show');
+    Route::get('/admin/users/edit', 'usersEdit')->name('admin.users.edit');
+    Route::get('/admin/products', 'productsIndex')->name('admin.products.index');
+    Route::get('/admin/products/create', 'productsCreate')->name('admin.products.create');
+    Route::get('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
+    Route::get('/admin/categories', 'categoriesIndex')->name('admin.categories.index');
+    Route::get('/admin/orders', 'ordersIndex')->name('admin.orders.index');
+    Route::get('/admin/orders/show', 'ordersShow')->name('admin.orders.show');
+
+    Route::get('/admin/articles', 'articlesIndex')->name('admin.articles.index');
+    Route::get('/admin/articles/create', 'articlesCreate')->name('admin.articles.create');
+    Route::post('/admin/articles/store', 'articlesStore')->name('admin.articles.store');
+    Route::get('/admin/articles/edit', 'articlesEdit')->name('admin.articles.edit');
+    Route::get('/admin/articles/supprimer', 'articlesSupprimer')->name('admin.articles.supprimer');
+    Route::get('/admin/articles/tag', 'articlesTag')->name('admin.articles.tag');
+
+    Route::get('/admin/comments', 'commentsIndex')->name('admin.comments.index');
+    Route::get('/admin/tags', 'tagsIndex')->name('admin.tags.index');
+    Route::get('/admin/tag/create', 'tagCreate')->name('admin.tags.create');
+    Route::post('/admin/tag/store', 'tagStore')->name('admin.tags.store');
+    Route::post('/admin/tag/update', 'tagUpdate')->name('admin.tags.update');
+    Route::put('/admin/tag/update/store', 'tagUpdateStore')->name('admin.tags.update.store');
+    Route::post('/admin/tag/delete', 'tagDelete')->name('admin.tags.delete');
+});
 
 // Dashboard Expert Agricole
 Route::view('/expert', 'expert.dashboard')->name('expert.dashboard');
@@ -110,9 +123,8 @@ Route::view('/client/documents', 'client.documents.index')->name('client.documen
 Route::view('/not-found', 'error.404')->name('error.404');
 Route::fallback(function () {
     return redirect('/not-found');
-}); 
+});
 
 Route::get('/maintenance', function () {
     return view('error.maintenance');
 });
-

@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->string('titre');
-            $table->text('contenu');
-            $table->string('photo')->nullable();
-            $table->timestamps();
+            $table->foreignId('auteur')->constrained('admins')->onDelete('cascade')->after('photo')->default(1);
         });
     }
 
@@ -30,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropForeign(['auteur']);
+            $table->dropColumn('auteur');
+        });
     }
 };
