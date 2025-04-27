@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->string('titre');
-            $table->text('contenu');
-            $table->string('photo')->nullable();
-            $table->timestamps();
+            $table->string('categorie')->after('contenu');
+            $table->string('statut')->default('Brouillon')->after('categorie');
         });
     }
 
@@ -30,6 +27,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::table('articles', function (Blueprint $table) {
+            $table->dropColumn('categorie');
+            $table->dropColumn('statut');
+        });
     }
 };
