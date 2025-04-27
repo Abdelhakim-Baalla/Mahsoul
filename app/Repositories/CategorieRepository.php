@@ -16,7 +16,7 @@ class CategorieRepository implements CategorieRepositoryInterface
     }
     
     public function getCategorieById(int $id){
-
+        return Categorie::find($id);
     }
     
     public function modifierCategorie(int $id, array $data){
