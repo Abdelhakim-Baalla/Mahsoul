@@ -1,4 +1,5 @@
 @if (Auth::check())
+@if(Auth::user()->type == 'admin')
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -208,6 +209,11 @@
 </body>
 
 </html>
+@else 
+<script>
+    window.location.href = "{{ route('profile.show') }}";
+</script>
+@endif
 
 @else
 <script>
