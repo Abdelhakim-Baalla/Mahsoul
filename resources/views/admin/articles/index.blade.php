@@ -37,7 +37,7 @@
     </div>
 
     <!-- Filtres et outils -->
-   
+
 
     <!-- Tableau des articles -->
     <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
@@ -106,18 +106,18 @@
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 overflow-hidden">
                                     <img class="h-full w-full object-cover" src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}" title="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}">
-                                      
+
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm font-medium text-gray-900">
                                         <!-- auteur nom et prenom -->
-                                         <p>
-                                             {{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}
-                                         </p>
+                                        <p>
+                                            {{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}
+                                        </p>
 
                                     </div>
                                     <div class="text-xs text-gray-500">
-                                    {{$Utilisateuradmin->type}} 
+                                        {{$Utilisateuradmin->type}}
                                     </div>
                                 </div>
                             </div>
@@ -134,11 +134,11 @@
 
                         <!-- Colonne Statut -->
                         <td class="px-6 py-4 whitespace-nowrap">
-                            @if($article->statut === 'publié')
+                            @if(strtolower($article->statut) === 'publié')
                             <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
                                 <i class="fas fa-check-circle mr-1"></i> Publié
                             </span>
-                            @elseif($article->statut === 'brouillon')
+                            @elseif(strtolower($article->statut) === 'brouillon')
                             <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
                                 <i class="fas fa-edit mr-1"></i> Brouillon
                             </span>
@@ -163,7 +163,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
                                 <a href="{{ route('articles.show') }}"
-                                    value = "{{ $article->id }}"
+                                    value="{{ $article->id }}"
                                     class="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
                                     title="Voir l'article">
                                     <i class="fas fa-eye"></i>
