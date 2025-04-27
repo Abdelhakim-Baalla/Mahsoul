@@ -36,7 +36,7 @@ class ArticleRepository implements ArticleRepositoryInterface
 
     public function getPublishedArticles()
     {
-        return Article::where('statut', 'publié')->paginate(6);
+        return Article::where('statut', 'like', 'publié')->paginate(6);
     }
 
     public function getAdminById(int $id)
