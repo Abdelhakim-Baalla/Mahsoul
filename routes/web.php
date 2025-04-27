@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,9 +60,12 @@ Route::view('/consultations', 'consultations.index')->name('consultations.index'
 Route::view('/consultations/show', 'consultations.show')->name('consultations.show');
 
 // Formation
-Route::view('/formation', 'articles.index')->name('articles.index');
-Route::view('/formation/show', 'articles.show')->name('articles.show');
-Route::view('/formation/tag', 'articles.tag')->name('articles.tag');
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('/formation', 'articles.index')->name('articles.index');
+    Route::get('/formation/show', 'articles.show')->name('articles.show');
+    Route::get('/formation/tag', 'articles.tag')->name('articles.tag');
+});
+
 
 // Dashboard Admin
 Route::controller(AdminController::class)->group(function () {

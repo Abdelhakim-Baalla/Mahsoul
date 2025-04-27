@@ -203,7 +203,8 @@
                         <!-- Colonne Actions -->
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
-                                <a href="{{ route('articles.show', $article->slug) }}" target="_blank"
+                                <a href="{{ route('articles.show') }}"
+                                    value = "{{ $article->id }}"
                                     class="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
                                     title="Voir l'article">
                                     <i class="fas fa-eye"></i>
