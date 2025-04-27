@@ -31,8 +31,8 @@
                         <!-- Métadonnées -->
                         <div class="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600">
                             <div class="flex items-center">
-                                <img src="https://via.placeholder.com/40x40" alt="Ahmed Benali" class="w-8 h-8 rounded-full mr-2">
-                                <span>Par <a href="#" class="text-primary-600 hover:underline">Ahmed Benali</a></span>
+                                <img src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}" class="w-8 h-8 rounded-full mr-2">
+                                <div class="flex gap-1"><p>Par</p><p class="text-primary-600 hover:underline">{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}</p></div>
                             </div>
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -150,14 +150,14 @@
                 <div class="bg-white rounded-xl shadow-lg p-6">
                     <h3 class="text-lg font-semibold mb-4">À propos de l'auteur</h3>
                     <div class="flex items-center gap-4 mb-4">
-                        <img src="https://via.placeholder.com/80x80" alt="Ahmed Benali" class="w-16 h-16 rounded-full">
+                        <img src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}" class="w-16 h-16 rounded-full">
                         <div>
-                            <h4 class="font-medium">Ahmed Benali</h4>
-                            <p class="text-sm text-gray-600">Expert en irrigation et techniques agricoles</p>
+                            <h4 class="font-medium">{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}</h4>
+                            <p class="text-sm text-gray-600">{{$admin->domaines_expertise}}</p>
                         </div>
                     </div>
-                    <p class="text-gray-700 mb-4">Ingénieur agronome avec plus de 15 ans d'expérience dans le développement de systèmes d'irrigation durables pour les exploitations agricoles au Maroc.</p>
-                    <a href="#" class="text-primary-600 hover:text-primary-800 font-medium">Voir tous ses articles</a>
+                    <p class="text-gray-700 mb-4">{{$admin->about}}</p>
+                    <a href="{{route('articles.index')}}" class="text-primary-600 hover:text-primary-800 font-medium">Voir tous ses articles</a>
                 </div>
             </div>
         </div>
