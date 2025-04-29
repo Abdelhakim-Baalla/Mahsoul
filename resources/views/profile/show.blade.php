@@ -133,6 +133,25 @@
 
                         <!-- Main Content -->
                         <div class="lg:col-span-2">
+                            <div class="flex flex-col items-end justify-center mb-6">
+                            @if(Auth::user()->type == 'agricole')
+                                <a href="{{route('admin.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                            @elseif(Auth::user()->type == 'veterinaire')
+                                <a href="{{route('veterinaire.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                            @elseif(Auth::user()->type == 'client')
+                                <a href="{{route('client.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                            @elseif(Auth::user()->type == 'admin')
+                                <a href="{{route('admin.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                            @endif
+                            </div>
                             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
                                 <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                                     <h3 class="text-xl font-bold text-gray-800">Informations personnelles</h3>
@@ -173,6 +192,7 @@
                                         </div>
                                     </dl>
                                 </div>
+                            </div>
                         </div>
 
                             <!-- Farm Information Card -->

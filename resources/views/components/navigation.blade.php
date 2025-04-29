@@ -13,41 +13,8 @@
                 <!-- Liens de navigation -->
                 <div class="hidden md:ml-10 md:flex md:items-center md:space-x-6">
                     <a href="{{ route('welcome') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Accueil</a>
-                    <div class="relative group">
-                        <button class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium flex items-center">
-                            Marketplace
-                            <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                        <div class="absolute z-10 left-0 pt-2 w-48 transition-all duration-200 ease-in-out origin-top">
-                            <div class="rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block transform opacity-0 group-hover:opacity-100">
-                                <div class="py-1">
-                                    <a href="{{ route('products.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Tous les produits</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Médicaments</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Aliments pour animaux</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Équipements</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative group">
-                        <button class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium flex items-center">
-                            Consultations
-                            <svg class="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                        <div class="absolute z-10 left-0 pt-2 w-48 transition-all duration-200 ease-in-out origin-top">
-                            <div class="rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block transform opacity-0 group-hover:opacity-100">
-                                <div class="py-1">
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Vétérinaires</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Experts agricoles</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50">Prendre rendez-vous</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="{{ route('products.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Marketplace</a>
+                    <a href="{{ route('experts.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Consultations</a>
                     <a href="{{ route('articles.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Formation</a>
                     <a href="{{ route('about') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">À propos</a>
                     <a href="{{ route('contact') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Contact</a>

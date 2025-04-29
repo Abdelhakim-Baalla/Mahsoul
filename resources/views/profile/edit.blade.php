@@ -40,7 +40,7 @@
                         <div class="p-6 text-white relative" style="background-image: url('{{ asset('images/agricole-banner.jpg') }}'); background-size: cover; background-position: center;">
                             @elseif(Auth::user()->type == 'veterinaire')
                             <div class="p-6 text-white relative" style="background-image: url('{{ asset('images/veterinaire-banner.jpg') }}'); background-size: cover; background-position: center;">
-                                @elseif(Auth::user()->type == 'client')
+                                @elseif(Auth::user()->type == 'client') 
                                 <div class="p-6 text-white relative" style="background-image: url('{{ asset('images/client-banner.jpg') }}'); background-size: cover; background-position: center;">
                                     @else
                                     <div class="p-6 text-white relative" style="background-image: url('{{ asset('images/paysage.jpg') }}'); background-size: cover; background-position: center;">
