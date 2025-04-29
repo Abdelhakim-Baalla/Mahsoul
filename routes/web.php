@@ -70,9 +70,13 @@ Route::controller(ArticleController::class)->group(function () {
 // Dashboard Admin
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'dashboard')->name('admin.dashboard');
+
     Route::get('/admin/users', 'usersIndex')->name('admin.users.index');
     Route::get('/admin/users/show', 'usersShow')->name('admin.users.show');
     Route::get('/admin/users/edit', 'usersEdit')->name('admin.users.edit');
+    Route::post('/admin/users/edit/submit', 'usersEditSubmit')->name('admin.users.edit.submit');
+    Route::post('/admin/users/delete', 'usersDelete')->name('admin.users.delete');
+
     Route::get('/admin/products', 'productsIndex')->name('admin.products.index');
     Route::get('/admin/products/create', 'productsCreate')->name('admin.products.create');
     Route::get('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
@@ -83,8 +87,12 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/articles', 'articlesIndex')->name('admin.articles.index');
     Route::get('/admin/articles/create', 'articlesCreate')->name('admin.articles.create');
     Route::post('/admin/articles/store', 'articlesStore')->name('admin.articles.store');
+    Route::post('/admin/articles/store-with-categorie', 'articlesStorewithCategorie')->name('admin.articles.store.submit');
     Route::get('/admin/articles/edit', 'articlesEdit')->name('admin.articles.edit');
-    Route::get('/admin/articles/supprimer', 'articlesSupprimer')->name('admin.articles.supprimer');
+    Route::post('/admin/articles/edit/store', 'articlesEditStore')->name('admin.articles.update.store');
+    Route::post('/admin/articles/edit/store/submit', 'articlesEditStoreSubmit')->name('admin.articles.update.store.submit');
+
+    Route::delete('/admin/articles/supprimer', 'articlesSupprimer')->name('admin.articles.supprimer');
     Route::get('/admin/articles/tag', 'articlesTag')->name('admin.articles.tag');
 
     Route::get('/admin/comments', 'commentsIndex')->name('admin.comments.index');

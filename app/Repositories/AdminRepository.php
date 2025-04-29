@@ -21,15 +21,19 @@ class AdminRepository implements AdminRepositoryInterface
     }
 
 
-    public function getById(int $id)
+    public function getById( $id)
     {
         return Admin::find($id);
     }
 
+    public function getByUtilisateurId($id)
+    {
+        return Admin::get()->where('compte', $id)->first();
+    }
+
     public function getUtilisateurById(int $id)
     {
-        $admin = $this->getById($id);
-        return $this->utilisateurRepository->getById($admin->compte);
+        return $this->utilisateurRepository->getById($id);
     }
 
 
@@ -38,6 +42,17 @@ class AdminRepository implements AdminRepositoryInterface
         $admin = $this->getById($id);
 
         return $admin->update($data);
+    }
+
+    public function modifierUtilisateur(int $id, array $data){
+        $utilisateur = $this->getUtilisateurById($id);
+
+        return $utilisateur->update($data);
+    }
+
+    public function supprimerUtilisateur(int $id){
+        $utilisateur = $this->getUtilisateurById($id);
+        return $utilisateur->delete();
     }
 
     public function creerArticle(string $titre, string $photo, string $contenu){

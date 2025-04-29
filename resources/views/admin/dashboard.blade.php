@@ -25,7 +25,7 @@
                                 </dt>
                                 <dd>
                                     <div class="text-lg font-medium text-gray-900">
-                                        1,482
+                                        {{$statistiques['utilisateurs']}}
                                     </div>
                                 </dd>
                             </dl>
@@ -57,7 +57,7 @@
                                 </dt>
                                 <dd>
                                     <div class="text-lg font-medium text-gray-900">
-                                        356
+                                    {{$statistiques['produits']}}
                                     </div>
                                 </dd>
                             </dl>
@@ -89,7 +89,7 @@
                                 </dt>
                                 <dd>
                                     <div class="text-lg font-medium text-gray-900">
-                                        243
+                                    {{$statistiques['commandes']}}
                                     </div>
                                 </dd>
                             </dl>
@@ -121,7 +121,7 @@
                                 </dt>
                                 <dd>
                                     <div class="text-lg font-medium text-gray-900">
-                                        98
+                                    {{$statistiques['consultations']}}
                                     </div>
                                 </dd>
                             </dl>
@@ -138,139 +138,55 @@
             </div>
         </div>
 
-        <!-- Graphiques et statistiques -->
-        <div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <!-- Graphique des ventes -->
-            <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900">Ventes mensuelles</h3>
-                <div class="mt-4 h-64 bg-gray-50 rounded-md flex items-center justify-center">
-                    <!-- Placeholder pour le graphique -->
-                    <p class="text-gray-500">Graphique des ventes mensuelles</p>
-                </div>
-            </div>
-
-            <!-- Graphique des utilisateurs -->
-            <div class="bg-white shadow rounded-lg p-6">
-                <h3 class="text-lg font-medium text-gray-900">Nouveaux utilisateurs</h3>
-                <div class="mt-4 h-64 bg-gray-50 rounded-md flex items-center justify-center">
-                    <!-- Placeholder pour le graphique -->
-                    <p class="text-gray-500">Graphique des nouveaux utilisateurs</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Activités récentes -->
         <div class="mt-8 bg-white shadow rounded-lg">
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Activités récentes
+                    Utilisateurs
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Les dernières activités sur la plateforme.
+                    Liste des Utilisateurs sur la plateforme.
                 </p>
             </div>
             <div class="border-t border-gray-200">
                 <ul role="list" class="divide-y divide-gray-200">
+                    @foreach($statistiques['allUtilisateurs'] as $utilisateur)
                     <li class="px-4 py-4 sm:px-6">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200"></div>
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200">
+                                    <img src="{{$utilisateur->photo}}" alt="{{$utilisateur->nom}} {{$utilisateur->prenom}}" class="h-10 w-10 rounded-full">
+                                </div>
                                 <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-900">
-                                        Ahmed Benali
+                                      {{$utilisateur->prenom}} {{$utilisateur->nom}}
                                     </div>
                                     <div class="text-sm text-gray-500">
-                                        a créé un nouveau compte
+                                    @if($utilisateur->type == 'admin')
+                                        <i class="fas fa-user-shield mr-1"></i> Administrateur
+                                     @elseif($utilisateur->type == 'agricole')
+                                        <i class="fas fa-tractor mr-1"></i> Agricole
+                                     @elseif($utilisateur->type == 'veterinaire')
+                                        <i class="fas fa-stethoscope mr-1"></i> Vétérinaire
+                                     @elseif($utilisateur->type == 'client')
+                                        <i class="fas fa-user mr-1"></i> Client
+                                     @endif
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-sm text-gray-500">
-                                Il y a 2 heures
-                            </div>
                         </div>
                     </li>
-                    <li class="px-4 py-4 sm:px-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200"></div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        Fatima Zahra
-                                    </div>
-                                    <div class="text-sm text-gray-500">
-                                        a ajouté un nouveau produit
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                Il y a 3 heures
-                            </div>
-                        </div>
-                    </li>
-                    <li class="px-4 py-4 sm:px-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200"></div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        Karim Alaoui
-                                    </div>
-                                    <div class="text-sm text-gray-500">
-                                        a passé une commande
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                Il y a 5 heures
-                            </div>
-                        </div>
-                    </li>
-                    <li class="px-4 py-4 sm:px-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200"></div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        Samira Tazi
-                                    </div>
-                                    <div class="text-sm text-gray-500">
-                                        a demandé une consultation
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                Il y a 8 heures
-                            </div>
-                        </div>
-                    </li>
-                    <li class="px-4 py-4 sm:px-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200"></div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        Youssef Mansouri
-                                    </div>
-                                    <div class="text-sm text-gray-500">
-                                        a publié un nouvel article
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                Il y a 12 heures
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="bg-gray-50 px-4 py-4 sm:px-6">
                 <div class="text-sm">
-                    <a href="#" class="font-medium text-green-600 hover:text-green-500">
-                        Voir toutes les activités
+                    <a href="{{route('admin.users.index')}}" class="font-medium text-green-600 hover:text-green-500">
+                        Voir toutes les Utilisateurs
                     </a>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 @endsection

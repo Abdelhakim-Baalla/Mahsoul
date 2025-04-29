@@ -17,7 +17,9 @@ class Article extends Model
         'auteur',
         'photo',
         'categorie',
-        'statut'
+        'categorie_id',
+        'statut',
+        'auteur_id'
     ];
 
     public function admin()
@@ -33,5 +35,10 @@ class Article extends Model
     public function tag()
     {
         return $this->hasMany(Tag::class);
+    }
+
+    public function categorie()
+    {
+        return $this->hasOne(Categorie::class);
     }
 }

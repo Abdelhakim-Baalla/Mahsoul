@@ -30,5 +30,9 @@ class ProduitRepository implements ProduitRepositoryInterface
     public function getProduitsEpuises(){
 
     }
+
+    public function countProduit(){
+        return Produit::get()->count();
+    }
     
 }

@@ -7,28 +7,21 @@ use App\Repositories\Interfaces\CategorieRepositoryInterface;
 
 class CategorieRepository implements CategorieRepositoryInterface
 {
-    public function ajouterCategorie(string $nom, string $description){
+    public function ajouterCategorie(string $nom, string $description) {}
 
+    public function getAllCategories()
+    {
+        return Categorie::get(); 
     }
-    
-    public function getAllCategories(){
 
-    }
-    
-    public function getCategorieById(int $id){
+    public function getCategorieById(int $id)
+    {
         return Categorie::find($id);
     }
-    
-    public function modifierCategorie(int $id, array $data){
 
-    }
-    
-    public function supprimerCategorie(int $id){
+    public function modifierCategorie(int $id, array $data) {}
 
-    }
-    
-    public function getCategorieByCategorieId(int $id){
+    public function supprimerCategorie(int $id) {}
 
-    }
-    
+    public function getCategorieByCategorieId(int $id) {}
 }

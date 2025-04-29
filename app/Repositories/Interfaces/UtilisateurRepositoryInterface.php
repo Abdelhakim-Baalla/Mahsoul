@@ -11,4 +11,6 @@ interface UtilisateurRepositoryInterface
     public function connexion(string $email, string $password);
     public function deconnexion();
     public function inscription(array $data);
+    public function countUsers();
+    public function getAllUtilisateurs();
 }

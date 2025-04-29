@@ -18,4 +18,8 @@ class Categorie extends Model
     public function produit(){
         return $this->hasMany(Produit::class);
     }
+
+    public function article(){
+        return $this->belongsTo(Article::class);
+    }
 }

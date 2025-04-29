@@ -21,4 +21,7 @@ interface AdminRepositoryInterface
     public function modifierProduit(int $id, array $data);
     public function supprimerProduit(int $id);
     public function getUtilisateurById(int $id);
+    public function getByUtilisateurId($id);
+    public function modifierUtilisateur(int $id, array $data);
+    public function supprimerUtilisateur(int $id);
 }

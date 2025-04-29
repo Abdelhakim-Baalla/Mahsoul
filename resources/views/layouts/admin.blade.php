@@ -175,8 +175,8 @@
         </header>
 
         <!-- Main Content -->
-        <main class="flex-1 overflow-hidden bg-gray-100">
-            <div class="h-screen flex items-center justify-center">
+        <main class="flex-1 overflow-y-auto bg-gray-100">
+            <div class="p-6">
                 @yield('content')
             </div>
         </main>

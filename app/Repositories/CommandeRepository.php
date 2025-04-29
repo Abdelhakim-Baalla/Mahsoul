@@ -50,5 +50,9 @@ class CommandeRepository implements CommandeRepositoryInterface
     public function genererFacteure(int $id_commande){
 
     }
+
+    public function countCommandes(){
+        return Commande::get()->count();
+    }
     
 }

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen bg-primary-50 py-22">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="rounded-lg shadow-lg overflow-hidden bg-white">
+<div class="min-h-screen bg-primary-50">
+    <div class="w-full h-screen flex items-center justify-center mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="rounded-lg shadow-lg overflow-hidden bg-white max-w-4xl w-full mx-auto">
             @if($errors->any())
             <div class="px-4 py-2 bg-red-100">
                 @foreach($errors->all() as $error)

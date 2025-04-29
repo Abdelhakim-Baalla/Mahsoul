@@ -15,5 +15,6 @@ interface CommandeRepositoryInterface
     public function confirmerCommande(int $id_commande);
     public function annulerCommande(int $id_commande);
     public function genererFacteure(int $id_commande);
+    public function countCommandes();
     
 }

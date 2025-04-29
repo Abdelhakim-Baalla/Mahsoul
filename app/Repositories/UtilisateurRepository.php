@@ -20,7 +20,12 @@ class UtilisateurRepository implements UtilisateurRepositoryInterface
         return Utilisateur::where('email', $email)->first();
     }
 
-    public function getById(int $id)
+    public function getAllUtilisateurs()
+    {
+        return Utilisateur::paginate(5);
+    }
+
+    public function getById( $id)
     {
         return Utilisateur::find($id);
     }
@@ -44,6 +49,12 @@ class UtilisateurRepository implements UtilisateurRepositoryInterface
         
         
         return $utilisateur;
+    }
+
+    
+    
+    public function countUsers(){
+        return Utilisateur::get()->count();
     }
     
     public function deconnexion()
