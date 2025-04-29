@@ -27,5 +27,8 @@ class RendezVousRepository implements RendezVousRepositoryInterface
 
     }
     
+    public function countConsultations(){
+        return RendezVous::get()->count();
+    }
     
 }

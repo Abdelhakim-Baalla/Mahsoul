@@ -78,6 +78,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\AdminRepositoryInterface::class,
             \App\Repositories\AdminRepository::class
         );
+        
     }
 
     /**
