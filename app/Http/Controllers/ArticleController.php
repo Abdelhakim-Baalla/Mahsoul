@@ -27,7 +27,7 @@ class ArticleController extends Controller
     public function articlesIndex()
     {
         $articles = $this->articleRepository->getPublishedArticles();
-        
+        // dd($articles);
         foreach ($articles as $article) {
             $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
             $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
@@ -40,22 +40,28 @@ class ArticleController extends Controller
 
             if (empty($imageUrl)) {
                 $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-               
             }
-                $imageExists = @getimagesize($imageUrl);
-            
+
+            $imageExists = @getimagesize($imageUrl);
 
             if ($imageExists) {
                 $article->photo = $imageUrl;
             } else {
                 $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
             }
+
+            
+            // echo $article->auteur . "<br>";
+            $article->auteur = $this->getAdminById($article->auteur);
+            // echo $article->auteur . "<br>";
+            // dd($article->auteur);
+            $idUtilisateur = $article->auteur->compte;    
+            $Utilisateuradmin = $this->getUtilisateurAdminById($idUtilisateur);
+            $article->auteur = $Utilisateuradmin;
+            // echo $article . "<br>";
         }
 
-        $admin = $this->getAdminById($articles->toArray()['data'][0]['auteur']);
-        $Utilisateuradmin = $this->getUtilisateurAdminById($articles->toArray()['data'][0]['auteur']);
-
-        return view('articles.index', compact('articles', 'admin', 'Utilisateuradmin'));
+        return view('articles.index', compact('articles', 'Utilisateuradmin'));
     }
 
     public function articlesShow(Request $request)
@@ -69,31 +75,31 @@ class ArticleController extends Controller
         if (!$article) {
             return redirect()->route('articles.index')->with('error', 'Article not found.');
         }
-       
-            $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
-            $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
 
-            $backgroundColor = $backgroundColors[array_rand($backgroundColors)];
-            $textColor = (in_array($backgroundColor, ['000000', '4CAF50', '3F51B5'])) ? 'FFFFFF' : '000000';
+        $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
+        $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
 
-            $encodedTitle = urlencode($article->titre);
-            $imageUrl = $article->photo;
+        $backgroundColor = $backgroundColors[array_rand($backgroundColors)];
+        $textColor = (in_array($backgroundColor, ['000000', '4CAF50', '3F51B5'])) ? 'FFFFFF' : '000000';
 
-            if (empty($imageUrl)) {
-                $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-               
-            }
-                $imageExists = @getimagesize($imageUrl);
-            
+        $encodedTitle = urlencode($article->titre);
+        $imageUrl = $article->photo;
 
-            if ($imageExists) {
-                $article->photo = $imageUrl;
-            } else {
-                $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-            }
+        if (empty($imageUrl)) {
+            $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+        }
+        $imageExists = @getimagesize($imageUrl);
 
-            $admin = $this->getAdminById($article->auteur);
-            $Utilisateuradmin = $this->getUtilisateurAdminById($article->auteur);
+
+        if ($imageExists) {
+            $article->photo = $imageUrl;
+        } else {
+            $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+        }
+
+        $admin = $this->getAdminById($article->auteur);
+        $Utilisateuradmin = $this->getUtilisateurAdminById($admin->compte);
+        // dd($Utilisateuradmin);
 
         return view('articles.show', compact('article', 'admin', 'Utilisateuradmin'));
     }

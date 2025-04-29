@@ -18,7 +18,8 @@ class Article extends Model
         'photo',
         'categorie',
         'categorie_id',
-        'statut'
+        'statut',
+        'auteur_id'
     ];
 
     public function admin()

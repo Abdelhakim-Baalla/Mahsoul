@@ -3,7 +3,6 @@
 @section('title', 'Créer un article - Mahsoul Admin')
 
 @section('content')
-<!-- Catégories sous forme de radio buttons avec pagination -->
 <div class="mb-6">
     <label class="block font-medium text-gray-700 mb-2">
         <i class="fas fa-tag text-primary-500 mr-2"></i>
@@ -21,17 +20,18 @@
     </div>
     @endif
 
-    <form action="{{ route('admin.articles.store.submit') }}" method="POST">
+    <form action="{{ route('admin.articles.update.store.submit') }}" method="POST">
         @csrf
         <input type="hidden" name="titre" value="{{$validated['titre']}}">
         <input type="hidden" name="contenu" value="{{$validated['contenu']}}">
         <input type="hidden" name="photo"  value="{{$validated['photo']}}">
         <input type="hidden" name="statut" value="{{$validated['statut']}}">
-        <input type="hidden" name="auteur_id" value="{{$validated['auteur_id']}}">
+        <input type="hidden" name="article_id" value="{{$validated['article_id']}}">
         <div class="max-h-[500px] overflow-y-auto border border-gray-300 rounded-lg bg-white p-2">
             @foreach($categories as $categorie)
             <div class="flex items-center mb-2 p-2 hover:bg-gray-100 rounded">
-                <input type="radio" id="{{ $categorie->id }}" name="categorie_id" value="{{ $categorie->id }}" class="mr-2 accent-primary-600">
+                <input type="radio" id="{{ $categorie->id }}" name="categorie_id" value="{{ $categorie->id }}" class="mr-2 accent-primary-600" 
+                @if($categorie->id == $validated['categorie_id']) checked @endif>
                 <label for="{{ $categorie->id }}" class="block text-gray-800 cursor-pointer">
                     {{ $categorie->nom }}
                 </label>

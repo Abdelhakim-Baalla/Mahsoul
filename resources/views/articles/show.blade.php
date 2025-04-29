@@ -160,7 +160,6 @@
                         </div>
                     </div>
                     <p class="text-gray-700 mb-4">{{$admin->about}}</p>
-                    <a href="{{route('articles.index')}}" class="text-primary-600 hover:text-primary-800 font-medium">Voir tous ses articles</a>
                 </div>
             </div>
         </div>

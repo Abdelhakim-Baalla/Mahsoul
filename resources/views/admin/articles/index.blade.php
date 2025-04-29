@@ -3,7 +3,7 @@
 @section('title', 'Gestion des articles - Mahsoul Admin')
 
 @section('content')
-<div class="flex-1 p-6">
+<div class="flex-1 p-2">
     <!-- Message de succès -->
     @if(session('success'))
     <div class="mb-6 bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
@@ -35,8 +35,6 @@
             Nouvel Article
         </a>
     </div>
-
-    <!-- Filtres et outils -->
 
 
     <!-- Tableau des articles -->
@@ -105,19 +103,19 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 overflow-hidden">
-                                    <img class="h-full w-full object-cover" src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}" title="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}">
+                                    <img class="h-full w-full object-cover" src="{{$article->auteur->photo}}" alt="{{$article->auteur->nom}} {{$article->auteur->prenom}}" title="{{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}">
 
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm font-medium text-gray-900">
                                         <!-- auteur nom et prenom -->
                                         <p>
-                                            {{$Utilisateuradmin->nom}} {{$Utilisateuradmin->prenom}}
+                                        {{$article->auteur->nom}} {{$article->auteur->prenom}}
                                         </p>
 
                                     </div>
                                     <div class="text-xs text-gray-500">
-                                        {{$Utilisateuradmin->type}}
+                                    {{$article->auteur->type}}
                                     </div>
                                 </div>
                             </div>
@@ -162,20 +160,31 @@
                         <!-- Colonne Actions -->
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
-                                <a href="{{ route('articles.show') }}"
-                                    value="{{ $article->id }}"
+                            @if(strtolower($article->statut) === 'publié')
+                            <form action="{{ route('articles.show') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $article->id }}">
+                                 <button type="submit"
                                     class="text-blue-600 hover:text-blue-900 p-1 rounded-full hover:bg-blue-50"
-                                    title="Voir l'article">
+                                    title="Voir l'article {{ $article->id }}">
                                     <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ route('admin.articles.edit', $article->id) }}"
+                                </button>
+                            </form>
+                            @endif
+                               <form action="{{ route('admin.articles.edit') }}" method="GET">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $article->id }}">
+                                 <button type="submit"
                                     class="text-gray-600 hover:text-gray-900 p-1 rounded-full hover:bg-gray-50"
                                     title="Modifier">
                                     <i class="fas fa-pencil-alt"></i>
-                                </a>
-                                <form action="" method="POST" class="inline">
+                                </button>
+                               </form>
+                               
+                                <form action="{{ route('admin.articles.supprimer') }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
+                                    <input type="hidden" name="id" value="{{ $article->id }}">
                                     <button type="submit"
                                         class="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50"
                                         title="Supprimer"

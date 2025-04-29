@@ -45,9 +45,11 @@
             </div>
 
             <!-- Formulaire -->
-            <form action="{{route('admin.articles.store')}}" method="POST" class="space-y-6">
+            <form action="{{route('admin.articles.update.store')}}" method="POST" class="space-y-6">
                 @csrf
-                <input type="hidden" name="auteur_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" name="article_id" value="{{$article->id}}">
+                <input type="hidden" name="categorie_id" value="{{$article->categorie_id}}">
+                <input type="hidden" name="categorie" value="{{$article->categorie}}">
                 <!-- Section Informations -->
                 <div class="bg-white shadow rounded-lg">
                     <div class="px-6 py-4 border-b border-gray-200">
@@ -58,47 +60,50 @@
                     <div class="px-6 py-4 space-y-4">
                         <div>
                             <label for="titre" class="block text-sm font-medium text-gray-700">Titre</label>
-                            <input type="text" id="titre" name="titre"
+                            <input type="text" id="titre" name="titre" value="{{$article->titre}}"
                                 class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
                                 required>
                         </div>
                         
                         <div>
                             <label for="photo" class="block text-sm font-medium text-gray-700">Image</label>
-                            <input type="text" id="photo" name="photo"
+                            <input type="text" id="photo" name="photo" value="{{$article->photo}}"
                                 class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
                                 placeholder="URL de l'image">
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-medium text-gray-700" for="statut">Statut</label>
-                            <div class="mt-1 grid grid-cols-3 gap-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-3" for="statut">Statut</label>
+                            <div class="mt-1 grid grid-cols-3 gap-2 mb-4">
                                 <label class="flex items-center p-2 border rounded-md cursor-pointer hover:bg-gray-50">
-                                    <input type="radio" name="statut" value="brouillon" class="h-4 w-4 text-primary-600">
+                                    <input type="radio" name="statut" value="brouillon" {{ strtolower($article->statut) === 'brouillon' ? "checked" : "" }} class="h-4 w-4 text-primary-600">
                                     <span class="ml-2">Brouillon</span>
                                 </label>
                                 <label class="flex items-center p-2 border rounded-md cursor-pointer hover:bg-gray-50">
-                                    <input type="radio" name="statut" value="en attente" class="h-4 w-4 text-primary-600">
+                                    <input type="radio" name="statut" value="en attente" {{ strtolower($article->statut) === 'en attente' ? "checked" : "" }} class="h-4 w-4 text-primary-600">
                                     <span class="ml-2">En attente</span>
                                 </label>
-                                <label class="flex items-center p-2 border rounded-md cursor-pointer bg-gray-50">
-                                    <input type="radio" name="statut" value="publié" checked class="h-4 w-4 text-primary-600">
+                                <label class="flex items-center p-2 border rounded-md cursor-pointer hover:bg-gray-50">
+                                    <input type="radio" name="statut" value="publié" {{ strtolower($article->statut) === 'publié' ? "checked" : "" }} class="h-4 w-4 text-primary-600">
                                     <span class="ml-2">Publié</span>
                                 </label>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Section Contenu -->
-                <div class="bg-white shadow rounded-lg">
+                <div class="bg-white shadow rounded-lg mt-4">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h2 class="text-lg font-medium text-gray-900">
                             Contenu de l'article
                         </h2>
                     </div>
                     <div class="px-6 py-4">
-                        <textarea id="contenu" name="contenu" rows="20" class="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 min-h-[400px]" placeholder="Écrivez votre contenu ici..."></textarea>
+                        <textarea id="contenu" name="contenu" rows="20" class="block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-primary-500 focus:border-primary-500 min-h-[400px]" placeholder="Écrivez votre contenu ici...">
+                        {{$article->contenu}}
+                        </textarea>
                     </div>
                 </div>
 

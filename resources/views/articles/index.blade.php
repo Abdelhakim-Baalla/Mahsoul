@@ -61,14 +61,21 @@
                             {{ Str::limit(strip_tags($article->contenu), 30) }}
                         </p>
                         
-                        <!-- Afficher l'auteur -->
-                        <div class="flex items-center gap-2 mb-4 text-sm text-gray-600">
-                            <img src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}" class="w-6 h-6 rounded-full">
-                            <span>Par {{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}</span>
+                        <div class="flex items-center gap-2 mb-4 text-xs text-gray-600">
+                            <img src="{{$article->auteur->photo}}" alt="{{$article->auteur->prenom}} {{$article->auteur->nom}}" class="w-6 h-6 rounded-full">
+                            <div>
+                                <span>{{$article->auteur->prenom}} {{$article->auteur->nom}}</span>
+                                <small class="text-gray-500 text-[10px] mt-1 italic text-end">Team Mahsoul</small>
+                            </div>
                         </div>
                         
                         <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500">Dernier Modification: {{ $article->updated_at->format('d/m/Y') }}</span>
+                            <span class="text-xs text-gray-500 flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                {{ $article->created_at->format('d/m/Y') }}
+                            </span>
                             <form action="{{ route('articles.show') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $article->id }}">
