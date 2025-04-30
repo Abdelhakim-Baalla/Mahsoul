@@ -102,12 +102,14 @@
                                                 <span class="text-sm text-gray-500">{{$commentaire->created_at->format('d-m-Y H:i')}}</span>
                                             </div>
                                             <p class="text-gray-700">{{$commentaire->contenu}}</p>
-                                            @if($commentaire->utilisateur->id == Auth::user()->id)
+                                            @if($commentaire->utilisateur->id == Auth::user()->id || Auth::user()->type == 'admin')
                                             <div class="flex items-center gap-2 text-xs mt-2">
                                                 <!-- Modifier le commentaire -->
-                                                <form action="" method="POST">
+                                                <form action="{{route('articles.editComment')}}" method="get">
                                                     @csrf
-                                                    @method('PUT')
+                                                    <input type="hidden" name="commentaire_id" value="{{$commentaire->id}}">
+                                                    <input type="hidden" name="contenu" value="{{$commentaire->contenu}}">
+                                                    <input type="hidden" name="article_id" value="{{$article->id}}">
                                                     <button type="submit" class="text-blue-500 hover:underline">
                                                         Modifier
                                                     </button>
@@ -168,9 +170,10 @@
                                                     @if($commentaire->utilisateur->id == Auth::user()->id)
                                                     <div class="flex items-center gap-2 text-xs mt-2">
                                                         <!-- Modifier le commentaire -->
-                                                        <form action="" method="POST">
+                                                        <form action="{{route('articles.editComment')}}" method="get">
                                                             @csrf
-                                                            @method('PUT')
+                                                            <input type="hidden" name="commentaire_id" value="{{$commentaire->id}}">
+                                                            <input type="hidden" name="contenu" value="{{$commentaire->contenu}}">
                                                             <button type="submit" class="text-blue-500 hover:underline">
                                                                 Modifier
                                                             </button>
