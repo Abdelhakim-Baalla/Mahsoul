@@ -100,6 +100,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/articles/tag', 'articlesTag')->name('admin.articles.tag');
 
     Route::get('/admin/comments', 'commentsIndex')->name('admin.comments.index');
+    Route::delete('/admin/comments/delete', 'commentsDelete')->name('admin.comments.delete');
+
     Route::get('/admin/tags', 'tagsIndex')->name('admin.tags.index');
     Route::get('/admin/tag/create', 'tagCreate')->name('admin.tags.create');
     Route::post('/admin/tag/store', 'tagStore')->name('admin.tags.store');
