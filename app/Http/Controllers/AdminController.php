@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\ArticleRepositoryInterface;
 use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
+use App\Repositories\Interfaces\CommentaireRepositoryInterface;
 use App\Repositories\Interfaces\ProduitRepositoryInterface;
 use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
@@ -23,8 +24,9 @@ class AdminController extends Controller
     private $produitRepository;
     private $commandeRepository;
     private $rendezVousRepository;
+    private $commentaireRepository;
 
-    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, AdminRepositoryInterface $adminRepository, TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository, UtilisateurRepositoryInterface $utilisateurRepository)
+    public function __construct(CommentaireRepositoryInterface $commentaireRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, AdminRepositoryInterface $adminRepository, TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository, UtilisateurRepositoryInterface $utilisateurRepository)
     {
         $this->tagRepository = $tagRepository;
         $this->articleRepository = $articleRepository;
@@ -34,6 +36,7 @@ class AdminController extends Controller
         $this->produitRepository = $produitRepository;
         $this->commandeRepository = $commandeRepository;
         $this->rendezVousRepository = $rendezVousRepository;
+        $this->commentaireRepository = $commentaireRepository;
     }
 
     public function getAdminById(int $id)
@@ -319,5 +322,25 @@ class AdminController extends Controller
     {
         $categories = $this->categorieRepository->getAllCategories();
         return view('admin.categories.index', compact('categories'));
+    }
+
+    public function commentsIndex(){
+        $comments = $this->commentaireRepository->getAllCommentaires();
+        foreach ($comments as $comment) {
+            $comment->article = $this->articleRepository->getArticleById($comment->article);
+            $comment->utilisateur = $this->utilisateurRepository->getById($comment->utilisateur);
+        }
+        // dd($comments);
+        return view('admin.comments.index', compact('comments'));
+    }
+
+    public function commentsDelete(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'commentaire_id' => 'required|integer'
+        ]);
+        // dd($validated['id']);
+        $this->commentaireRepository->supprimerCommentaire($validated['commentaire_id']);
+        return redirect()->route('admin.comments.index')->with('success', 'Commentaire supprimé avec succès !');
     }
 }
