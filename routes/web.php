@@ -62,8 +62,10 @@ Route::view('/consultations/show', 'consultations.show')->name('consultations.sh
 // Formation
 Route::controller(ArticleController::class)->group(function () {
     Route::get('/formation', 'articlesIndex')->name('articles.index');
-    Route::post('/formation/show', 'articlesShow')->name('articles.show');
+    Route::get('/formation/show', 'articlesShow')->name('articles.show');
     Route::get('/formation/tag', 'articlesTag')->name('articles.tag');
+    Route::get('/formation/show/add/comment', 'articlesAddComment')->name('articles.addComment');
+    Route::delete('/formation/show/delete/comment', 'articlesDeleteComment')->name('articles.deleteComment');
 });
 
 
@@ -128,10 +130,10 @@ Route::view('/client/orders', 'client.orders.index')->name('client.orders.index'
 Route::view('/client/documents', 'client.documents.index')->name('client.documents.index');
 
 
-Route::view('/not-found', 'error.404')->name('error.404');
-Route::fallback(function () {
-    return redirect('/not-found');
-});
+// Route::view('/not-found', 'error.404')->name('error.404');
+// Route::fallback(function () {
+//     return redirect('/not-found');
+// });
 
 Route::get('/maintenance', function () {
     return view('error.maintenance');

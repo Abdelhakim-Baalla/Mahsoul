@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\ArticleRepositoryInterface;
+use App\Repositories\Interfaces\CommentaireRepositoryInterface;
+use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     private $articleRepository;
+    private $commentaireRepository;
+    private $utilisateurRepository;
 
-    public function __construct(ArticleRepositoryInterface $articleRepository)
+    public function __construct(ArticleRepositoryInterface $articleRepository, CommentaireRepositoryInterface $commentaireRepository, UtilisateurRepositoryInterface $utilisateurRepository)
     {
         $this->articleRepository = $articleRepository;
+        $this->commentaireRepository = $commentaireRepository;
+        $this->utilisateurRepository = $utilisateurRepository;
     }
 
     public function getAdminById(int $id)
@@ -50,12 +56,12 @@ class ArticleController extends Controller
                 $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
             }
 
-            
+
             // echo $article->auteur . "<br>";
             $article->auteur = $this->getAdminById($article->auteur);
             // echo $article->auteur . "<br>";
             // dd($article->auteur);
-            $idUtilisateur = $article->auteur->compte;    
+            $idUtilisateur = $article->auteur->compte;
             $Utilisateuradmin = $this->getUtilisateurAdminById($idUtilisateur);
             $article->auteur = $Utilisateuradmin;
             // echo $article . "<br>";
@@ -99,8 +105,44 @@ class ArticleController extends Controller
 
         $admin = $this->getAdminById($article->auteur);
         $Utilisateuradmin = $this->getUtilisateurAdminById($admin->compte);
+        $commentaires = $this->commentaireRepository->getCommentairesByArticleId($article->id);
+        foreach ($commentaires as $com) {
+            $com->utilisateur = $this->utilisateurRepository->getById($com->utilisateur);
+        }
         // dd($Utilisateuradmin);
 
-        return view('articles.show', compact('article', 'admin', 'Utilisateuradmin'));
+        return view('articles.show', compact('article', 'admin', 'Utilisateuradmin', 'commentaires'));
+    }
+
+    public function articlesAddComment(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'article_id' => 'required|integer|exists:articles,id',
+            'utilisateur' => 'required|integer|exists:utilisateurs,id',
+            'commentaire' => 'required|string|max:255'
+        ]);
+        // dd($validated);
+
+        $this->commentaireRepository->ajouterCommentaire($validated['article_id'], $validated['utilisateur'], $validated['commentaire']);
+        $commentaire = $this->commentaireRepository->getCommentairesByArticleId($validated['article_id']);
+        foreach ($commentaire as $com) {
+            $com->utilisateur = $this->utilisateurRepository->getById($com->utilisateur);
+        }
+        // dd($commentaire);
+        // $article = $this->articleRepository->getArticleById($validated['article_id']);
+        // $admin = $this->getAdminById($article->auteur);
+        // $Utilisateuradmin = $this->getUtilisateurAdminById($admin->compte);
+        // dd($article);
+        return redirect('/formation/show');
+    }
+
+    public function articlesDeleteComment(Request $request){
+        $validated = $request->validate([
+            'commentaire_id' => 'required|integer|exists:commentaires,id',
+        ]);
+        // dd($validated);
+        $this->commentaireRepository->supprimerCommentaire($validated['commentaire_id']);
+        return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
     }
 }
