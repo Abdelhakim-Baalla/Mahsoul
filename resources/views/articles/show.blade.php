@@ -59,14 +59,17 @@
 
                         <!-- Section commentaires -->
                         <div class="mt-10 border-t pt-8">
-                            <h3 class="text-xl font-semibold mb-6">Commentaires (8)</h3>
+                            <h3 class="text-xl font-semibold mb-6">Commentaires ({{ $commentaires->count() }})</h3>
 
                             <!-- Formulaire de commentaire -->
                             <div class="mb-8 bg-gray-50 p-4 rounded-xl">
                                 <h4 class="text-lg font-medium mb-4">Laisser un commentaire</h4>
-                                <form>
+                                <form action="{{route('articles.addComment')}}" method="get" class="space-y-4">
+                                    @csrf
+                                    <input type="hidden" name="utilisateur" value="{{Auth::user()->id}}">
+                                    <input type="hidden" name="article_id" value="{{$article->id}}">
                                     <div class="mb-4">
-                                        <textarea rows="4" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Votre commentaire..."></textarea>
+                                        <textarea rows="4" name="commentaire" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="Votre commentaire..."></textarea>
                                     </div>
                                     <div class="flex justify-end">
                                         <button type="submit" class="px-6 py-2 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition font-medium">Publier</button>
@@ -76,72 +79,130 @@
 
                             <!-- Liste des commentaires -->
                             <div class="space-y-6">
-                                <!-- Commentaire 1 -->
-                                <div class="bg-gray-50 p-4 rounded-xl">
+                                @foreach($commentaires->take(5) as $commentaire)
+                                <div class="bg-gray-20 p-4 rounded-xl group">
                                     <div class="flex items-start gap-4">
-                                        <img src="https://via.placeholder.com/40x40" alt="Utilisateur" class="w-10 h-10 rounded-full">
+                                        <img src="{{$commentaire->utilisateur->photo}}" alt="{{$commentaire->utilisateur->nom}} {{$commentaire->utilisateur->prenom}}" class="w-10 h-10 rounded-full">
                                         <div class="flex-1">
-                                            <div class="flex justify-between items-center mb-1">
-                                                <h5 class="font-medium">Karim Alaoui</h5>
-                                                <span class="text-sm text-gray-500">Il y a 2 jours</span>
-                                            </div>
-                                            <p class="text-gray-700">J'ai installé un système goutte-à-goutte l'année dernière et je confirme les économies d'eau. Par contre, j'ai eu quelques problèmes avec le colmatage des goutteurs. Avez-vous des conseils pour l'entretien ?</p>
-                                            <div class="mt-3 flex items-center gap-4">
-                                                <button class="text-sm text-gray-600 hover:text-primary-600 flex items-center gap-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                                                    </svg>
-                                                    12
-                                                </button>
-                                                <button class="text-sm text-gray-600 hover:text-primary-600">Répondre</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Réponse au commentaire -->
-                                    <div class="ml-12 mt-4 pl-4 border-l-2 border-gray-200">
-                                        <div class="flex items-start gap-4">
-                                            <img src="https://via.placeholder.com/40x40" alt="Auteur" class="w-8 h-8 rounded-full">
-                                            <div>
-                                                <div class="flex items-center gap-2 mb-1">
-                                                    <h5 class="font-medium">Ahmed Benali</h5>
-                                                    <span class="bg-primary-100 text-primary-800 text-xs px-2 py-0.5 rounded">Auteur</span>
-                                                    <span class="text-sm text-gray-500">Il y a 1 jour</span>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <div class="flex items-center gap-2">
+                                                    <h5 class="font-medium">{{$commentaire->utilisateur->nom}} {{$commentaire->utilisateur->prenom}}</h5>
+                                                    @if($commentaire->utilisateur->type == 'admin' && $Utilisateuradmin->id == $commentaire->utilisateur->id)
+                                                    <span class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded-full">Auteur</span>
+                                                    @elseif($commentaire->utilisateur->type == 'agricole')
+                                                    <span class="text-xs text-blue-500 bg-blue-100 px-2 py-1 rounded-full">Agricole</span>
+                                                    @elseif($commentaire->utilisateur->type == 'veterinaire')
+                                                    <span class="text-xs text-yellow-500 bg-yellow-100 px-2 py-1 rounded-full">veterinaire</span>
+                                                    @elseif($commentaire->utilisateur->type == 'client')
+                                                    <span class="text-xs text-red-500 bg-red-100 px-2 py-1 rounded-full">Client</span>
+                                                    @elseif($commentaire->utilisateur->type == 'admin')
+                                                    <span class="text-xs text-purple-500 bg-purple-100 px-2 py-1 rounded-full">Admin</span>
+                                                    @endif
                                                 </div>
-                                                <p class="text-gray-700">Bonjour Karim, pour éviter le colmatage, je recommande un nettoyage régulier avec une solution d'acide citrique dilué. Vous pouvez aussi installer un filtre à disques en amont du système. N'hésitez pas à me contacter pour plus de détails.</p>
+                                                <span class="text-sm text-gray-500">{{$commentaire->created_at->format('d-m-Y H:i')}}</span>
                                             </div>
+                                            <p class="text-gray-700">{{$commentaire->contenu}}</p>
+                                            @if($commentaire->utilisateur->id == Auth::user()->id)
+                                            <div class="flex items-center gap-2 text-xs mt-2">
+                                                <!-- Modifier le commentaire -->
+                                                <form action="" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="text-blue-500 hover:underline">
+                                                        Modifier
+                                                    </button>
+                                                </form>
+                                                <!-- Supprimer le commentaire -->
+                                                <form action="{{route('articles.deleteComment')}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="commentaire_id" value="{{$commentaire->id}}">
+                                                    <button type="submit" class="text-red-500 hover:underline">
+                                                        Supprimer
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Commentaire 2 -->
-                                <div class="bg-gray-50 p-4 rounded-xl">
-                                    <div class="flex items-start gap-4">
-                                        <img src="https://via.placeholder.com/40x40" alt="Utilisateur" class="w-10 h-10 rounded-full">
-                                        <div class="flex-1">
-                                            <div class="flex justify-between items-center mb-1">
-                                                <h5 class="font-medium">Fatima Zahra</h5>
-                                                <span class="text-sm text-gray-500">Il y a 3 jours</span>
-                                            </div>
-                                            <p class="text-gray-700">Article très instructif ! J'aimerais savoir si ces systèmes sont adaptés aux petites exploitations de moins d'un hectare ? Le coût n'est-il pas prohibitif pour les petits agriculteurs ?</p>
-                                            <div class="mt-3 flex items-center gap-4">
-                                                <button class="text-sm text-gray-600 hover:text-primary-600 flex items-center gap-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                                                    </svg>
-                                                    8
-                                                </button>
-                                                <button class="text-sm text-gray-600 hover:text-primary-600">Répondre</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
+                                
+                                @if($commentaires->count() > 5)
+                                <div class="text-center">
+                                    <button id="showAllCommentsBtn" class="px-6 py-2 bg-primary-600 text-white rounded-xl hover:bg-primary-700 transition font-medium">Afficher tous les commentaires</button>
                                 </div>
-
-                                <!-- Voir plus de commentaires -->
-                                <button class="w-full py-3 text-center text-primary-600 hover:text-primary-800 font-medium border border-gray-200 rounded-xl hover:bg-gray-50 transition">
-                                    Voir plus de commentaires
-                                </button>
+                                @endif
                             </div>
+
+                            <div id="allCommentsModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden">
+                                <div class="bg-white rounded-xl shadow-lg p-6 max-w-3xl w-full">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h3 class="text-xl font-semibold">Tous les commentaires</h3>
+                                        <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">&times;</button>
+                                    </div>
+                                    <div class="space-y-6 max-h-96 overflow-y-auto">
+                                        @foreach($commentaires as $commentaire)
+                                        <div class="bg-gray-50 p-4 rounded-xl group">
+                                            <div class="flex items-start gap-4">
+                                                <img src="{{$commentaire->utilisateur->photo}}" alt="{{$commentaire->utilisateur->nom}} {{$commentaire->utilisateur->prenom}}" class="w-10 h-10 rounded-full">
+                                                <div class="flex-1">
+                                                    <div class="flex items-center justify-between mb-1">
+                                                        <div class="flex items-center gap-2">
+                                                            <h5 class="font-medium">{{$commentaire->utilisateur->nom}} {{$commentaire->utilisateur->prenom}}</h5>
+                                                            @if($commentaire->utilisateur->type == 'admin' && $Utilisateuradmin->id == $commentaire->utilisateur->id)
+                                                            <span class="text-xs text-green-500 bg-green-100 px-2 py-1 rounded-full">Auteur</span>
+                                                            @elseif($commentaire->utilisateur->type == 'agricole')
+                                                            <span class="text-xs text-blue-500 bg-blue-100 px-2 py-1 rounded-full">Agricole</span>
+                                                            @elseif($commentaire->utilisateur->type == 'veterinaire')
+                                                            <span class="text-xs text-yellow-500 bg-yellow-100 px-2 py-1 rounded-full">veterinaire</span>
+                                                            @elseif($commentaire->utilisateur->type == 'client')
+                                                            <span class="text-xs text-red-500 bg-red-100 px-2 py-1 rounded-full">Client</span>
+                                                            @elseif($commentaire->utilisateur->type == 'admin')
+                                                            <span class="text-xs text-purple-500 bg-purple-100 px-2 py-1 rounded-full">Admin</span>
+                                                            @endif
+                                                        </div>
+                                                        <span class="text-sm text-gray-500">{{$commentaire->created_at->format('d-m-Y H:i')}}</span>
+                                                    </div>
+                                                    <p class="text-gray-700">{{$commentaire->contenu}}</p>
+                                                    @if($commentaire->utilisateur->id == Auth::user()->id)
+                                                    <div class="flex items-center gap-2 text-xs mt-2">
+                                                        <!-- Modifier le commentaire -->
+                                                        <form action="" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="text-blue-500 hover:underline">
+                                                                Modifier
+                                                            </button>
+                                                        </form>
+                                                        <!-- Supprimer le commentaire -->
+                                                        <form action="{{route('articles.deleteComment')}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="hidden" name="commentaire_id" value="{{$commentaire->id}}">
+                                                            <button type="submit" class="text-red-500 hover:underline">
+                                                                Supprimer
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                document.getElementById('showAllCommentsBtn').addEventListener('click', function() {
+                                    document.getElementById('allCommentsModal').classList.remove('hidden');
+                                });
+
+                                document.getElementById('closeModalBtn').addEventListener('click', function() {
+                                    document.getElementById('allCommentsModal').classList.add('hidden');
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>

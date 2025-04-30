@@ -76,7 +76,7 @@
                                 </svg>
                                 {{ $article->created_at->format('d/m/Y') }}
                             </span>
-                            <form action="{{ route('articles.show') }}" method="post">
+                            <form action="{{ route('articles.show') }}" method="get">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $article->id }}">
                                 <button type="submit" class="text-primary-600 hover:text-primary-800 font-medium text-sm">
