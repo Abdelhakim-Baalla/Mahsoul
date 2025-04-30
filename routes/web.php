@@ -66,6 +66,8 @@ Route::controller(ArticleController::class)->group(function () {
     Route::get('/formation/tag', 'articlesTag')->name('articles.tag');
     Route::get('/formation/show/add/comment', 'articlesAddComment')->name('articles.addComment');
     Route::delete('/formation/show/delete/comment', 'articlesDeleteComment')->name('articles.deleteComment');
+    Route::get('/formation/show/edit/comment', 'articleseditComment')->name('articles.editComment');
+    Route::put('/formation/show/edit/comment/submit', 'articleseditCommentSubmit')->name('articles.editComment.submit');
 });
 
 

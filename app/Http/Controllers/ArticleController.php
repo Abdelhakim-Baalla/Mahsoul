@@ -145,4 +145,37 @@ class ArticleController extends Controller
         $this->commentaireRepository->supprimerCommentaire($validated['commentaire_id']);
         return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
     }
+
+    public function articleseditComment(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'commentaire_id' => 'required|integer|exists:commentaires,id',
+            'contenu' => 'required|string',
+            'article_id' => 'required|integer|exists:articles,id'
+        ]);
+
+        $article = $this->articleRepository->getArticleById($validated['article_id']);
+        // dd($article);
+        $validated['article'] = $article;
+        // dd($validated); 
+
+        return view('articles.comment-edit', compact('validated'));
+
+        // $this->commentaireRepository->modifierCommentaire($validated['commentaire_id'], $validated);
+        // return redirect()->back()->with('success', 'Commentaire supprimé avec succès.');
+    }
+
+    public function articleseditCommentSubmit(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'commentaire_id' => 'required|integer|exists:commentaires,id',
+            'contenu' => 'required|string',
+            'article_id' => 'required|integer|exists:articles,id'
+        ]);
+        // dd($validated);
+        $this->commentaireRepository->modifierCommentaire($validated['commentaire_id'], $validated);
+        //  $comm = $this->commentaireRepository->getCommentaireById($validated['commentaire_id']);
+        //  dd($comm);
+        return redirect()->route('articles.show', ['id' => $validated['article_id']])->with('success', 'Commentaire modifié avec succès.');
+    }
 }

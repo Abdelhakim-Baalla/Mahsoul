@@ -25,7 +25,12 @@ class CommentaireRepository implements CommentaireRepositoryInterface
     }
     
     public function modifierCommentaire(int $id, array $data){
-
+        $commentaire = $this->getCommentaireById($id);
+        // dd($data['contenu']);
+        // dd($commentaire);
+        return $commentaire->update([
+            'contenu' => $data['contenu']
+        ]);
     }
     
     public function supprimerCommentaire(int $id){
