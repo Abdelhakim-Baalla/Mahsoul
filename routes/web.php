@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,13 +43,15 @@ Route::controller(ProfileController::class)->group(function () {
 });
 
 // Marketplace - Utilisateur
-Route::view('/products', 'products.index')->name('products.index');
-Route::view('/products/show', 'products.show')->name('products.show');
-Route::view('/cart', 'cart.index')->name('cart.index');
-Route::view('/checkout', 'checkout.index')->name('checkout.index');
-Route::view('/checkout/confirmation', 'checkout.confirmation')->name('checkout.confirmation');
-Route::view('/orders', 'orders.index')->name('orders.index');
-Route::view('/orders/show', 'orders.show')->name('orders.show');
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index')->name('products.index');
+    Route::get('/products/show', 'show')->name('products.show');
+    Route::get('/cart', 'cartIndex')->name('cart.index');
+    Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
+    Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
+    Route::get('/orders', 'ordersIndex')->name('orders.index');
+    Route::get('/orders/show', 'ordersShow')->name('orders.show');
+});
 
 // Consultations - Utilisateur
 Route::view('/experts', 'consultations.index')->name('experts.index');
