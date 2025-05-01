@@ -83,6 +83,7 @@ Route::controller(AdminController::class)->group(function () {
 
     Route::get('/admin/products', 'productsIndex')->name('admin.products.index');
     Route::get('/admin/products/create', 'productsCreate')->name('admin.products.create');
+    Route::post('/admin/products/store', 'productsStore')->name('admin.products.store');
     Route::get('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
     
     Route::get('/admin/categories', 'categoriesIndex')->name('admin.categories.index');
