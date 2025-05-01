@@ -122,11 +122,14 @@
                                         <span class="text-xs text-gray-500">/ {{ $product->unite_mesure }}</span>
                                     </span>
                                 </div>
-                                <a href="{{ route('products.show', $product->id) }}" 
-                                   class="text-sm font-medium text-white bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded-lg transition-colors duration-200"
-                                   aria-label="Voir le produit {{ $product->nom }}">
-                                    Voir produit
-                                </a>
+                                <form action="{{ route('products.show') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <button type="submit" class="text-sm font-medium text-white bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded-lg transition-colors duration-200">
+                                         Voir produit
+                                    </button>
+                                </form>
+                                
                             </div>
                         </div>
                     </div>

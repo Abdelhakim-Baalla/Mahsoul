@@ -45,7 +45,7 @@ Route::controller(ProfileController::class)->group(function () {
 // Marketplace - Utilisateur
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
-    Route::get('/products/show', 'show')->name('products.show');
+    Route::post('/products/show', 'productShow')->name('products.show');
     Route::get('/cart', 'cartIndex')->name('cart.index');
     Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
     Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
