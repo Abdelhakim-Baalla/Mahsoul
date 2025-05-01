@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\ArticleRepositoryInterface;
 use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
+use App\Repositories\Interfaces\CommentaireRepositoryInterface;
 use App\Repositories\Interfaces\ProduitRepositoryInterface;
 use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
@@ -23,8 +24,9 @@ class AdminController extends Controller
     private $produitRepository;
     private $commandeRepository;
     private $rendezVousRepository;
+    private $commentaireRepository;
 
-    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, AdminRepositoryInterface $adminRepository, TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository, UtilisateurRepositoryInterface $utilisateurRepository)
+    public function __construct(CommentaireRepositoryInterface $commentaireRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, AdminRepositoryInterface $adminRepository, TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository, UtilisateurRepositoryInterface $utilisateurRepository)
     {
         $this->tagRepository = $tagRepository;
         $this->articleRepository = $articleRepository;
@@ -34,6 +36,7 @@ class AdminController extends Controller
         $this->produitRepository = $produitRepository;
         $this->commandeRepository = $commandeRepository;
         $this->rendezVousRepository = $rendezVousRepository;
+        $this->commentaireRepository = $commentaireRepository;
     }
 
     public function getAdminById(int $id)
@@ -45,10 +48,10 @@ class AdminController extends Controller
     {
         $countUtilisateurs = $this->utilisateurRepository->countUsers();
         $countProduits = $this->produitRepository->countProduit();
-        $countCommandes = $this->commandeRepository->countCommandes(); 
-        $countconsultations = $this->rendezVousRepository->countConsultations(); 
+        $countCommandes = $this->commandeRepository->countCommandes();
+        $countconsultations = $this->rendezVousRepository->countConsultations();
 
-        $allUtilisateurs = $this->utilisateurRepository->getAllUtilisateurs(); 
+        $allUtilisateurs = $this->utilisateurRepository->getAllUtilisateurs();
 
         $statistiques = [
             'utilisateurs' => $countUtilisateurs,
@@ -61,27 +64,31 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('statistiques'));
     }
 
-    public function usersIndex (){
+    public function usersIndex()
+    {
         $utilisateurs = $this->utilisateurRepository->getAllUtilisateurs();
         // dd($utilisateurs);
         return view('admin.users.index', compact('utilisateurs'));
     }
 
-    public function usersShow (Request $request){
+    public function usersShow(Request $request)
+    {
         // dd($request->id);
         $utilisateur = $this->utilisateurRepository->getById($request->id);
         // dd($utilisateurs);
         return view('admin.users.show', compact('utilisateur'));
     }
 
-    public function usersEdit (Request $request){
+    public function usersEdit(Request $request)
+    {
         // dd($request->id);
         $utilisateur = $this->utilisateurRepository->getById($request->id);
         // dd($utilisateurs);
         return view('admin.users.edit', compact('utilisateur'));
     }
 
-    public function usersEditSubmit(Request $request){
+    public function usersEditSubmit(Request $request)
+    {
         // dd($request->all());
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
@@ -102,7 +109,8 @@ class AdminController extends Controller
         // dd($utilisateur); 
     }
 
-    public function usersDelete(Request $request){
+    public function usersDelete(Request $request)
+    {
         $validated = $request->validate([
             'id' => 'required|integer'
         ]);
@@ -119,7 +127,7 @@ class AdminController extends Controller
     {
         $articles = $this->articleRepository->getAllArticles();
         $categorie = $this->articleRepository->getCategorieById(1);
-        $categorieNom = $categorie->nom;
+        $categorieNom = $categorie ? $categorie->nom : 'Unknown Category';
         if ($articles->isEmpty()) {
             return redirect()->route('admin.articles.create');
         }
@@ -149,12 +157,12 @@ class AdminController extends Controller
             $article->auteur = $this->getAdminById($article->auteur);
             // echo $article->auteur . "<br>";
             // dd($article->auteur);
-            $idUtilisateur = $article->auteur->compte;    
+            $idUtilisateur = $article->auteur->compte;
             $Utilisateuradmin = $this->getUtilisateurAdminById($idUtilisateur);
             $article->auteur = $Utilisateuradmin;
         }
 
-        return view('admin.articles.index', compact('articles','Utilisateuradmin', 'categorieNom'));
+        return view('admin.articles.index', compact('articles', 'Utilisateuradmin', 'categorieNom'));
     }
 
     public function articlesCreate()
@@ -175,7 +183,7 @@ class AdminController extends Controller
         // dd($validated);
 
         $categories = $this->categorieRepository->getAllCategories();
-        
+
         return view('admin.articles.add-categorie', compact('validated', 'categories'));
     }
 
@@ -193,11 +201,12 @@ class AdminController extends Controller
         ]);
 
         $categories = $this->categorieRepository->getAllCategories();
-        
+
         return view('admin.articles.update-with-categorie', compact('validated', 'categories'));
     }
 
-    public function articlesEditStoreSubmit(Request $request){
+    public function articlesEditStoreSubmit(Request $request)
+    {
         // dd($request->all());
         $validated = $request->validate([
             'titre' => 'required|string|max:255',
@@ -242,7 +251,8 @@ class AdminController extends Controller
         return redirect()->route('admin.articles.index')->with('success', 'Article ajouter avec succès !');
     }
 
-    public function articlesSupprimer(Request $request){
+    public function articlesSupprimer(Request $request)
+    {
         $validated = $request->validate([
             'id' => 'required|integer'
         ]);
@@ -251,7 +261,8 @@ class AdminController extends Controller
         return redirect()->route('admin.articles.index')->with('success', 'Article supprimé avec succès !');
     }
 
-    public function articlesEdit(Request $request){
+    public function articlesEdit(Request $request)
+    {
         // dd($request->all());
         $article = $this->articleRepository->getArticleById($request->id);
         return view('admin.articles.update', compact('article'));
@@ -319,5 +330,122 @@ class AdminController extends Controller
     {
         $categories = $this->categorieRepository->getAllCategories();
         return view('admin.categories.index', compact('categories'));
+    }
+
+    public function categoriesedit(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $categorie = $this->categorieRepository->getCategorieById($validated['id']);
+        return view('admin.categories.modifier', compact('categorie'));
+    }
+
+    public function categorieseditSubmit(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'id' => 'required|integer',
+            'nom' => 'required|string|max:255|unique:categories,nom,',
+            'description' => 'required|string|max:255'
+        ]);
+        // dd($validated);
+        $this->categorieRepository->modifierCategorie($validated['id'], $validated);
+        return redirect()->route('admin.categories.index')->with('success', 'Catégorie modifier avec succès !');
+    }
+
+    public function categoriesdelete(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'id' => 'required|integer'
+        ]);
+        // dd($validated['id']);
+        $this->categorieRepository->supprimerCategorie($validated['id']);
+        return redirect()->route('admin.categories.index')->with('success', 'Catégorie supprimé avec succès !');
+    }
+
+    public function categoriesAdd(){
+        return view('admin.categories.ajouter');
+    }
+
+    public function categoriesStore(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255|unique:categories,nom|min:3',
+            'description' => 'required|string|max:255'
+        ]);
+        // dd($validated);
+        $this->categorieRepository->ajouterCategorie($validated['nom'], $validated['description']);
+        return redirect()->route('admin.categories.index')->with('success', 'Catégorie ajouter avec succès !');
+    }
+
+    public function commentsIndex()
+    {
+        $comments = $this->commentaireRepository->getAllCommentaires();
+        foreach ($comments as $comment) {
+            $comment->article = $this->articleRepository->getArticleById($comment->article);
+            $comment->utilisateur = $this->utilisateurRepository->getById($comment->utilisateur);
+        }
+        // dd($comments);
+        return view('admin.comments.index', compact('comments'));
+    }
+
+    public function commentsDelete(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'commentaire_id' => 'required|integer'
+        ]);
+        // dd($validated['id']);
+        $this->commentaireRepository->supprimerCommentaire($validated['commentaire_id']);
+        return redirect()->route('admin.comments.index')->with('success', 'Commentaire supprimé avec succès !');
+    }
+
+    public function ordersIndex(){
+        return view('admin.orders.index');
+    }
+
+    public function ordersShow(){
+        return view('admin.orders.show');
+    }
+
+    public function productsIndex (){
+        $produits = $this->produitRepository->getAllProduits();
+        $categories = $this->categorieRepository->getAllCategories();
+        foreach ($produits as $produit) {
+            // dd($produit->categorie);
+            $produit->categorie = $this->categorieRepository->getCategorieById($produit->categorie);
+            // dd($produit->categorie);
+            // $produit->tags = $this->tagRepository->getTagsByProduitId($produit->id);
+        }
+        return view('admin.products.index', compact('produits', 'categories'));
+    }
+
+    public function productsCreate(){
+        $categories = $this->categorieRepository->getAllCategories();
+        // dd($categories);
+        return view('admin.products.create', compact('categories'));
+    }
+    
+    public function productsStore(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255|unique:produits,nom|min:3',
+            'categorie' => 'required|integer|exists:categories,id',
+            'description' => 'required|string',
+            'prix' => 'required|numeric',
+            'quantite' => 'required|integer',
+            'unite_mesure' => 'required|string|max:255',
+            'en_stock' => 'required|integer|in:0,1',
+            'image' => 'string',
+            'vendeur' => 'required|string|max:255'
+        ]);
+        // dd($validated);
+        $this->produitRepository->ajouterProduit($validated);
+        return redirect()->route('admin.products.index')->with('success', 'Produit ajouter avec succès !');
     }
 }

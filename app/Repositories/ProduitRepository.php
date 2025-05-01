@@ -7,7 +7,8 @@ use App\Repositories\Interfaces\ProduitRepositoryInterface;
 
 class ProduitRepository implements ProduitRepositoryInterface
 {
-    public function ajouterEnStock(int $produit_id, float $quantite){
+    public function ajouterproduit(array $data) {
+        return Produit::create($data);
 
     }
     
@@ -16,11 +17,15 @@ class ProduitRepository implements ProduitRepositoryInterface
     }
     
     public function getProduitById(int $id){
-
+        return Produit::find($id);
     }
     
     public function getAllProduits(){
+        return Produit::paginate(5);
+    }
 
+    public function getAllProduitsClient(){
+        return Produit::paginate(8);
     }
     
     public function getProduitsEnStock(){

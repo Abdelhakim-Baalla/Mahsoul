@@ -39,7 +39,7 @@ class CommentaireRepository implements CommentaireRepositoryInterface
     }
     
     public function getAllCommentaires(){
-        return Commentaire::paginate(); 
+        return Commentaire::paginate(5); 
     }
     
     

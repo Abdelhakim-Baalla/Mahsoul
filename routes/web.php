@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,13 +43,15 @@ Route::controller(ProfileController::class)->group(function () {
 });
 
 // Marketplace - Utilisateur
-Route::view('/products', 'products.index')->name('products.index');
-Route::view('/products/show', 'products.show')->name('products.show');
-Route::view('/cart', 'cart.index')->name('cart.index');
-Route::view('/checkout', 'checkout.index')->name('checkout.index');
-Route::view('/checkout/confirmation', 'checkout.confirmation')->name('checkout.confirmation');
-Route::view('/orders', 'orders.index')->name('orders.index');
-Route::view('/orders/show', 'orders.show')->name('orders.show');
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index')->name('products.index');
+    Route::post('/products/show', 'productShow')->name('products.show');
+    Route::get('/cart', 'cartIndex')->name('cart.index');
+    Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
+    Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
+    Route::get('/orders', 'ordersIndex')->name('orders.index');
+    Route::get('/orders/show', 'ordersShow')->name('orders.show');
+});
 
 // Consultations - Utilisateur
 Route::view('/experts', 'consultations.index')->name('experts.index');
@@ -83,8 +86,16 @@ Route::controller(AdminController::class)->group(function () {
 
     Route::get('/admin/products', 'productsIndex')->name('admin.products.index');
     Route::get('/admin/products/create', 'productsCreate')->name('admin.products.create');
+    Route::post('/admin/products/store', 'productsStore')->name('admin.products.store');
     Route::get('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
+    
     Route::get('/admin/categories', 'categoriesIndex')->name('admin.categories.index');
+    Route::get('/admin/categories/add', 'categoriesAdd')->name('admin.categories.add');
+    Route::post('/admin/categories/store', 'categoriesStore')->name('admin.categories.store');
+    Route::post('/admin/categories/edit', 'categoriesedit')->name('admin.categories.edit');
+    Route::put('/admin/categories/edit/submit', 'categorieseditSubmit')->name('admin.categories.edit.submit');
+    Route::delete('/admin/categories/delete', 'categoriesdelete')->name('admin.categories.delete');
+
     Route::get('/admin/orders', 'ordersIndex')->name('admin.orders.index');
     Route::get('/admin/orders/show', 'ordersShow')->name('admin.orders.show');
 
@@ -100,6 +111,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/articles/tag', 'articlesTag')->name('admin.articles.tag');
 
     Route::get('/admin/comments', 'commentsIndex')->name('admin.comments.index');
+    Route::delete('/admin/comments/delete', 'commentsDelete')->name('admin.comments.delete');
+
     Route::get('/admin/tags', 'tagsIndex')->name('admin.tags.index');
     Route::get('/admin/tag/create', 'tagCreate')->name('admin.tags.create');
     Route::post('/admin/tag/store', 'tagStore')->name('admin.tags.store');

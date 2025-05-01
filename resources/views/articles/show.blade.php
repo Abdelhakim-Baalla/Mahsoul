@@ -1,3 +1,4 @@
+@if (Auth::check())
 @extends('layouts.app')
 
 @section('title', 'Techniques d\'irrigation modernes pour économiser l\'eau')
@@ -5,7 +6,7 @@
 @section('content')
 <section class="py-12 diagonal-box bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <!-- Fil d'Ariane -->
+        <!-- Breadcrumb -->
         <div class="flex items-center gap-2 text-gray-600 mb-6">
             <a href="{{ url('formation') }}" class="hover:text-primary-600 hover:underline">Articles</a>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -15,20 +16,20 @@
         </div>
 
         <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Article principal -->
+            <!-- Main Article -->
             <div class="lg:w-2/3">
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <!-- Image principale -->
+                    <!-- Main Image -->
                     <div class="relative h-80 w-full">
                         <img src="{{$article->photo}}" alt="{{$article->titre}}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-black/10"></div>
                     </div>
 
-                    <!-- Contenu de l'article -->
+                    <!-- Article Content -->
                     <div class="p-6">
                         <h1 class="text-3xl font-bold text-gray-900 mb-4">{{$article->titre}}</h1>
 
-                        <!-- Métadonnées -->
+                        <!-- Metadata -->
                         <div class="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600">
                             <div class="flex items-center">
                                 <img src="{{$Utilisateuradmin->photo}}" alt="{{$Utilisateuradmin->prenom}} {{$Utilisateuradmin->nom}}" class="w-8 h-8 rounded-full mr-2">
@@ -43,7 +44,6 @@
                                 </svg>
                                 <span>{{$article->created_at->format('d/m/Y')}}</span>
                             </div>
-                            <!-- Affichage de la catégorie -->
                             <div class="flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -52,16 +52,16 @@
                             </div>
                         </div>
 
-                        <!-- Contenu -->
+                        <!-- Content -->
                         <div class="prose max-w-none text-gray-700 break-words">
                             <div class="overflow-hidden text-ellipsis">{!! $article->contenu !!}</div>
                         </div>
 
-                        <!-- Section commentaires -->
+                        <!-- Comments Section -->
                         <div class="mt-10 border-t pt-8">
                             <h3 class="text-xl font-semibold mb-6">Commentaires ({{ $commentaires->count() }})</h3>
 
-                            <!-- Formulaire de commentaire -->
+                            <!-- Comment Form -->
                             <div class="mb-8 bg-gray-50 p-4 rounded-xl">
                                 <h4 class="text-lg font-medium mb-4">Laisser un commentaire</h4>
                                 <form action="{{route('articles.addComment')}}" method="get" class="space-y-4">
@@ -77,7 +77,7 @@
                                 </form>
                             </div>
 
-                            <!-- Liste des commentaires -->
+                            <!-- Comments List -->
                             <div class="space-y-6">
                                 @foreach($commentaires->take(5) as $commentaire)
                                 <div class="bg-gray-20 p-4 rounded-xl group">
@@ -104,7 +104,7 @@
                                             <p class="text-gray-700">{{$commentaire->contenu}}</p>
                                             @if($commentaire->utilisateur->id == Auth::user()->id || Auth::user()->type == 'admin')
                                             <div class="flex items-center gap-2 text-xs mt-2">
-                                                <!-- Modifier le commentaire -->
+                                                <!-- Edit Comment -->
                                                 <form action="{{route('articles.editComment')}}" method="get">
                                                     @csrf
                                                     <input type="hidden" name="commentaire_id" value="{{$commentaire->id}}">
@@ -114,7 +114,7 @@
                                                         Modifier
                                                     </button>
                                                 </form>
-                                                <!-- Supprimer le commentaire -->
+                                                <!-- Delete Comment -->
                                                 <form action="{{route('articles.deleteComment')}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -230,3 +230,8 @@
     </div>
 </section>
 @endsection
+@else
+<script>
+    window.location.href = "{{ url('login') }}";
+</script>
+@endif
