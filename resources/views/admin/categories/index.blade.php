@@ -12,9 +12,9 @@
                 <i class="fas fa-folder mr-2"></i>
                 <span>Catégories de produits</span>
             </div>
-            <button type="button" class="bg-white text-primary-600 px-3 py-1 rounded-md text-sm font-medium hover:bg-gray-100" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+            <a href="{{route('admin.categories.add')}}" class="bg-white text-primary-600 px-3 py-1 rounded-md text-sm font-medium hover:bg-gray-100" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                 <i class="fas fa-plus mr-1"></i> Ajouter une catégorie
-            </button>
+            </a>
         </div>
         <div class="p-4">
             <div class="overflow-x-auto" style="max-height: 500px; overflow-y: auto;">
