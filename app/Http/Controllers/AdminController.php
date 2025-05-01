@@ -404,4 +404,24 @@ class AdminController extends Controller
         $this->commentaireRepository->supprimerCommentaire($validated['commentaire_id']);
         return redirect()->route('admin.comments.index')->with('success', 'Commentaire supprimé avec succès !');
     }
+
+    public function ordersIndex(){
+        return view('admin.orders.index');
+    }
+
+    public function ordersShow(){
+        return view('admin.orders.show');
+    }
+
+    public function productsIndex (){
+        $produits = $this->produitRepository->getAllProduits();
+        foreach ($produits as $produit) {
+            // dd($produit->categorie);
+            $produit->categorie = $this->categorieRepository->getCategorieById($produit->categorie);
+            // dd($produit->categorie);
+            // $produit->tags = $this->tagRepository->getTagsByProduitId($produit->id);
+        }
+        return view('admin.products.index', compact('produits'));
+    }
+    
 }
