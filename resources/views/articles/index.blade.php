@@ -62,11 +62,19 @@
                         </p>
                         
                         <div class="flex items-center gap-2 mb-4 text-xs text-gray-600">
-                            <img src="{{$article->auteur->photo}}" alt="{{$article->auteur->prenom}} {{$article->auteur->nom}}" class="w-6 h-6 rounded-full">
-                            <div>
-                                <span>{{$article->auteur->prenom}} {{$article->auteur->nom}}</span>
-                                <small class="text-gray-500 text-[10px] mt-1 italic text-end">Team Mahsoul</small>
-                            </div>
+                            @if(is_object($article->auteur))
+                                <img src="{{$article->auteur->photo}}" alt="{{$article->auteur->prenom}} {{$article->auteur->nom}}" class="w-6 h-6 rounded-full">
+                                <div>
+                                    <span>{{$article->auteur->prenom}} {{$article->auteur->nom}}</span>
+                                    <small class="text-gray-500 text-[10px] mt-1 italic text-end">Team Mahsoul</small>
+                                </div>
+                            @else
+                                <img src="/path/to/default/photo.jpg" alt="Auteur inconnu" class="w-6 h-6 rounded-full">
+                                <div>
+                                    <span>Auteur inconnu</span>
+                                    <small class="text-gray-500 text-[10px] mt-1 italic text-end">Team Mahsoul</small>
+                                </div>
+                            @endif
                         </div>
                         
                         <div class="flex justify-between items-center">

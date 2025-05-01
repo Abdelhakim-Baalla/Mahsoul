@@ -84,7 +84,12 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/products', 'productsIndex')->name('admin.products.index');
     Route::get('/admin/products/create', 'productsCreate')->name('admin.products.create');
     Route::get('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
+    
     Route::get('/admin/categories', 'categoriesIndex')->name('admin.categories.index');
+    Route::post('/admin/categories/edit', 'categoriesedit')->name('admin.categories.edit');
+    Route::put('/admin/categories/edit/submit', 'categorieseditSubmit')->name('admin.categories.edit.submit');
+    Route::delete('/admin/categories/delete', 'categoriesdelete')->name('admin.categories.delete');
+
     Route::get('/admin/orders', 'ordersIndex')->name('admin.orders.index');
     Route::get('/admin/orders/show', 'ordersShow')->name('admin.orders.show');
 

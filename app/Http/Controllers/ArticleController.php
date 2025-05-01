@@ -34,6 +34,11 @@ class ArticleController extends Controller
     {
         $articles = $this->articleRepository->getPublishedArticles();
         // dd($articles);
+        if (empty($articles)) {
+            return view('articles.index', ['articles' => []]);
+        }
+
+        $Utilisateuradmin = null;
         foreach ($articles as $article) {
             $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
             $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
@@ -49,22 +54,22 @@ class ArticleController extends Controller
             }
 
             $imageExists = @getimagesize($imageUrl);
-
+            // dd($imageExists);
             if ($imageExists) {
                 $article->photo = $imageUrl;
             } else {
                 $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
             }
+            // dd($article->photo);
 
-
-            // echo $article->auteur . "<br>";
-            $article->auteur = $this->getAdminById($article->auteur);
-            // echo $article->auteur . "<br>";
-            // dd($article->auteur);
-            $idUtilisateur = $article->auteur->compte;
-            $Utilisateuradmin = $this->getUtilisateurAdminById($idUtilisateur);
-            $article->auteur = $Utilisateuradmin;
-            // echo $article . "<br>";
+            // dd($article);
+            $admin = $this->getAdminById($article->auteur);
+            if ($admin) {
+                $idUtilisateur = $admin->compte ?? null;
+                $Utilisateuradmin = $idUtilisateur ? $this->getUtilisateurAdminById($idUtilisateur) : null;
+                $article->auteur = $Utilisateuradmin;
+            }
+            // dd($article);
         }
 
         return view('articles.index', compact('articles', 'Utilisateuradmin'));
