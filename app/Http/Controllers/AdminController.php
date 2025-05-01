@@ -367,6 +367,22 @@ class AdminController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Catégorie supprimé avec succès !');
     }
 
+    public function categoriesAdd(){
+        return view('admin.categories.ajouter');
+    }
+
+    public function categoriesStore(Request $request)
+    {
+        // dd($request->all());
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255|unique:categories,nom|min:3',
+            'description' => 'required|string|max:255'
+        ]);
+        // dd($validated);
+        $this->categorieRepository->ajouterCategorie($validated['nom'], $validated['description']);
+        return redirect()->route('admin.categories.index')->with('success', 'Catégorie ajouter avec succès !');
+    }
+
     public function commentsIndex()
     {
         $comments = $this->commentaireRepository->getAllCommentaires();
