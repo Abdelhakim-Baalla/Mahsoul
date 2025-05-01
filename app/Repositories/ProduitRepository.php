@@ -17,7 +17,7 @@ class ProduitRepository implements ProduitRepositoryInterface
     }
     
     public function getProduitById(int $id){
-
+        return Produit::find($id);
     }
     
     public function getAllProduits(){

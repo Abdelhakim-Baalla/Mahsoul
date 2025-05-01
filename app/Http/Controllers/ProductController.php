@@ -35,4 +35,20 @@ class ProductController extends Controller
         }
         return view('products.index', compact('products'));
     }
+
+    public function productShow(Request $request){
+        // dd($request->id);
+        $product = $this->produitRepository->getProduitById($request->id);
+        if (empty($product)) {
+            return view('products.index', ['product' => []]);
+        }
+        $categorie = $this->categorieRepository->getCategorieById($product->categorie);
+        if ($categorie) {
+            $product->categorie = $categorie->nom;
+        } else {
+            $product->categorie = 'Unknown';
+        }
+        // dd($product->categorie);
+        return view('products.show', compact('product'));
+    }
 }
