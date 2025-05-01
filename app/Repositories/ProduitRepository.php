@@ -23,6 +23,10 @@ class ProduitRepository implements ProduitRepositoryInterface
     public function getAllProduits(){
         return Produit::paginate(5);
     }
+
+    public function getAllProduitsClient(){
+        return Produit::paginate(8);
+    }
     
     public function getProduitsEnStock(){
 
