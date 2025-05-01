@@ -436,7 +436,7 @@ class AdminController extends Controller
         $validated = $request->validate([
             'nom' => 'required|string|max:255|unique:produits,nom|min:3',
             'categorie' => 'required|integer|exists:categories,id',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string',
             'prix' => 'required|numeric',
             'quantite' => 'required|integer',
             'unite_mesure' => 'required|string|max:255',
