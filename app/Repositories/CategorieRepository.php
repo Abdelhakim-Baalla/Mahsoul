@@ -7,7 +7,12 @@ use App\Repositories\Interfaces\CategorieRepositoryInterface;
 
 class CategorieRepository implements CategorieRepositoryInterface
 {
-    public function ajouterCategorie(string $nom, string $description) {}
+    public function ajouterCategorie(string $nom, string $description) {
+        return Categorie::create([
+            'nom' => $nom,
+            'description' => $description
+        ]);
+    }
 
     public function getAllCategories()
     {
