@@ -20,7 +20,7 @@ class ProduitRepository implements ProduitRepositoryInterface
     }
     
     public function getAllProduits(){
-
+        return Produit::paginate(5);
     }
     
     public function getProduitsEnStock(){
