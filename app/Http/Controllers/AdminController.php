@@ -423,5 +423,11 @@ class AdminController extends Controller
         }
         return view('admin.products.index', compact('produits'));
     }
+
+    public function productsCreate(){
+        $categories = $this->categorieRepository->getAllCategories();
+        // dd($categories);
+        return view('admin.products.create', compact('categories'));
+    }
     
 }
