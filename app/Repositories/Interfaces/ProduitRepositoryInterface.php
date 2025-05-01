@@ -11,4 +11,5 @@ interface ProduitRepositoryInterface
     public function getProduitsEnStock();
     public function getProduitsEpuises();
     public function countProduit();
+    public function getAllProduitsClient();
 }
