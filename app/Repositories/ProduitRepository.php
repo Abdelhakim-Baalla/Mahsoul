@@ -7,7 +7,8 @@ use App\Repositories\Interfaces\ProduitRepositoryInterface;
 
 class ProduitRepository implements ProduitRepositoryInterface
 {
-    public function ajouterEnStock(int $produit_id, float $quantite){
+    public function ajouterproduit(array $data) {
+        return Produit::create($data);
 
     }
     

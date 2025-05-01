@@ -415,13 +415,14 @@ class AdminController extends Controller
 
     public function productsIndex (){
         $produits = $this->produitRepository->getAllProduits();
+        $categories = $this->categorieRepository->getAllCategories();
         foreach ($produits as $produit) {
             // dd($produit->categorie);
             $produit->categorie = $this->categorieRepository->getCategorieById($produit->categorie);
             // dd($produit->categorie);
             // $produit->tags = $this->tagRepository->getTagsByProduitId($produit->id);
         }
-        return view('admin.products.index', compact('produits'));
+        return view('admin.products.index', compact('produits', 'categories'));
     }
 
     public function productsCreate(){
@@ -430,4 +431,21 @@ class AdminController extends Controller
         return view('admin.products.create', compact('categories'));
     }
     
+    public function productsStore(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255|unique:produits,nom|min:3',
+            'categorie' => 'required|integer|exists:categories,id',
+            'description' => 'required|string|max:255',
+            'prix' => 'required|numeric',
+            'quantite' => 'required|integer',
+            'unite_mesure' => 'required|string|max:255',
+            'en_stock' => 'required|integer|in:0,1',
+            'image' => 'string',
+            'vendeur' => 'required|string|max:255'
+        ]);
+        // dd($validated);
+        $this->produitRepository->ajouterProduit($validated);
+        return redirect()->route('admin.products.index')->with('success', 'Produit ajouter avec succès !');
+    }
 }
