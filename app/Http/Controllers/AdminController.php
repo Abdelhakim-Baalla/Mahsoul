@@ -448,4 +448,19 @@ class AdminController extends Controller
         $this->produitRepository->ajouterProduit($validated);
         return redirect()->route('admin.products.index')->with('success', 'Produit ajouter avec succès !');
     }
+
+    public function productsEdit(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'id' => 'required|integer'
+        ]);
+        // dd($validated['id']);
+        
+        $produit = $this->produitRepository->getProduitById($validated['id']);
+        // dd($produit);
+        $produit->categorie = $this->categorieRepository->getCategorieById($produit->categorie);
+        // dd($produit);
+        $categories = $this->categorieRepository->getAllCategories();
+        return view('admin.products.edit', compact('produit', 'categories'));
+    }
 }

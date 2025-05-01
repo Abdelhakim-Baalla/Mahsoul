@@ -3,239 +3,154 @@
 @section('title', 'Modifier un produit - Mahsoul')
 
 @section('content')
-<div class="py-6">
+<div class="py-6 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center">
-            <a href="{{ route('admin.products.index') }}" class="text-green-600 hover:text-green-900 mr-2">
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Modifier le produit</h1>
+            <a href="{{ route('admin.products.index') }}" class="inline-flex items-center px-5 py-3 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
+                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
+                Retour
             </a>
-            <h1 class="text-2xl font-semibold text-gray-900">Modifier le produit</h1>
         </div>
 
-        <div class="mt-6 bg-white shadow overflow-hidden rounded-lg">
-            <form action="#" method="POST">
-                <div class="px-4 py-5 sm:p-6">
-                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                        <div class="sm:col-span-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700">
-                                Nom du produit
-                            </label>
-                            <div class="mt-1">
-                                <input type="text" name="name" id="name" value="Oranges fraîches" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-2">
-                            <label for="category" class="block text-sm font-medium text-gray-700">
-                                Catégorie
-                            </label>
-                            <div class="mt-1">
-                                <select id="category" name="category" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                    <option value="">Sélectionner une catégorie</option>
-                                    <option value="fruits" selected>Fruits</option>
-                                    <option value="vegetables">Légumes</option>
-                                    <option value="cereals">Céréales</option>
-                                    <option value="dairy">Produits laitiers</option>
-                                    <option value="honey">Miel et dérivés</option>
-                                    <option value="oils">Huiles</option>
-                                    <option value="nuts">Fruits secs</option>
-                                    <option value="spices">Épices</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-6">
-                            <label for="description" class="block text-sm font-medium text-gray-700">
-                                Description
-                            </label>
-                            <div class="mt-1">
-                                <textarea id="description" name="description" rows="4" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">Oranges juteuses et sucrées, cultivées sans pesticides dans la région de Souss. Riches en vitamine C et parfaites pour les jus frais.</textarea>
-                            </div>
-                            <p class="mt-2 text-sm text-gray-500">
-                                Description détaillée du produit.
-                            </p>
-                        </div>
-
-                        <div class="sm:col-span-2">
-                            <label for="price" class="block text-sm font-medium text-gray-700">
-                                Prix
-                            </label>
-                            <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="text" name="price" id="price" value="25" class="focus:ring-green-500 focus:border-green-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0.00">
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                    <span class="text-gray-500 sm:text-sm">
-                                        DH
-                                    </span>
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <form action="" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="space-y-6">
+                    <!-- Basic Information Section -->
+                    <div>
+                        <h2 class="text-lg font-medium text-gray-900 mb-4 pb-2 border-b border-gray-200">Informations de base</h2>
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <label for="nom" class="block text-sm font-medium text-gray-700">Nom du produit</label>
+                                <div class="mt-1">
+                                    <input type="text" name="nom" id="nom" value="{{$produit->nom}}" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="sm:col-span-2">
-                            <label for="unit" class="block text-sm font-medium text-gray-700">
-                                Unité
-                            </label>
-                            <div class="mt-1">
-                                <select id="unit" name="unit" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                    <option value="kg" selected>Kilogramme (kg)</option>
-                                    <option value="g">Gramme (g)</option>
-                                    <option value="l">Litre (L)</option>
-                                    <option value="ml">Millilitre (mL)</option>
-                                    <option value="piece">Pièce</option>
-                                    <option value="box">Boîte</option>
-                                    <option value="bunch">Botte</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-2">
-                            <label for="stock" class="block text-sm font-medium text-gray-700">
-                                Stock disponible
-                            </label>
-                            <div class="mt-1">
-                                <input type="number" name="stock" id="stock" value="150" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md" min="0">
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-3">
-                            <label for="region" class="block text-sm font-medium text-gray-700">
-                                Région d'origine
-                            </label>
-                            <div class="mt-1">
-                                <select id="region" name="region" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                    <option value="">Sélectionner une région</option>
-                                    <option value="casablanca">Casablanca-Settat</option>
-                                    <option value="rabat">Rabat-Salé-Kénitra</option>
-                                    <option value="marrakech">Marrakech-Safi</option>
-                                    <option value="fes">Fès-Meknès</option>
-                                    <option value="tanger">Tanger-Tétouan-Al Hoceïma</option>
-                                    <option value="souss" selected>Souss-Massa</option>
-                                    <option value="oriental">L'Oriental</option>
-                                    <option value="beni">Béni Mellal-Khénifra</option>
-                                    <option value="draa">Drâa-Tafilalet</option>
-                                    <option value="guelmim">Guelmim-Oued Noun</option>
-                                    <option value="laayoune">Laâyoune-Sakia El Hamra</option>
-                                    <option value="dakhla">Dakhla-Oued Ed-Dahab</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-3">
-                            <label for="farmer" class="block text-sm font-medium text-gray-700">
-                                Agriculteur
-                            </label>
-                            <div class="mt-1">
-                                <select id="farmer" name="farmer" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                    <option value="">Sélectionner un agriculteur</option>
-                                    <option value="1" selected>Ahmed Benali</option>
-                                    <option value="2">Fatima Zahra</option>
-                                    <option value="3">Karim Alaoui</option>
-                                    <option value="4">Samira Tazi</option>
-                                    <option value="5">Youssef Mansouri</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sm:col-span-6">
-                            <label class="block text-sm font-medium text-gray-700">
-                                Photos du produit
-                            </label>
-                            <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                                <div class="relative">
-                                    <img src="/placeholder.svg?height=150&width=150" alt="Photo du produit" class="h-32 w-32 object-cover rounded-md">
-                                    <button type="button" class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-100 rounded-full p-1 text-red-600 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="relative">
-                                    <img src="/placeholder.svg?height=150&width=150" alt="Photo du produit" class="h-32 w-32 object-cover rounded-md">
-                                    <button type="button" class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-100 rounded-full p-1 text-red-600 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                    </button>
+                            <div class="sm:col-span-6">
+                                <label for="categorie" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                                <div class="mt-1">
+                                    <select id="categorie" name="categorie" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" size="5" style="overflow-y: auto;">
+                                        @foreach($categories as $categorie)
+                                            <option value="{{ $categorie->id }}" {{ $produit->categorie->id == $categorie->id ? 'selected' : '' }}>{{ $categorie->nom }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="mt-4 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                <div class="space-y-1 text-center">
-                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <div class="flex text-sm text-gray-600">
-                                        <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
-                                            <span>Télécharger des fichiers</span>
-                                            <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
-                                        </label>
-                                        <p class="pl-1">ou glisser-déposer</p>
-                                    </div>
-                                    <p class="text-xs text-gray-500">
-                                        PNG, JPG, GIF jusqu'à 10MB
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="sm:col-span-3">
-                            <fieldset>
-                                <legend class="block text-sm font-medium text-gray-700">
-                                    Certifications
-                                </legend>
-                                <div class="mt-4 space-y-4">
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="bio" name="bio" type="checkbox" checked class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="bio" class="font-medium text-gray-700">Agriculture Biologique</label>
-                                            <p class="text-gray-500">Produit certifié biologique.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="local" name="local" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="local" class="font-medium text-gray-700">Produit Local</label>
-                                            <p class="text-gray-500">Produit cultivé localement.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="flex items-center h-5">
-                                            <input id="fair_trade" name="fair_trade" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
-                                        </div>
-                                        <div class="ml-3 text-sm">
-                                            <label for="fair_trade" class="font-medium text-gray-700">Commerce Équitable</label>
-                                            <p class="text-gray-500">Produit issu du commerce équitable.</p>
-                                        </div>
-                                    </div>
+                            <div class="sm:col-span-6">
+                                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                                <div class="mt-1">
+                                    <textarea id="description" name="description" rows="4" class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">{{$produit->description}}</textarea>
                                 </div>
-                            </fieldset>
-                        </div>
-
-                        <div class="sm:col-span-3">
-                            <label for="status" class="block text-sm font-medium text-gray-700">
-                                Statut
-                            </label>
-                            <div class="mt-1">
-                                <select id="status" name="status" class="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                                    <option value="active" selected>Actif</option>
-                                    <option value="inactive">Inactif</option>
-                                    <option value="pending">En attente</option>
-                                </select>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <button type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mr-3">
-                        Annuler
-                    </button>
-                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        Enregistrer
-                    </button>
+
+                    <!-- Pricing & Inventory Section -->
+                    <div>
+                        <h2 class="text-lg font-medium text-gray-900 mb-4 pb-2 border-b border-gray-200">Prix et stock</h2>
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-2">
+                                <label for="prix" class="block text-sm font-medium text-gray-700">Prix (DH)</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <input type="number" step="0.01" name="prix" id="prix" value="{{$produit->prix}}" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 pr-12 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="0.00">
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm">DH</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="quantite" class="block text-sm font-medium text-gray-700">Quantité</label>
+                                <div class="mt-1">
+                                    <input type="number" step="0.01" name="quantite" id="quantite" value="{{$produit->quantite}}" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="unite_mesure" class="block text-sm font-medium text-gray-700">Unité de mesure</label>
+                                <div class="mt-1">
+                                    <select id="unite_mesure" name="unite_mesure" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                        <option value="kg" {{ $produit->unite_mesure == 'kg' ? 'selected' : '' }}>Kilogramme (kg)</option>
+                                        <option value="g" {{ $produit->unite_mesure == 'g' ? 'selected' : '' }}>Gramme (g)</option>
+                                        <option value="l" {{ $produit->unite_mesure == 'l' ? 'selected' : '' }}>Litre (L)</option>
+                                        <option value="ml" {{ $produit->unite_mesure == 'ml' ? 'selected' : '' }}>Millilitre (mL)</option>
+                                        <option value="piece" {{ $produit->unite_mesure == 'piece' ? 'selected' : '' }}>Pièce</option>
+                                        <option value="boite" {{ $produit->unite_mesure == 'boite' ? 'selected' : '' }}>Boîte</option>
+                                        <option value="boteille" {{ $produit->unite_mesure == 'boteille' ? 'selected' : '' }}>Botte</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700">Statut du stock</label>
+                                <div class="mt-1 flex items-center space-x-4">
+                                    <div class="flex items-center">
+                                        <input id="en_stock_oui" name="en_stock" type="radio" value="1" {{ $produit->en_stock == 1 ? 'checked' : '' }} class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300">
+                                        <label for="en_stock_oui" class="ml-2 block text-sm text-gray-700">En stock</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="en_stock_non" name="en_stock" type="radio" value="0" {{ $produit->en_stock == 0 ? 'checked' : '' }} class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300">
+                                        <label for="en_stock_non" class="ml-2 block text-sm text-gray-700">Rupture</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Section -->
+                    <div>
+                        <h2 class="text-lg font-medium text-gray-900 mb-4 pb-2 border-b border-gray-200">Images du produit</h2>
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                                    <div class="relative">
+                                        <img src="{{$produit->image}}" alt="Photo du produit" class="h-32 w-full object-cover rounded-lg">
+                                       
+                                    </div>
+                                </div>
+                                
+                                <div>
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-6">
+                                <label for="image" class="block text-sm font-medium text-gray-700">URL de l'image</label>
+                                <div class="mt-1">
+                                    <input type="url" name="image" value="{{$produit->image}}" id="image" class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" placeholder="https://example.com/image.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information Section -->
+                    <div>
+                        <h2 class="text-lg font-medium text-gray-900 mb-4 pb-2 border-b border-gray-200">Vendeur</h2>
+                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div class="sm:col-span-4">
+                                <label for="vendeur" class="block text-sm font-medium text-gray-700">Nom du vendeur</label>
+                                <div class="mt-1">
+                                    <input type="text" name="vendeur" id="vendeur" value="{{$produit->vendeur}}" class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex justify-end space-x-4 pt-4 border-t border-gray-200">
+                        <button type="reset" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Annuler
+                        </button>
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Enregistrer les modifications
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
