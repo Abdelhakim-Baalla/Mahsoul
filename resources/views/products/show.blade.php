@@ -82,6 +82,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="flex items-center">
+                             @if($product->en_stock == 1 && $product->quantite > 0)
+                                <span class="px-2.5 py-1 inline-flex text-xs leading-4 font-semibold rounded-full bg-green-100 text-green-800">
+                                    <svg class="h-4 w-4 text-green-400 mr-1" fill="currentColor" viewBox="0 0 8 8">
+                                        <circle cx="4" cy="4" r="3" />
+                                    </svg>
+                                    En stock
+                                </span>
+                            @else
+                                <span class="px-2.5 py-1 inline-flex text-xs leading-4 font-semibold rounded-full bg-red-100 text-red-800">
+                                    <svg class="h-4 w-4 text-red-400 mr-1" fill="currentColor" viewBox="0 0 8 8">
+                                        <circle cx="4" cy="4" r="3" />
+                                    </svg>
+                                    Rupture
+                                </span>
+                            @endif 
+                        </div>
+                      
                         
                         <div class="mt-6 ">
                             <div class="text-3xl font-bold text-primary-700 mb-4">
@@ -120,7 +138,7 @@
                                     </div>
                                     <span class="ml-3 text-gray-500">{{strtoupper($product->unite_mesure)}}</span>
                                 </div>
-                                
+                                @if($product->en_stock == 1 && $product->quantite > 0)
                                 <div class="flex flex-col sm:flex-row sm:space-x-2  space-y-2 sm:space-y-0">
                                     <button type="button" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-md transition duration-150 ease-in-out flex items-center justify-center max-w-xs mx-auto sm:mx-0">
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -129,6 +147,16 @@
                                         Ajouter au panier
                                     </button>
                                 </div>
+                                @else
+                                <div class="flex flex-col sm:flex-row sm:space-x-2  space-y-2 sm:space-y-0">
+                                    <button type="button" disabled class="flex-1 bg-gray-400 text-white font-medium py-3 px-6 rounded-md transition duration-150 ease-in-out flex items-center justify-center max-w-xs mx-auto sm:mx-0">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                        Produit en rupture de stock
+                                    </button>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
