@@ -452,7 +452,7 @@ class AdminController extends Controller
         if( $validated['en_stock'] == 0) {
             $validated['quantite'] = 0 ;
         }
-        
+
         // dd($validated);
         $this->produitRepository->ajouterProduit($validated);
         return redirect()->route('admin.products.index')->with('success', 'Produit ajouter avec succès !');
@@ -502,5 +502,14 @@ class AdminController extends Controller
         $this->produitRepository->modifierProduit($id, $validated);
 
         return redirect()->route('admin.products.index')->with('success', 'Produit modifier avec succès !');
+    }
+
+    public function productDelete(Request $request){
+        $validated = $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $this->produitRepository->deleteProduits($validated['id']);
+        return redirect()->route('admin.products.index')->with('success', 'Produit Supprimer avec succès !');
     }
 }
