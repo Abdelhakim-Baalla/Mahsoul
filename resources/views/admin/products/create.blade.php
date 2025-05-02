@@ -72,12 +72,12 @@
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="unite_mesure" class="block text-sm font-medium text-gray-700">Unité de mesure*</label>
+                                <label for="unite_mesure" class="block text-sm font-medium text-gray-700">Unité de mesure</label>
                                 <div class="mt-1">
                                     <select id="unite_mesure" name="unite_mesure" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         <option value="kg">Kilogramme (kg)</option>
                                         <option value="g">Gramme (g)</option>
-                                        <option value="l">Litre (L)</option>
+                                        <option value="l">Litre (L)</option>    
                                         <option value="ml">Millilitre (mL)</option>
                                         <option value="piece">Pièce</option>
                                         <option value="boite">Boîte</option>
@@ -130,9 +130,9 @@
 
                     <!-- Form Actions -->
                     <div class="flex justify-end space-x-4 pt-4 border-t border-gray-200">
-                        <button type="reset" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <a href="{{ route('admin.products.index') }}" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Annuler
-                        </button>
+                        </a>
                         <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Enregistrer
                         </button>
