@@ -16,7 +16,7 @@
         </div>
 
         <div class="bg-white shadow-md rounded-lg p-6">
-            <form action="" method="POST">
+            <form action="{{ route('admin.products.edit.store') }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="space-y-6">
@@ -141,12 +141,12 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" name="produit_id" value="{{$produit->id}}">
                     <!-- Form Actions -->
                     <div class="flex justify-end space-x-4 pt-4 border-t border-gray-200">
-                        <button type="reset" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <a href="{{ route('admin.products.index') }}" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Annuler
-                        </button>
+                        </a>
                         <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Enregistrer les modifications
                         </button>
