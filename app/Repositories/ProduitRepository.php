@@ -52,6 +52,10 @@ class ProduitRepository implements ProduitRepositoryInterface
 
     }
 
+    public function deleteProduits(int $id){
+        $produit = $this->getProduitById($id);
+        $produit->delete();
+    }
     public function countProduit(){
         return Produit::get()->count();
     }
