@@ -1,3 +1,4 @@
+@if (Auth::check())
 @extends('layouts.app')
 
 @section('title', 'Oranges fraîches - Mahsoul')
@@ -238,3 +239,9 @@
     });
 </script>
 @endsection
+
+@else
+<script>
+    window.location.href = "{{ route('login') }}";
+</script>
+@endif
