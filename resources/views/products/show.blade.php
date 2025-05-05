@@ -123,43 +123,48 @@
 
                             <div class="mt-8 flex justify-between items-center">
                                 <div class="flex items-center ">
-                                    <h3 class="text-lg font-semibold text-gray-800 mr-2">Quantité</h3>
-                                    <div class="relative flex items-center max-w-[8rem]">
-                                        <button type="button" id="decrement-button" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-2 h-10 focus:ring-primary-500 focus:border-primary-500">
-                                            <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+
+                                    @if($product->en_stock == 1 && $product->quantite > 0)
+                                    <div class="flex flex-col sm:flex-row sm:space-x-2  space-y-2 sm:space-y-0">
+                                        <form action="{{route('add.cart.save')}}" method="get" class="flex justify-between gap-24">
+                                            @csrf
+                                            <div class="relative flex items-center max-w-[8rem]">
+                                                <button type="button" id="decrement-button" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-2 h-10 focus:ring-primary-500 focus:border-primary-500">
+                                                    <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                    </svg>
+                                                </button>
+                                                <input type="text" id="quantity-input" name="quantity" class="bg-gray-50 border-x-0 border-gray-300 h-10 text-center text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5" value="1" required>
+                                                <button type="button" id="increment-button" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-2 h-10 focus:ring-primary-500 focus:border-primary-500">
+                                                    <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                    </svg>
+                                                </button>
+                                                <span class="ml-3 text-gray-500">{{strtoupper($product->unite_mesure)}}</span>
+                                            </div>
+                                            <input type="hidden" id="utilisateurId" name="utilisateurId" value="{{Auth::user()->id}}">
+                                            <input type="hidden" id="produitId" name="produitId" value="{{$product->id}}">
+                                            <button id="ajouterPanier" type="submit" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-md transition duration-150 ease-in-out flex items-center justify-center max-w-xs mx-auto sm:mx-0">
+                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                                </svg>
+                                                Ajouter au panier
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                    @else
+                                    <div class="flex flex-col sm:flex-row sm:space-x-2  space-y-2 sm:space-y-0">
+                                        <button type="button" disabled class="flex-1 bg-gray-400 text-white font-medium py-3 px-6 rounded-md transition duration-150 ease-in-out flex items-center justify-center max-w-xs mx-auto sm:mx-0">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                             </svg>
-                                        </button>
-                                        <input type="text" id="quantity-input" class="bg-gray-50 border-x-0 border-gray-300 h-10 text-center text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full py-2.5" value="1" required>
-                                        <button type="button" id="increment-button" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-2 h-10 focus:ring-primary-500 focus:border-primary-500">
-                                            <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
-                                            </svg>
+                                            Produit en rupture de stock
                                         </button>
                                     </div>
-                                    <span class="ml-3 text-gray-500">{{strtoupper($product->unite_mesure)}}</span>
+                                    @endif
                                 </div>
-                                @if($product->en_stock == 1 && $product->quantite > 0)
-                                <div class="flex flex-col sm:flex-row sm:space-x-2  space-y-2 sm:space-y-0">
-                                    <input type="hidden" id="utilisateurId" name="utilisateurId" value="{{Auth::user()->id}}">
-                                    <input type="hidden" id="produitId" name="produitId" value="{{$product->id}}">
-                                    <button id="ajouterPanier" type="button" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-md transition duration-150 ease-in-out flex items-center justify-center max-w-xs mx-auto sm:mx-0">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
-                                        Ajouter au panier
-                                    </button>
-                                </div>
-                                @else
-                                <div class="flex flex-col sm:flex-row sm:space-x-2  space-y-2 sm:space-y-0">
-                                    <button type="button" disabled class="flex-1 bg-gray-400 text-white font-medium py-3 px-6 rounded-md transition duration-150 ease-in-out flex items-center justify-center max-w-xs mx-auto sm:mx-0">
-                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
-                                        Produit en rupture de stock
-                                    </button>
-                                </div>
-                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -260,55 +265,55 @@
         }
     });
 
-    if (!sessionStorage.getItem("cart")) {
-        sessionStorage.setItem("cart", JSON.stringify([]));
-    }
+    // if (!sessionStorage.getItem("cart")) {
+    //     sessionStorage.setItem("cart", JSON.stringify([]));
+    // }
 
-    const ajouterPanier = document.getElementById('ajouterPanier');
-    const utilisateurId = document.getElementById('utilisateurId');
-    const produitId = document.getElementById('produitId');
+    // const ajouterPanier = document.getElementById('ajouterPanier');
+    // const utilisateurId = document.getElementById('utilisateurId');
+    // const produitId = document.getElementById('produitId');
 
-    var utilisateurIdValue = utilisateurId.value;
-    var produitIdValue = produitId.value;
+    // var utilisateurIdValue = utilisateurId.value;
+    // var produitIdValue = produitId.value;
 
-    var cartString = sessionStorage.getItem("cart");
-    var cart = JSON.parse(cartString);
-    var itemExist = 'non';
-    for (let index = 0; index < cart.length; index++) {
-        // console.log(cart[index]['produitId']);
-        if (cart[index]['produitId'] == produitIdValue) {
-            itemExist = 'oui';
-            ajouterPanier.disabled = true;
-            ajouterPanier.textContent = "Element dans le panier";
-            ajouterPanier.classList.remove('bg-primary-600', 'hover:bg-primary-700');
-            ajouterPanier.classList.add('bg-gray-400', 'cursor-not-allowed');
-        } else {
-            itemExist = 'non';
-        }
-    }
-
-
-    ajouterPanier.addEventListener('click', function() {
-
-        var quantityValue = quantityInput.value;
-        // console.log(itemExist);
-        // die();
-        if (itemExist == 'non') {
-            cart.push({
-                utilisateurId: utilisateurIdValue,
-                produitId: produitIdValue,
-                quantity: quantityValue
-            });
-
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            ajouterPanier.disabled = true;
-            ajouterPanier.textContent = "Element dans le panier";
-            ajouterPanier.classList.remove('bg-primary-600', 'hover:bg-primary-700');
-            ajouterPanier.classList.add('bg-gray-400', 'cursor-not-allowed');
-        }
+    // var cartString = sessionStorage.getItem("cart");
+    // var cart = JSON.parse(cartString);
+    // var itemExist = 'non';
+    // for (let index = 0; index < cart.length; index++) {
+    //     // console.log(cart[index]['produitId']);
+    //     if (cart[index]['produitId'] == produitIdValue) {
+    //         itemExist = 'oui';
+    //         ajouterPanier.disabled = true;
+    //         ajouterPanier.textContent = "Element dans le panier";
+    //         ajouterPanier.classList.remove('bg-primary-600', 'hover:bg-primary-700');
+    //         ajouterPanier.classList.add('bg-gray-400', 'cursor-not-allowed');
+    //     } else {
+    //         itemExist = 'non';
+    //     }
+    // }
 
 
-    });
+    // ajouterPanier.addEventListener('click', function() {
+
+    //     var quantityValue = quantityInput.value;
+    //     // console.log(itemExist);
+    //     // die();
+    //     if (itemExist == 'non') {
+    //         cart.push({
+    //             utilisateurId: utilisateurIdValue,
+    //             produitId: produitIdValue,
+    //             quantity: quantityValue
+    //         });
+
+    //         sessionStorage.setItem("cart", JSON.stringify(cart));
+    //         ajouterPanier.disabled = true;
+    //         ajouterPanier.textContent = "Element dans le panier";
+    //         ajouterPanier.classList.remove('bg-primary-600', 'hover:bg-primary-700');
+    //         ajouterPanier.classList.add('bg-gray-400', 'cursor-not-allowed');
+    //     }
+
+
+    // });
 </script>
 @endsection
 
