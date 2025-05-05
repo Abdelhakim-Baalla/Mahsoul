@@ -61,9 +61,29 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
-    public function checkoutIndex()
+    public function checkoutIndex(Request $request)
     {
-        return view('checkout.index');
+        $cart = $request->session()->get('cart', []);
+        // dd($cart);
+
+        $cartItems = [];
+        $total = 0;
+
+        foreach ($cart as $productId => $item) {
+            $product = $this->produitRepository->getProduitById($productId);
+
+            if ($product) {
+                $cartItems[] = [
+                    'product' => $product,
+                    'quantity' => $item['quantity'],
+                    'user_id' => $item['user_id']
+                ];
+
+                $total += $product->prix * $item['quantity'];
+            }
+            // dd($cartItems);
+        }
+        return view('checkout.index', compact('cartItems', 'total'));
     }
 
     public function addToCart(Request $request)
