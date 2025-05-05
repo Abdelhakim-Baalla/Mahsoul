@@ -263,6 +263,38 @@
                         </div>
                     </div>
                     @endif
+
+
+
+                    <!-- Admin Information card -->
+                    @if(Auth::user()->type == 'admin')
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
+                        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-800">Informations sur l'exploitation</h3>
+                            <a href="/profile/edit/information/veterinaire" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                                <i class="fas fa-edit mr-1"></i>
+                                Modifier
+                            </a>
+                        </div>
+                        <div class="p-6">
+                            <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">About</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->about }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Domaine D'experience</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->domaines_expertise }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Contact Urgence</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->contact_urgence }}</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    @endif
+
                 </div>
             </div>
         </div>
