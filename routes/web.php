@@ -40,6 +40,8 @@ Route::controller(ProfileController::class)->group(function () {
     Route::PUT('/profile/update', 'updateProfile')->name('profile.update');
     Route::get('/profile/edit/information/agricole', 'showeditProfileInformationAgricole')->name('profile.updateAgricole');
     Route::get('/profile/edit/information/veterinaire', 'showeditProfileInformationVeterinaire')->name('profile.updateVeterinaire');
+    Route::get('/profile/edit/information/admin', 'showeditProfileInformationAdmin')->name('profile.updateAdmin');
+
     Route::PUT('/agricole/information/update', 'updateProfileInformartionAgricole')->name('profile.updateAgricoleInfo');
     Route::PUT('/veterinaire/information/update', 'updateProfileInformartionVeterinaire')->name('profile.updateVeterinaireInfo');
 });

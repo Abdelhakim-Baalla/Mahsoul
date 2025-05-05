@@ -55,6 +55,13 @@ class ProfileController extends Controller
         return view('profile.editveterinaire');
     }
 
+    public function showeditProfileInformationAdmin(){
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        return view('profile.editadmin');
+    }
 
     public function updateProfile(Request $request)
     {
