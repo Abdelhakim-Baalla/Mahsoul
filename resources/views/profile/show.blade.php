@@ -271,7 +271,7 @@
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
                         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                             <h3 class="text-xl font-bold text-gray-800">Informations sur l'exploitation</h3>
-                            <a href="/profile/edit/information/veterinaire" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            <a href="/profile/edit/information/admin" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
                                 <i class="fas fa-edit mr-1"></i>
                                 Modifier
                             </a>
