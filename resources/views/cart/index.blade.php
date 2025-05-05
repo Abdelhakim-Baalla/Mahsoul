@@ -167,7 +167,7 @@
                         </div>
 
                         <div class="mt-4 flex justify-center">
-                            <img src="/images/payment-methods.png" alt="Méthodes de paiement" class="h-8">
+                            <img src="{{ asset('images/stripe-logo.png') }}" alt="Méthodes de paiement" class="h-8">
                         </div>
                     </div>
                 </div>
