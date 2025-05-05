@@ -133,7 +133,7 @@ Route::view('/expert/consultations/show', 'expert.consultations.show')->name('ex
 Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
 
 // Dashboard Vétérinaire
-Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
+Route::view('/vet', 'vet.dashboard')->name('veterinaire.dashboard');
 Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
 Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
 Route::view('/vet/consultations', 'vet.consultations.index')->name('vet.consultations.index');
