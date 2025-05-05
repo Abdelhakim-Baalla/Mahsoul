@@ -145,4 +145,8 @@ class ProductController extends Controller
         // dd($cart);
         return view('cart.index', compact('cartItems', 'total'));
     }
+
+    public function cartDeleteItem(Request $request){
+
+    }
 }

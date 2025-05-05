@@ -55,9 +55,9 @@
                                                     {{$demande['product']->nom}}
                                                 </button>
                                             </form>
-                                            
+
                                         </h3>
-                                        <p class="mt-1 text-sm text-gray-500">Flacon 100ml</p>
+
                                         @if($demande['product']->en_stock)
                                         <p class="mt-1 text-sm text-green-600 flex items-center">
                                             <i class="fas fa-check-circle mr-1"></i> En stock
@@ -76,20 +76,31 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between">
-                                    <div class="flex items-center">
-                                        <label for="quantity-1" class="sr-only">Quantité</label>
-                                        <div class="flex items-center border border-gray-300 rounded-md">
-                                            <button type="button" class="px-3 py-1 text-gray-600 hover:bg-gray-100" onclick="updateQuantity('quantity-1', -1)">-</button>
-                                            <input type="number" id="quantity-1" name="quantity-1" min="1" value="{{$demande['quantity']}}" class="w-12 text-center border-0 focus:ring-0">
-                                            <button type="button" class="px-3 py-1 text-gray-600 hover:bg-gray-100" onclick="updateQuantity('quantity-1', 1)">+</button>
-                                        </div>
-                                    </div>
+                                        <form action="" method="get" class="flex gap-5 ">
+                                            <div class="flex items-center">
+                                                <label for="quantity-1" class="sr-only">Quantité</label>
+                                                <div class="flex items-center border border-gray-300 rounded-md">
+                                                    <button type="button" class="px-3 py-1 text-gray-600 hover:bg-gray-100" onclick="updateQuantity('quantity-1', -1)">-</button>
+                                                    <input type="number" id="quantity-1" name="quantity-1" min="1" value="{{$demande['quantity']}}" class="w-12 text-center border-0 focus:ring-0">
+                                                    <button type="button" class="px-3 py-1 text-gray-600 hover:bg-gray-100" onclick="updateQuantity('quantity-1', 1)">+</button>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="idProduit" id="idProduit" value="{{$demande['product']->id}}">
+                                            <button type="submit" class="text-green-600 hover:text-green-700 text-xs font-medium" id="supprimerProduitPanier">
+                                                <i class="fas fa-pen-alt mr-1"></i>
+                                                Modifier
+                                            </button>
+                                        </form>
+
                                     <div class="mt-4 sm:mt-0 flex space-x-3">
-                                        <input type="hidden" name="idProduit" id="idProduit" value="{{$demande['product']->id}}">
-                                        <button class="text-red-600 hover:text-red-700 text-sm font-medium" id="supprimerProduitPanier">
-                                            <i class="fas fa-trash-alt mr-1"></i>
-                                            Supprimer
-                                        </button>
+                                        <form action="{{route('cart.delete.product')}}" method="post">
+                                            <input type="hidden" name="idProduit" id="idProduit" value="{{$demande['product']->id}}">
+                                            <button type="submit" class="text-red-600 hover:text-red-700 text-sm font-medium" id="supprimerProduitPanier">
+                                                <i class="fas fa-trash-alt mr-1"></i>
+                                                Supprimer
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +169,7 @@
             </div>
         </div>
 
-        
+
     </div>
 </div>
 
