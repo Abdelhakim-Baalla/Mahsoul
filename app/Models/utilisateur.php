@@ -34,6 +34,11 @@ class Utilisateur extends Authenticatable
     {
         return $this->hasOne(Client::class, 'compte');
     }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'compte');
+    }
   
 }
 
