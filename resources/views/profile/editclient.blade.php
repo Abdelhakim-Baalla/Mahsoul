@@ -120,7 +120,7 @@
                             </div>
                             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
                                 <div class="p-6">
-                                    <form action="/agricole/information/update" method="POST">
+                                    <form action="/client/information/update" method="POST">
                                         @csrf
                                         @method('PUT')
 
