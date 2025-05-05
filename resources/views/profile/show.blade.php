@@ -210,19 +210,19 @@
                             <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Nom de la Ferme</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->ferme }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->ferme ?? ''}}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Type des Produits</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->produit }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->produit ?? ''}}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Superficie</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->superficie_terrain }} ha</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->superficie_terrain ?? ''}} ha</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Région</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->region }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->agricole->region ?? ''}}</dd>
                                 </div>
 
                             </dl>
@@ -244,19 +244,19 @@
                             <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Specialite</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->specialite }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->specialite ?? '' }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Diplome</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->diplome }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->diplome ?? '' }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Année D'experience</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->annee_experience }} ans</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->annee_experience ?? '' }} ans</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Prix de déplacement</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->prix_deplacement }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->prix_deplacement ?? '' }}</dd>
                                 </div>
 
                             </dl>
@@ -280,15 +280,44 @@
                             <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">About</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->about }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->about ?? '' }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Domaine D'experience</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->domaines_expertise }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->domaines_expertise ?? '' }}</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Contact Urgence</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->contact_urgence }}</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->admin->contact_urgence ?? '' }}</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                    @endif
+
+                     <!-- Client Information card -->
+                     @if(Auth::user()->type == 'client')
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
+                        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-gray-800">Informations sur l'exploitation</h3>
+                            <a href="/profile/edit/information/client" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                                <i class="fas fa-edit mr-1"></i>
+                                Modifier
+                            </a>
+                        </div>
+                        <div class="p-6">
+                            <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-6">
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Type D'exploitation</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->client->type_exploitation ?? ''}}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Nombre D'animaux</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->client->nombre_animaux ?? ''}}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Superficie De terre (ha)</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->client->superficie_terres ?? ''}} (ha)</dd>
                                 </div>
                             </dl>
                         </div>
