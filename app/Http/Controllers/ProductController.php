@@ -61,7 +61,8 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
-    public function checkoutIndex(){
+    public function checkoutIndex()
+    {
         return view('checkout.index');
     }
 
@@ -75,7 +76,7 @@ class ProductController extends Controller
         // dd($validated);
         $cart = session()->get('cart', []);
         // dd($cart);
-        
+
         $productKey = $validated['produitId'];
         // dd($productKey);
 
@@ -94,14 +95,14 @@ class ProductController extends Controller
         // dd($cart);   
 
 
-        $product = $this->produitRepository->getProduitById( $validated['produitId']);
+        $product = $this->produitRepository->getProduitById($validated['produitId']);
         // dd($product);
-        
-        
+
+
         if (empty($product)) {
             return view('products.index', ['product' => []]);
         }
-        
+
         $categorie = $this->categorieRepository->getCategorieById($product->categorie);
         // dd($categorie);
 
@@ -127,7 +128,7 @@ class ProductController extends Controller
 
         $cartItems = [];
         $total = 0;
-        
+
         foreach ($cart as $productId => $item) {
             $product = $this->produitRepository->getProduitById($productId);
 
@@ -137,7 +138,7 @@ class ProductController extends Controller
                     'quantity' => $item['quantity'],
                     'user_id' => $item['user_id']
                 ];
-                
+
                 $total += $product->prix * $item['quantity'];
             }
             // dd($cartItems);
@@ -146,17 +147,25 @@ class ProductController extends Controller
         return view('cart.index', compact('cartItems', 'total'));
     }
 
-    public function cartDeleteItem(Request $request){
+    public function cartDeleteItem(Request $request)
+    {
         // dd($request->idProduit);
         $cart = $request->session()->get('cart', []);
         $id = $request->idProduit;
         // dd($cart[$id]);
         unset($cart[$id]);
         // dd($cart);
-        
-        session()->put('cart', $cart);
-        
-        return redirect()->back()->with('success', 'Produit supprimé du panier avec succès');
 
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Produit supprimé du panier avec succès');
+    }
+
+    public function cartVider()
+    {
+        session()->forget('cart');
+
+        return redirect()->route('cart.index')
+            ->with('success', 'Votre panier a été vidé avec succès');
     }
 }

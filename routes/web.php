@@ -56,6 +56,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/cart/save', 'addToCart')->name('add.cart.save');
     Route::get('/cart', 'cartIndex')->name('cart.index');
     Route::post('/cart/delete', 'cartDeleteItem')->name('cart.delete.product');
+    Route::get('/cart/vider', 'cartVider')->name('cart.vider');
 
     Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
     Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
