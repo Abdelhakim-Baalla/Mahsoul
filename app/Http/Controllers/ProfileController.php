@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
+use App\Repositories\Interfaces\ClientRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
 use Illuminate\Http\Request;
@@ -15,13 +16,15 @@ class ProfileController extends Controller
     protected $agricoleRepository;
     protected $veterinaireRepository;
     protected $adminRepository;
+    protected $clientRepository;
 
-    public function __construct(AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(ClientRepositoryInterface $clientRepository, AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
         $this->veterinaireRepository = $veterinaireRepository;
         $this->adminRepository = $adminRepository;
+        $this->clientRepository = $clientRepository;
     }
     public function showProfile()
     {
@@ -123,7 +126,8 @@ class ProfileController extends Controller
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
 
-    public function updateProfileInformartionVeterinaire(Request $request){
+    public function updateProfileInformartionVeterinaire(Request $request)
+    {
         $user = Auth::user();
 
         $validated = $request->validate([
@@ -145,7 +149,8 @@ class ProfileController extends Controller
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
     
-    public function updateProfileInformartionAdmin(Request $request){
+    public function updateProfileInformartionAdmin(Request $request)
+    {
         $user = Auth::user();
 
         $validated = $request->validate([
@@ -162,6 +167,29 @@ class ProfileController extends Controller
         }
 
         $user->admin->refresh();
+
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
+    }
+
+
+    public function updateProfileInformartionClient(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'type_exploitation' => 'required|string',
+            'nombre_animaux' => 'required|integer',
+            'superficie_terres' => 'required|integer'
+        ]);
+
+
+        $updated = $this->clientRepository->modifierProfilClient($user->client->id, $validated);
+
+        if (!$updated) {
+            return back()->with('error', 'Failed to update profile');
+        }
+
+        $user->client->refresh();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
