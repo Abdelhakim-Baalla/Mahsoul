@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
+use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,11 +12,13 @@ class ProfileController extends Controller
 {
     protected $utilisateurRepository;
     protected $agricoleRepository;
+    protected $veterinaireRepository;
 
-    public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
+        $this->veterinaireRepository = $veterinaireRepository;
     }
     public function showProfile()
     {
@@ -97,6 +100,28 @@ class ProfileController extends Controller
         }
 
         $user->agricole->refresh();
+
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
+    }
+
+    public function updateProfileInformartionVeterinaire(Request $request){
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'specialite' => 'required|string|max:255',
+            'diplome' => 'required|string|max:255',
+            'annee_experience' => 'required|string|max:255',
+            'prix_deplacement' => 'required|integer'
+        ]);
+
+
+        $updated = $this->veterinaireRepository->modifierProfilVeterinaire($user->veterinaire->id, $validated);
+
+        if (!$updated) {
+            return back()->with('error', 'Failed to update profile');
+        }
+
+        $user->veterinaire->refresh();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
