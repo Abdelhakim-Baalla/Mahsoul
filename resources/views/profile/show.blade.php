@@ -252,7 +252,7 @@
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Année D'experience</dt>
-                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->annee_experience }} ha</dd>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ Auth::user()->veterinaire->annee_experience }} ans</dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm font-medium text-gray-500">Prix de déplacement</dt>
