@@ -122,7 +122,7 @@ class ProductController extends Controller
 
         // $cart = json_decode($request['cart'], true);
         // session()->push('cart', $cart);
-        $cart = $request->session()->get('cart');
+        $cart = $request->session()->get('cart', []);
         // dd($cart);
 
         $cartItems = [];
