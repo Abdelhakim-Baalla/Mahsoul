@@ -147,6 +147,16 @@ class ProductController extends Controller
     }
 
     public function cartDeleteItem(Request $request){
+        // dd($request->idProduit);
+        $cart = $request->session()->get('cart', []);
+        $id = $request->idProduit;
+        // dd($cart[$id]);
+        unset($cart[$id]);
+        // dd($cart);
+        
+        session()->put('cart', $cart);
+        
+        return redirect()->back()->with('success', 'Produit supprimé du panier avec succès');
 
     }
 }
