@@ -77,6 +77,7 @@
                                 </div>
                                 <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between">
                                         <form action="" method="get" class="flex gap-5 ">
+                                            @csrf
                                             <div class="flex items-center">
                                                 <label for="quantity-1" class="sr-only">Quantité</label>
                                                 <div class="flex items-center border border-gray-300 rounded-md">
@@ -94,6 +95,7 @@
 
                                     <div class="mt-4 sm:mt-0 flex space-x-3">
                                         <form action="{{route('cart.delete.product')}}" method="post">
+                                            @csrf
                                             <input type="hidden" name="idProduit" id="idProduit" value="{{$demande['product']->id}}">
                                             <button type="submit" class="text-red-600 hover:text-red-700 text-sm font-medium" id="supprimerProduitPanier">
                                                 <i class="fas fa-trash-alt mr-1"></i>
