@@ -61,6 +61,10 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
+    public function checkoutIndex(){
+        return view('checkout.index');
+    }
+
     public function addToCart(Request $request)
     {
         $validated = $request->validate([
