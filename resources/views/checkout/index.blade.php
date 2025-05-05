@@ -75,6 +75,7 @@
             <!-- Checkout Form -->
             <div class="lg:w-2/3">
                 <form action="/checkout/payment" method="POST">
+                    @csrf
                     <!-- Shipping Information -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">

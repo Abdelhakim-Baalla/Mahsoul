@@ -86,6 +86,14 @@ class ProductController extends Controller
         return view('checkout.index', compact('cartItems', 'total'));
     }
 
+    public function checkoutpayment(Request $request){
+        dd($request->all());
+    }
+
+    public function checkoutConfirmation(){
+        return view('checkout.confirmation');
+    }
+
     public function addToCart(Request $request)
     {
         $validated = $request->validate([

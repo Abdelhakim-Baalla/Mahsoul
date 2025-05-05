@@ -60,6 +60,7 @@ Route::controller(ProductController::class)->group(function () {
 
     Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
     Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
+    Route::post('/checkout/payment', 'checkoutpayment')->name('checkout.payment');
     Route::get('/orders', 'ordersIndex')->name('orders.index');
     Route::get('/orders/show', 'ordersShow')->name('orders.show');
 });
