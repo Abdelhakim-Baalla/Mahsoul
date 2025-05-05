@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
@@ -13,12 +14,14 @@ class ProfileController extends Controller
     protected $utilisateurRepository;
     protected $agricoleRepository;
     protected $veterinaireRepository;
+    protected $adminRepository;
 
-    public function __construct(VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
         $this->veterinaireRepository = $veterinaireRepository;
+        $this->adminRepository = $adminRepository;
     }
     public function showProfile()
     {
@@ -129,6 +132,27 @@ class ProfileController extends Controller
         }
 
         $user->veterinaire->refresh();
+
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
+    }
+    
+    public function updateProfileInformartionAdmin(Request $request){
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'about' => 'required|string',
+            'domaines_expertise' => 'required|string|max:255',
+            'contact_urgence' => 'required|string|max:255'
+        ]);
+
+
+        $updated = $this->adminRepository->modifierProfilAdmin($user->admin->id, $validated);
+
+        if (!$updated) {
+            return back()->with('error', 'Failed to update profile');
+        }
+
+        $user->admin->refresh();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
