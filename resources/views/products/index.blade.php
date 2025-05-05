@@ -122,7 +122,7 @@
                                         <span class="text-xs text-gray-500">/ {{ $product->unite_mesure }}</span>
                                     </span>
                                 </div>
-                                <form action="{{ route('products.show') }}" method="POST">
+                                <form action="{{ route('products.show') }}" method="get">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $product->id }}">
                                     <button type="submit" class="text-sm font-medium text-white bg-green-600 hover:bg-green-700 px-3 py-1.5 rounded-lg transition-colors duration-200">

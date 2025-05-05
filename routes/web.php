@@ -45,7 +45,8 @@ Route::controller(ProfileController::class)->group(function () {
 // Marketplace - Utilisateur
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
-    Route::post('/products/show', 'productShow')->name('products.show');
+    Route::get('/products/show', 'productShow')->name('products.show');
+    Route::get('/cart/save', 'addToCart')->name('add.cart.save');
     Route::get('/cart', 'cartIndex')->name('cart.index');
     Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
     Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
@@ -87,7 +88,9 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/products', 'productsIndex')->name('admin.products.index');
     Route::get('/admin/products/create', 'productsCreate')->name('admin.products.create');
     Route::post('/admin/products/store', 'productsStore')->name('admin.products.store');
-    Route::get('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
+    Route::post('/admin/products/edit', 'productsEdit')->name('admin.products.edit');
+    Route::put('/admin/products/edit/store', 'productsEditSubmit')->name('admin.products.edit.store');
+    Route::delete('/admin/product/delete', 'productDelete')->name('admin.products.delete');
     
     Route::get('/admin/categories', 'categoriesIndex')->name('admin.categories.index');
     Route::get('/admin/categories/add', 'categoriesAdd')->name('admin.categories.add');

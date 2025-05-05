@@ -444,8 +444,72 @@ class AdminController extends Controller
             'image' => 'string',
             'vendeur' => 'required|string|max:255'
         ]);
+
+        if ($validated['quantite'] == 0) {
+            $validated['en_stock'] = 0;
+        }
+        
+        if( $validated['en_stock'] == 0) {
+            $validated['quantite'] = 0 ;
+        }
+
         // dd($validated);
         $this->produitRepository->ajouterProduit($validated);
         return redirect()->route('admin.products.index')->with('success', 'Produit ajouter avec succès !');
+    }
+
+    public function productsEdit(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'id' => 'required|integer'
+        ]);
+        // dd($validated['id']);
+        
+        $produit = $this->produitRepository->getProduitById($validated['id']);
+        // dd($produit);
+        $produit->categorie = $this->categorieRepository->getCategorieById($produit->categorie);
+        // dd($produit);
+        $categories = $this->categorieRepository->getAllCategories();
+        return view('admin.products.edit', compact('produit', 'categories'));
+    }
+
+    public function productsEditSubmit(Request $request){
+        // dd($request->all());
+        $validated = $request->validate([
+            'nom' => 'required|string',
+            'categorie' => 'required|integer',
+            'description' => 'required|string',
+            'prix' => 'required|numeric',
+            'quantite' => 'required|integer',
+            'unite_mesure' => 'required|string',
+            'en_stock' => 'required|integer',
+            'image' => 'required|string',
+            'vendeur' => 'required|string',
+            'produit_id' => 'required|integer',
+        ]);
+
+        if ($validated['quantite'] == 0) {
+            $validated['en_stock'] = 0;
+        }
+        
+        if( $validated['en_stock'] == 0) {
+            $validated['quantite'] = 0 ;
+        }
+
+        // dd($validated);
+        $id = $validated['produit_id'];
+
+        $this->produitRepository->modifierProduit($id, $validated);
+
+        return redirect()->route('admin.products.index')->with('success', 'Produit modifier avec succès !');
+    }
+
+    public function productDelete(Request $request){
+        $validated = $request->validate([
+            'id' => 'required|integer'
+        ]);
+
+        $this->produitRepository->deleteProduits($validated['id']);
+        return redirect()->route('admin.products.index')->with('success', 'Produit Supprimer avec succès !');
     }
 }

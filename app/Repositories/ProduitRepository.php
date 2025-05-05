@@ -15,6 +15,22 @@ class ProduitRepository implements ProduitRepositoryInterface
     public function retirerDuStock(int $produit_id, float $quantite){
 
     }
+
+    public function modifierProduit(int $id, array $data){
+        $produit = $this->getProduitById($id);
+        // dd($produit);
+       return $produit->update([
+            'nom' => $data['nom'],
+            'categorie' => $data['categorie'],
+            'description' => $data['description'],
+            'prix' => $data['prix'],
+            'quantite' => $data['quantite'],
+            'unite_mesure' => $data['unite_mesure'],
+            'en_stock' => $data['en_stock'],
+            'image' => $data['image'],
+            'vendeur' => $data['vendeur'],
+        ]);
+    }
     
     public function getProduitById(int $id){
         return Produit::find($id);
@@ -36,6 +52,10 @@ class ProduitRepository implements ProduitRepositoryInterface
 
     }
 
+    public function deleteProduits(int $id){
+        $produit = $this->getProduitById($id);
+        $produit->delete();
+    }
     public function countProduit(){
         return Produit::get()->count();
     }

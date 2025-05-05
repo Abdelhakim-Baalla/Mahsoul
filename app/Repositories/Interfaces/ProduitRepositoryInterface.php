@@ -12,4 +12,6 @@ interface ProduitRepositoryInterface
     public function getProduitsEpuises();
     public function countProduit();
     public function getAllProduitsClient();
+    public function modifierProduit(int $id, array $data);
+    public function deleteProduits(int $id);
 }

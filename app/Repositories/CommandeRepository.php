@@ -28,7 +28,7 @@ class CommandeRepository implements CommandeRepositoryInterface
     }
     
     public function getAllCommandes(){
-
+        return Commande::get();
     }
     
     public function calculerTotal(array $produits){
