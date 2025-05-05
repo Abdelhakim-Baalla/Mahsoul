@@ -66,6 +66,15 @@ class ProfileController extends Controller
         return view('profile.editadmin');
     }
 
+
+    public function showeditProfileInformationClient(){
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        return view('profile.editclient');
+    }
+
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
