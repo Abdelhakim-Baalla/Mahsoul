@@ -41,6 +41,7 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile/edit/information/agricole', 'showeditProfileInformationAgricole')->name('profile.updateAgricole');
     Route::get('/profile/edit/information/veterinaire', 'showeditProfileInformationVeterinaire')->name('profile.updateVeterinaire');
     Route::PUT('/agricole/information/update', 'updateProfileInformartionAgricole')->name('profile.updateAgricoleInfo');
+    Route::PUT('/veterinaire/information/update', 'updateProfileInformartionVeterinaire')->name('profile.updateVeterinaireInfo');
 });
 
 // Marketplace - Utilisateur
