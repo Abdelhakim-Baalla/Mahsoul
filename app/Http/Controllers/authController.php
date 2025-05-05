@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
+use App\Repositories\Interfaces\ClientRepositoryInterface;
 use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -14,12 +15,14 @@ class AuthController extends Controller
     protected $utilisateurRepository;
     protected $agricoleRepository;
     protected $veterinaireRepository;
+    protected $clientRepository;
 
-    public function __construct(VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(ClientRepositoryInterface $clientRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
         $this->veterinaireRepository = $veterinaireRepository;
+        $this->clientRepository = $clientRepository;
     }
 
     public function showRegistrationForm()
@@ -90,6 +93,20 @@ class AuthController extends Controller
 
             // dd($utilisateurIdToCreate);
             $this->veterinaireRepository->create($utilisateurIdToCreate);
+            // dd($rr);
+        }elseif ($utilisateur['type'] == 'client') {
+            $utilisateurId = $utilisateur['id'];
+            // dd($utilisateurId);
+
+            $utilisateurIdToCreate = [
+                'type_exploitation' => 'non spécifié',
+                'nombre_animaux' => 0,
+                'superficie_terres' => 0,
+                'compte' => $utilisateurId
+            ];
+
+            // dd($utilisateurIdToCreate);
+            $this->clientRepository->create($utilisateurIdToCreate);
             // dd($rr);
         }
 
