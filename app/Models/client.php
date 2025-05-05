@@ -12,7 +12,7 @@ class Client extends Utilisateur
     protected $table = 'clients';
     
     protected $fillable = [
-        'type_expoitation', 'nombre_animaux', 'superficie_terres'
+        'type_expoitation', 'nombre_animaux', 'superficie_terres', 'compte'
     ];
 
     public function rendezVous(){
