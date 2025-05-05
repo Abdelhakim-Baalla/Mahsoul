@@ -44,6 +44,13 @@ class ProfileController extends Controller
         return view('profile.editAgricole');
     }
 
+    public function showeditProfileInformationVeterinaire(){
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
+
+        return view('profile.editveterinaire');
+    }
 
 
     public function updateProfile(Request $request)
