@@ -9,7 +9,14 @@ class VeterinaireRepository implements VeterinaireRepositoryInterface
 {
     public function create(array $data)
     {
-        return Veterinaire::create($data);
+        // dd($data);
+        return Veterinaire::create([
+            'specialite' => $data['specialite'],
+            'diplome' => $data['diplome'],
+            'annee_experience' => $data['annee_experience'],
+            'prix_deplacement' => $data['prix_deplacement'],
+            'compte' => $data['compte']
+        ]);
     }
 
 
