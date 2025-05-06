@@ -64,7 +64,7 @@
                             <!-- Comment Form -->
                             <div class="mb-8 bg-gray-50 p-4 rounded-xl">
                                 <h4 class="text-lg font-medium mb-4">Laisser un commentaire</h4>
-                                <form action="{{route('articles.addComment')}}" method="get" class="space-y-4">
+                                <form action="{{route('articles.addComment')}}" method="get" class="space-y-4" onsubmit="return validateCommentForm()">
                                     @csrf
                                     <input type="hidden" name="utilisateur" value="{{Auth::user()->id}}">
                                     <input type="hidden" name="article_id" value="{{$article->id}}">
@@ -229,6 +229,7 @@
         </div>
     </div>
 </section>
+<script src="{{ asset('js/comment-validation.js') }}"></script>
 @endsection
 @else
 <script>
