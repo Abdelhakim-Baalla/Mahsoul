@@ -44,10 +44,14 @@
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700">
+            <button type="submit" onclick="return validateCategorySelection()" class="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700">
                 Enregistrer
             </button>
         </div>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/article-category-validation.js') }}"></script>
 @endsection
