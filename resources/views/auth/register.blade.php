@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-md transition duration-150 ease-in-out">
+                        <button type="submit" onclick="return validateRegisterForm()" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-md transition duration-150 ease-in-out">
                             Créer mon compte
                         </button>
 
@@ -103,4 +103,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/register-validation.js') }}"></script>
 @endsection

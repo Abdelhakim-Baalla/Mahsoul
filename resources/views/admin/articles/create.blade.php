@@ -107,7 +107,7 @@
                     <a href="{{ route('admin.articles.index') }}" class="px-4 py-2 border rounded-md text-gray-700 bg-white hover:bg-gray-50">
                         Annuler
                     </a>
-                    <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700">
+                    <button type="submit" onclick="return validateArticleForm()" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700">
                         Suivant
                     </button>
                 </div>
@@ -115,4 +115,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/article-validation.js') }}"></script>
 @endsection

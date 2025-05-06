@@ -61,150 +61,21 @@
                     <p class="mt-2">Votre commande a été confirmée et sera traitée rapidement.</p>
                 </div>
                 
-                <div class="p-6">
-                    <div class="mb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-2">Détails de la commande</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-gray-600">Numéro de commande:</p>
-                                <p class="font-medium text-gray-800">#MAH-12345</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-600">Date:</p>
-                                <p class="font-medium text-gray-800">22 Avril 2023</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-600">Statut du paiement:</p>
-                                <p class="font-medium text-green-600">Payé</p>
-                            </div>
-                            <div>
-                                <p class="text-gray-600">Méthode de paiement:</p>
-                                <p class="font-medium text-gray-800">Carte bancaire (se terminant par 4242)</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="p-6 text-center">
+                    <p class="text-gray-700 mb-4">Un email de confirmation a été envoyé à votre adresse email.</p>
+                    <p class="text-gray-700 mb-4">Vous pouvez suivre l'état de votre commande dans votre espace client.</p>
+                    <p class="text-gray-700 mb-6">Si vous avez des questions concernant votre commande, n'hésitez pas à nous contacter.</p>
                     
-                    <div class="border-t border-gray-200 pt-6 mb-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Récapitulatif des articles</h2>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produit</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix unitaire</th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-10 w-10">
-                                                    <img class="h-10 w-10 rounded-md object-cover" src="/images/product-1.jpg" alt="Antibiotique Bovins Premium">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Antibiotique Bovins Premium</div>
-                                                    <div class="text-sm text-gray-500">Flacon 100ml</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">1</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">350 DH</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">350 DH</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-10 w-10">
-                                                    <img class="h-10 w-10 rounded-md object-cover" src="/images/product-2.jpg" alt="Aliment Complet Bovins">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Aliment Complet Bovins</div>
-                                                    <div class="text-sm text-gray-500">Sac 25kg</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">2</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">180 DH</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">360 DH</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0 h-10 w-10">
-                                                    <img class="h-10 w-10 rounded-md object-cover" src="/images/product-6.jpg" alt="Engrais Organique Premium">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900">Engrais Organique Premium</div>
-                                                    <div class="text-sm text-gray-500">Sac 20kg</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">1</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">220 DH</div>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">220 DH</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">Sous-total</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">930 DH</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">Frais de livraison</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">50 DH</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700">Taxes (20%)</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">186 DH</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="px-6 py-4 whitespace-nowrap"></td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-base font-bold text-gray-900">Total</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-base font-bold text-primary-700">1166 DH</td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                    <div class="mt-8">
+                        <a href="/" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                            <i class="fas fa-home mr-2"></i> Retour à l'accueil
+                        </a>
+                        <a href="/profile" class="ml-4 inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                            <i class="fas fa-user mr-2"></i> Mon compte
+                        </a>
                     </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-200 pt-6">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Adresse de livraison</h3>
-                            <address class="not-italic text-gray-700">
-                                Mohammed Alami<br>
-                                123 Rue de l'Agriculture<br>
-                                10000 Ville<br>
-                                Maroc<br>
-                                <span class="mt-2 block">Téléphone: +212 6XX XX XX XX</span>
-                            </address>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Informations de livraison</h3>
-                            <p class="text-gray-700">
-                                <span class="font-medium">Méthode de livraison:</span> Livraison standard<br>
-                
-
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

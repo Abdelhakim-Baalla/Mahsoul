@@ -24,6 +24,21 @@ class Utilisateur extends Authenticatable
     {
         return $this->hasOne(Agricole::class, 'compte');
     }
+
+    public function veterinaire()
+    {
+        return $this->hasOne(Veterinaire::class, 'compte');
+    }
+
+    public function client()
+    {
+        return $this->hasOne(Client::class, 'compte');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'compte');
+    }
   
 }
 

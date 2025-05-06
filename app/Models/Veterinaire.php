@@ -12,7 +12,7 @@ class Veterinaire extends Utilisateur
     protected $table = 'veterinaires';
     
     protected $fillable = [
-        'specialite', 'diplome', 'annee_experience', 'prix_deplacement'
+        'specialite', 'diplome', 'annee_experience', 'prix_deplacement', 'compte'
     ];
 
     public function rendezVous(){

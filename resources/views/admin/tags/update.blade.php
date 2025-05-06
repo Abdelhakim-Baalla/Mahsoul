@@ -84,6 +84,7 @@
                         <i class="fas fa-arrow-left mr-2"></i> Retour à la liste
                     </a>
                     <button type="submit"
+                        onclick="return validateTagEditForm()"
                         class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition flex items-center justify-center">
                         <i class="fas fa-save mr-2"></i>
                         Enregistrer
@@ -93,4 +94,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/tag-edit-validation.js') }}"></script>
 @endsection

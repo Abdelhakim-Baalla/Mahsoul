@@ -12,7 +12,7 @@ class Commande extends Model
     protected $table = 'commandes';
 
     protected $fillable = [
-        'client', 'date_commande', 'total', 'statut', 'methode_paiment', 'reference_paiment', 'adresse_livraison', 'frais_livraison'
+        'client', 'date_commande', 'total', 'statut', 'methode_paiment', 'reference_paiement', 'adresse_livraison', 'frais_livraison'
     ];
 
     public function client(){

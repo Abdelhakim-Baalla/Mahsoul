@@ -7,8 +7,8 @@ use App\Repositories\Interfaces\CommandeRepositoryInterface;
 
 class CommandeRepository implements CommandeRepositoryInterface
 {
-    public function creerCommande(int $client_id, array $produits, string $adresse_livraison, $date,string $mothod, string $reference){
-
+    public function creerCommande(array $data){
+        return Commande::create($data);
     }
     
     public function getCommandeById(int $id){

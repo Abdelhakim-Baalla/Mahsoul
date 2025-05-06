@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StripePaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +40,14 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile/edit', 'showeditProfile')->name('profile.edit');
     Route::PUT('/profile/update', 'updateProfile')->name('profile.update');
     Route::get('/profile/edit/information/agricole', 'showeditProfileInformationAgricole')->name('profile.updateAgricole');
+    Route::get('/profile/edit/information/veterinaire', 'showeditProfileInformationVeterinaire')->name('profile.updateVeterinaire');
+    Route::get('/profile/edit/information/admin', 'showeditProfileInformationAdmin')->name('profile.updateAdmin');
+    Route::get('/profile/edit/information/client', 'showeditProfileInformationClient')->name('profile.updateClient');
+
     Route::PUT('/agricole/information/update', 'updateProfileInformartionAgricole')->name('profile.updateAgricoleInfo');
+    Route::PUT('/veterinaire/information/update', 'updateProfileInformartionVeterinaire')->name('profile.updateVeterinaireInfo');
+    Route::PUT('/admin/information/update', 'updateProfileInformartionAdmin')->name('profile.updateAdminInfo');
+    Route::PUT('/client/information/update', 'updateProfileInformartionClient')->name('profile.updateClientInfo');
 });
 
 // Marketplace - Utilisateur
@@ -48,11 +56,25 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/products/show', 'productShow')->name('products.show');
     Route::get('/cart/save', 'addToCart')->name('add.cart.save');
     Route::get('/cart', 'cartIndex')->name('cart.index');
+    Route::post('/cart/delete', 'cartDeleteItem')->name('cart.delete.product');
+    Route::get('/cart/vider', 'cartVider')->name('cart.vider');
+
     Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
-    Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
+    Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('payment.success');
+    Route::get('/checkout/cancel', 'checkoutCancel')->name('payment.cancel');
+    Route::post('/checkout/payment', 'checkoutpayment')->name('checkout.payment');
+
     Route::get('/orders', 'ordersIndex')->name('orders.index');
     Route::get('/orders/show', 'ordersShow')->name('orders.show');
 });
+
+
+
+Route::controller(StripePaymentController::class)->group(function () {
+    Route::get('/checkout/stripe', 'checkout')->name('checkout.stripe');
+});
+
+
 
 // Consultations - Utilisateur
 Route::view('/experts', 'consultations.index')->name('experts.index');
@@ -133,7 +155,7 @@ Route::view('/expert/consultations/show', 'expert.consultations.show')->name('ex
 Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
 
 // Dashboard Vétérinaire
-Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
+Route::view('/vet', 'vet.dashboard')->name('veterinaire.dashboard');
 Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
 Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
 Route::view('/vet/consultations', 'vet.consultations.index')->name('vet.consultations.index');

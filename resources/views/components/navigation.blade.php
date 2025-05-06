@@ -24,12 +24,15 @@
             <!-- Actions utilisateur -->
             <div class="hidden md:flex items-center space-x-4">
                 @auth
+                    @php
+                        $cartCount = count(session()->get('cart', []));
+                    @endphp
                     <!-- Panier -->
                      <form action="{{ route('cart.index') }}">
                         <input type="hidden" name="cart" id="cartInput">
                         <button type="submit" class="text-primary-700 hover:text-primary-500 relative p-2">
                         <i class="fas fa-shopping-cart text-xl"></i>
-                        <span class="absolute -top-1 -right-1 bg-secondary-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">0</span>
+                        <span class="absolute -top-1 -right-1 bg-secondary-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">{{$cartCount}}</span>
                         </button>
                      </form>
                     

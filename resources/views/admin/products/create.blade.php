@@ -35,7 +35,7 @@
                                 <div class="mt-1">
                                     <select id="categorie" name="categorie" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" size="5" style="overflow-y: auto;">
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                                        <option value="{{ $category->id }}">{{ $category->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,7 +77,7 @@
                                     <select id="unite_mesure" name="unite_mesure" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         <option value="kg">Kilogramme (kg)</option>
                                         <option value="g">Gramme (g)</option>
-                                        <option value="l">Litre (L)</option>    
+                                        <option value="l">Litre (L)</option>
                                         <option value="ml">Millilitre (mL)</option>
                                         <option value="piece">Pièce</option>
                                         <option value="boite">Boîte</option>
@@ -133,7 +133,7 @@
                         <a href="{{ route('admin.products.index') }}" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Annuler
                         </a>
-                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <button type="submit" onclick="return validateForm()" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Enregistrer
                         </button>
                     </div>
@@ -142,4 +142,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/product-validation.js') }}"></script>
 @endsection

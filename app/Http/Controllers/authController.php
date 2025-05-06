@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
+use App\Repositories\Interfaces\ClientRepositoryInterface;
+use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -12,11 +14,15 @@ class AuthController extends Controller
 {
     protected $utilisateurRepository;
     protected $agricoleRepository;
+    protected $veterinaireRepository;
+    protected $clientRepository;
 
-    public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(ClientRepositoryInterface $clientRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
+        $this->veterinaireRepository = $veterinaireRepository;
+        $this->clientRepository = $clientRepository;
     }
 
     public function showRegistrationForm()
@@ -33,7 +39,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('profile.show');
         }
-        
+
         return view('auth.login');
     }
 
@@ -57,17 +63,54 @@ class AuthController extends Controller
 
 
         $utilisateur = $this->utilisateurRepository->inscription($validated);
-        
-        if($utilisateur['type'] == 'agricole'){
+        // dd($utilisateur);
+
+        if ($utilisateur['type'] == 'agricole') {
             $utilisateurId = $utilisateur['id'];
-            $utilisateurIdToCreate = ['compte' => $utilisateurId, 
-            'ferme' => 'non spécifié',
-            'produit' => 'non spécifiée',
-            'superficie_terrain' => 'non spécifiée',
-            'region' => 'non spécifiée'
-        ];
+
+            $utilisateurIdToCreate = [
+                'compte' => $utilisateurId,
+                'ferme' => 'non spécifié',
+                'produit' => 'non spécifiée',
+                'superficie_terrain' => 'non spécifiée',
+                'region' => 'non spécifiée'
+            ];
+
             $this->agricoleRepository->create($utilisateurIdToCreate);
+
+
+        }elseif ($utilisateur['type'] == 'veterinaire') {
+            $utilisateurId = $utilisateur['id'];
+            // dd($utilisateurId);
+
+            $utilisateurIdToCreate = [
+                'specialite' => 'non spécifié',
+                'diplome' => 'non spécifiée',
+                'annee_experience' => 'non spécifiée',
+                'compte' => $utilisateurId,
+                'prix_deplacement' => 0
+            ];
+
+            // dd($utilisateurIdToCreate);
+            $this->veterinaireRepository->create($utilisateurIdToCreate);
+            // dd($rr);
+        }elseif ($utilisateur['type'] == 'client') {
+            $utilisateurId = $utilisateur['id'];
+            // dd($utilisateurId);
+
+            $utilisateurIdToCreate = [
+                'type_exploitation' => 'non spécifié',
+                'nombre_animaux' => 0,
+                'superficie_terres' => 0,
+                'compte' => $utilisateurId
+            ];
+
+            // dd($utilisateurIdToCreate);
+            $this->clientRepository->create($utilisateurIdToCreate);
+            // dd($rr);
         }
+
+        
 
         Auth::login($utilisateur);
 
@@ -86,7 +129,7 @@ class AuthController extends Controller
             $validated['password']
         );
 
-        
+
 
         Auth::login($utilisateur, $request->has('remember'));
 
