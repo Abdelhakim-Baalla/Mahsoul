@@ -65,6 +65,17 @@
             background-color: rgba(90, 157, 69, 0.1);
             border-left: 4px solid #5a9d45;
         }
+
+        .border-red-500 {
+            border-color: #ef4444;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            margin-top: 0.25rem;
+        }
     </style>
 </head>
 
@@ -209,7 +220,7 @@
 </body>
 
 </html>
-@else 
+@else
 <script>
     window.location.href = "{{ route('profile.show') }}";
 </script>

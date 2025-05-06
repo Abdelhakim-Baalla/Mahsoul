@@ -35,7 +35,7 @@
                                 <div class="mt-1">
                                     <select id="categorie" name="categorie" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm" size="5" style="overflow-y: auto;">
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                                        <option value="{{ $category->id }}">{{ $category->nom }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,7 +77,7 @@
                                     <select id="unite_mesure" name="unite_mesure" required class="block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         <option value="kg">Kilogramme (kg)</option>
                                         <option value="g">Gramme (g)</option>
-                                        <option value="l">Litre (L)</option>    
+                                        <option value="l">Litre (L)</option>
                                         <option value="ml">Millilitre (mL)</option>
                                         <option value="piece">Pièce</option>
                                         <option value="boite">Boîte</option>
@@ -133,7 +133,7 @@
                         <a href="{{ route('admin.products.index') }}" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Annuler
                         </a>
-                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <button type="submit" onclick="return validateForm()" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Enregistrer
                         </button>
                     </div>
@@ -142,4 +142,72 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    function validateForm() {
+        var toutEstValide = true;
+
+        function marquerErreur(element, message) {
+            element.classList.add('border-red-500');
+            element.classList.remove('border-gray-300');
+            alert(message);
+            element.focus();
+            toutEstValide = false;
+            return false;
+        }
+
+        function reinitialiserStyle(element) {
+            element.classList.remove('border-red-500');
+            element.classList.add('border-gray-300');
+        }
+
+        var inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(function(input) {
+            reinitialiserStyle(input);
+        });
+
+        var nom = document.getElementById('nom');
+        if (nom.value.trim() === "") {
+            return marquerErreur(nom, "Le nom du produit est requis");
+        }
+
+        var categorie = document.getElementById('categorie');
+        if (categorie.value === "") {
+            return marquerErreur(categorie, "Veuillez sélectionner une catégorie");
+        }
+
+        var description = document.getElementById('description');
+        if (description.value.trim() === "") {
+            return marquerErreur(description, "La description du produit est requise");
+        }
+        if (description.value.trim().length < 10) {
+            return marquerErreur(description, "La description doit contenir au moins 10 caractères");
+        }
+
+        var prix = document.getElementById('prix');
+        if (prix.value === "") {
+            return marquerErreur(prix, "Le prix est requis");
+        }
+        if (parseFloat(prix.value) <= 0) {
+            return marquerErreur(prix, "Le prix doit être supérieur à 0");
+        }
+
+        var quantite = document.getElementById('quantite');
+        if (quantite.value === "") {
+            return marquerErreur(quantite, "La quantité est requise");
+        }
+        if (parseFloat(quantite.value) < 0) {
+            return marquerErreur(quantite, "La quantité ne peut pas être négative");
+        }
+
+        var image = document.getElementById('image');
+        if (image.value.trim() === "") {
+            return marquerErreur(image, "L'URL de l'image n'est pas valide");
+        }
+        
+        return toutEstValide;
+    }
+</script>
 @endsection
