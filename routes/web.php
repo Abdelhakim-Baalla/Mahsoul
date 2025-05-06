@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StripePaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,11 +60,21 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/cart/vider', 'cartVider')->name('cart.vider');
 
     Route::get('/checkout', 'checkoutIndex')->name('checkout.index');
-    Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('checkout.confirmation');
+    Route::get('/checkout/confirmation', 'checkoutConfirmation')->name('payment.success');
+    Route::get('/checkout/cancel', 'checkoutCancel')->name('payment.cancel');
     Route::post('/checkout/payment', 'checkoutpayment')->name('checkout.payment');
+
     Route::get('/orders', 'ordersIndex')->name('orders.index');
     Route::get('/orders/show', 'ordersShow')->name('orders.show');
 });
+
+
+
+Route::controller(StripePaymentController::class)->group(function () {
+    Route::get('/checkout/stripe', 'checkout')->name('checkout.stripe');
+});
+
+
 
 // Consultations - Utilisateur
 Route::view('/experts', 'consultations.index')->name('experts.index');
