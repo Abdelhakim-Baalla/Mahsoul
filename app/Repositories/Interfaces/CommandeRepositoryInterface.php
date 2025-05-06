@@ -4,7 +4,7 @@ namespace App\Repositories\Interfaces;
 
 interface CommandeRepositoryInterface
 {
-    public function creerCommande(int $client_id, array $produits, string $adresse_livraison, $date,string $mothod, string $reference);
+    public function creerCommande(array $data);
     public function getCommandeById(int $id);
     public function modifierCommande(int $id, array $data);
     public function supprimerCommande(int $id);
