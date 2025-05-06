@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client')->constrained('clients')->onDelete('cascade');
-            $table->date('date_commande');
-            $table->float('total');
-            $table->string('statut');
+            $table->date('date_commande')->nullable();
+            $table->float('total')->nullable();
+            $table->string('statut')->default('pending');
             $table->string('methode_paiement');
             $table->string('reference_paiement');
-            $table->string('adresse_livraison');
+            $table->string('adresse_livraison')->nullable();
             $table->float('frais_livraison')->default(0);
             $table->engine = 'InnoDB';
             $table->timestamps();

@@ -1,68 +1,143 @@
-# Projet Mahsoul - Site Web Agricole
+# ![Mahsoul Logo](/public/images/logo-white.jpg) Projet Mahsoul - Plateforme Agricole Intelligente
 
 ---
 
-## Avertissement ⚠️
-Ce projet est en cours de développement et certaines fonctionnalités peuvent être sujettes à changement.
+## 📌 Avertissement  
+*Ce projet est en cours de développement actif - les fonctionnalités peuvent évoluer.*
 
 ---
 
-## Introduction
+## 🌱 Introduction  
 
-### Objectif du Projet  
-Le projet Mahsoul consiste à développer un site web de consultation en ligne pour les agriculteurs, éleveurs et autres acteurs du secteur agricole. L'objectif principal est de permettre aux utilisateurs de réserver des consultations avec des experts agricoles, vétérinaires, et autres professionnels du secteur. En parallèle, le site proposera un catalogue de produits agricoles avec un système de commande et de livraison en ligne. Il intégrera également des services de suivi des conditions climatiques et des conseils personnalisés.
+### 🎯 Objectif  
+Mahsoul est une plateforme digitale innovante qui connecte les acteurs du secteur agricole (agriculteurs, éleveurs, coopératives) avec des experts et fournisseurs. Notre solution intègre :  
+- 🩺 Consultations expertes en ligne  
+- 🛒 Marketplace de produits agricoles  
+- 📚 Centre de formation digitale  
+- ⚙️ Outils de gestion agricole  
 
----
-
-## Périmètre du Projet
-
-### Fonctionnalités du Site  
-Le site inclura les fonctionnalités suivantes :
-- **Prise de rendez-vous en ligne** avec des experts agricoles et vétérinaires.
-- **Vente de produits agricoles** (médicaments, aliments pour animaux, équipements).
-- **Consultation en ligne** avec téléchargement de documents pour des diagnostics agricoles.
-- **Suivi en temps réel** des conditions météorologiques et des alertes agricoles.
-- **Module de formation en ligne** pour les pratiques agricoles.
-- **Marketplace** pour l'achat et la vente de produits agricoles.
+### 🌍 Contexte  
+Répondre aux défis du secteur agricole marocain par la digitalisation des services clés.
 
 ---
 
-## Exigences Techniques
+## 📸 Captures d'écran
 
-### Plateforme  
-- Le site doit être compatible avec les navigateurs modernes.
-- Le site doit être réactif sur les appareils mobiles et tablettes.
+### 🏠 Page d'Accueil
+![Page d'Accueil](/public/images/accueil.png)
 
-### Sécurité  
-- Mise en place de systèmes de sécurité robustes pour protéger les données des utilisateurs et les transactions.
+### 🛒 Marketplace
+#### Liste des Produits
+![Liste des Produits](/public/images/marketplace-products.png)
 
-### Technologies Utilisées  
-- **Back-end** : PHP avec le framework Laravel, base de données MySQL.
-- **Front-end** : HTML5, CSS3, JavaScript avec Vue.js, Tailwind pour un design responsive.
-- **Outils** : Git pour la gestion de version.
+#### Détails d'un Produit
+![Détails du Produit](/public/images/marketplace-product-details.png)
+
+### 📚 Formation
+#### Liste des Articles
+![Liste des Articles](/public/images/formation-articles.png)
+
+#### Détails d'un Article
+![Détails d'un Article](/public/images/formation-article-details.png)
+
+### 🧾 Autres Pages
+#### À Propos
+![À Propos](/public/images/about.png)
+
+#### Connexion & Inscription
+![Connexion](/public/images/login.png)
+![Inscription](/public/images/register.png)
+
+#### Profil Utilisateur
+![Profil](/public/images/profile.png)
+
+---
+
+## 🛠️ Fonctionnalités Clés  
+
+| Module | Fonctionnalités |
+|--------|----------------|
+| **👨‍⚕️ Consultations** | Rendez-vous en ligne, Historique, Documents partagés |
+| **🛍️ Marketplace** | Catalogue intelligent, Panier, Paiement sécurisé |
+| **🎓 Formation** | Articles techniques, Système de commentaires |
+| **📊 Dashboard** | Suivi des commandes/consultations |
 
 ---
 
-## Ressources
+## 💻 Stack Technique  
 
-### Suivi du projet  
-Consultez notre tableau de bord Jira pour suivre l'avancement des tâches, y compris les user stories, les tâches de conception, et d'implémentation :  
-[Suivi du projet sur Jira](https://abdelhakimbaalla50.atlassian.net/jira/software/projects/MA7/boards/7?atlOrigin=eyJpIjoiMTQzMmJlNDdkMmQ1NGQ1ZmJiZWExZjA5Y2NlNTgxNjgiLCJwIjoiaiJ9)
+### 🔧 Backend  
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php)  
+![Laravel](https://img.shields.io/badge/Laravel-10.x-FF2D20?logo=laravel)  
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)  
 
-### Maquettes de conception  
-Découvrez les maquettes de conception et l'interface utilisateur sur Figma, incluant les différentes étapes de conception de l'application :  
-[Maquettes Figma](https://www.figma.com/design/MZ2VPfC0qY0VDvvWyS9343/Mahsol?node-id=0-1&t=ArTwvXi01dqRwCeY-1)
+### 🎨 Frontend  
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.3.x-06B6D4?logo=tailwind-css)  
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)  
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)  
+![Blade](https://img.shields.io/badge/Laravel_Blade-FF2D20?logo=laravel)  
 
-### Présentation du projet  
-Consultez notre présentation complète sur Canva, qui fournit un aperçu détaillé du projet, des objectifs, et des phases de développement :  
-[Présentation Canva](https://www.canva.com/design/DAGdGrny0Tw/F4z_dOSOjRmx4KAQMMB_VA/edit?utm_content=DAGdGrny0Tw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
-
-### Cahier des charges  
-Le cahier des charges détaillant les user stories et les spécifications techniques est disponible pour référence. Il présente les fonctionnalités principales et les priorités de développement:  
-[cahier des charges](https://docs.google.com/document/d/17_ZoQLefHz0ZBXp0kERqQGm4PRlk2iWXElDs6w16hm4/edit?usp=sharing)
-
-### Conception de l'application  
-La conception de l'application, incluant les Diagrammes UML:  
-[Les Diagrammes UML](#)
+### 🛡️ Sécurité  
+![Stripe](https://img.shields.io/badge/Stripe_Payments-008CDD?logo=stripe&logoColor=white)  
 
 ---
+
+## 🚀 Installation et déploiement
+
+```bash
+# Cloner le répertoire
+git clone https://github.com/Abdelhakim-Baalla/Mahsoul.git
+cd Mahsoul
+
+# Installation des dépendances
+composer install
+npm install
+
+# Configuration
+cp .env.example .env
+php artisan key:generate
+
+# Base de données
+php artisan migrate --seed
+
+# Compilation des assets
+npm run dev
+
+# Lancer le serveur de développement
+php artisan serve
+```
+
+---
+
+## 📚 Ressources  
+
+| Documentation | Lien |
+|--------------|------|
+| 📊 Jira | [Suivi de projet](https://abdelhakimbaalla50.atlassian.net/jira/software/projects/MA7/boards/7?atlOrigin=eyJpIjoiMjlmZGVmNWY1OWUwNDEyMDhmNzQwMjJjMzE2ZjRjZTMiLCJwIjoiaiJ9) |
+| 🎨 Figma | [Maquettes](https://www.figma.com/file/MZ2VPfC0qY0VDvvWyS9343) |
+| 📝 Cahier des charges | [Google Docs](https://docs.google.com/document/d/17_ZoQLefHz0ZBXp0kERqQGm4PRlk2iWXElDs6w16hm4) |
+| 📊 UML | [Diagrammes](https://mega.nz/folder/1oBQkJJJ#Q7naKqIxvjqoHI--JtQYIg) |
+
+---
+
+---
+
+## 🤝 Contribution  
+Les contributions sont les bienvenues ! Veuillez suivre notre [guide de contribution](CONTRIBUTING.md).
+
+---
+
+## 👥 Équipe
+
+- **Abdelhakim Baalla** - Chef de Projet & Développeur Full-Stack
+
+---
+
+## 📄 Licence  
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE).
+
+---
+
+## 📞 Contact
+
+Pour toute question ou suggestion, veuillez nous contacter à [contact@mahsoul.ma](mailto:contact@mahsoul.ma)

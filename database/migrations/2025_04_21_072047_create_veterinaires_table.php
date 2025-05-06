@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('veterinaires', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utilisateur')->constrained('utilisateurs')->onDelete('cascade');
+            $table->string('specialite')->nullable();
+            $table->string('diplome')->nullable();
+            $table->string('annee_experience')->nullable();
+            $table->float('prix_deplacement')->nullable();
+            $table->foreignId('compte')->constrained('utilisateurs')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->timestamps();
         });
