@@ -26,10 +26,14 @@
                 </div>
                 <div class="flex justify-end">
                     <a href="{{ route('admin.categories.index') }}" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Annuler</a>
-                    <button type="submit" class="ml-2 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Ajouter</button>
+                    <button type="submit" onclick="return validateCategoryForm()" class="ml-2 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Ajouter</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/categorie-validation.js') }}"></script>
 @endsection
