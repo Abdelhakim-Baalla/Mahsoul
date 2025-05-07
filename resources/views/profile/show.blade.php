@@ -4,7 +4,6 @@
 
 <div class="bg-primary-50 min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-primary-800">Mon profil</h1>
             <p class="mt-2 text-lg text-gray-600">Gérez vos informations personnelles et vos préférences</p>
@@ -131,7 +130,6 @@
                             </div>
                         </div>
 
-                        <!-- Main Content -->
                         <div class="lg:col-span-2">
                             <div class="flex flex-col items-end justify-center mb-6">
                                 @if(Auth::user()->type == 'agricole')

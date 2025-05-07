@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="min-h-screen bg-primary-50 py-12">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"> <!-- Conteneur plus large -->
 
-        <!-- Registration Card - Plus large avec image plus visible -->
         <div class="rounded-lg shadow-lg overflow-hidden bg-white">
             @if($errors->all())
             <ul class="errorban px-4 py-2 bg-red-100">
@@ -77,7 +75,6 @@
                             <input type="text" id="photo" name="photo" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
                         </div>
 
-                        <!-- Terms and Conditions -->
                         <div class="mb-6">
                             <div class="flex items-start">
                                 <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
@@ -91,7 +88,6 @@
                             Créer mon compte
                         </button>
 
-                        <!-- Login Link -->
                         <div class="mt-6 text-center">
                             <p class="text-sm text-gray-600">
                                 Vous avez déjà un compte ? <a href="/login" class="text-primary-600 hover:text-primary-700 font-medium">Connectez-vous</a>

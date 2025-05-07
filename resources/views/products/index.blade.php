@@ -3,7 +3,6 @@
 @section('title', 'Marketplace - Mahsoul')
 
 @section('head')
-<!-- Intégration de la police arabe -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,9 +22,7 @@
 <div class="min-h-screen bg-gray-50 font-arabic">
 
 
-    <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Filters with improved accessibility -->
         <div class="mb-8 bg-white rounded-lg shadow-sm p-4">
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="flex-1 relative">
@@ -56,7 +53,6 @@
             </div>
         </div>
 
-        <!-- Products Grid -->
         <div>
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-semibold text-gray-900">Produits disponibles</h2>
@@ -74,14 +70,13 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     @foreach($products as $product)
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200">
-                        <!-- Image Container with visible background -->
+                       
                         <div class="relative bg-gray-100 h-72">
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <img src="{{ $product->image }}" alt="{{ $product->nom }}" 
                                      class="max-h-full max-w-full object-scale-down">
                             </div>
                             
-                            <!-- Badges -->
                             <div class="absolute top-2 left-2">
                                 <span class="bg-white px-2 py-1 rounded text-xs font-medium text-gray-700 shadow-sm">
                                     {{ $product->categorie }}
@@ -99,7 +94,6 @@
                             @endif
                         </div>
                         
-                        <!-- Product Info -->
                         <div class="p-4">
                             <h3 class="font-medium text-gray-900 mb-1">{{ $product->nom }}</h3>
                             <p class="text-sm text-gray-500 mb-3 line-clamp-2">{{ $product->description }}</p>
@@ -138,7 +132,6 @@
             @endif
         </div>
 
-        <!-- Pagination -->
         <div class="mt-8">
             {{ $products->links('pagination::tailwind') }}
         </div>
