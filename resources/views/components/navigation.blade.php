@@ -1,7 +1,6 @@
 <nav class="bg-white shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
-            <!-- Logo et navigation principale -->
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}" class="flex items-center">
@@ -10,7 +9,6 @@
                     </a>
                 </div>
                 
-                <!-- Liens de navigation -->
                 <div class="hidden md:ml-10 md:flex md:items-center md:space-x-6">
                     <a href="{{ route('welcome') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Accueil</a>
                     <a href="{{ route('products.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Marketplace</a>
@@ -21,13 +19,11 @@
                 </div>
             </div>
             
-            <!-- Actions utilisateur -->
             <div class="hidden md:flex items-center space-x-4">
                 @auth
                     @php
                         $cartCount = count(session()->get('cart', []));
                     @endphp
-                    <!-- Panier -->
                      <form action="{{ route('cart.index') }}">
                         <input type="hidden" name="cart" id="cartInput">
                         <button type="submit" class="text-primary-700 hover:text-primary-500 relative p-2">
@@ -37,7 +33,6 @@
                      </form>
                     
                     
-                    <!-- Menu profil - Solution CSS pure -->
                     <div class="profile-dropdown">
                         <button class="profile-button">
                             <img src="{{ Auth::user()->photo ?? asset('images/default-avatar.jpg') }}" 
@@ -70,7 +65,6 @@
                         </div>
                     </div>
                 @else
-                    <!-- Liens connexion/inscription -->
                     <a href="{{ route('login') }}" class="login-button">Connexion</a>
                     <a href="{{ route('register') }}" class="register-button">Inscription</a>
                 @endauth
@@ -182,12 +176,3 @@
     }
 </style>
 
-<script>
-    const cartForm = document.querySelector('form[action="{{ route('cart.index') }}"]');
-    const cartInput = document.getElementById('cartInput');
-    cartForm.addEventListener('submit', function () {
-        const cart = sessionStorage.getItem('cart') || '[]';
-        cartInput.value = cart;
-        console.log("Submitting cart:", cartInput.value);
-    });
-</script>

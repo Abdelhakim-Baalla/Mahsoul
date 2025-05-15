@@ -7,7 +7,6 @@
     <title>@yield('title', 'Espace Expert - Mahsoul')</title>
     <meta name="description" content="Espace Expert Mahsoul - Plateforme de consultation agricole">
     <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -49,15 +48,12 @@
         }
     </script>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Styles supplémentaires pour l'expert -->
     <style>
         .sidebar-active {
             background-color: rgba(219, 148, 24, 0.1);
@@ -66,7 +62,6 @@
     </style>
 </head>
 <body class="font-sans bg-gray-100 flex h-screen">
-    <!-- Sidebar -->
     <div id="sidebar" class="bg-white w-64 shadow-md flex-shrink-0 hidden md:block">
         <div class="flex items-center justify-center h-16 border-b">
             <a href="{{ route('expert.dashboard') }}" class="text-xl font-bold text-secondary-600">
@@ -124,9 +119,7 @@
         </nav>
     </div>
 
-    <!-- Content -->
     <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Top Header -->
         <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
             <div class="flex items-center">
                 <button id="sidebar-toggle" class="md:hidden text-gray-700 focus:outline-none">
@@ -153,13 +146,11 @@
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto bg-gray-100">
             @yield('content')
         </main>
     </div>
 
-    <!-- Scripts -->
     <script>
         // Toggle sidebar on mobile
         document.getElementById('sidebar-toggle').addEventListener('click', function() {

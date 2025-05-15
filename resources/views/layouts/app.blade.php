@@ -7,7 +7,6 @@
     <title>Mahsoul - Plateforme agricole</title>
     <meta name="description" content="Mahsoul - Plateforme complète au service des agriculteurs et du secteur agricole">
     <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -50,39 +49,26 @@
         }
     </script>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="font-sans bg-primary-50 flex flex-col min-h-screen {{ app()->getLocale() === 'ar' ? 'font-arabic' : '' }}">
-    <!-- Navigation -->
     <div id="navigation">
         @include('components.navigation')
     </div>
 
-    <!-- Content -->
     <main class="flex-grow">
         @yield('content')
     </main>
 
-    <!-- Footer -->
     <div id="footer">
         @include('components.footer')
     </div>
 
-    <!-- Scripts -->
-    <script>
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-    </script>
     @yield('scripts')
 </body>
 </html>

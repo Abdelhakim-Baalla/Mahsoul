@@ -10,4 +10,6 @@ interface VeterinaireRepositoryInterface
     public function repondreConsultation(int $consultation_id, string $reponse);
     public function consulterConsultation(int $id);
     public function refuserConsultation(int $consultation_id);
+    public function getAllVeterinaire();
+    public function getByUtilisateurId(int $id);
 }

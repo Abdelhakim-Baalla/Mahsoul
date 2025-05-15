@@ -51,6 +51,8 @@ class ProductController extends Controller
         // dd($cart);
         // dd($request->id);    
         $product = $this->produitRepository->getProduitById($request->id);
+        // dd($product); 
+
         if (empty($product)) {
             return view('products.index', ['product' => []]);
         }
@@ -137,7 +139,8 @@ class ProductController extends Controller
                 'quantite' => $item['quantity'],
                 'prix_unitaire' => $product->prix
             ];
-            $this->orderItem->creerOrderItem($oritms);
+            $er = $this->orderItem->creerOrderItem($oritms);
+            // dd($er);
         }
 
         session()->forget('cart');
