@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
 use Illuminate\Support\Facades\Route;
@@ -78,8 +79,10 @@ Route::controller(StripePaymentController::class)->group(function () {
 
 
 // Consultations - Utilisateur
-Route::view('/experts', 'consultations.index')->name('experts.index');
-Route::view('/experts/show', 'experts.show')->name('experts.show');
+Route::controller(ConsultationController::class)->group(function () {
+    Route::get('/experts', 'AfficherExperts')->name('experts.index');
+    Route::get('/experts/show', 'expertShow')->name('experts.show');
+});
 Route::view('/appointments/create', 'appointments.create')->name('appointments.create');
 Route::view('/appointments', 'appointments.index')->name('appointments.index');
 Route::view('/appointments/show', 'appointments.show')->name('appointments.show');
