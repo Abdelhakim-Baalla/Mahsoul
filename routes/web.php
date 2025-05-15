@@ -37,6 +37,7 @@ Route::view('/reset-password', 'auth.reset-password')->name('password.reset');
 
 Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'showProfile')->name('profile.show');
+    Route::get('/profile/orders', 'showProfileOrders')->name('profile.show.orders');
     Route::get('/profile/edit', 'showeditProfile')->name('profile.edit');
     Route::PUT('/profile/update', 'updateProfile')->name('profile.update');
     Route::get('/profile/edit/information/agricole', 'showeditProfileInformationAgricole')->name('profile.updateAgricole');

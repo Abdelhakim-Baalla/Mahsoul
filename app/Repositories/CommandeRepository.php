@@ -24,6 +24,7 @@ class CommandeRepository implements CommandeRepositoryInterface
     }
     
     public function getCommandesByClientId(int $client_id){
+        return Commande::get()->where('client', $client_id);
 
     }
     

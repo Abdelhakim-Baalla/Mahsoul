@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="bg-primary-50 min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-primary-800">Modifier mon profil</h1>
-            <p class="mt-2 text-lg text-gray-600">Mettez à jour vos informations personnelles</p>
+            <h1 class="text-3xl font-bold text-primary-800">Mon profil</h1>
+            <p class="mt-2 text-lg text-gray-600">Gérez vos informations personnelles et vos préférences</p>
         </div>
         @if ($errors->any())
         <div class="lg:col-span-2 mb-6">
@@ -18,7 +18,7 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <h3 class="text-sm font-medium text-red-800">Il y a {{ $errors->count() }} erreur(s) dans votre formulaire</h3>
+                        <h3 class="text-sm font-medium text-red-800">Il y a {{ $errors->count() }} erreur(s)</h3>
                         <div class="mt-2 text-sm text-red-700">
                             <ul class="list-disc pl-5 space-y-1">
                                 @foreach ($errors->all() as $error)
@@ -31,9 +31,7 @@
             </div>
         </div>
         @endif
-
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Sidebar -->
             <div class="lg:col-span-1">
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     @if(Auth::user()->type == 'agricole')
@@ -51,9 +49,30 @@
                                             <img class="h-20 w-20 rounded-full object-cover border-4 border-white" src="{{ Auth::user()->photo ?? asset('images/default-avatar.jpg') }}" alt="Photo de profil">
                                         </div>
                                         <div class="ml-4">
-                                            <h2 class="text-xl font-bold">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h2>
-                                            <p class="text-primary-200">{{ Auth::user()->type }}</p>
-                                            <p class="text-sm text-primary-100 mt-1">Membre depuis {{ Auth::user()->created_at->format('d-m-Y') }}</p>
+                                            <h2 class="text-xl font-bold text-white">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h2>
+                                            <div class="mt-1 flex items-center space-x-2">
+                                                @switch(Auth::user()->type)
+                                                @case('admin')
+                                                <i class="fas fa-crown text-yellow-400"></i>
+                                                <span class="text-white font-medium">ADMINISTRATEUR</span>
+                                                @break
+                                                @case('veterinaire')
+                                                <i class="fas fa-stethoscope text-blue-300"></i>
+                                                <span class="text-white font-medium">VÉTÉRINAIRE</span>
+                                                @break
+                                                @case('agricole')
+                                                <i class="fas fa-tractor text-green-300"></i>
+                                                <span class="text-white font-medium">AGRICOLE</span>
+                                                @break
+                                                @case('client')
+                                                <i class="fas fa-user-circle text-purple-300"></i>
+                                                <span class="text-white font-medium">CLIENT</span>
+                                                @break
+                                                @default
+                                                <i class="fas fa-user text-gray-300"></i>
+                                                <span class="text-white font-medium">UTILISATEUR</span>
+                                                @endswitch
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -61,13 +80,13 @@
                                 <nav class="p-4">
                                     <ul class="space-y-2">
                                         <li>
-                                            <a href="/profile" class="flex items-center px-4 py-2 bg-primary-50 text-primary-700 rounded-md font-medium">
+                                            <a href="/profile" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
                                                 <i class="fas fa-user mr-3"></i>
                                                 Informations personnelles
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/profile/orders" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">
+                                            <a href="/profile/orders" class="flex items-center px-4 py-2 bg-primary-50 text-primary-700 rounded-md font-medium">
                                                 <i class="fas fa-shopping-bag mr-3"></i>
                                                 Mes commandes
                                             </a>
@@ -111,68 +130,76 @@
                             </div>
                         </div>
 
-                        <!-- Main Content -->
                         <div class="lg:col-span-2">
-                            <!-- Edit Profile Form -->
-
-                            <div class="p-6 border-b border-gray-200">
-                                <h3 class="text-xl font-bold text-gray-800">Modifier mes informations</h3>
+                            <div class="flex flex-col items-end justify-center mb-6">
+                                @if(Auth::user()->type == 'agricole')
+                                <a href="{{route('admin.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                                @elseif(Auth::user()->type == 'veterinaire')
+                                <a href="{{route('veterinaire.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                                @elseif(Auth::user()->type == 'client')
+                                <a href="{{route('client.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                                @elseif(Auth::user()->type == 'admin')
+                                <a href="{{route('admin.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                    Go to dashboard
+                                </a>
+                                @endif
                             </div>
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-                                <div class="p-6">
-                                    <form action="/veterinaire/information/update" method="POST">
-                                        @csrf
-                                        @method('PUT')
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-green-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">
+                                            Produit
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">
+                                            Catégorie
+                                        </th>
 
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                            
-                                            <div>
-                                                <label for="specialite" class="block text-sm font-medium text-gray-700 mb-1">Specialite</label>
-                                                <input type="text" id="specialite" name="specialite" value="{{ Auth::user()->veterinaire->specialite ?? '' }}"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-100">
+                                    @for ($i =0; $i < count($produitsFinal); $i++)
+                                        <tr class="hover:bg-green-50 transition-colors duration-150">
+                                        <!-- Produit -->
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-md object-cover border border-gray-100" src="{{$produitsFinal[$i]['image']}}" alt="{{$produitsFinal[$i]['nom']}}">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="font-medium text-gray-900">
+                                                        {{$produitsFinal[$i]['nom']}}
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </td>
 
-                                            <div>
-                                                <label for="diplome" class="block text-sm font-medium text-gray-700 mb-1">Diplôme</label>
-                                                <input type="text" id="diplome" name="diplome" value="{{ Auth::user()->veterinaire->diplome ?? '' }}"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
-                                            </div>
+                                        <!-- Catégorie -->
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                                                {{$produitsFinal[$i]['categorie']}}
+                                            </span>
+                                        </td>
+                                        </tr>
+                                        @endfor
 
-                                            <div>
-                                                <label for="annee_experience" class="block text-sm font-medium text-gray-700 mb-1">Année D'éxperience (ans)</label>
-                                                <input type="text" step="0.01" id="annee_experience" name="annee_experience"
-                                                    value="{{ Auth::user()->veterinaire->annee_experience ?? '' }}"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
-                                            </div>
-
-                                            <div>
-                                                <label for="prix_deplacement" class="block text-sm font-medium text-gray-700 mb-1">prix déplacement</label>
-                                                <input type="text" id="prix_deplacement" name="prix_deplacement" value="{{ Auth::user()->veterinaire->prix_deplacement ?? '' }}"
-                                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
-                                            </div>
-                                        </div>
-
-                                        @if(Auth::user()->veterinaire)
-                                        <input type="hidden" name="veterinaire_id" value="{{ Auth::user()->veterinaire->id }}">
-                                        @endif
-
-                                        <!-- Boutons -->
-                                        <div class="flex justify-end space-x-4">
-                                            <a href="/profile" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 font-medium">
-                                                Annuler
-                                            </a>
-                                            <button type="submit" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-md font-medium">
-                                                Enregistrer les modifications
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-
-
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+
+
+
+
+
+
+
                 </div>
             </div>
-            @endsection
+        </div>
+        @endsection

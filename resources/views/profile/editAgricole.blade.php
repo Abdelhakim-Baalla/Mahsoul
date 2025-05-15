@@ -53,7 +53,7 @@
                                         <div class="ml-4">
                                             <h2 class="text-xl font-bold">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h2>
                                             <p class="text-primary-200">{{ Auth::user()->type }}</p>
-                                            <p class="text-sm text-primary-100 mt-1">Membre depuis {{ Auth::user()->created_at->format('D M Y') }}</p>
+                                            <p class="text-sm text-primary-100 mt-1">Membre depuis {{ Auth::user()->created_at->format('d-m-Y') }}</p>
                                         </div>
                                     </div>
                                 </div>
