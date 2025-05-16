@@ -153,7 +153,7 @@
                                     </button>
                                 </form>
 
-                                 <form action="" method="get">
+                                 <form action="{{route('rendezVous.refuse')}}" method="get">
                                     <input type="hidden" name="id" value="{{$rendezVous->id}}">
                                     <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
                                       Réfusé le rendez Vous
@@ -187,7 +187,7 @@
                                     </button>
                                 </form>
 
-                                 <form action="" method="get">
+                                 <form action="{{route('rendezVous.refuse')}}" method="get">
                                     <input type="hidden" name="id" value="{{$rendezVous->id}}">
                                     <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
                                       Réfusé le rendez Vous

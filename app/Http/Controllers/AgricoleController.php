@@ -57,12 +57,21 @@ class AgricoleController extends Controller
     public function agricoleAppointmentsAccept(Request $request)
     {
         // dd($request->id);
-
         $data = [
             'statut' => 'approved'
         ];
 
-        // dd($data);
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        
+        return redirect()->route('agricole.appointments.index');
+    }
+
+     public function agricoleAppointmentsRefuse(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'cancel'
+        ];
 
         $this->rendezVousRepository->modifierRendezVous($request->id, $data);
         
