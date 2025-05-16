@@ -9,33 +9,17 @@
 
     <!-- Filtres -->
     <div class="bg-white rounded-lg shadow-md p-4 mb-6">
-        <form action="{{ route('agricole.appointments.index') }}" method="GET" class="flex flex-wrap gap-4">
+        <form action="{{ route('agricole.appointments.index.filtreer') }}" method="GET" class="flex flex-wrap gap-4">
             <div class="flex-1 min-w-[200px]">
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
                 <select id="status" name="status" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="">Tous les statuts</option>
-                    <option value="upcoming">À venir</option>
-                    <option value="completed">Terminés</option>
-                    <option value="cancelled">Annulés</option>
-                </select>
-            </div>
-            <div class="flex-1 min-w-[200px]">
-                <label for="consultation_type" class="block text-sm font-medium text-gray-700 mb-1">Type de consultation</label>
-                <select id="consultation_type" name="consultation_type" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option value="">Tous les types</option>
-                    <option value="video">Vidéo</option>
-                    <option value="message">Message</option>
-                </select>
-            </div>
-            <div class="flex-1 min-w-[200px]">
-                <label for="date_range" class="block text-sm font-medium text-gray-700 mb-1">Période</label>
-                <select id="date_range" name="date_range" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option value="">Toutes les périodes</option>
-                    <option value="today">Aujourd'hui</option>
-                    <option value="tomorrow">Demain</option>
-                    <option value="this_week">Cette semaine</option>
-                    <option value="next_week">Semaine prochaine</option>
-                    <option value="this_month">Ce mois</option>
+                    <option value="approved">Accepter</option>
+                    <option value="pending">En attente</option>
+                    <option value="review-canceling">En Attente L'annulation</option>
+                    <option value="approved-canceling">L'annulation Accepter</option>
+                    <option value="cancel-canceling">L'annulation Refuser</option>
+                    <option value="cancel">Refuser</option>
                 </select>
             </div>
             <div class="flex items-end">

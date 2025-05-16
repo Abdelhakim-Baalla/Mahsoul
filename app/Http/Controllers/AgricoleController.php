@@ -44,6 +44,11 @@ class AgricoleController extends Controller
         return view('agricole.appointments.index', compact('rendezVous'));
     }
 
+    public function agricoleAppointmentsIndexFiltrer(Request $request)
+    {
+        dd($request->all());
+    }
+
     public function agricoleAppointmentsShow (Request $request)
     {
         // dd($request->all());
@@ -83,6 +88,18 @@ class AgricoleController extends Controller
         // dd($request->id);
         $data = [
             'statut' => 'approved-canceling'
+        ];
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        
+        return redirect()->route('agricole.appointments.index');
+    }
+
+    public function agricoleAppointmentsRefuserAnnulation(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'cancel-canceling'
         ];
 
         $this->rendezVousRepository->modifierRendezVous($request->id, $data);

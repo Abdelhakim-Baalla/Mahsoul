@@ -167,7 +167,7 @@
                                     </button>
                                 </form>
 
-                                 <form action="" method="get">
+                                 <form action="{{route('rendezVous.refuser.annulation')}}" method="get">
                                     <input type="hidden" name="id" value="{{$rendezVous->id}}">
                                     <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
                                       Réfusé l'annulation
@@ -180,19 +180,9 @@
                                 </button>
                             
                             @elseif($rendezVous->statut == 'cancel-canceling')
-                                <form action="{{route('rendezVous.accepter')}}" method="get">
-                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
-                                    <button type="submit" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
-                                      Accepter le rendez Vous
-                                    </button>
-                                </form>
-
-                                 <form action="{{route('rendezVous.refuse')}}" method="get">
-                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
-                                    <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
-                                      Réfusé le rendez Vous
-                                    </button>
-                                </form>
+                                <button type="button" class="px-8 py-3 w-full text-white bg-blue-300 rounded focus:outline-none" disabled>
+                                    Deja Confirmé
+                                </button>
                             
                             @elseif($rendezVous->statut == 'cancel')
                                <button type="button" class="px-8 py-3 w-full text-white bg-red-300 rounded focus:outline-none" disabled>
