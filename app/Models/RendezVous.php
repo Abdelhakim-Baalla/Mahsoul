@@ -11,7 +11,7 @@ class RendezVous extends Model
 
     protected $table = 'rendez_vous'; 
 
-    protected $fillable = ['client', 'expert', 'statut', 'description'];
+    protected $fillable = ['client', 'expert', 'statut', 'description', 'date_reserver', 'sujet', 'adresse', 'telephone', 'total'];
 
     public function client()
     {

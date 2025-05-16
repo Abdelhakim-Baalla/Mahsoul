@@ -75,10 +75,12 @@
                                 <p class="text-gray-500 text-sm">par consultation</p>
                                 @endif
                             </div>
-                            
-                            <a href="" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-medium py-3 px-4 rounded-md transition duration-300">
-                                Prendre rendez-vous
-                            </a>
+                            <form action="{{route('rendezVous.create')}}" method="get">
+                                <input type="hidden" name="expert_id" value="{{$expert->id}}">
+                                <button type="submit" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-medium py-3 px-4 rounded-md transition duration-300">
+                                    Prendre rendez-vous
+                                </button>
+                            </form>
                             <button class="block w-full mt-3 border border-green-600 text-green-600 hover:bg-green-50 text-center font-medium py-3 px-4 rounded-md transition duration-300">
                                 Contacter l'expert
                             </button>

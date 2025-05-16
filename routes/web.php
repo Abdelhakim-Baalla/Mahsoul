@@ -74,6 +74,7 @@ Route::controller(ProductController::class)->group(function () {
 
 Route::controller(StripePaymentController::class)->group(function () {
     Route::get('/checkout/stripe', 'checkout')->name('checkout.stripe');
+    Route::get('/checkout/rendezVous/stripe', 'checkoutRendezVous')->name('rendezVous.checkout.stripe');
 });
 
 
@@ -82,8 +83,10 @@ Route::controller(StripePaymentController::class)->group(function () {
 Route::controller(ConsultationController::class)->group(function () {
     Route::get('/experts', 'AfficherExperts')->name('experts.index');
     Route::get('/experts/show', 'expertShow')->name('experts.show');
+    Route::get('/rendezVous/create', 'createRendezVous')->name('rendezVous.create');
+    Route::post('/rendezVous/payemnt', 'payementRendezVous')->name('rendezVous.payement');
 });
-Route::view('/appointments/create', 'appointments.create')->name('appointments.create');
+
 Route::view('/appointments', 'appointments.index')->name('appointments.index');
 Route::view('/appointments/show', 'appointments.show')->name('appointments.show');
 Route::view('/consultations', 'consultations.index')->name('consultations.index');

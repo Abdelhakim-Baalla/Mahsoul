@@ -7,8 +7,8 @@ use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 
 class RendezVousRepository implements RendezVousRepositoryInterface
 {
-    public function creerRendezVous(int $client_id, int $expert_id, $date, string $description){
-
+    public function creerRendezVous(array $data){
+        return RendezVous::create($data);
     }
     
     public function annulerRendezVous(int $rendez_vous_id){
