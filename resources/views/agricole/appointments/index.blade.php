@@ -81,7 +81,7 @@
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div>
                             <h4 class="font-medium text-gray-800">{{$rendezVou->sujet}}</h4>
-                            <p class="text-gray-600 mt-1">{{$rendezVou->description}}</p>
+                            <p class="text-gray-600 mt-1">{{ Str::limit(strip_tags($rendezVou->description), 10) }}</p>
                             <div class="mt-2">
                                 @if($rendezVou->statut == 'approved')
                                 <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">

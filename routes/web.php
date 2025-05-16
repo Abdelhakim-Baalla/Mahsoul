@@ -160,6 +160,7 @@ Route::controller(AgricoleController::class)->group(function () {
     Route::get('/agricole', 'agricoleDashboard')->name('agricole.dashboard');
     Route::get('/agricole/appointments', 'agricoleAppointmentsIndex')->name('agricole.appointments.index');
     Route::get('/agricole/appointments/show', 'agricoleAppointmentsShow')->name('agricole.appointments.show');
+    Route::get('/agricole/appointments/accept', 'agricoleAppointmentsAccept')->name('rendezVous.accepter');
 });
 
 // Dashboard Expert Agricole

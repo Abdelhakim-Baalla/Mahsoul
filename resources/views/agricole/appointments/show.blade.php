@@ -16,12 +16,12 @@
         <div class="bg-green-600 text-white p-6">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold">Rendez-vous #AP12345</h1>
-                    <p class="mt-1">Consultation sur la santé des oliviers</p>
+                    <h1 class="text-2xl font-bold">Rendez-vous #{{$rendezVous->id}}</h1>
+                    <p class="mt-1">{{$rendezVous->sujet}}</p>
                 </div>
                 <div class="mt-4 md:mt-0">
                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-500 text-white">
-                        À venir
+                       {{$rendezVous->statut}}
                     </span>
                 </div>
             </div>
@@ -37,19 +37,19 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <p class="text-sm text-gray-500">Date et heure</p>
-                                <p class="text-gray-800 font-medium">15 Juin 2023 à 14:30</p>
+                                <p class="text-gray-800 font-medium">{{$rendezVous->date_reserver}}</p>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <p class="text-sm text-gray-500">Type de consultation</p>
-                                <p class="text-gray-800 font-medium">Consultation vidéo</p>
+                                <p class="text-gray-800 font-medium">Consultation à place</p>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
                                 <p class="text-sm text-gray-500">Créé le</p>
-                                <p class="text-gray-800 font-medium">10 Juin 2023 09:15</p>
+                                <p class="text-gray-800 font-medium">{{$rendezVous->created_at->format('d M Y')}}</p>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
-                                <p class="text-sm text-gray-500">Durée prévue</p>
-                                <p class="text-gray-800 font-medium">30 minutes</p>
+                                <p class="text-sm text-gray-500">Adresse</p>
+                                <p class="text-gray-800 font-medium">{{$rendezVous->adresse}}</p>
                             </div>
                         </div>
                     </div>
@@ -58,12 +58,14 @@
                         <h2 class="text-xl font-semibold text-gray-800 mb-4">Description</h2>
                         <div class="bg-gray-50 p-4 rounded-lg">
                             <p class="text-gray-700 whitespace-pre-line">
-                                Bonjour, j'ai remarqué que mes oliviers présentent des feuilles jaunies et des branches qui semblent se dessécher. Je cultive ces oliviers depuis 5 ans et c'est la première fois que je rencontre ce problème. J'aimerais avoir votre avis sur les causes possibles et les solutions à envisager. J'ai joint quelques photos des arbres affectés.
+                                {{$rendezVous->description}}
                             </p>
                         </div>
                     </div>
 
-                    <div class="mb-8">
+                   
+
+                    {{-- <div class="mb-8">
                         <h2 class="text-xl font-semibold text-gray-800 mb-4">Documents joints</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                             <div class="bg-gray-50 p-4 rounded-lg">
@@ -109,20 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mb-8">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Notes personnelles</h2>
-                        <form class="bg-gray-50 p-4 rounded-lg">
-                            <div class="mb-4">
-                                <label for="notes" class="block text-gray-700 font-medium mb-2">Vos notes (visibles uniquement par vous)</label>
-                                <textarea id="notes" name="notes" rows="4" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Ajoutez vos notes préparatoires ici...">D'après les photos, il pourrait s'agir d'une attaque de mouche de l'olivier ou d'un problème d'irrigation. À vérifier pendant la consultation.</textarea>
-                            </div>
-                            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
-                                Enregistrer les notes
-                            </button>
-                        </form>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Colonne de droite -->
@@ -130,36 +119,86 @@
                     <div class="bg-gray-50 rounded-lg p-6 sticky top-6">
                         <h2 class="text-xl font-semibold text-gray-800 mb-4">Client</h2>
                         <div class="flex items-center mb-4">
-                            <img src="/placeholder.svg?height=64&width=64" alt="Photo de profil" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <img src="{{$rendezVous->client->photo}}" alt="Photo de profil de {{$rendezVous->client->prenom}} {{$rendezVous->client->nom}}" class="w-16 h-16 rounded-full object-cover mr-4">
                             <div>
-                                <h3 class="font-medium text-gray-800">Ahmed Benali</h3>
-                                <p class="text-gray-600">Agriculteur - Meknès</p>
+                                <h3 class="font-medium text-gray-800">{{$rendezVous->client->prenom}} {{$rendezVous->client->nom}}</h3>
+                                @if($rendezVous->client->about != 'non spécifié')
+                                <p class="text-gray-600">{{$rendezVous->client->about}}</p>
+                                @else
+                                @endif
                             </div>
                         </div>
                         <div class="mb-6">
                             <p class="text-gray-600 mb-2">
-                                <span class="font-medium">Email:</span> ahmed.benali@example.com
+                                <span class="font-medium">Email:</span> {{$rendezVous->client->email}}
                             </p>
                             <p class="text-gray-600 mb-2">
-                                <span class="font-medium">Téléphone:</span> +212 6XX XX XX XX
+                                <span class="font-medium">Téléphone:</span> {{$rendezVous->client->telephone}}
                             </p>
                             <p class="text-gray-600">
-                                <span class="font-medium">Client depuis:</span> Mars 2022
+                                <span class="font-medium">Client depuis:</span> {{$rendezVous->client->created_at}}
                             </p>
                         </div>
                         
                         <div class="space-y-3">
-                            <a href="" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center font-medium py-2 px-4 rounded-md transition duration-300">
-                                Voir l'historique du client
-                            </a>
+                            @if($rendezVous->statut == 'approved')
+                                    <button type="button" class="px-8 py-3 w-full text-white bg-blue-300 rounded focus:outline-none" disabled>
+                                        Deja Confirmé
+                                    </button>
+                            @elseif($rendezVous->statut == 'pending')
+                                <form action="{{route('rendezVous.accepter')}}" method="get">
+                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
+                                    <button type="submit" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                      Accepter le rendez Vous
+                                    </button>
+                                </form>
+
+                                 <form action="" method="get">
+                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
+                                    <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                      Réfusé le rendez Vous
+                                    </button>
+                                </form>
+                            @elseif($rendezVous->statut == 'review-canceling')
+                                <form action="" method="get">
+                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
+                                    <button type="submit" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                      Accepter l'annulation'
+                                    </button>
+                                </form>
+
+                                 <form action="" method="get">
+                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
+                                    <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                      Réfusé l'annulation
+                                    </button>
+                                </form>
+
+                            @elseif($rendezVous->statut == 'approved-canceling')
+                                <button type="button" class="px-8 py-3 w-full text-white bg-red-300 rounded focus:outline-none" disabled>
+                                    Annulé
+                                </button>
                             
-                            <a href="" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
-                                Démarrer la consultation
-                            </a>
+                            @elseif($rendezVous->statut == 'cancel-canceling')
+                                <form action="{{route('rendezVous.accepter')}}" method="get">
+                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
+                                    <button type="submit" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                      Accepter le rendez Vous
+                                    </button>
+                                </form>
+
+                                 <form action="" method="get">
+                                    <input type="hidden" name="id" value="{{$rendezVous->id}}">
+                                    <button type="submit" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                      Réfusé le rendez Vous
+                                    </button>
+                                </form>
                             
-                            <button type="button" class="block w-full border border-red-600 text-red-600 hover:bg-red-50 text-center font-medium py-2 px-4 rounded-md transition duration-300">
-                                Reprogrammer
-                            </button>
+                            @elseif($rendezVous->statut == 'cancel')
+                               <button type="button" class="px-8 py-3 w-full text-white bg-red-300 rounded focus:outline-none" disabled>
+                                    Annulé
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>

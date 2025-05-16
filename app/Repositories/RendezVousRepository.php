@@ -16,6 +16,7 @@ class RendezVousRepository implements RendezVousRepositoryInterface
     }
     
     public function getRendezVousById(int $id){
+        // dd($id);
         return RendezVous::find($id);
     }
 
@@ -24,7 +25,9 @@ class RendezVousRepository implements RendezVousRepositoryInterface
     }
     
     public function modifierRendezVous(int $id, array $data){
+        // dd($id);
         $rendez_vous = $this->getRendezVousById($id);
+        // dd($rendez_vous);
         return $rendez_vous->update($data);
     }
     

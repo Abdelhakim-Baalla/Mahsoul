@@ -44,8 +44,28 @@ class AgricoleController extends Controller
         return view('agricole.appointments.index', compact('rendezVous'));
     }
 
-    public function agricoleAppointmentsShow ()
+    public function agricoleAppointmentsShow (Request $request)
     {
-        return view('agricole.appointments.show');
+        // dd($request->all());
+        $rendezVous = $this->rendezVousRepository->getRendezVousById($request->id);
+        $rendezVous->client = $this->utilisateurRepository->getById($rendezVous->client);
+        // dd($rendezVous->client);
+
+        return view('agricole.appointments.show', compact('rendezVous'));
+    }
+
+    public function agricoleAppointmentsAccept(Request $request)
+    {
+        // dd($request->id);
+
+        $data = [
+            'statut' => 'approved'
+        ];
+
+        // dd($data);
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        
+        return redirect()->route('agricole.appointments.index');
     }
 }
