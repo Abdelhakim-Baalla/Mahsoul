@@ -12,4 +12,6 @@ interface RendezVousRepositoryInterface
     public function countConsultations();
     public function countConsultationsByUtilisateurId(int $id);
     public function getAllRendezVous();
+    public function countConsultationsByExpertId(int $id);
+    public function countRevenusByExpertId(int $id);
 }

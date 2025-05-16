@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgricoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
@@ -154,8 +155,13 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/admin/tag/delete', 'tagDelete')->name('admin.tags.delete');
 });
 
+
+Route::controller(AgricoleController::class)->group(function () {
+    Route::get('/agricole', 'agricoleDashboard')->name('agricole.dashboard');
+});
+
 // Dashboard Expert Agricole
-Route::view('/expert', 'expert.dashboard')->name('expert.dashboard');
+
 Route::view('/expert/appointments', 'expert.appointments.index')->name('expert.appointments.index');
 Route::view('/expert/appointments/show', 'expert.appointments.show')->name('expert.appointments.show');
 Route::view('/expert/consultations', 'expert.consultations.index')->name('expert.consultations.index');
