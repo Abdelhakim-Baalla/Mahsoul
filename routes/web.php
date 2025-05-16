@@ -173,11 +173,11 @@ Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('ve
 
 Route::controller(ClientController::class)->group(function () {
     Route::get('/client', 'clientDashboard')->name('client.dashboard');
+    Route::get('/client/consultations', 'clientConsultationsIndex')->name('client.consultations.index');
 });
 
 // Dashboard Client
 Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
-Route::view('/client/consultations', 'client.consultations.index')->name('client.consultations.index');
 Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
 Route::view('/client/documents', 'client.documents.index')->name('client.documents.index');
 

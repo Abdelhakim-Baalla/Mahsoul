@@ -30,5 +30,9 @@ class RendezVousRepository implements RendezVousRepositoryInterface
     public function countConsultations(){
         return RendezVous::get()->count();
     }
+
+    public function countConsultationsByUtilisateurId(int $id){
+        return RendezVous::get()->where('client', $id) ->count();
+    }
     
 }

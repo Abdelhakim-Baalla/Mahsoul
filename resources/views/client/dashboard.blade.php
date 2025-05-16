@@ -11,24 +11,22 @@
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <div class="flex items-center mb-6">
                         <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
+                            <img src="{{Auth::user()->photo}}" class="rounded-full" alt="{{Auth::user()->prenom}} {{Auth::user()->nom}}">
                         </div>
                         <div class="ml-4">
-                            <h2 class="text-lg font-semibold text-gray-800">Nom de l'utilisateur</h2>
+                            <h2 class="text-lg font-semibold text-gray-800">{{Auth::user()->prenom}} {{Auth::user()->nom}}</h2>
                             <p class="text-gray-600">Client</p>
                         </div>
                     </div>
                     
                     <nav class="space-y-2">
-                        <a href="#" class="flex items-center px-4 py-2 text-primary-700 bg-primary-50 rounded-md font-medium">
+                        <a href="/client" class="flex items-center px-4 py-2 text-primary-700 bg-primary-50 rounded-md font-medium">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                             </svg>
                             Tableau de bord
                         </a>
-                        <a href="#" class="flex items-center px-4 py-2 text-gray-700 rounded-md hover:bg-primary-50 hover:text-primary-700">
+                        <a href="/client/consultations" class="flex items-center px-4 py-2 text-gray-700 rounded-md hover:bg-primary-50 hover:text-primary-700">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -91,7 +89,7 @@
                 </div>
                 
                 <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <!-- Orders Stats -->
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
@@ -109,22 +107,6 @@
                         </div>
                     </div>
                     
-                    <!-- Appointments Stats -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">Rendez-vous</h2>
-                            <div class="p-2 bg-blue-100 rounded-full">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-3xl font-bold text-gray-800">55</p>
-                            </div>
-                        </div>
-                    </div>
                     
                     <!-- Consultations Stats -->
                     <div class="bg-white rounded-lg shadow-md p-6">
@@ -138,7 +120,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-3xl font-bold text-gray-800">88</p>
+                                <p class="text-3xl font-bold text-gray-800">{{$countRendezVous}}</p>
                             </div>
                         </div>
                     </div>
