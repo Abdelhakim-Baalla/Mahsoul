@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="mb-6">
-        <a href="{{ route('expert.appointments.index') }}" class="inline-flex items-center text-green-600 hover:text-green-700">
+        <a href="{{ route('agricole.appointments.index') }}" class="inline-flex items-center text-green-600 hover:text-green-700">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
             </svg>
@@ -149,15 +149,13 @@
                         </div>
                         
                         <div class="space-y-3">
-                            <a href="{{ route('expert.consultations.history', ['client_id' => 123]) }}" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                            <a href="" class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center font-medium py-2 px-4 rounded-md transition duration-300">
                                 Voir l'historique du client
                             </a>
                             
-                            @if($appointment->status === 'upcoming' && $appointment->consultation_type === 'video' && \Carbon\Carbon::parse($appointment->date . ' ' . $appointment->time)->subMinutes(5)->isPast())
-                                <a href="{{ route('video.join', $appointment->id) }}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
-                                    Démarrer la consultation
-                                </a>
-                            @endif
+                            <a href="" class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center font-medium py-2 px-4 rounded-md transition duration-300">
+                                Démarrer la consultation
+                            </a>
                             
                             <button type="button" class="block w-full border border-red-600 text-red-600 hover:bg-red-50 text-center font-medium py-2 px-4 rounded-md transition duration-300">
                                 Reprogrammer

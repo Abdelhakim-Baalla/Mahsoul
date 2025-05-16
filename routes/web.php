@@ -158,12 +158,12 @@ Route::controller(AdminController::class)->group(function () {
 
 Route::controller(AgricoleController::class)->group(function () {
     Route::get('/agricole', 'agricoleDashboard')->name('agricole.dashboard');
+    Route::get('/agricole/appointments', 'agricoleAppointmentsIndex')->name('agricole.appointments.index');
+    Route::get('/agricole/appointments/show', 'agricoleAppointmentsShow')->name('agricole.appointments.show');
 });
 
 // Dashboard Expert Agricole
 
-Route::view('/expert/appointments', 'expert.appointments.index')->name('expert.appointments.index');
-Route::view('/expert/appointments/show', 'expert.appointments.show')->name('expert.appointments.show');
 Route::view('/expert/consultations', 'expert.consultations.index')->name('expert.consultations.index');
 Route::view('/expert/consultations/show', 'expert.consultations.show')->name('expert.consultations.show');
 Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');

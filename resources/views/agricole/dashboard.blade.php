@@ -44,7 +44,7 @@
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h2 class="text-xl font-semibold text-gray-800">Rendez-vous à venir</h2>
-                    <a href="{{ route('expert.appointments.index') }}" class="text-green-600 hover:text-green-700 text-sm font-medium">Voir tous</a>
+                    <a href="{{ route('agricole.appointments.index') }}" class="text-green-600 hover:text-green-700 text-sm font-medium">Voir tous</a>
                 </div>
                 <div class="p-6">
                     <div class="w-full">
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form action="{{ route('expert.appointments.show') }}" method="get">
+                                <form action="{{ route('agricole.appointments.show') }}" method="get">
                                     <input type="hidden" name="id" value="{{$rendez->id}}">
                                     <button type="submit" class="text-green-600 hover:text-green-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

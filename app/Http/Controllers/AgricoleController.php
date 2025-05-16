@@ -33,4 +33,19 @@ class AgricoleController extends Controller
 
         return view('agricole.dashboard', compact('countRendezVous', 'revenu', 'rendezVous'));
     }
+
+    public function agricoleAppointmentsIndex ()
+    {
+        $rendezVous = $this->rendezVousRepository->getAllRendezVous();
+        foreach ($rendezVous as $rendez) {
+            $rendez->client = $this->utilisateurRepository->getById($rendez->client);
+            // dd($rendez->client);
+        }
+        return view('agricole.appointments.index', compact('rendezVous'));
+    }
+
+    public function agricoleAppointmentsShow ()
+    {
+        return view('agricole.appointments.show');
+    }
 }
