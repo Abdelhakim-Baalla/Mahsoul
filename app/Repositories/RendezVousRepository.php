@@ -53,5 +53,10 @@ class RendezVousRepository implements RendezVousRepositoryInterface
     {
         return RendezVous::get()->where('expert', $id);
     }
+
+    public function getRendezVousFiltrer(string $statut)
+    {
+         return RendezVous::where('statut', $statut)->paginate(5);
+    }
     
 }

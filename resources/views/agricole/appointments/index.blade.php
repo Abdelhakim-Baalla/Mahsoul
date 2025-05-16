@@ -33,8 +33,9 @@
 
     <!-- Liste des rendez-vous -->
     <div class="space-y-4">
-        @foreach($rendezVous as $rendezVou)
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+        @if(count($rendezVous) > 0)
+            @foreach($rendezVous as $rendezVou)
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
             <div class="p-6">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div class="flex items-center mb-4 md:mb-0">
@@ -107,8 +108,13 @@
                     </div>
                 </div>
             </div>
+            </div>
+            @endforeach
+        @else
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+            <p>Aucun Rendez Vous A éte asigné</p>
         </div>
-        @endforeach
+        @endif
     </div>
     
     <!-- Pagination -->

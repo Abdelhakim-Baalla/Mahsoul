@@ -46,7 +46,14 @@ class AgricoleController extends Controller
 
     public function agricoleAppointmentsIndexFiltrer(Request $request)
     {
-        dd($request->all());
+        // dd($request->status);
+
+        $rendezVous = $this->rendezVousRepository->getRendezVousFiltrer($request->status);
+        foreach ($rendezVous as $rendez) {
+            $rendez->client = $this->utilisateurRepository->getById($rendez->client);
+            // dd($rendez->client);
+        }
+        return view('agricole.appointments.index', compact('rendezVous'));
     }
 
     public function agricoleAppointmentsShow (Request $request)
