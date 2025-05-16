@@ -77,4 +77,16 @@ class AgricoleController extends Controller
         
         return redirect()->route('agricole.appointments.index');
     }
+
+     public function agricoleAppointmentsAccepteAnnulation(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'approved-canceling'
+        ];
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        
+        return redirect()->route('agricole.appointments.index');
+    }
 }

@@ -162,6 +162,7 @@ Route::controller(AgricoleController::class)->group(function () {
     Route::get('/agricole/appointments/show', 'agricoleAppointmentsShow')->name('agricole.appointments.show');
     Route::get('/agricole/appointments/accept', 'agricoleAppointmentsAccept')->name('rendezVous.accepter');
     Route::get('/agricole/appointments/refuse', 'agricoleAppointmentsRefuse')->name('rendezVous.refuse');
+    Route::get('/agricole/appointments/accept/annulation', 'agricoleAppointmentsAccepteAnnulation')->name('rendezVous.accepter.annulation');
 });
 
 // Dashboard Expert Agricole
