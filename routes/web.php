@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
@@ -169,8 +170,12 @@ Route::view('/vet/consultations', 'vet.consultations.index')->name('vet.consulta
 Route::view('/vet/consultations/show', 'vet.consultations.show')->name('vet.consultations.show');
 Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('vet.consultations.respond');
 
+
+Route::controller(ClientController::class)->group(function () {
+    Route::get('/client', 'clientDashboard')->name('client.dashboard');
+});
+
 // Dashboard Client
-Route::view('/client', 'client.dashboard')->name('client.dashboard');
 Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
 Route::view('/client/consultations', 'client.consultations.index')->name('client.consultations.index');
 Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');

@@ -81,11 +81,11 @@
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-2xl font-bold text-gray-800">Bienvenue, Nom de l'utilisateur</h1>
+                            <h1 class="text-2xl font-bold text-gray-800">Bienvenue, {{Auth::user()->prenom}} {{Auth::user()->nom}} </h1>
                             <p class="text-gray-600 mt-1">Voici un aperçu de votre activité sur Mahsoul</p>
                         </div>
                         <div class="hidden md:block">
-                            <span class="text-sm text-gray-500">Date actuelle</span>
+                            <span class="text-sm text-gray-500">{{ date('d-m-Y H:m') }}</span>
                         </div>
                     </div>
                 </div>
@@ -104,12 +104,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-3xl font-bold text-gray-800">Nombre de commandes</p>
-                                <p class="text-sm text-gray-600">Commandes totales</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium">Tendance</p>
-                                <p class="text-xs text-gray-500">vs mois dernier</p>
+                                <p class="text-3xl font-bold text-gray-800">{{$countCommandes}}</p>
                             </div>
                         </div>
                     </div>
@@ -126,12 +121,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-3xl font-bold text-gray-800">Nombre de rendez-vous</p>
-                                <p class="text-sm text-gray-600">Rendez-vous à venir</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-600">Prochain RDV</p>
-                                <p class="text-xs text-gray-500">Date</p>
+                                <p class="text-3xl font-bold text-gray-800">55</p>
                             </div>
                         </div>
                     </div>
@@ -148,12 +138,7 @@
                         </div>
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-3xl font-bold text-gray-800">Nombre de consultations</p>
-                                <p class="text-sm text-gray-600">Consultations totales</p>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium">Tendance</p>
-                                <p class="text-xs text-gray-500">vs mois dernier</p>
+                                <p class="text-3xl font-bold text-gray-800">88</p>
                             </div>
                         </div>
                     </div>
