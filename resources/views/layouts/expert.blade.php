@@ -172,7 +172,9 @@
                 menu.classList.add('hidden');
             }
         });
-    </script>
+
+        </script>
+        @yield('scripts')
 </body>
 </html>
 

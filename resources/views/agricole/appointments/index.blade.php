@@ -23,7 +23,7 @@
                 </select>
             </div>
             <div class="flex items-end">
-                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                <button type="submit" onclick="return validateFiltrageForm()" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
                     Filtrer
                 </button>
             </div>
@@ -116,4 +116,8 @@
          {{ $rendezVous->links('pagination::tailwind') }}
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/filrage-consultations-par-statut-validation.js') }}"></script>
 @endsection
