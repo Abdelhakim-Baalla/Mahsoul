@@ -174,6 +174,7 @@ Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('ve
 Route::controller(ClientController::class)->group(function () {
     Route::get('/client', 'clientDashboard')->name('client.dashboard');
     Route::get('/client/consultations', 'clientConsultationsIndex')->name('client.consultations.index');
+    Route::delete('/client/consultations/annuler', 'clientConsultationsAnnuler')->name('client.consultation.annuler');
 });
 
 // Dashboard Client
@@ -182,10 +183,10 @@ Route::view('/client/orders', 'client.orders.index')->name('client.orders.index'
 Route::view('/client/documents', 'client.documents.index')->name('client.documents.index');
 
 
-// Route::view('/not-found', 'error.404')->name('error.404');
-// Route::fallback(function () {
-//     return redirect('/not-found');
-// });
+Route::view('/not-found', 'error.404')->name('error.404');
+Route::fallback(function () {
+    return redirect('/not-found');
+});
 
 Route::get('/maintenance', function () {
     return view('error.maintenance');

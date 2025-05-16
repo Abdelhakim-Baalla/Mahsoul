@@ -16,11 +16,16 @@ class RendezVousRepository implements RendezVousRepositoryInterface
     }
     
     public function getRendezVousById(int $id){
+        return RendezVous::find($id);
+    }
 
+    public function getAllRendezVous(){
+        return RendezVous::paginate(5);
     }
     
-    public function modifierRendezVous(int $rendez_vous_id, $date, $description){
-
+    public function modifierRendezVous(int $id, array $data){
+        $rendez_vous = $this->getRendezVousById($id);
+        return $rendez_vous->update($data);
     }
     
     public function confirmerRendezVous(int $rendez_vous_id){
