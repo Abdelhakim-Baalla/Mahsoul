@@ -109,7 +109,7 @@
                                                 Total Payée
                                             </th>
                                             @foreach($rendezVous as $rendezVou)
-                                            @if($rendezVou->statut == 'approved' || $rendezVou->statut == 'pending' || $rendezVou->statut == 'cancel' )
+                                            @if($rendezVou->statut == 'pending')
                                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Actions
                                             </th>
@@ -212,7 +212,7 @@
                                             </td>
                                         
                                             <!-- Colonne Actions -->
-                                            @if($rendezVou->statut == 'approved' || $rendezVou->statut == 'pending' || $rendezVou->statut == 'cancel' )
+                                            @if($rendezVou->statut == 'pending')
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                                  <form action="{{ route('client.consultation.annuler') }}" method="POST" class="inline">
                                                         @csrf
