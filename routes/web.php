@@ -177,6 +177,13 @@ Route::view('/expert/consultations/respond', 'expert.consultations.respond')->na
 
 Route::controller(VeterinaireController::class)->group(function () {
     Route::get('/vet', 'veterinaireDashboard')->name('vet.dashboard');
+    Route::get('/vet/consultations', 'vetConsultationsIndex')->name('vet.consultations.index');
+    Route::get('/vet/consultations/show', 'vetConsultationsShow')->name('vet.consultations.show');
+    Route::get('/veterinaire/appointments/accept', 'vetAppointmentsAccept')->name('vet.rendezVous.accepter');
+    Route::get('/veterinaire/appointments/refuse', 'vetAppointmentsRefuse')->name('vet.rendezVous.refuse');
+    Route::get('/veterinaire/appointments/accept/annulation', 'vetAppointmentsAccepteAnnulation')->name('vet.rendezVous.accepter.annulation');
+    Route::get('/veterinaire/appointments/refuser/annulation', 'vetAppointmentsRefuserAnnulation')->name('vet.rendezVous.refuser.annulation');
+    Route::get('/veterinaire/appointments/filtrer', 'veterinaireAppointmentsIndexFiltrer')->name('veterinaire.appointments.index.filtreer');
   
 });
 
@@ -184,8 +191,6 @@ Route::controller(VeterinaireController::class)->group(function () {
 // Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
 Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
 Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
-Route::view('/vet/consultations', 'vet.consultations.index')->name('vet.consultations.index');
-Route::view('/vet/consultations/show', 'vet.consultations.show')->name('vet.consultations.show');
 Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('vet.consultations.respond');
 
 

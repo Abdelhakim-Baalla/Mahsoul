@@ -35,7 +35,7 @@ class VeterinaireController extends Controller
         $countConsultationsRecent2 = $this->rendezVousRepository->countRendezVousByStatusAndExpertId('cancel-canceling', Auth::user()->id);
         $countConsultationsRecent += $countConsultationsRecent2;
 
-        
+
         $consultationsAnnules = $this->rendezVousRepository->getRendezVousByStatusAndExpertId('cancel', Auth::user()->id);
         // dd($consultationsAnnules);
         $countConsultationsAnnules = $this->rendezVousRepository->countRendezVousByStatusAndExpertId('cancel', Auth::user()->id);
@@ -65,5 +65,85 @@ class VeterinaireController extends Controller
 
         // dd($consultationsEnAttente);
         return view('vet.dashboard', compact('countRendezVous', 'total', 'consultationsEnAttente', 'consultationsRecent', 'countConsultationsEnAttente', 'countConsultationsRecent', 'consultationsAnnules', 'countConsultationsAnnules'));
+    }
+
+    public function vetConsultationsIndex()
+    {
+        $rendezVous = $this->rendezVousRepository->getAllRendezVous();
+        foreach ($rendezVous as $consultation) {
+            $consultation->client = $this->utilisateurRepository->getById($consultation->client);
+        }
+
+        return view('vet.consultations.index', compact('rendezVous'));
+    }
+
+    public function vetConsultationsShow(Request $request)
+    {
+        // dd($request->id);
+        $consultation = $this->rendezVousRepository->getRendezVousById($request->id);
+        $consultation->client = $this->utilisateurRepository->getById($consultation->client);
+
+        // dd($rendezVous);
+        return view('vet.consultations.show', compact('consultation'));
+    }
+
+
+
+    public function vetAppointmentsAccept(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'approved'
+        ];
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+
+        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+    }
+
+    public function vetAppointmentsRefuse(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'cancel'
+        ];
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+
+        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+    }
+
+    public function vetAppointmentsAccepteAnnulation(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'approved-canceling'
+        ];
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+
+        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+    }
+
+    public function vetAppointmentsRefuserAnnulation(Request $request)
+    {
+        // dd($request->id);
+        $data = [
+            'statut' => 'cancel-canceling'
+        ];
+
+        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+
+        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+    }
+
+    public function veterinaireAppointmentsIndexFiltrer(Request $request)
+    {
+        $rendezVous = $this->rendezVousRepository->getRendezVousFiltrer($request->status);
+        foreach ($rendezVous as $rendez) {
+            $rendez->client = $this->utilisateurRepository->getById($rendez->client);
+            // dd($rendez->client);
+        }
+        return view('vet.consultations.index', compact('rendezVous'));
     }
 }

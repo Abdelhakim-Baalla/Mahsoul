@@ -16,7 +16,7 @@
         <div class="relative">
             @if($expert->type == 'agricole')
             <div class="h-48" style="background-image: url('{{ asset('images/agricole-banner.jpg') }}'); background-size: cover; background-position: center;"></div>
-            @elseif($expert->type == 'agricole')
+            @elseif($expert->type == 'veterinaire')
             <div class="h-48" style="background-image: url('{{ asset('images/veterinaire-banner.jpg') }}'); background-size: cover; background-position: center;"></div>
             @else
             <div class="h-48 bg-gradient-to-r from-green-500 to-green-700"></div>
