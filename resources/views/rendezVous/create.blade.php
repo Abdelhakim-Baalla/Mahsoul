@@ -63,12 +63,12 @@
                     <!-- Conditions -->
                     <div class="mb-6">
                         <label class="flex items-center">
-                            <input type="checkbox" name="terms" class="h-5 w-5 text-green-600 focus:ring-green-500" required>
+                            <input type="checkbox" id="terms" name="terms" class="h-5 w-5 text-green-600 focus:ring-green-500" required>
                             <span class="ml-2 text-gray-700">J'accepte les <a href="#" class="text-green-600 hover:underline">conditions d'utilisation</a> et la <a href="#" class="text-green-600 hover:underline">politique de confidentialité</a></span>
                         </label>
                     </div>
                     
-                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-md transition duration-300">
+                    <button type="submit" onclick="return validateRendezVousForm()" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-md transition duration-300">
                         Confirmer le rendez-vous
                     </button>
                 </form>
@@ -171,4 +171,7 @@
         timeSelect.addEventListener('change', updateDatetime);
     });
 </script>
+@endsection
+@section('scripts')
+<script src="{{ asset('js/cree-rendez-vous-validation.js') }}"></script>
 @endsection
