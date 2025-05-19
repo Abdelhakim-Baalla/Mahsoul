@@ -133,11 +133,11 @@
                         <div class="lg:col-span-2">
                             <div class="flex flex-col items-end justify-center mb-6">
                                 @if(Auth::user()->type == 'agricole')
-                                <a href="{{route('admin.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                <a href="{{route('agricole.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
                                     Go to dashboard
                                 </a>
                                 @elseif(Auth::user()->type == 'veterinaire')
-                                <a href="{{route('veterinaire.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                <a href="{{route('vet.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
                                     Go to dashboard
                                 </a>
                                 @elseif(Auth::user()->type == 'client')

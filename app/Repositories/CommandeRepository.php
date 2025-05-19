@@ -55,5 +55,9 @@ class CommandeRepository implements CommandeRepositoryInterface
     public function countCommandes(){
         return Commande::get()->count();
     }
+
+    public function countCommandesByUtilisateurId(int $id){
+        return Commande::get()->where('client', $id) ->count();
+    }
     
 }

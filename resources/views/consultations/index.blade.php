@@ -61,10 +61,6 @@
                                          {{$agricole->ferme}}
                                         </span>
                                     @endif
-
-                                    <span class="inline-flex items-center ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                       {{$agricole->compte->telephone}}
-                                    </span>
                                 </div>
                             </div>
                             <div class="mt-4 md:mt-0">
@@ -144,9 +140,12 @@
                             </div>
                             <div class="mt-4 md:mt-0">
                                 
-                                <a href="{{ route('consultations.show') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                                    Voir détails
-                                </a>
+                                <form action="{{ route('experts.show') }}" method="get">
+                                    <input type="hidden" name="expert_id" value="{{$veterinaire->compte->id}}">
+                                    <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                        Voir détails
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

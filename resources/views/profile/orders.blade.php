@@ -137,7 +137,7 @@
                                     Go to dashboard
                                 </a>
                                 @elseif(Auth::user()->type == 'veterinaire')
-                                <a href="{{route('veterinaire.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+                                <a href="{{route('vet.dashboard')}}" class="inline-block px-4 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
                                     Go to dashboard
                                 </a>
                                 @elseif(Auth::user()->type == 'client')
@@ -150,6 +150,7 @@
                                 </a>
                                 @endif
                             </div>
+                            @if(count($produitsFinal) > 0)
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-green-50">
                                     <tr>
@@ -190,6 +191,10 @@
 
                                 </tbody>
                             </table>
+                            @else
+                            <p>Aucun Produit A été Demander</p>
+                            @endif
+                            
                         </div>
                     </div>
 

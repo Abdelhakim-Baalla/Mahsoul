@@ -251,18 +251,6 @@ class ProfileController extends Controller
 
                 array_push($produitsFinal, $analyse);
         }
-
-        // dd($produitsFinal);
-
-        // die();
-
-       
-
-        // die();
-        // dd($orderItems);
-        // die();  
-
-        // dd($orderItems);
-        return view('profile.orders', compact('commandes', 'orderItems', 'produitsFinal'));
+        return view('profile.orders', compact('commandes', 'produitsFinal'));
     }
 }

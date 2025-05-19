@@ -3,10 +3,13 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgricoleController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\VeterinaireController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,6 +77,7 @@ Route::controller(ProductController::class)->group(function () {
 
 Route::controller(StripePaymentController::class)->group(function () {
     Route::get('/checkout/stripe', 'checkout')->name('checkout.stripe');
+    Route::get('/checkout/rendezVous/stripe', 'checkoutRendezVous')->name('rendezVous.checkout.stripe');
 });
 
 
@@ -82,8 +86,10 @@ Route::controller(StripePaymentController::class)->group(function () {
 Route::controller(ConsultationController::class)->group(function () {
     Route::get('/experts', 'AfficherExperts')->name('experts.index');
     Route::get('/experts/show', 'expertShow')->name('experts.show');
+    Route::get('/rendezVous/create', 'createRendezVous')->name('rendezVous.create');
+    Route::post('/rendezVous/payemnt', 'payementRendezVous')->name('rendezVous.payement');
 });
-Route::view('/appointments/create', 'appointments.create')->name('appointments.create');
+
 Route::view('/appointments', 'appointments.index')->name('appointments.index');
 Route::view('/appointments/show', 'appointments.show')->name('appointments.show');
 Route::view('/consultations', 'consultations.index')->name('consultations.index');
@@ -150,34 +156,60 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/admin/tag/delete', 'tagDelete')->name('admin.tags.delete');
 });
 
+
+Route::controller(AgricoleController::class)->group(function () {
+    Route::get('/agricole', 'agricoleDashboard')->name('agricole.dashboard');
+    Route::get('/agricole/appointments', 'agricoleAppointmentsIndex')->name('agricole.appointments.index');
+    Route::get('/agricole/appointments/filtrer', 'agricoleAppointmentsIndexFiltrer')->name('agricole.appointments.index.filtreer');
+    Route::get('/agricole/appointments/show', 'agricoleAppointmentsShow')->name('agricole.appointments.show');
+    Route::get('/agricole/appointments/accept', 'agricoleAppointmentsAccept')->name('rendezVous.accepter');
+    Route::get('/agricole/appointments/refuse', 'agricoleAppointmentsRefuse')->name('rendezVous.refuse');
+    Route::get('/agricole/appointments/accept/annulation', 'agricoleAppointmentsAccepteAnnulation')->name('rendezVous.accepter.annulation');
+    Route::get('/agricole/appointments/refuser/annulation', 'agricoleAppointmentsRefuserAnnulation')->name('rendezVous.refuser.annulation');
+});
+
 // Dashboard Expert Agricole
-Route::view('/expert', 'expert.dashboard')->name('expert.dashboard');
-Route::view('/expert/appointments', 'expert.appointments.index')->name('expert.appointments.index');
-Route::view('/expert/appointments/show', 'expert.appointments.show')->name('expert.appointments.show');
+
 Route::view('/expert/consultations', 'expert.consultations.index')->name('expert.consultations.index');
 Route::view('/expert/consultations/show', 'expert.consultations.show')->name('expert.consultations.show');
 Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
 
+
+Route::controller(VeterinaireController::class)->group(function () {
+    Route::get('/vet', 'veterinaireDashboard')->name('vet.dashboard');
+    Route::get('/vet/consultations', 'vetConsultationsIndex')->name('vet.consultations.index');
+    Route::get('/vet/consultations/show', 'vetConsultationsShow')->name('vet.consultations.show');
+    Route::get('/veterinaire/appointments/accept', 'vetAppointmentsAccept')->name('vet.rendezVous.accepter');
+    Route::get('/veterinaire/appointments/refuse', 'vetAppointmentsRefuse')->name('vet.rendezVous.refuse');
+    Route::get('/veterinaire/appointments/accept/annulation', 'vetAppointmentsAccepteAnnulation')->name('vet.rendezVous.accepter.annulation');
+    Route::get('/veterinaire/appointments/refuser/annulation', 'vetAppointmentsRefuserAnnulation')->name('vet.rendezVous.refuser.annulation');
+    Route::get('/veterinaire/appointments/filtrer', 'veterinaireAppointmentsIndexFiltrer')->name('veterinaire.appointments.index.filtreer');
+  
+});
+
 // Dashboard Vétérinaire
-Route::view('/vet', 'vet.dashboard')->name('veterinaire.dashboard');
+// Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
 Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
 Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
-Route::view('/vet/consultations', 'vet.consultations.index')->name('vet.consultations.index');
-Route::view('/vet/consultations/show', 'vet.consultations.show')->name('vet.consultations.show');
 Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('vet.consultations.respond');
 
+
+Route::controller(ClientController::class)->group(function () {
+    Route::get('/client', 'clientDashboard')->name('client.dashboard');
+    Route::get('/client/consultations', 'clientConsultationsIndex')->name('client.consultations.index');
+    Route::delete('/client/consultations/annuler', 'clientConsultationsAnnuler')->name('client.consultation.annuler');
+});
+
 // Dashboard Client
-Route::view('/client', 'client.dashboard')->name('client.dashboard');
 Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
-Route::view('/client/consultations', 'client.consultations.index')->name('client.consultations.index');
 Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
 Route::view('/client/documents', 'client.documents.index')->name('client.documents.index');
 
 
-// Route::view('/not-found', 'error.404')->name('error.404');
-// Route::fallback(function () {
-//     return redirect('/not-found');
-// });
+Route::view('/not-found', 'error.404')->name('error.404');
+Route::fallback(function () {
+    return redirect('/not-found');
+});
 
 Route::get('/maintenance', function () {
     return view('error.maintenance');
