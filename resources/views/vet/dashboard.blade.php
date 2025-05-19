@@ -40,113 +40,34 @@
         
     </div>
 
-    <!-- Statistiques par type d'animal -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Répartition par type d'animal</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <canvas id="animalTypeChart" height="200"></canvas>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                        <span class="text-gray-700">Bovins</span>
-                    </div>
-                    <p class="text-2xl font-bold text-gray-800 mt-2"></p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
-                        <span class="text-gray-700">Ovins</span>
-                    </div>
-                    <p class="text-2xl font-bold text-gray-800 mt-2"></p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-                        <span class="text-gray-700">Caprins</span>
-                    </div>
-                    <p class="text-2xl font-bold text-gray-800 mt-2"></p>
-                </div>
-                <div class="bg-gray-50 p-4 rounded-lg">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-                        <span class="text-gray-700">Autres</span>
-                    </div>
-                    <p class="text-2xl font-bold text-gray-800 mt-2"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Prochains rendez-vous -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="px-6 py-4 bg-green-600 text-white flex justify-between items-center">
-                <h2 class="text-lg font-semibold">Prochains rendez-vous</h2>
-                <a href="{{ route('vet.appointments.index') }}" class="text-sm hover:underline">Voir tous</a>
-            </div>
-            <div class="p-6">
-                    <div class="space-y-4">
-                        <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
-                            <div class="flex justify-between items-start">
-                                <div class="flex items-center">
-                                    <img src="" alt="{" class="w-10 h-10 rounded-full object-cover mr-3">
-                                    <div>
-                                        <h3 class="font-medium text-gray-800"></h3>
-                                        <p class="text-sm text-gray-600"></p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-medium text-gray-800"></p>
-                                    <p class="text-sm text-gray-600"></p>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-600 truncate"></p>
-                                <div class="mt-2 flex justify-between items-center">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium">
-                                        
-                                    </span>
-                                    <a href="" class="text-sm text-green-600 hover:text-green-700">
-                                        Voir détails
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <p class="text-gray-500">Aucun rendez-vous à venir</p>
-                    </div>
-            </div>
-        </div>
-
         <!-- Consultations récentes -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="px-6 py-4 bg-blue-600 text-white flex justify-between items-center">
-                <h2 class="text-lg font-semibold">Consultations récentes</h2>
-                <a href="" class="text-sm hover:underline">Voir toutes</a>
+            <div class="px-6 py-4 bg-green-600 text-white flex justify-between items-center">
+                <h2 class="text-lg font-semibold">Consultations récentes ({{$countConsultationsRecent}})</h2>
+                 @if($countConsultationsRecent > 3)
+                <a href="{{ route('vet.appointments.index') }}" class="text-sm hover:underline">Voir tous</a>
+                @endif
             </div>
             <div class="p-6">
+                @foreach($consultationsRecent as $consultation)
                     <div class="space-y-4">
                         <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
                             <div class="flex justify-between items-start">
                                 <div class="flex items-center">
-                                    <img src="" alt="" class="w-10 h-10 rounded-full object-cover mr-3">
+                                    <img src="{{$consultation->client->photo}}" alt="{{$consultation->client->prenom}} {{$consultation->client->nom}}" title="{{$consultation->client->prenom}} {{$consultation->client->nom}}" class="w-10 h-10 rounded-full object-cover mr-3">
                                     <div>
-                                        <h3 class="font-medium text-gray-800"></h3>
-                                        <p class="text-sm text-gray-600"></p>
+                                        <h3 class="font-medium text-gray-800">{{$consultation->client->prenom}} {{$consultation->client->nom}}</h3>
+                                        <p class="text-sm text-gray-600">{{ Str::limit(strip_tags($consultation->sujet), 10) }}</p>
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <p class="text-sm font-medium text-gray-800"></p>
-                                    <p class="text-sm text-gray-600"> min</p>
+                                    <p class="text-sm font-medium text-gray-800">{{$consultation->total}} DH</p>
+                                    <p class="text-sm text-gray-600">{{$consultation->adresse}}</p>
                                 </div>
                             </div>
                             <div class="mt-2">
-                                <p class="text-sm text-gray-600 truncate"></p>
-                                <div class="mt-2 flex justify-between items-center">
+                                <div class="mt-2 flex justify-between items-center mb-3">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                         Terminée
                                     </span>
@@ -157,9 +78,56 @@
                             </div>
                         </div>
                     </div>
+                @endforeach
+                    @if($consultationsRecent->isEmpty())
                     <div class="text-center py-4">
-                        <p class="text-gray-500">Aucune consultation récente</p>
+                        <p class="text-gray-500">Aucun Consultations récente</p>
                     </div>
+                    @endif
+            </div>
+        </div>
+
+        <!-- Consultations annulés -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="px-6 py-4 bg-red-600 text-white flex justify-between items-center">
+                <h2 class="text-lg font-semibold">Consultations annulés ({{$countConsultationsAnnules}})</h2>
+                @if($countConsultationsAnnules > 3)
+                <a href="" class="text-sm hover:underline">Voir toutes</a>
+                @endif
+            </div>
+            <div class="p-6">
+                @foreach($consultationsAnnules as $consultation)
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+                            <div class="flex justify-between items-start">
+                                <div class="flex items-center">
+                                    <img src="{{$consultation->client->photo}}" alt="{{$consultation->client->prenom}} {{$consultation->client->nom}}" class="w-10 h-10 rounded-full object-cover mr-3">
+                                    <div>
+                                        <h3 class="font-medium text-gray-800">{{$consultation->client->prenom}} {{$consultation->client->nom}}</h3>
+                                        <p class="text-sm text-gray-600">{{ Str::limit(strip_tags($consultation->sujet), 10) }}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm font-medium text-gray-800">{{$consultation->total}} DH</p>
+                                    <p class="text-sm text-gray-600">{{$consultation->adresse}} </p>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-600 truncate"></p>
+                                <div class="mt-2 flex justify-between items-center">
+                                    <a href="" class="text-sm text-green-600 hover:text-green-700">
+                                        Voir détails
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                    @if($consultationsAnnules->isEmpty())
+                    <div class="text-center py-4">
+                        <p class="text-gray-500">Aucune consultation annulé</p>
+                    </div>
+                    @endif
             </div>
         </div>
     </div>
@@ -167,8 +135,10 @@
     <!-- Consultations en attente de réponse -->
     <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
         <div class="px-6 py-4 bg-yellow-600 text-white flex justify-between items-center">
-            <h2 class="text-lg font-semibold">Consultations en attente de réponse</h2>
+            <h2 class="text-lg font-semibold">Consultations en attente de réponse ({{$countConsultationsEnAttente}})</h2>
+             @if($countConsultationsEnAttente > 3)
             <a href="" class="text-sm hover:underline">Voir toutes</a>
+            @endif
         </div>
         <div class="p-6">
                 <div class="overflow-x-auto">
@@ -176,51 +146,54 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Animal</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sujet</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Télephone</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($consultationsEnAttente as $consultation)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
-                                            <img class="h-10 w-10 rounded-full object-cover" src="" alt="">
+                                            <img class="h-10 w-10 rounded-full object-cover" src="{{$consultation->client->photo}}" alt="{{$consultation->client->prenom}} {{$consultation->client->nom}}" title="{{$consultation->client->prenom}} {{$consultation->client->nom}}">
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">namec</div>
-                                            <div class="text-sm text-gray-500"></div>
+                                            <div class="text-sm font-medium text-gray-900">{{$consultation->client->prenom}} {{$consultation->client->nom}}</div>
+                                            <div class="text-sm text-gray-500">{{$consultation->adresse}}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900"></div>
-                                    <div class="text-sm text-gray-500"></div>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm text-gray-900 truncate max-w-xs">{{ Str::limit(strip_tags($consultation->sujet), 15) }}</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="text-sm text-gray-900 truncate max-w-xs"></div>
+                                    <div class="text-sm text-gray-900 truncate max-w-xs">{{ Str::limit(strip_tags($consultation->description), 10) }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900"></div>
-                                    <div class="text-sm text-gray-500"></div>
+                                    <div class="text-sm text-gray-900">{{   $consultation->date_reserver}}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ">
+                                        {{$consultation->telephone}}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="" class="text-green-600 hover:text-green-900">Répondre</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
+                @if($consultationsEnAttente->isEmpty())
                 <div class="text-center py-4">
                     <p class="text-gray-500">Aucune consultation en attente</p>
                 </div>  
+                @endif
         </div>
     </div>
 </div>

@@ -58,5 +58,16 @@ class RendezVousRepository implements RendezVousRepositoryInterface
     {
          return RendezVous::where('statut', $statut)->paginate(5);
     }
+
+    public function getRendezVousByStatusAndExpertId(string $statut, int $id)
+    {
+         return RendezVous::where('statut', $statut)->where('expert', $id)->paginate(3);
+    }
+
+    public function countRendezVousByStatusAndExpertId(string $statut, int $id)
+    {
+        
+        return RendezVous::where('statut', $statut)->where('expert', $id)->count();
+    }
     
 }
