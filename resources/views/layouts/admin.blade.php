@@ -216,9 +216,19 @@
 </body>
 
 </html>
-@else
+@elseif(Auth::user()->type == 'agricole')
 <script>
-    window.location.href = "{{ route('profile.show') }}";
+    window.location.href = "{{ route('agricole.dashboard') }}";
+</script>
+
+@elseif(Auth::user()->type == 'veterinaire')
+<script>
+    window.location.href = "{{ route('veterinaire.dashboard') }}";
+</script>
+
+@elseif(Auth::user()->type == 'client')
+<script>
+    window.location.href = "{{ route('client.dashboard') }}";
 </script>
 @endif
 

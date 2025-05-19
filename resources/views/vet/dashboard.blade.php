@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@if(Auth::user()->type == 'veterinaire')
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="mb-8">
@@ -294,3 +294,17 @@
 </script>
 @endpush
 @endsection
+
+@elseif(Auth::user()->type == 'admin')
+<script>
+    window.location.href = "{{ route('admin.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'agricole')
+<script>
+    window.location.href = "{{ route('agricole.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'client')
+<script>
+    window.location.href = "{{ route('client.dashboard') }}";
+</script>
+@endif

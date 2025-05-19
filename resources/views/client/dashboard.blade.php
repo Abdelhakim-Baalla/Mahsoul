@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@if(Auth::user()->type == 'client')
 @section('title', 'Tableau de bord client - Mahsoul')
 
 @section('content')
@@ -124,3 +124,17 @@
     </div>
 </div>
 @endsection
+
+@elseif(Auth::user()->type == 'admin')
+<script>
+    window.location.href = "{{ route('admin.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'agricole')
+<script>
+    window.location.href = "{{ route('agricole.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'veterinaire')
+<script>
+    window.location.href = "{{ route('veterinaire.dashboard') }}";
+</script>
+@endif

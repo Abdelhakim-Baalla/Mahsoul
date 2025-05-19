@@ -1,4 +1,5 @@
 @if (Auth::check())
+@if(Auth::user()->type == 'agricole')
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -177,6 +178,19 @@
         @yield('scripts')
 </body>
 </html>
+@elseif(Auth::user()->type == 'admin')
+<script>
+    window.location.href = "{{ route('admin.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'veterinaire')
+<script>
+    window.location.href = "{{ route('veterinaire.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'client')
+<script>
+    window.location.href = "{{ route('client.dashboard') }}";
+</script>
+@endif
 
 @else
     <script>
