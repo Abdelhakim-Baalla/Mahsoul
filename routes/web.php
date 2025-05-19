@@ -9,6 +9,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\VeterinaireController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -173,8 +174,14 @@ Route::view('/expert/consultations', 'expert.consultations.index')->name('expert
 Route::view('/expert/consultations/show', 'expert.consultations.show')->name('expert.consultations.show');
 Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
 
+
+Route::controller(VeterinaireController::class)->group(function () {
+    Route::get('/vet', 'veterinaireDashboard')->name('vet.dashboard');
+  
+});
+
 // Dashboard Vétérinaire
-Route::view('/vet', 'vet.dashboard')->name('veterinaire.dashboard');
+// Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
 Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
 Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
 Route::view('/vet/consultations', 'vet.consultations.index')->name('vet.consultations.index');

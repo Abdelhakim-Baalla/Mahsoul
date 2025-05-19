@@ -16,6 +16,8 @@
         <div class="relative">
             @if($expert->type == 'agricole')
             <div class="h-48" style="background-image: url('{{ asset('images/agricole-banner.jpg') }}'); background-size: cover; background-position: center;"></div>
+            @elseif($expert->type == 'agricole')
+            <div class="h-48" style="background-image: url('{{ asset('images/veterinaire-banner.jpg') }}'); background-size: cover; background-position: center;"></div>
             @else
             <div class="h-48 bg-gradient-to-r from-green-500 to-green-700"></div>
             @endif
@@ -86,7 +88,7 @@
                             </button>
                         </div>
                     </div>
-                @elseif($expert->type == 'veterinare')
+                @elseif($expert->type == 'veterinaire')
                 <div>
                         <div class="bg-gray-50 rounded-lg p-6 sticky top-6">
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">Réserver une consultation</h3>
@@ -99,9 +101,12 @@
                                 @endif
                             </div>
                             
-                            <a href="" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-medium py-3 px-4 rounded-md transition duration-300">
-                                Prendre rendez-vous
-                            </a>
+                             <form action="{{route('rendezVous.create')}}" method="get">
+                                <input type="hidden" name="expert_id" value="{{$expert->id}}">
+                                <button type="submit" class="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-medium py-3 px-4 rounded-md transition duration-300">
+                                    Prendre rendez-vous
+                                </button>
+                            </form>
                             <button class="block w-full mt-3 border border-green-600 text-green-600 hover:bg-green-50 text-center font-medium py-3 px-4 rounded-md transition duration-300">
                                 Contacter l'expert
                             </button>

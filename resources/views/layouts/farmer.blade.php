@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Espace Agriculteur - Mahsoul')</title>
-    <meta name="description" content="Espace Agriculteur Mahsoul - Plateforme agricole complète">
+    <title>@yield('title', 'Espace Vétérinaire - Mahsoul')</title>
+    <meta name="description" content="Espace Vétérinaire Mahsoul - Plateforme agricole complète">
     <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -64,68 +64,68 @@
 <body class="font-sans bg-gray-100 flex h-screen">
     <div id="sidebar" class="bg-white w-64 shadow-md flex-shrink-0 hidden md:block">
         <div class="flex items-center justify-center h-16 border-b">
-            <a href="{{ route('farmer.dashboard') }}" class="text-xl font-bold text-primary-600">
-                Espace Agriculteur
+            <a href="" class="text-xl font-bold text-primary-600">
+                Espace Vétérinaire
             </a>
         </div>
         <nav class="mt-5">
             <ul>
                 <li>
-                    <a href="{{ route('farmer.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.dashboard') ? 'sidebar-active' : '' }}">
+                    <a href="/vet" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.dashboard') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
                         <span>Tableau de bord</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('farmer.products.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.products.*') ? 'sidebar-active' : '' }}">
-                        <i class="fas fa-box w-5 h-5 mr-3"></i>
-                        <span>Mes produits</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('farmer.orders.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.orders.*') ? 'sidebar-active' : '' }}">
-                        <i class="fas fa-shopping-cart w-5 h-5 mr-3"></i>
-                        <span>Mes commandes</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('farmer.crops.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.crops.*') ? 'sidebar-active' : '' }}">
-                        <i class="fas fa-seedling w-5 h-5 mr-3"></i>
-                        <span>Mes cultures</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('farmer.consultations.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.consultations.*') ? 'sidebar-active' : '' }}">
+                 <li>
+                    <a href="/vet/consultations" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.consultations.*') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-comments w-5 h-5 mr-3"></i>
                         <span>Consultations</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('farmer.weather.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.weather.*') ? 'sidebar-active' : '' }}">
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.products.*') ? 'sidebar-active' : '' }}">
+                        <i class="fas fa-box w-5 h-5 mr-3"></i>
+                        <span>Mes produits</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.orders.*') ? 'sidebar-active' : '' }}">
+                        <i class="fas fa-shopping-cart w-5 h-5 mr-3"></i>
+                        <span>Mes commandes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.crops.*') ? 'sidebar-active' : '' }}">
+                        <i class="fas fa-seedling w-5 h-5 mr-3"></i>
+                        <span>Mes cultures</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.weather.*') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-cloud-sun w-5 h-5 mr-3"></i>
                         <span>Météo</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('farmer.reports.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('farmer.reports.*') ? 'sidebar-active' : '' }}">
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('vet.reports.*') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-chart-bar w-5 h-5 mr-3"></i>
                         <span>Rapports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('messages.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('messages.*') ? 'sidebar-active' : '' }}">
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('messages.*') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-envelope w-5 h-5 mr-3"></i>
                         <span>Messages</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('profile.show') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('profile.*') ? 'sidebar-active' : '' }}">
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('profile.*') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-user w-5 h-5 mr-3"></i>
                         <span>Mon profil</span>
                     </a>
                 </li>
                 <li class="border-t mt-5 pt-3">
-                    <a href="{{ route('home') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
+                    <a href="" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
                         <i class="fas fa-arrow-left w-5 h-5 mr-3"></i>
                         <span>Retour au site</span>
                     </a>
@@ -149,13 +149,13 @@
                 <button id="sidebar-toggle" class="md:hidden text-gray-700 focus:outline-none">
                     <i class="fas fa-bars"></i>
                 </button>
-                <h1 class="text-lg font-medium ml-4">@yield('header', 'Espace Agriculteur')</h1>
+                <h1 class="text-lg font-medium ml-4">@yield('header', 'Espace Vétérinaire')</h1>
             </div>
             <div class="flex items-center">
                 <div class="relative">
                     <button id="user-menu-button" class="flex items-center focus:outline-none">
-                        <span class="mr-2 text-sm font-medium text-gray-700">{{ auth()->user()->name }}</span>
-                        <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=5a9d45&color=fff" alt="{{ auth()->user()->name }}">
+                        <span class="mr-2 text-sm font-medium text-gray-700">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</span>
+                        <img class="h-8 w-8 rounded-full object-cover" src="{{ auth()->user()->photo }}" alt="{{ auth()->user()->nom }} {{ auth()->user()->prenom }}">
                     </button>
                     <div id="user-menu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
                         <div class="py-1">
