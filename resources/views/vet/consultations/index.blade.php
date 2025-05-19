@@ -96,3 +96,7 @@
         @endif
 </div>
 @endsection
+
+@section('scripts')
+<script src="{{ asset('js/filrage-consultations-par-statut-validation.js') }}"></script>
+@endsection
