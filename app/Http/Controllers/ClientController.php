@@ -7,6 +7,8 @@ use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class ClientController extends Controller
 {
     protected $commandeRepository;
@@ -52,5 +54,29 @@ class ClientController extends Controller
         // $review-canceling;
         $this->rendezVousRepository->modifierRendezVous($request->id, $data);
         return redirect()->route('client.consultations.index');
+    }
+
+    public function clientConsultationsDownloadPDF(Request $request)
+    {
+        // dd($request->id);
+        $rendezVous = $this->rendezVousRepository->getRendezVousById($request->id);
+        $rendezVous->expert = $this->utilisateurRepository->getById($rendezVous->expert);
+        $rendezVous->client = $this->utilisateurRepository->getById($rendezVous->client);
+        // // dd($rendezVous->sujet);
+        
+        $data = [
+            'title' => 'Résumer Sur le Rendez-Vous ' . $rendezVous->sujet,
+            'date' => date('d/m/Y'),
+            'rendezVous' => $rendezVous
+        ];
+
+        // // dd($data);
+
+        $pdf = PDF::loadView('rendezVousPdf', $data);
+        return $pdf->download('rendezVous.pdf');
+        // $title = 'Résumer Sur le Rendez-Vous ' . $rendezVous->sujet;
+        // $date = date('d/m/Y');
+
+        // return view('rendezVousPdf', compact('rendezVous', 'title', 'date'));
     }
 }

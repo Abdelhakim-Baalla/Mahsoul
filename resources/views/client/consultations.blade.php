@@ -222,6 +222,21 @@
                                                             <i class="fas fa-cancel"></i>
                                                         </button>
                                                  </form>
+                                                 
+                                                </div>
+                                            </td>
+                                            @endif
+                                            @if($rendezVou->statut != 'pending')
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                 <form action="{{ route('client.consultation.downloadPDF') }}" method="POST" class="inline">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{$rendezVou->id}}">
+                                                        <button type="submit"
+                                                            class="text-purple-600 hover:text-purple-900 focus:text-purple-600 p-1 rounded-full hover:bg-red-50"
+                                                            title="Télécharger">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                 </form>
                                                 </div>
                                             </td>
                                             @endif
@@ -233,6 +248,7 @@
                             </div>
                         </div>
                     </div>
+                    {{$rendezVous->links()}}
                 </div>
             </div>
         </div>

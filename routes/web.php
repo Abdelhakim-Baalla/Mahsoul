@@ -198,6 +198,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/client', 'clientDashboard')->name('client.dashboard');
     Route::get('/client/consultations', 'clientConsultationsIndex')->name('client.consultations.index');
     Route::delete('/client/consultations/annuler', 'clientConsultationsAnnuler')->name('client.consultation.annuler');
+    Route::post('/client/consultations/Resume/Pdf', 'clientConsultationsDownloadPDF')->name('client.consultation.downloadPDF');
 });
 
 // Dashboard Client
