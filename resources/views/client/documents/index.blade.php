@@ -26,7 +26,7 @@
                             </svg>
                             Tableau de bord
                         </a>
-                        <a href="/client/consultations" class="flex items-center px-4 py-2 text-primary-700 bg-primary-50 rounded-md font-medium">
+                        <a href="/client/consultations" class="flex items-center px-4 py-2 text-gray-700 rounded-md hover:bg-primary-50 hover:text-primary-700">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -38,7 +38,7 @@
                             </svg>
                             Mes commandes
                         </a>
-                        <a href="/client/documents" class="flex items-center px-4 py-2 text-gray-700 rounded-md hover:bg-primary-50 hover:text-primary-700">
+                        <a href="/client/documents" class="flex items-center px-4 py-2 text-primary-700 bg-primary-50 rounded-md font-medium">
                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                             </svg>
@@ -66,6 +66,7 @@
                             Déconnexion
                         </button>
                         </form>
+                        
                     </nav>
                 </div>
             </div>
@@ -78,10 +79,10 @@
                     <!-- Orders Stats -->
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">Mes Consultations</h2>
+                            <h2 class="text-lg font-semibold text-gray-800">Mes Document</h2>
                             <div class="p-2 bg-primary-100 rounded-full">
                                 <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                    <path d="M4 4a2 2 0 0 1 2-2h8a1 1 0 0 1 .707.293l5 5A1 1 0 0 1 20 8v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4zm13.586 4L14 4.414V8h3.586zM12 4H6v16h12V10h-5a1 1 0 0 1-1-1V4zm-4 9a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1zm0 4a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1z" fill="#0D0D0D"/>
                                 </svg>
                             </div>
                         </div>
@@ -91,25 +92,13 @@
                                     <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Sujet
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Description
+                                                PDF
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Expert
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Statut
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Date de Réservation
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Adresse
-                                            </th>
-                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Total Payée
+                                                Client
                                             </th>
                                             
                                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -118,122 +107,76 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @if($rendezVous == null || $rendezVous->isEmpty())
+                                        @if($documents == null || $documents->isEmpty())
                                             <tr>
                                                 <td colspan="7" class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                                     Aucun Consultation trouvé.
                                                 </td>
                                             </tr>
                                         @else
-                                            @foreach($rendezVous as $rendezVou)
+                                            @foreach($documents as $document)
                                             <tr class="hover:bg-gray-50 transition duration-150">
-                                            <!-- Colonne Titre -->
+                                            <!-- Colonne Pdf -->
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="flex items-center">
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900 line-clamp-1">
-                                                            {{ Str::limit(strip_tags($rendezVou->sujet), 10) }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        
-                                            <!-- Colonne description -->
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium text-gray-900 line-clamp-1">
-                                                    {{ Str::limit(strip_tags($rendezVou->description), 10) }}
-                                                </div>
+                                                @php
+                                                    $pdfBase64 = $document->pdf_content;
+                                                    // Decode the Base64 string
+                                                    $pdfContent = $pdfBase64;
+                                                    // echo $pdfContent;
+                                                @endphp
+
+                                               <iframe src="data:application/pdf;base64,<?php echo $pdfContent; ?>" width="100%" height="400px"></iframe>
                                             </td>
 
                                             <!-- Colonne Expert -->
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
+                                                    
                                                     <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 overflow-hidden">
-                                                        <img class="h-full w-full object-cover" src="{{$rendezVou->expert->photo}}" alt="{{$rendezVou->expert->nom}} {{$rendezVou->expert->prenom}}" title="{{$rendezVou->expert->prenom}} {{$rendezVou->expert->nom}}">
+                                                        <img class="h-full w-full object-cover" src="{{$document->expert->photo}}" alt="{{$document->expert->prenom}} {{$document->expert->nom}}" title="{{$document->expert->prenom}} {{$document->expert->nom}}">
                                                     
                                                     </div>
                                                     <div class="ml-3">
                                                         <div class="text-sm font-medium text-gray-900">
                                                             <!-- auteur nom et prenom -->
                                                             <p>
-                                                               {{$rendezVou->expert->prenom}} {{$rendezVou->expert->nom}}
+                                                              {{$document->expert->prenom}} {{$document->expert->nom}}
                                                             </p>
                                                         
                                                         </div>
                                                         <div class="text-xs text-gray-500">
-                                                            {{$rendezVou->expert->type}}
+                                                           {{$document->expert->adresse}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                         
-                                            <!-- Colonne Statut -->
+                                            <!-- Colonne Client -->
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                @if($rendezVou->statut == 'approved')
-                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                                    <i class="fas fa-check-circle mr-1"></i> Apprové
-                                                </span>
-                                                @elseif($rendezVou->statut == 'pending')
-                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
-                                                    <i class="fas fa-clock mr-1"></i> En attente
-                                                </span>
-                                                @elseif($rendezVou->statut == 'review-canceling')
-                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
-                                                    <i class="fas fa-clock mr-1"></i> Annulation En attente
-                                                </span>
-                                                @elseif($rendezVou->statut == 'approved-canceling')
-                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                                    <i class="fas fa-check-circle mr-1"></i> Annulation Apprové
-                                                </span>
-                                                @elseif($rendezVou->statut == 'cancel-canceling')
-                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                                    <i class="fas fa-check-circle mr-1"></i> Annulation Rufusé / Consultaion Apprové
-                                                </span>
-                                                @elseif($rendezVou->statut == 'cancel')
-                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800">
-                                                    <i class="fas fa-cancel mr-1"></i> Rufusé
-                                                </span>
-                                                @endif
-                                            </td>
-                                        
-                                            <!-- Colonne Date de reservation -->
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{$rendezVou->date_reserver}}
-                                            </td>
-                                        
-                                            <!-- Colonne Adress -->
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                 {{ Str::limit(strip_tags($rendezVou->adresse), 10) }}
-                                            </td>
-
-                                            <!-- Colonne Total Payée -->
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{$rendezVou->total}} DH
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0 h-8 w-8 rounded-full bg-gray-200 overflow-hidden">
+                                                        <img class="h-full w-full object-cover" src="{{$document->client->photo}}" alt="{{$document->client->prenom}} {{$document->client->nom}}" title="{{$document->client->prenom}} {{$document->client->nom}}">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <div class="text-sm font-medium text-gray-900">
+                                                            <!-- auteur nom et prenom -->
+                                                            <p>
+                                                              {{$document->client->prenom}} {{$document->client->nom}}
+                                                            </p>
+                                                        
+                                                        </div>
+                                                        <div class="text-xs text-gray-500">
+                                                           {{$document->client->adresse}}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         
                                             <!-- Colonne Actions -->
-                                            @if($rendezVou->statut == 'pending')
-                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                                 <form action="{{ route('client.consultation.annuler') }}" method="POST" class="inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="hidden" name="id" value="{{$rendezVou->id}}">
-                                                        <button type="submit"
-                                                            class="text-red-600 hover:text-red-900 p-1 rounded-full hover:bg-red-50"
-                                                            title="Annuler"
-                                                            onclick="return confirm('Êtes-vous sûr de vouloir annuler cet Consultation ?')">
-                                                            <i class="fas fa-cancel"></i>
-                                                        </button>
-                                                 </form>
-                                                 
-                                                </div>
-                                            </td>
-                                            @endif
-                                            @if($rendezVou->statut != 'pending')
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                                  <form action="{{ route('client.consultation.downloadPDF') }}" method="POST" class="inline">
                                                         @csrf
-                                                        <input type="hidden" name="id" value="{{$rendezVou->id}}">
+                                                        <input type="hidden" name="id" value="{{$document->rendez_vous}}">
                                                         <button type="submit"
                                                             class="text-purple-600 hover:text-purple-900 focus:text-purple-600 p-1 rounded-full hover:bg-red-50"
                                                             title="Télécharger">
@@ -242,7 +185,6 @@
                                                  </form>
                                                 </div>
                                             </td>
-                                            @endif
                                            </tr>
                                           @endforeach
                                         @endif
@@ -251,7 +193,7 @@
                             </div>
                         </div>
                     </div>
-                    {{$rendezVous->links()}}
+                    {{$documents->links()}}
                 </div>
             </div>
         </div>

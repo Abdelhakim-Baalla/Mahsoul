@@ -78,15 +78,27 @@ class ClientController extends Controller
 
         // dd($data);
 
-        $pdfSave = PDF::loadView('rendezVousPdf', $data);
-        $pdfContent = $pdfSave->output();
-        $this->documentRepository->uploader($pdfContent, $rendez_vous_id ,$rendez_vous_expert, $rendez_vous_client);
-
         $pdf = PDF::loadView('rendezVousPdf', $data);
         return $pdf->download('rendezVous.pdf');
         // $title = 'Résumer Sur le Rendez-Vous ' . $rendezVous->sujet;
         // $date = date('d/m/Y');
 
         // return view('rendezVousPdf', compact('rendezVous', 'title', 'date'));
+    }
+
+    public function clientDocumentsIndex()
+    {
+        // dd(auth()->user()->id);
+        $documents = $this->documentRepository->getByClientId(auth()->user()->id);
+        foreach($documents as $document)
+        {
+            // dd($document->rendez_vous);
+
+             $document->expert = $this->utilisateurRepository->getById($document->expert);
+             $document->client = $this->utilisateurRepository->getById($document->client);
+            //  dd( $document->rendez_vous->id);
+        }
+
+        return view('client.documents.index', compact('documents'));
     }
 }

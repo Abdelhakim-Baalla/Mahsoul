@@ -199,12 +199,12 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/client/consultations', 'clientConsultationsIndex')->name('client.consultations.index');
     Route::delete('/client/consultations/annuler', 'clientConsultationsAnnuler')->name('client.consultation.annuler');
     Route::post('/client/consultations/Resume/Pdf', 'clientConsultationsDownloadPDF')->name('client.consultation.downloadPDF');
+    Route::get('/client/documents', 'clientDocumentsIndex')->name('client.documents.index');
 });
 
 // Dashboard Client
 Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
 Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
-Route::view('/client/documents', 'client.documents.index')->name('client.documents.index');
 
 
 Route::view('/not-found', 'error.404')->name('error.404');

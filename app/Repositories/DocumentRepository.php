@@ -22,6 +22,13 @@ class DocumentRepository implements DocumentRepositoryInterface
     public function getByRendezVousId(int $rendez_vous_id){
 
     }
+
+    public function getByClientId(int $client){
+
+       return Document::where('client', $client)
+        ->groupBy('client', 'id', 'rendez_vous')
+        ->paginate(2);
+    }
     
     public function uploader($pdfContent, $id, $expert, $client){
         $document = new Document();

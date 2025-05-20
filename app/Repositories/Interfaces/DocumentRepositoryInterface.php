@@ -9,4 +9,5 @@ interface DocumentRepositoryInterface
     public function getById(int $document_id);
     public function getByRendezVousId(int $rendez_vous_id);
     public function uploader($pdfContent, $id, $expert, $client);
+    public function getByClientId(int $client);
 }
