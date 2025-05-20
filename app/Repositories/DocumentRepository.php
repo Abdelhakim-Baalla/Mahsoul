@@ -23,8 +23,13 @@ class DocumentRepository implements DocumentRepositoryInterface
 
     }
     
-    public function uploader(int $rendez_vous_id, string $nom_fichier, string $chemin, string $type_fichier){
-
+    public function uploader($pdfContent, $id, $expert, $client){
+        $document = new Document();
+        $document->pdf_content = base64_encode($pdfContent);
+        $document->rendez_vous = $id;
+        $document->expert = $expert;
+        $document->client = $client;
+        $document->save();
     }
     
     
