@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
+use App\Repositories\Interfaces\DocumentRepositoryInterface;
 use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use Illuminate\Http\Request;
+
+use PDF;
 
 class ClientController extends Controller
 {
     protected $commandeRepository;
     protected $rendezVousRepository;
     protected $utilisateurRepository;
+    protected $documentRepository;
 
-    public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository)
+    public function __construct(DocumentRepositoryInterface $documentRepository, UtilisateurRepositoryInterface $utilisateurRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository)
     {
         $this->commandeRepository = $commandeRepository;
         $this->rendezVousRepository = $rendezVousRepository;
         $this->utilisateurRepository = $utilisateurRepository;
+        $this->documentRepository = $documentRepository;
     }
 
     public function clientDashboard()
@@ -29,7 +34,7 @@ class ClientController extends Controller
         return view('client.dashboard', compact('countCommandes', 'countRendezVous'));
     }
 
-    
+
     public function clientConsultationsIndex()
     {
         $rendezVous = $this->rendezVousRepository->getAllRendezVous();
@@ -38,7 +43,6 @@ class ClientController extends Controller
         }
         // dd($rendezVous);
         return view('client.consultations', compact('rendezVous'));
-
     }
 
     public function clientConsultationsAnnuler(Request $request)
@@ -52,5 +56,49 @@ class ClientController extends Controller
         // $review-canceling;
         $this->rendezVousRepository->modifierRendezVous($request->id, $data);
         return redirect()->route('client.consultations.index');
+    }
+
+    public function clientConsultationsDownloadPDF(Request $request)
+    {
+        // dd($request->id);
+        $rendezVous = $this->rendezVousRepository->getRendezVousById($request->id);
+        $rendez_vous_id = $rendezVous->id;
+        $rendez_vous_expert = $rendezVous->expert;
+        $rendez_vous_client = $rendezVous->client;
+
+        $rendezVous->expert = $this->utilisateurRepository->getById($rendezVous->expert);
+        $rendezVous->client = $this->utilisateurRepository->getById($rendezVous->client);
+        // // dd($rendezVous->sujet);
+
+        $data = [
+            'title' => 'Résumer Sur le Rendez-Vous ' . $rendezVous->sujet,
+            'date' => date('d/m/Y'),
+            'rendezVous' => $rendezVous
+        ];
+
+        // dd($data);
+
+        $pdf = PDF::loadView('rendezVousPdf', $data);
+        return $pdf->download('rendezVous.pdf');
+        // $title = 'Résumer Sur le Rendez-Vous ' . $rendezVous->sujet;
+        // $date = date('d/m/Y');
+
+        // return view('rendezVousPdf', compact('rendezVous', 'title', 'date'));
+    }
+
+    public function clientDocumentsIndex()
+    {
+        // dd(auth()->user()->id);
+        $documents = $this->documentRepository->getByClientId(auth()->user()->id);
+        foreach($documents as $document)
+        {
+            // dd($document->rendez_vous);
+
+             $document->expert = $this->utilisateurRepository->getById($document->expert);
+             $document->client = $this->utilisateurRepository->getById($document->client);
+            //  dd( $document->rendez_vous->id);
+        }
+
+        return view('client.documents.index', compact('documents'));
     }
 }

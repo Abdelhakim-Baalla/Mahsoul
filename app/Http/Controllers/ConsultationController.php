@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Consultation;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
+use App\Repositories\Interfaces\DocumentRepositoryInterface;
 use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
 use Illuminate\Http\Request;
+
+use PDF;
 
 class ConsultationController extends Controller
 {
@@ -15,13 +18,15 @@ class ConsultationController extends Controller
     protected $veterinaireRepository;
     protected $utilisateurRepository;
     protected $rendezVousRepository;
+    protected $documentRepository;
 
-    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(DocumentRepositoryInterface $documentRepository, RendezVousRepositoryInterface $rendezVousRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->agricoleRepository = $agricoleRepository; 
         $this->veterinaireRepository = $veterinaireRepository; 
         $this->utilisateurRepository = $utilisateurRepository; 
         $this->rendezVousRepository = $rendezVousRepository; 
+        $this->documentRepository = $documentRepository; 
     }
 
     public function index()
@@ -150,7 +155,30 @@ class ConsultationController extends Controller
             'total' => $validated['prix_deplacement']
         ];
 
-        $this->rendezVousRepository->creerRendezVous($rendezVous);
+        $rendez = $this->rendezVousRepository->creerRendezVous($rendezVous);
+
+        // dd($rendez->id);
+
+        $rendezVous = $this->rendezVousRepository->getRendezVousById($rendez->id);
+        $rendez_vous_id = $rendezVous->id;
+        $rendez_vous_expert = $rendezVous->expert;
+        $rendez_vous_client = $rendezVous->client;
+
+        $rendezVous->expert = $this->utilisateurRepository->getById($rendezVous->expert);
+        $rendezVous->client = $this->utilisateurRepository->getById($rendezVous->client);
+        // // dd($rendezVous->sujet);
+
+        $data = [
+            'title' => 'Résumer Sur le Rendez-Vous ' . $rendezVous->sujet,
+            'date' => date('d/m/Y'),
+            'rendezVous' => $rendezVous
+        ];
+
+        // dd($data);
+
+        $pdfSave = PDF::loadView('rendezVousPdf', $data);
+        $pdfContent = $pdfSave->output();
+        $this->documentRepository->uploader($pdfContent, $rendez_vous_id ,$rendez_vous_expert, $rendez_vous_client);
 
         return redirect()->route('rendezVous.checkout.stripe');
     }
