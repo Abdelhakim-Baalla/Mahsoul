@@ -12,10 +12,20 @@ class AgricoleRepository implements AgricoleRepositoryInterface
         return Agricole::create($data);
     }
 
+    public function getAllAgricole()
+    {
+        return Agricole::get();
+    }
+
 
     public function getById(int $id)
     {
         return Agricole::find($id);
+    }
+
+    public function getByUtilisateurId(int $id)
+    {
+        return Agricole::get()->where('compte', $id)->first();
     }
 
     public function modifierProfilAgricole(int $id, array $data)

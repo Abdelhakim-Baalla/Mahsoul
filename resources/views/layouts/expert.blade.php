@@ -1,13 +1,13 @@
 @if (Auth::check())
+@if(Auth::user()->type == 'agricole')
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Espace Expert - Mahsoul')</title>
-    <meta name="description" content="Espace Expert Mahsoul - Plateforme de consultation agricole">
+    <title>@yield('title', 'Espace Agricole - Mahsoul')</title>
+    <meta name="description" content="Espace Agricole Mahsoul - Plateforme de consultation agricole">
     <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -49,15 +49,12 @@
         }
     </script>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Styles supplémentaires pour l'expert -->
     <style>
         .sidebar-active {
             background-color: rgba(219, 148, 24, 0.1);
@@ -66,23 +63,22 @@
     </style>
 </head>
 <body class="font-sans bg-gray-100 flex h-screen">
-    <!-- Sidebar -->
     <div id="sidebar" class="bg-white w-64 shadow-md flex-shrink-0 hidden md:block">
         <div class="flex items-center justify-center h-16 border-b">
-            <a href="{{ route('expert.dashboard') }}" class="text-xl font-bold text-secondary-600">
-                Espace Expert
+            <a href="" class="text-xl font-bold text-secondary-600">
+                Espace Agricole
             </a>
         </div>
         <nav class="mt-5">
             <ul>
                 <li>
-                    <a href="{{ route('expert.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('expert.dashboard') ? 'sidebar-active' : '' }}">
+                    <a href="{{ route('agricole.dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('expert.dashboard') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-tachometer-alt w-5 h-5 mr-3"></i>
                         <span>Tableau de bord</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('expert.appointments.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('expert.appointments.*') ? 'sidebar-active' : '' }}">
+                    <a href="{{ route('agricole.appointments.index') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100 {{ request()->routeIs('expert.appointments.*') ? 'sidebar-active' : '' }}">
                         <i class="fas fa-calendar-check w-5 h-5 mr-3"></i>
                         <span>Rendez-vous</span>
                     </a>
@@ -124,21 +120,19 @@
         </nav>
     </div>
 
-    <!-- Content -->
     <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Top Header -->
         <header class="bg-white shadow-sm h-16 flex items-center justify-between px-6">
             <div class="flex items-center">
                 <button id="sidebar-toggle" class="md:hidden text-gray-700 focus:outline-none">
                     <i class="fas fa-bars"></i>
                 </button>
-                <h1 class="text-lg font-medium ml-4">@yield('header', 'Espace Expert')</h1>
+                <h1 class="text-lg font-medium ml-4">@yield('header', 'Espace Agricole')</h1>
             </div>
             <div class="flex items-center">
                 <div class="relative">
                     <button id="user-menu-button" class="flex items-center focus:outline-none">
-                        <span class="mr-2 text-sm font-medium text-gray-700">{{ auth()->user()->name }}</span>
-                        <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=db9418&color=fff" alt="{{ auth()->user()->name }}">
+                        <span class="mr-2 text-sm font-medium text-gray-700">{{ auth()->user()->nom }} {{ auth()->user()->prenom }}</span>
+                        <img class="h-8 w-8 rounded-full object-cover" src="{{ auth()->user()->photo }}" alt="{{ auth()->user()->nom }}">
                     </button>
                     <div id="user-menu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
                         <div class="py-1">
@@ -153,13 +147,11 @@
             </div>
         </header>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto bg-gray-100">
             @yield('content')
         </main>
     </div>
 
-    <!-- Scripts -->
     <script>
         // Toggle sidebar on mobile
         document.getElementById('sidebar-toggle').addEventListener('click', function() {
@@ -181,9 +173,24 @@
                 menu.classList.add('hidden');
             }
         });
-    </script>
+
+        </script>
+        @yield('scripts')
 </body>
 </html>
+@elseif(Auth::user()->type == 'admin')
+<script>
+    window.location.href = "{{ route('admin.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'veterinaire')
+<script>
+    window.location.href = "{{ route('veterinaire.dashboard') }}";
+</script>
+@elseif(Auth::user()->type == 'client')
+<script>
+    window.location.href = "{{ route('client.dashboard') }}";
+</script>
+@endif
 
 @else
     <script>

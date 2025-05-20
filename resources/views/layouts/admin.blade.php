@@ -193,21 +193,17 @@
         </main>
     </div>
 
-    <!-- Scripts -->
     <script>
-        // Toggle sidebar on mobile
         document.getElementById('sidebar-toggle').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('hidden');
         });
 
-        // Toggle user menu
         document.getElementById('user-menu-button').addEventListener('click', function() {
             const menu = document.getElementById('user-menu');
             menu.classList.toggle('hidden');
         });
 
-        // Close user menu when clicking outside
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('user-menu');
             const button = document.getElementById('user-menu-button');
@@ -220,9 +216,19 @@
 </body>
 
 </html>
-@else
+@elseif(Auth::user()->type == 'agricole')
 <script>
-    window.location.href = "{{ route('profile.show') }}";
+    window.location.href = "{{ route('agricole.dashboard') }}";
+</script>
+
+@elseif(Auth::user()->type == 'veterinaire')
+<script>
+    window.location.href = "{{ route('veterinaire.dashboard') }}";
+</script>
+
+@elseif(Auth::user()->type == 'client')
+<script>
+    window.location.href = "{{ route('client.dashboard') }}";
 </script>
 @endif
 

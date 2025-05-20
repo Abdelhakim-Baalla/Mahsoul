@@ -1,7 +1,6 @@
 <footer class="bg-primary-800 text-white py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <!-- Logo et description -->
             <div class="col-span-1">
                 <div class="flex items-center">
                     <img class="h-8 w-auto" src="{{ asset('images/logo-white.jpg') }}" alt="Mahsoul Logo">
@@ -23,7 +22,6 @@
                 </div>
             </div>
             
-            <!-- Liens rapides -->
             <div>
                 <h3 class="text-sm font-bold mb-2">Liens rapides</h3>
                 <ul class="space-y-1">
@@ -33,7 +31,6 @@
                 </ul>
             </div>
             
-            <!-- Services -->
             <div>
                 <h3 class="text-sm font-bold mb-2">Services</h3>
                 <ul class="space-y-1">
@@ -43,7 +40,6 @@
                 </ul>
             </div>
             
-            <!-- Contact -->
             <div>
                 <h3 class="text-sm font-bold mb-2">Contact</h3>
                 <ul class="space-y-1">

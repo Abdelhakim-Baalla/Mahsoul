@@ -13,5 +13,9 @@ interface OrderItemRepositoryInterface
     public function supprimerOrderItem(int $id);
     
     public function getAllCommandes();
+
+    public function getOrderItemByCommandeId(int $id);
+
+    public function getQuantityByProduitId(int $id, int $commande);
     
 }

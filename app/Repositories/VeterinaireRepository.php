@@ -25,6 +25,16 @@ class VeterinaireRepository implements VeterinaireRepositoryInterface
         return Veterinaire::find($id);
     }
 
+    public function getAllVeterinaire()
+    {
+        return Veterinaire::get();
+    }
+
+    public function getByUtilisateurId(int $id)
+    {
+        return Veterinaire::get()->where('compte', $id)->first();
+    }
+
     public function modifierProfilVeterinaire(int $id, array $data)
     {
         $veterinaire = $this->getById($id);

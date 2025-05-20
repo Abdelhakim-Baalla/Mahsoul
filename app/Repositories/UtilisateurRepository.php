@@ -25,6 +25,7 @@ class UtilisateurRepository implements UtilisateurRepositoryInterface
         return Utilisateur::paginate(5);
     }
 
+
     public function getById( $id)
     {
         return Utilisateur::find($id);

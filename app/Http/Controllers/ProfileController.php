@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Repositories\Interfaces\AdminRepositoryInterface;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
+use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use App\Repositories\Interfaces\ClientRepositoryInterface;
+use App\Repositories\Interfaces\CommandeRepositoryInterface;
+use App\Repositories\Interfaces\OrderItemRepositoryInterface;
+use App\Repositories\Interfaces\ProduitRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
 use Illuminate\Http\Request;
@@ -17,14 +21,22 @@ class ProfileController extends Controller
     protected $veterinaireRepository;
     protected $adminRepository;
     protected $clientRepository;
+    protected $commandesRepository;
+    protected $orderItemsRepository;
+    protected $produitRepository;
+    protected $categorieRepository;
 
-    public function __construct(ClientRepositoryInterface $clientRepository, AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(CategorieRepositoryInterface $categorieRepository, ProduitRepositoryInterface $produitRepository, OrderItemRepositoryInterface $orderItemsRepository, CommandeRepositoryInterface $commandesRepository, ClientRepositoryInterface $clientRepository, AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
         $this->veterinaireRepository = $veterinaireRepository;
         $this->adminRepository = $adminRepository;
         $this->clientRepository = $clientRepository;
+        $this->commandesRepository = $commandesRepository;
+        $this->orderItemsRepository = $orderItemsRepository;
+        $this->produitRepository = $produitRepository;
+        $this->categorieRepository = $categorieRepository;
     }
     public function showProfile()
     {
@@ -53,7 +65,8 @@ class ProfileController extends Controller
         return view('profile.editAgricole');
     }
 
-    public function showeditProfileInformationVeterinaire(){
+    public function showeditProfileInformationVeterinaire()
+    {
         if (!auth()->check()) {
             return redirect()->route('login');
         }
@@ -61,7 +74,8 @@ class ProfileController extends Controller
         return view('profile.editveterinaire');
     }
 
-    public function showeditProfileInformationAdmin(){
+    public function showeditProfileInformationAdmin()
+    {
         if (!auth()->check()) {
             return redirect()->route('login');
         }
@@ -70,7 +84,8 @@ class ProfileController extends Controller
     }
 
 
-    public function showeditProfileInformationClient(){
+    public function showeditProfileInformationClient()
+    {
         if (!auth()->check()) {
             return redirect()->route('login');
         }
@@ -148,7 +163,7 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
-    
+
     public function updateProfileInformartionAdmin(Request $request)
     {
         $user = Auth::user();
@@ -192,5 +207,50 @@ class ProfileController extends Controller
         $user->client->refresh();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
+    }
+
+    public function showProfileOrders()
+    {
+        // dd(Auth::user()->id);
+
+        $commandes = $this->commandesRepository->getCommandesByClientId(Auth::user()->id);
+        // dd($commandes);
+        $order = [];
+        foreach ($commandes as $commande) {
+            $orderItems = $this->orderItemsRepository->getOrderItemByCommandeId($commande->id);
+            array_push($order, $orderItems);
+        }
+
+        $produits = [];
+        foreach ($order as $orde) {
+            foreach ($orde as $or) {
+                $produit = $this->produitRepository->getProduitById($or->produit);
+                array_push($produits, $produit);
+            }
+        }
+
+        // die();
+        // dd($produits[0]);
+
+        $produitsFinal = [];
+        foreach ($produits as $produit) {
+                // dd($produit->categorie);
+                // dd($prod);
+                $categorie = $this->categorieRepository->getCategorieById($produit->categorie);
+                $commandes = $this->commandesRepository->getAllCommandes();
+                // dd($commandes);
+                $quantite = 0;
+
+                $analyse = [
+                    'id' => $produit->id,
+                    'nom' => $produit->nom,
+                    'image' => $produit->image,
+                    'categorie' => $categorie->nom
+                    // 'quantite' =>  $this->orderItemsRepository->getQuantityByProduitId($produit->id, $produit->id)
+                ];
+
+                array_push($produitsFinal, $analyse);
+        }
+        return view('profile.orders', compact('commandes', 'produitsFinal'));
     }
 }

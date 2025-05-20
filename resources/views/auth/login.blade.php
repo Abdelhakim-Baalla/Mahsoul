@@ -29,7 +29,6 @@
                     <form action="{{ route('login.submit') }}" method="POST" class="space-y-6">
                         @csrf
 
-                        <!-- Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                             <div class="relative">
@@ -42,7 +41,6 @@
                             </div>
                         </div>
 
-                        <!-- Password -->
                         <div>
                             <div class="flex items-center justify-between">
                                 <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
@@ -58,7 +56,6 @@
                             </div>
                         </div>
 
-                        <!-- Remember Me -->
                         <div class="flex items-center">
                             <input id="remember_me" name="remember" type="checkbox" 
                                    class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
@@ -67,12 +64,10 @@
                             </label>
                         </div>
 
-                        <!-- Submit Button -->
                         <button type="submit"  onclick="return validateLoginForm()" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-md transition duration-150 ease-in-out">
                             Se connecter
                         </button>
 
-                        <!-- Social Login -->
                         <div class="relative my-6">
                             <div class="absolute inset-0 flex items-center">
                                 <div class="w-full border-t border-gray-300"></div>
@@ -84,7 +79,6 @@
                             </div>
                         </div>
 
-                        <!-- Register Link -->
                         <div class="mt-6 text-center">
                             <p class="text-sm text-gray-600">
                                 Vous n'avez pas de compte ? <a href="{{ route('register') }}" class="text-primary-600 hover:text-primary-700 font-medium">Inscrivez-vous</a>
