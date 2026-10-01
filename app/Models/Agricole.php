@@ -12,7 +12,7 @@ class Agricole extends Utilisateur
     protected $table = 'agricoles';
     
     protected $fillable = [
-        'ferme', 'produit', 'superficie_terrain', 'region', 'compte'
+        'ferme', 'produit', 'superficie_terrain', 'region', 'compte', 'prix_deplacement'
     ];
 
     public function rendezVous(){

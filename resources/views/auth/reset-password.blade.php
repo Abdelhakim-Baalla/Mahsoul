@@ -20,14 +20,15 @@
                     </div>
                     
                     <!-- Reset Password Form -->
-                    <form action="/reset-password" method="POST">
+                    <form action="{{ route('password.update') }}" method="POST">
+                        @csrf
                         <!-- Hidden Token Field -->
-                        <input type="hidden" name="token" value="{{ $token }}">
+                        <input type="hidden" name="token" value="{{ $token ?? request('token', '') }}">
                         
                         <!-- Email -->
                         <div class="mb-6">
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" id="email" name="email" value="{{ $email }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-gray-100" readonly>
+                            <input type="email" id="email" name="email" value="{{ $email ?? request('email', old('email')) }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500 bg-gray-100" readonly>
                         </div>
                         
                         <!-- New Password -->

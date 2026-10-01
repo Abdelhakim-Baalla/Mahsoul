@@ -12,7 +12,7 @@ class Admin extends Utilisateur
     protected $table = 'admins';
     
     protected $fillable = [
-        'domaines_expertise', 'contact_urgence'
+        'domaines_expertise', 'contact_urgence', 'compte', 'about'
     ];
 
     public function article(){

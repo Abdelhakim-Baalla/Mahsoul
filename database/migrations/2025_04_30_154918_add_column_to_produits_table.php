@@ -13,6 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
+        if (Schema::hasColumn('produits', 'categorie')) {
+            return;
+        }
         Schema::table('produits', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->foreignId('categorie')->constrained('categories')->onDelete('cascade');

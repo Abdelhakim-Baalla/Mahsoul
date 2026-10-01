@@ -13,12 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('documents', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->foreignId('rendez_vous')->constrained('rendez_vous')->onDelete('cascade');
-            $table->foreignId('expert')->constrained('utilisateurs')->onDelete('cascade');
-            $table->foreignId('client')->constrained('utilisateurs')->onDelete('cascade');
-        });
+        if (!Schema::hasColumn('documents', 'expert')) {
+            Schema::table('documents', function (Blueprint $table) {
+                $table->foreignId('expert')->constrained('utilisateurs')->onDelete('cascade');
+            });
+        }
+        if (!Schema::hasColumn('documents', 'client')) {
+            Schema::table('documents', function (Blueprint $table) {
+                $table->foreignId('client')->constrained('utilisateurs')->onDelete('cascade');
+            });
+        }
+        // 'rendez_vous' already exists from the create table migration, skip it to avoid duplicate column error.
     }
 
     /**

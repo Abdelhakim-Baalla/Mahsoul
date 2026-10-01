@@ -22,6 +22,7 @@ class ConsultationController extends Controller
 
     public function __construct(DocumentRepositoryInterface $documentRepository, RendezVousRepositoryInterface $rendezVousRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
+        $this->middleware('auth')->only(['createRendezVous', 'payementRendezVous']);
         $this->agricoleRepository = $agricoleRepository; 
         $this->veterinaireRepository = $veterinaireRepository; 
         $this->utilisateurRepository = $utilisateurRepository; 
@@ -76,8 +77,13 @@ class ConsultationController extends Controller
 
     public function expertShow(Request $request)
     {
-        $expert = $this->utilisateurRepository->getById($request->expert_id);
-        // dd($expert->id);
+        $validated = $request->validate([
+            'expert_id' => 'required|integer|exists:utilisateurs,id',
+        ]);
+        $expert = $this->utilisateurRepository->getById($validated['expert_id']);
+        if (!$expert) {
+            abort(404, 'Expert introuvable.');
+        }
 
         if($expert->type == 'agricole')
         {
@@ -97,9 +103,13 @@ class ConsultationController extends Controller
 
     public function createRendezVous(Request $request)
     {
-        // dd($request->expert_id);
-        $utilisateur = $this->utilisateurRepository->getById($request->expert_id);
-        // dd($utilisateur->type);
+        $validated = $request->validate([
+            'expert_id' => 'required|integer|exists:utilisateurs,id',
+        ]);
+        $utilisateur = $this->utilisateurRepository->getById($validated['expert_id']);
+        if (!$utilisateur) {
+            abort(404, 'Expert introuvable.');
+        }
 
         if($utilisateur->type == 'agricole')
         {

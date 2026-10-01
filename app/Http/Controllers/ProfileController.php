@@ -9,10 +9,14 @@ use App\Repositories\Interfaces\ClientRepositoryInterface;
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
 use App\Repositories\Interfaces\OrderItemRepositoryInterface;
 use App\Repositories\Interfaces\ProduitRepositoryInterface;
+use App\Repositories\Interfaces\RendezVousRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
 use App\Repositories\Interfaces\VeterinaireRepositoryInterface;
+use App\Models\Produit;
+use App\Models\RendezVous;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -25,9 +29,12 @@ class ProfileController extends Controller
     protected $orderItemsRepository;
     protected $produitRepository;
     protected $categorieRepository;
+    protected $rendezVousRepository;
 
-    public function __construct(CategorieRepositoryInterface $categorieRepository, ProduitRepositoryInterface $produitRepository, OrderItemRepositoryInterface $orderItemsRepository, CommandeRepositoryInterface $commandesRepository, ClientRepositoryInterface $clientRepository, AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
+    public function __construct(RendezVousRepositoryInterface $rendezVousRepository, CategorieRepositoryInterface $categorieRepository, ProduitRepositoryInterface $produitRepository, OrderItemRepositoryInterface $orderItemsRepository, CommandeRepositoryInterface $commandesRepository, ClientRepositoryInterface $clientRepository, AdminRepositoryInterface $adminRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
+        $this->middleware('auth');
+        $this->rendezVousRepository = $rendezVousRepository;
         $this->utilisateurRepository = $utilisateurRepository;
         $this->agricoleRepository = $agricoleRepository;
         $this->veterinaireRepository = $veterinaireRepository;
@@ -211,7 +218,9 @@ class ProfileController extends Controller
 
     public function showProfileOrders()
     {
-        // dd(Auth::user()->id);
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
 
         $commandes = $this->commandesRepository->getCommandesByClientId(Auth::user()->id);
         // dd($commandes);
@@ -252,5 +261,118 @@ class ProfileController extends Controller
                 array_push($produitsFinal, $analyse);
         }
         return view('profile.orders', compact('commandes', 'produitsFinal'));
+    }
+
+    public function showProfileConsultations()
+    {
+        $user = Auth::user();
+
+        if ($user->type === 'client') {
+            $rendezVous = RendezVous::where('client', $user->id)->latest()->get();
+        } elseif (in_array($user->type, ['veterinaire', 'agricole'])) {
+            $rendezVous = RendezVous::where('expert', $user->id)->latest()->get();
+        } else {
+            $rendezVous = RendezVous::latest()->get();
+        }
+
+        foreach ($rendezVous as $rdv) {
+            $rdv->expertUser = $this->utilisateurRepository->getById($rdv->expert);
+            $rdv->clientUser = $this->utilisateurRepository->getById($rdv->client);
+        }
+
+        return view('profile.consultations', compact('rendezVous'));
+    }
+
+    public function showProfileFavorites()
+    {
+        $ids = session()->get('favorites', []);
+        $produits = $ids ? Produit::whereIn('id', $ids)->get() : collect();
+
+        foreach ($produits as $produit) {
+            $categorie = $this->categorieRepository->getCategorieById($produit->categorie);
+            $produit->categorie_nom = $categorie ? $categorie->nom : 'Unknown';
+        }
+
+        return view('profile.favorites', compact('produits'));
+    }
+
+    public function toggleFavorite(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:produits,id',
+        ]);
+
+        $favorites = session()->get('favorites', []);
+        if (in_array($validated['id'], $favorites)) {
+            $favorites = array_values(array_diff($favorites, [$validated['id']]));
+            $message = 'Produit retiré de vos favoris.';
+        } else {
+            $favorites[] = $validated['id'];
+            $message = 'Produit ajouté à vos favoris.';
+        }
+        session()->put('favorites', $favorites);
+
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function showProfileSecurity()
+    {
+        return view('profile.security');
+    }
+
+    public function updateProfilePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'current_password' => 'required|string',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return back()->withErrors(['current_password' => 'Le mot de passe actuel est incorrect.']);
+        }
+
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        return redirect()->route('profile.security')->with('success', 'Mot de passe mis à jour avec succès.');
+    }
+
+    public function showProfileNotifications()
+    {
+        $user = Auth::user();
+        $notifications = collect();
+
+        if ($user->type === 'client') {
+            $commandes = $this->commandesRepository->getCommandesByClientId($user->id);
+            foreach ($commandes as $commande) {
+                $notifications->push([
+                    'icon' => 'fa-shopping-bag',
+                    'color' => 'primary',
+                    'title' => 'Commande #' . $commande->id . ' : ' . $commande->statut,
+                    'body' => 'Total de ' . $commande->total . ' DH — ' . ($commande->date_commande ?? ''),
+                    'date' => $commande->created_at,
+                ]);
+            }
+            $rdvs = RendezVous::where('client', $user->id)->latest()->take(5)->get();
+        } elseif (in_array($user->type, ['veterinaire', 'agricole'])) {
+            $rdvs = RendezVous::where('expert', $user->id)->latest()->take(5)->get();
+        } else {
+            $rdvs = RendezVous::latest()->take(5)->get();
+        }
+
+        foreach ($rdvs as $rdv) {
+            $notifications->push([
+                'icon' => 'fa-calendar-check',
+                'color' => 'secondary',
+                'title' => 'Rendez-vous : ' . ($rdv->sujet ?? 'Consultation') . ' (' . $rdv->statut . ')',
+                'body' => $rdv->description ?? '',
+                'date' => $rdv->created_at,
+            ]);
+        }
+
+        $notifications = $notifications->sortByDesc('date')->values();
+
+        return view('profile.notifications', compact('notifications'));
     }
 }

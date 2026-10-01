@@ -13,7 +13,11 @@ class Utilisateur extends Authenticatable
     protected $table = 'utilisateurs'; 
 
     protected $fillable = [
-        'nom', 'prenom', 'email', 'password', 'telephone', 'adresse', 'type', 'photo'
+        'nom', 'prenom', 'email', 'password', 'telephone', 'adresse', 'type', 'photo', 'about'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 
     public function commentaire(){

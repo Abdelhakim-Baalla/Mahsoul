@@ -50,14 +50,14 @@ class AuthController extends Controller
         $validated = $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email',
-            'password' => 'required|string|min:6',
+            'email' => 'required|email|max:255|unique:utilisateurs,email',
+            'password' => 'required|string|min:8|max:255',
             'password_confirmation' => 'required|same:password',
-            'telephone' => 'required|string|max:13',
-            'adresse' => 'required|string',
+            'telephone' => 'required|string|max:20',
+            'adresse' => 'required|string|max:500',
             'type' => 'required|string|in:client,veterinaire,agricole',
             'terms' => 'required|accepted',
-            'photo' => 'string'
+            'photo' => 'nullable|string|max:500'
         ]);
 
 
@@ -113,6 +113,7 @@ class AuthController extends Controller
         
 
         Auth::login($utilisateur);
+        $request->session()->regenerate();
 
         return redirect()->route('profile.show');
     }
@@ -131,15 +132,19 @@ class AuthController extends Controller
 
 
 
-        Auth::login($utilisateur, $request->has('remember'));
+        Auth::login($utilisateur, $request->boolean('remember'));
+        $request->session()->regenerate();
 
-        return redirect()->route('profile.show');
+        return redirect()->intended(route('profile.show'));
     }
 
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('login');
     }

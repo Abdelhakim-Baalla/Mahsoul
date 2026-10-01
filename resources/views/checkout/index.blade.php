@@ -85,23 +85,23 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-                                    <input type="text" id="prenom" name="prenom" value="{{Auth::user()->prenom}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                    <input type="text" id="prenom" name="prenom" value="{{ old('prenom', Auth::user()->prenom ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                                 </div>
                                 <div>
                                     <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-                                    <input type="text" id="nom" name="nom" value="{{Auth::user()->nom}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                    <input type="text" id="nom" name="nom" value="{{ old('nom', Auth::user()->nom ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                    <input type="email" id="email" name="email" value="{{Auth::user()->email}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                    <input type="email" id="email" name="email" value="{{ old('email', Auth::user()->email ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                                 </div>
                                 <div>
                                     <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                                    <input type="tel" id="telephone" name="telephone" value="{{Auth::user()->telephone}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                    <input type="tel" id="telephone" name="telephone" value="{{ old('telephone', Auth::user()->telephone ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                                 </div>
                                 <div class="md:col-span-2">
                                     <label for="adresse" class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
-                                    <input type="text" id="adresse" name="adresse" value="{{Auth::user()->adresse}}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                    <input type="text" id="adresse" name="adresse" value="{{ old('adresse', Auth::user()->adresse ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                                 </div>
                             </div>
                         </div>

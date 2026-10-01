@@ -41,26 +41,55 @@
                 </p>
             </div>
             
-            <div class="flex justify-center">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden w-full max-w-md">
-                    <!-- Conteneur image avec focus sur le haut du visage -->
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="{{ asset('images/abdelhakim-baalla.jpg') }}" alt="Abdelhakim Baalla" 
-                             class="absolute w-full h-full object-cover object-top"
-                             style="object-position: 50% 25%;">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch max-w-5xl mx-auto">
+                <!-- Creative photo collage -->
+                <div class="grid grid-cols-2 grid-rows-2 gap-3 h-full min-h-[420px]">
+                    <div class="row-span-2 rounded-2xl overflow-hidden shadow-lg relative group">
+                        <img src="{{ asset('images/abdelhakim-baalla.jpg') }}" alt="Abdelhakim Baalla - portrait principal"
+                             class="absolute w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+                             style="object-position: 50% 20%;">
+                        <span class="absolute bottom-3 left-3 bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Fondateur</span>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800">Abdelhakim Baalla</h3>
-                        <p class="text-primary-600 font-medium">Fondateur & CEO</p>
-                        <p class="mt-3 text-gray-600">Développeur web full stack passionné par l'innovation numérique et le développement durable, avec une sensibilité pour les solutions AgriTech.</p>
-                        <div class="mt-4 flex space-x-3">
-                            <a href="https://www.linkedin.com/in/abdelhakimbaalla/" class="text-gray-400 hover:text-primary-600" target="_blank">
+                    <div class="rounded-2xl overflow-hidden shadow-lg relative group min-h-[200px]">
+                        <img src="{{ asset('images/abdelhakim-baalla-2.jpg') }}" alt="Abdelhakim Baalla"
+                             class="absolute w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+                             style="object-position: 50% 20%;">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-lg relative group min-h-[200px]">
+                        <img src="{{ asset('images/abdelhakim-baalla-3.jpg') }}" alt="Abdelhakim Baalla"
+                             class="absolute w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+                             style="object-position: 50% 20%;">
+                    </div>
+                </div>
+                <!-- CEO card -->
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
+                    <div class="p-8 flex-1">
+                        <p class="text-primary-600 font-semibold text-sm uppercase tracking-wide">Fondateur & CEO</p>
+                        <h3 class="mt-2 text-3xl font-bold text-gray-800">Abdelhakim Baalla</h3>
+                        <p class="mt-1 text-gray-500">Développeur Full-Stack — Agadir, Maroc</p>
+                        <p class="mt-4 text-gray-600">Issu d'une famille d'agriculteurs, Abdelhakim a fondé Mahsoul pendant sa formation de Développeur Full-Stack à YouCode UM6P (2024 – 2026) pour digitaliser le secteur agricole marocain : consultations d'experts, marketplace et formation en ligne.</p>
+                        <p class="mt-3 text-gray-600">Passé par Larmo (Nest.js, Next.js, AWS, Docker) et NJT-GROUP (PHP, Laravel), il cumule plus de 50 projets et des certifications Google AI, HackerRank SQL, Microsoft C# et Postman.</p>
+                        <div class="mt-5 flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">PHP / Laravel</span>
+                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">React / Next.js</span>
+                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">Node.js / Nest.js</span>
+                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">Docker / AWS</span>
+                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">50+ projets</span>
+                        </div>
+                        <div class="mt-6 flex items-center space-x-4">
+                            <a href="https://www.linkedin.com/in/abdelhakimbaalla/" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="LinkedIn">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="https://x.com/Abdelhakim99891" class="text-gray-400 hover:text-primary-600" target="_blank">
+                            <a href="https://x.com/Abdelhakim99891" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="X / Twitter">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="mailto:abdelhakimbaalla50@gmail.com" class="text-gray-400 hover:text-primary-600">
+                            <a href="https://github.com/Abdelhakim-Baalla" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://baalla.tech" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="Portfolio">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                            <a href="mailto:abdelhakimbaalla50@gmail.com" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" title="Email">
                                 <i class="fas fa-envelope"></i>
                             </a>
                         </div>

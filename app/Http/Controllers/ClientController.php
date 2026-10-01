@@ -19,6 +19,7 @@ class ClientController extends Controller
 
     public function __construct(DocumentRepositoryInterface $documentRepository, UtilisateurRepositoryInterface $utilisateurRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository)
     {
+        $this->middleware('auth');
         $this->commandeRepository = $commandeRepository;
         $this->rendezVousRepository = $rendezVousRepository;
         $this->utilisateurRepository = $utilisateurRepository;
@@ -47,21 +48,28 @@ class ClientController extends Controller
 
     public function clientConsultationsAnnuler(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'review-canceling',
             'updated_at' => now()
         ];
 
         // $review-canceling;
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
         return redirect()->route('client.consultations.index');
     }
 
     public function clientConsultationsDownloadPDF(Request $request)
     {
-        // dd($request->id);
-        $rendezVous = $this->rendezVousRepository->getRendezVousById($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
+        $rendezVous = $this->rendezVousRepository->getRendezVousById($validated['id']);
+        if (!$rendezVous) {
+            abort(404, 'Rendez-vous introuvable.');
+        }
         $rendez_vous_id = $rendezVous->id;
         $rendez_vous_expert = $rendezVous->expert;
         $rendez_vous_client = $rendezVous->client;

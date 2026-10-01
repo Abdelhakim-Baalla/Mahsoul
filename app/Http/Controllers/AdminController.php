@@ -28,6 +28,7 @@ class AdminController extends Controller
 
     public function __construct(CommentaireRepositoryInterface $commentaireRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, AdminRepositoryInterface $adminRepository, TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository, UtilisateurRepositoryInterface $utilisateurRepository)
     {
+        $this->middleware('auth');
         $this->tagRepository = $tagRepository;
         $this->articleRepository = $articleRepository;
         $this->categorieRepository = $categorieRepository;
@@ -133,25 +134,8 @@ class AdminController extends Controller
         }
 
         foreach ($articles as $article) {
-            $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
-            $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
-
-            $backgroundColor = $backgroundColors[array_rand($backgroundColors)];
-            $textColor = (in_array($backgroundColor, ['000000', '4CAF50', '3F51B5'])) ? 'FFFFFF' : '000000';
-
-            $encodedTitle = urlencode($article->titre);
-            $imageUrl = $article->photo;
-
-            if (empty($imageUrl)) {
-                $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-            }
-            $imageExists = @getimagesize($imageUrl);
-
-
-            if ($imageExists) {
-                $article->photo = $imageUrl;
-            } else {
-                $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+            if (empty($article->photo)) {
+                $article->photo = '/images/farm.jpg';
             }
 
             $article->auteur = $this->getAdminById($article->auteur);

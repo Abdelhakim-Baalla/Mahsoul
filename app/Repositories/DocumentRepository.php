@@ -36,7 +36,11 @@ class DocumentRepository implements DocumentRepositoryInterface
         $document->rendez_vous = $id;
         $document->expert = $expert;
         $document->client = $client;
+        $document->nom = 'rendez-vous-' . $id . '.pdf';
+        $document->chemin = 'documents/rendez-vous-' . $id . '.pdf';
+        $document->type = 'pdf';
         $document->save();
+        return $document;
     }
     
     

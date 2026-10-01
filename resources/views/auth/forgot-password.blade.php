@@ -31,6 +31,12 @@
                     
                     <!-- Forgot Password Form -->
                     <form action="/forgot-password" method="POST">
+                        @csrf
+                        @if(session('status'))
+                        <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                            <span class="block sm:inline">{{ session('status') }}</span>
+                        </div>
+                        @endif
                         <!-- Email -->
                         <div class="mb-6">
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>

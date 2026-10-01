@@ -37,11 +37,25 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
-Route::view('/reset-password', 'auth.reset-password')->name('password.reset');
+Route::post('/forgot-password', function () {
+    return back()->with('status', 'Si un compte existe avec cet email, un lien de réinitialisation sera envoyé. (Fonctionnalité email à configurer.)');
+})->name('password.email');
+Route::get('/reset-password/{token?}', function ($token = null) {
+    return view('auth.reset-password', ['token' => $token ?? request('token'), 'email' => request('email')]);
+})->name('password.reset');
+Route::post('/reset-password', function () {
+    return redirect()->route('login')->with('status', 'Réinitialisation par lien email non configurée. Contactez l’administrateur.');
+})->name('password.update');
 
 Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'showProfile')->name('profile.show');
     Route::get('/profile/orders', 'showProfileOrders')->name('profile.show.orders');
+    Route::get('/profile/consultations', 'showProfileConsultations')->name('profile.consultations');
+    Route::get('/profile/favorites', 'showProfileFavorites')->name('profile.favorites');
+    Route::post('/favorites/toggle', 'toggleFavorite')->name('favorites.toggle');
+    Route::get('/profile/security', 'showProfileSecurity')->name('profile.security');
+    Route::put('/profile/security', 'updateProfilePassword')->name('profile.security.update');
+    Route::get('/profile/notifications', 'showProfileNotifications')->name('profile.notifications');
     Route::get('/profile/edit', 'showeditProfile')->name('profile.edit');
     Route::PUT('/profile/update', 'updateProfile')->name('profile.update');
     Route::get('/profile/edit/information/agricole', 'showeditProfileInformationAgricole')->name('profile.updateAgricole');
@@ -90,10 +104,12 @@ Route::controller(ConsultationController::class)->group(function () {
     Route::post('/rendezVous/payemnt', 'payementRendezVous')->name('rendezVous.payement');
 });
 
-Route::view('/appointments', 'appointments.index')->name('appointments.index');
-Route::view('/appointments/show', 'appointments.show')->name('appointments.show');
-Route::view('/consultations', 'consultations.index')->name('consultations.index');
-Route::view('/consultations/show', 'consultations.show')->name('consultations.show');
+Route::middleware('auth')->group(function () {
+    Route::view('/appointments', 'appointments.index')->name('appointments.index');
+    Route::view('/appointments/show', 'appointments.show')->name('appointments.show');
+    Route::view('/consultations', 'consultations.index')->name('consultations.index');
+    Route::view('/consultations/show', 'consultations.show')->name('consultations.show');
+});
 
 // Formation
 Route::controller(ArticleController::class)->group(function () {
@@ -170,9 +186,11 @@ Route::controller(AgricoleController::class)->group(function () {
 
 // Dashboard Expert Agricole
 
-Route::view('/expert/consultations', 'expert.consultations.index')->name('expert.consultations.index');
-Route::view('/expert/consultations/show', 'expert.consultations.show')->name('expert.consultations.show');
-Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
+Route::middleware('auth')->group(function () {
+    Route::view('/expert/consultations', 'expert.consultations.index')->name('expert.consultations.index');
+    Route::view('/expert/consultations/show', 'expert.consultations.show')->name('expert.consultations.show');
+    Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
+});
 
 
 Route::controller(VeterinaireController::class)->group(function () {
@@ -189,9 +207,11 @@ Route::controller(VeterinaireController::class)->group(function () {
 
 // Dashboard Vétérinaire
 // Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
-Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
-Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
-Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('vet.consultations.respond');
+Route::middleware('auth')->group(function () {
+    Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
+    Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
+    Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('vet.consultations.respond');
+});
 
 
 Route::controller(ClientController::class)->group(function () {
@@ -203,8 +223,10 @@ Route::controller(ClientController::class)->group(function () {
 });
 
 // Dashboard Client
-Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
-Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
+Route::middleware('auth')->group(function () {
+    Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
+    Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
+});
 
 
 Route::view('/not-found', 'error.404')->name('error.404');

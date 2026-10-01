@@ -12,7 +12,7 @@ class CommandeRepository implements CommandeRepositoryInterface
     }
     
     public function getCommandeById(int $id){
-
+        return Commande::find($id);
     }
     
     public function modifierCommande(int $id, array $data){

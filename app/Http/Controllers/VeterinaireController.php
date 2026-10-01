@@ -16,6 +16,7 @@ class VeterinaireController extends Controller
 
     public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, ClientRepositoryInterface $clientRepository, RendezVousRepositoryInterface $rendezVousRepository)
     {
+        $this->middleware('auth');
         $this->rendezVousRepository = $rendezVousRepository;
         $this->clientRepository = $clientRepository;
         $this->utilisateurRepository = $utilisateurRepository;
@@ -79,8 +80,13 @@ class VeterinaireController extends Controller
 
     public function vetConsultationsShow(Request $request)
     {
-        // dd($request->id);
-        $consultation = $this->rendezVousRepository->getRendezVousById($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
+        $consultation = $this->rendezVousRepository->getRendezVousById($validated['id']);
+        if (!$consultation) {
+            abort(404, 'Consultation introuvable.');
+        }
         $consultation->client = $this->utilisateurRepository->getById($consultation->client);
 
         // dd($rendezVous);
@@ -91,50 +97,58 @@ class VeterinaireController extends Controller
 
     public function vetAppointmentsAccept(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'approved'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
 
-        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+        return redirect()->route('vet.consultations.show', 'id=' . $validated['id']);
     }
 
     public function vetAppointmentsRefuse(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'cancel'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
 
-        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+        return redirect()->route('vet.consultations.show', 'id=' . $validated['id']);
     }
 
     public function vetAppointmentsAccepteAnnulation(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'approved-canceling'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
 
-        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+        return redirect()->route('vet.consultations.show', 'id=' . $validated['id']);
     }
 
     public function vetAppointmentsRefuserAnnulation(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'cancel-canceling'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
 
-        return redirect()->route('vet.consultations.show', 'id=' . $request->id);
+        return redirect()->route('vet.consultations.show', 'id=' . $validated['id']);
     }
 
     public function veterinaireAppointmentsIndexFiltrer(Request $request)

@@ -15,6 +15,7 @@ class ArticleController extends Controller
 
     public function __construct(ArticleRepositoryInterface $articleRepository, CommentaireRepositoryInterface $commentaireRepository, UtilisateurRepositoryInterface $utilisateurRepository)
     {
+        $this->middleware('auth')->only(['articlesAddComment', 'articlesDeleteComment', 'articleseditComment', 'articleseditCommentSubmit']);
         $this->articleRepository = $articleRepository;
         $this->commentaireRepository = $commentaireRepository;
         $this->utilisateurRepository = $utilisateurRepository;
@@ -40,27 +41,9 @@ class ArticleController extends Controller
 
         $Utilisateuradmin = null;
         foreach ($articles as $article) {
-            $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
-            $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
-
-            $backgroundColor = $backgroundColors[array_rand($backgroundColors)];
-            $textColor = (in_array($backgroundColor, ['000000', '4CAF50', '3F51B5'])) ? 'FFFFFF' : '000000';
-
-            $encodedTitle = urlencode($article->titre);
-            $imageUrl = $article->photo;
-
-            if (empty($imageUrl)) {
-                $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+            if (empty($article->photo)) {
+                $article->photo = '/images/farm.jpg';
             }
-
-            $imageExists = @getimagesize($imageUrl);
-            // dd($imageExists);
-            if ($imageExists) {
-                $article->photo = $imageUrl;
-            } else {
-                $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-            }
-            // dd($article->photo);
 
             // dd($article);
             $admin = $this->getAdminById($article->auteur);
@@ -87,25 +70,8 @@ class ArticleController extends Controller
             return redirect()->route('articles.index')->with('error', 'Article not found.');
         }
 
-        $backgroundColors = ['000000', 'FF5733', '4CAF50', 'FFC107', '3F51B5', 'E91E63'];
-        $textColors = ['FFFFFF', '000000', 'FF5733', '4CAF50', 'FFFFFF', '3F51B5'];
-
-        $backgroundColor = $backgroundColors[array_rand($backgroundColors)];
-        $textColor = (in_array($backgroundColor, ['000000', '4CAF50', '3F51B5'])) ? 'FFFFFF' : '000000';
-
-        $encodedTitle = urlencode($article->titre);
-        $imageUrl = $article->photo;
-
-        if (empty($imageUrl)) {
-            $imageUrl = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
-        }
-        $imageExists = @getimagesize($imageUrl);
-
-
-        if ($imageExists) {
-            $article->photo = $imageUrl;
-        } else {
-            $article->photo = "https://placehold.co/600x400/$backgroundColor/$textColor?text=$encodedTitle";
+        if (empty($article->photo)) {
+            $article->photo = '/images/farm.jpg';
         }
 
         $admin = $this->getAdminById($article->auteur);
@@ -171,16 +137,22 @@ class ArticleController extends Controller
     }
 
     public function articleseditCommentSubmit(Request $request){
-        // dd($request->all());
         $validated = $request->validate([
             'commentaire_id' => 'required|integer|exists:commentaires,id',
             'contenu' => 'required|string',
             'article_id' => 'required|integer|exists:articles,id'
         ]);
-        // dd($validated);
         $this->commentaireRepository->modifierCommentaire($validated['commentaire_id'], $validated);
-        //  $comm = $this->commentaireRepository->getCommentaireById($validated['commentaire_id']);
-        //  dd($comm);
         return redirect()->route('articles.show', ['id' => $validated['article_id']])->with('success', 'Commentaire modifié avec succès.');
+    }
+
+    public function articlesTag(Request $request)
+    {
+        $validated = $request->validate([
+            'tag' => 'sometimes|string|max:255',
+            'tag_id' => 'sometimes|integer',
+        ]);
+
+        return redirect()->route('articles.index')->with('info', 'Filtrage par tag bientôt disponible.');
     }
 }

@@ -11,7 +11,7 @@ class Document extends Model
 
     protected $table = 'documents'; 
 
-    protected $fillable = ['rendez_vous', 'nom_fichier', 'chemin', 'type_fichier'];
+    protected $fillable = ['rendez_vous', 'nom', 'chemin', 'type', 'expert', 'client', 'pdf_content'];
 
     public function rendezVous(){
         return $this->belongsTo(RendezVous::class);

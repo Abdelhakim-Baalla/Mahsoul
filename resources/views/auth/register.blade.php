@@ -27,36 +27,36 @@
                             <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Type de compte</label>
                             <select id="type" name="type" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                                 <option value="">Sélectionnez votre type de compte</option>
-                                <option value="client">Client</option>
-                                <option value="veterinaire">Vétérinaire</option>
-                                <option value="agricole">Expert agricole</option>
+                                <option value="client" {{ old('type') == 'client' ? 'selected' : '' }}>Client</option>
+                                <option value="veterinaire" {{ old('type') == 'veterinaire' ? 'selected' : '' }}>Vétérinaire</option>
+                                <option value="agricole" {{ old('type') == 'agricole' ? 'selected' : '' }}>Expert agricole</option>
                             </select>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                             <div>
                                 <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
-                                <input type="text" id="prenom" name="prenom" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                <input type="text" id="prenom" name="prenom" value="{{ old('prenom') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                             </div>
                             <div>
                                 <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
-                                <input type="text" id="nom" name="nom" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                                <input type="text" id="nom" name="nom" value="{{ old('nom') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                             </div>
                         </div>
 
                         <div class="mb-6">
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                         </div>
 
                         <div class="mb-6">
                             <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
-                            <input type="tel" id="telephone" name="telephone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                            <input type="tel" id="telephone" name="telephone" value="{{ old('telephone') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
                         </div>
 
                         <div class="mb-6">
                             <label for="adresse" class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
-                            <textarea id="adresse" name="adresse" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required></textarea>
+                            <textarea id="adresse" name="adresse" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>{{ old('adresse') }}</textarea>
                         </div>
 
                         <div class="mb-6">
@@ -72,7 +72,7 @@
 
                         <div class="mb-6">
                             <label for="photo" class="block text-sm font-medium text-gray-700 mb-1">Lien de Photo Profile</label>
-                            <input type="text" id="photo" name="photo" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                            <input type="text" id="photo" name="photo" value="{{ old('photo') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
                         </div>
 
                         <div class="mb-6">

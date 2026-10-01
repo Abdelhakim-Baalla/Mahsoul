@@ -19,6 +19,7 @@ class ProductController extends Controller
 
     public function __construct(OrderItemRepositoryInterface $orderItem, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, CategorieRepositoryInterface $categorieRepository)
     {
+        $this->middleware('auth')->only(['checkoutIndex', 'checkoutpayment', 'ordersIndex', 'ordersShow']);
         $this->produitRepository = $produitRepository;
         $this->categorieRepository = $categorieRepository;
         $this->commandeRepository = $commandeRepository;
@@ -47,14 +48,13 @@ class ProductController extends Controller
 
     public function productShow(Request $request)
     {
-        // $cart = session()->get('cart', []);
-        // dd($cart);
-        // dd($request->id);    
-        $product = $this->produitRepository->getProduitById($request->id);
-        // dd($product); 
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:produits,id',
+        ]);
+        $product = $this->produitRepository->getProduitById($validated['id']);
 
         if (empty($product)) {
-            return view('products.index', ['product' => []]);
+            return redirect()->route('products.index')->with('error', 'Produit introuvable.');
         }
         $categorie = $this->categorieRepository->getCategorieById($product->categorie);
         if ($categorie) {
@@ -259,5 +259,28 @@ class ProductController extends Controller
 
         return redirect()->route('cart.index')
             ->with('success', 'Votre panier a été vidé avec succès');
+    }
+
+    public function ordersIndex()
+    {
+        $commandes = $this->commandeRepository->getCommandesByClientId(auth()->id());
+
+        return view('orders.index', compact('commandes'));
+    }
+
+    public function ordersShow(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|integer',
+        ]);
+
+        $commande = $this->commandeRepository->getCommandeById($validated['id']);
+        if (!$commande) {
+            return redirect()->route('orders.index')->with('error', 'Commande introuvable.');
+        }
+
+        $items = $this->orderItem->getOrderItemByCommandeId($commande->id ?? $validated['id']);
+
+        return view('orders.show', compact('commande', 'items'));
     }
 }

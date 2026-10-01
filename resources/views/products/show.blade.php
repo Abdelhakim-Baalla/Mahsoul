@@ -141,6 +141,14 @@
                                                 Ajouter au panier
                                             </button>
                                         </form>
+                                        <form action="{{ route('favorites.toggle') }}" method="POST" class="mt-3">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$product->id}}">
+                                            <button type="submit" class="flex items-center text-red-500 hover:text-red-700 font-medium py-2 transition duration-150 ease-in-out">
+                                                <i class="fas fa-heart mr-2"></i>
+                                                Ajouter aux favoris
+                                            </button>
+                                        </form>
 
                                     </div>
                                     @else

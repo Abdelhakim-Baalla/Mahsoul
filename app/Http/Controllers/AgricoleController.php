@@ -14,6 +14,7 @@ class AgricoleController extends Controller
 
     public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, RendezVousRepositoryInterface $rendezVousRepository)
     {
+        $this->middleware('auth');
         $this->rendezVousRepository = $rendezVousRepository; 
         $this->utilisateurRepository = $utilisateurRepository; 
     }
@@ -58,8 +59,13 @@ class AgricoleController extends Controller
 
     public function agricoleAppointmentsShow (Request $request)
     {
-        // dd($request->all());
-        $rendezVous = $this->rendezVousRepository->getRendezVousById($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
+        $rendezVous = $this->rendezVousRepository->getRendezVousById($validated['id']);
+        if (!$rendezVous) {
+            abort(404, 'Rendez-vous introuvable.');
+        }
         $rendezVous->client = $this->utilisateurRepository->getById($rendezVous->client);
         // dd($rendezVous->client);
 
@@ -68,48 +74,56 @@ class AgricoleController extends Controller
 
     public function agricoleAppointmentsAccept(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'approved'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
         
         return redirect()->route('agricole.appointments.index');
     }
 
      public function agricoleAppointmentsRefuse(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'cancel'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
         
         return redirect()->route('agricole.appointments.index');
     }
 
      public function agricoleAppointmentsAccepteAnnulation(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'approved-canceling'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
         
         return redirect()->route('agricole.appointments.index');
     }
 
     public function agricoleAppointmentsRefuserAnnulation(Request $request)
     {
-        // dd($request->id);
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:rendez_vous,id',
+        ]);
         $data = [
             'statut' => 'cancel-canceling'
         ];
 
-        $this->rendezVousRepository->modifierRendezVous($request->id, $data);
+        $this->rendezVousRepository->modifierRendezVous($validated['id'], $data);
         
         return redirect()->route('agricole.appointments.index');
     }
