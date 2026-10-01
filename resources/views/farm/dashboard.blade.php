@@ -24,6 +24,8 @@
         </div>
         @endif
 
+        @include('farm.partials.nav', ['active' => 'dashboard'])
+
         <!-- KPI cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="bg-white rounded-lg shadow-md p-6">
@@ -91,7 +93,7 @@
             <!-- Tâches en cours -->
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-clipboard-list mr-2 text-primary-600"></i>Tâches en cours</h2>
+                    <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-clipboard-list mr-2 text-primary-600"></i>Tâches en cours</h2><a href="{{ route('farm.tasks.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
                 @if($tachesEnCours->isEmpty())
                 <p class="p-6 text-gray-500">Aucune tâche en cours.</p>
@@ -113,7 +115,7 @@
             <!-- Stocks -->
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-warehouse mr-2 text-primary-600"></i>Stocks intrants</h2>
+                    <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-warehouse mr-2 text-primary-600"></i>Stocks intrants</h2><a href="{{ route('farm.inputs.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
                 @if($inputs->isEmpty())
                 <p class="p-6 text-gray-500">Aucun intrant en stock.</p>
@@ -139,7 +141,7 @@
             <!-- Caisse -->
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-cash-register mr-2 text-primary-600"></i>Caisse récente</h2>
+                    <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-cash-register mr-2 text-primary-600"></i>Caisse récente</h2><a href="{{ route('farm.caisse.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
                 @if($transactions->isEmpty())
                 <p class="p-6 text-gray-500">Aucune transaction.</p>
@@ -163,7 +165,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-hard-hat mr-2 text-primary-600"></i>Ouvriers actifs</h2>
+                    <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-hard-hat mr-2 text-primary-600"></i>Ouvriers actifs</h2><div class="flex gap-3"><a href="{{ route('farm.attendance.index') }}" class="text-primary-600 text-sm font-medium">Pointer →</a><a href="{{ route('farm.workers.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div></div>
                 </div>
                 <ul class="divide-y divide-gray-200">
                     @foreach($workers as $w)
@@ -183,7 +185,7 @@
             </div>
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-file-invoice mr-2 text-primary-600"></i>Factures en attente</h2>
+                    <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-file-invoice mr-2 text-primary-600"></i>Factures en attente</h2><a href="{{ route('farm.invoices.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
                 @if($facturesImpayees->isEmpty())
                 <p class="p-6 text-gray-500">Aucune facture en attente.</p>

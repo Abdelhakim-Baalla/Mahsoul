@@ -16,6 +16,12 @@
                         <i class="fas fa-print mr-2"></i>Imprimer
                     </button>
                 </div>
+                @if(!empty($qrDataUri))
+                <div class="mt-5 flex items-center gap-4 bg-white/10 rounded-lg p-3">
+                    <img src="{{ $qrDataUri }}" alt="QR {{ $lot->code }}" class="w-24 h-24 bg-white rounded">
+                    <p class="text-sm opacity-90">Scannez pour vérifier ce lot en ligne.<br><span class="font-mono">{{ $lot->code }}</span></p>
+                </div>
+                @endif
             </div>
             <div class="p-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>

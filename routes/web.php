@@ -196,6 +196,38 @@ Route::controller(FarmController::class)->group(function () {
     Route::post('/ferme/lots', 'lotStore')->name('farm.lots.store');
     Route::get('/ferme/lots/fiche', 'lotShow')->name('farm.lots.show');
     Route::post('/ferme/lots/statut', 'lotUpdateStatus')->name('farm.lots.status');
+    Route::get('/ferme/ouvriers', 'workersIndex')->name('farm.workers.index');
+    Route::get('/ferme/ouvriers/creer', 'workerCreate')->name('farm.workers.create');
+    Route::post('/ferme/ouvriers', 'workerStore')->name('farm.workers.store');
+    Route::get('/ferme/ouvriers/modifier', 'workerEdit')->name('farm.workers.edit');
+    Route::put('/ferme/ouvriers', 'workerUpdate')->name('farm.workers.update');
+    Route::get('/ferme/pointage', 'attendanceIndex')->name('farm.attendance.index');
+    Route::post('/ferme/pointage', 'attendanceStore')->name('farm.attendance.store');
+    Route::get('/ferme/taches', 'tasksIndex')->name('farm.tasks.index');
+    Route::get('/ferme/taches/creer', 'taskCreate')->name('farm.tasks.create');
+    Route::post('/ferme/taches', 'taskStore')->name('farm.tasks.store');
+    Route::post('/ferme/taches/statut', 'taskStatus')->name('farm.tasks.status');
+    Route::post('/ferme/taches/supprimer', 'taskDelete')->name('farm.tasks.delete');
+    Route::get('/ferme/stocks', 'inputsIndex')->name('farm.inputs.index');
+    Route::get('/ferme/stocks/creer', 'inputCreate')->name('farm.inputs.create');
+    Route::post('/ferme/stocks', 'inputStore')->name('farm.inputs.store');
+    Route::post('/ferme/stocks/utiliser', 'usageStore')->name('farm.inputs.use');
+    Route::get('/ferme/caisse', 'transactionsIndex')->name('farm.caisse.index');
+    Route::post('/ferme/caisse', 'transactionStore')->name('farm.caisse.store');
+    Route::post('/ferme/caisse/supprimer', 'transactionDelete')->name('farm.caisse.delete');
+    Route::get('/ferme/factures', 'invoicesIndex')->name('farm.invoices.index');
+    Route::get('/ferme/factures/creer', 'invoiceCreate')->name('farm.invoices.create');
+    Route::post('/ferme/factures', 'invoiceStore')->name('farm.invoices.store');
+    Route::get('/ferme/factures/fiche', 'invoiceShow')->name('farm.invoices.show');
+    Route::post('/ferme/factures/statut', 'invoiceStatus')->name('farm.invoices.status');
+    Route::get('/ferme/parcelles', 'parcelsIndex')->name('farm.parcels.index');
+    Route::get('/ferme/parcelles/creer', 'parcelCreate')->name('farm.parcels.create');
+    Route::post('/ferme/parcelles', 'parcelStore')->name('farm.parcels.store');
+    Route::get('/ferme/parcelles/modifier', 'parcelEdit')->name('farm.parcels.edit');
+    Route::put('/ferme/parcelles', 'parcelUpdate')->name('farm.parcels.update');
+    Route::post('/ferme/parcelles/supprimer', 'parcelDelete')->name('farm.parcels.delete');
+    Route::get('/ferme/paie', 'payrollIndex')->name('farm.payroll.index');
+    Route::post('/ferme/paie/comptabiliser', 'payrollBook')->name('farm.payroll.book');
 });
 
 // Dashboard Expert Agricole
