@@ -161,8 +161,8 @@ class FarmController extends Controller
 
         $qrDataUri = null;
         try {
-            $qr = \Endroid\QrCode\QrCode::create(route('farm.lots.show', ['id' => $lot->id]));
-            $qrDataUri = (new \Endroid\QrCode\Writer\PngWriter())->write($qr)->getDataUri();
+            $qr = new \Endroid\QrCode\QrCode(route('farm.lots.show', ['id' => $lot->id]));
+            $qrDataUri = (new \Endroid\QrCode\Writer\SvgWriter())->write($qr)->getDataUri();
         } catch (\Throwable $e) {
             $qrDataUri = null;
         }
