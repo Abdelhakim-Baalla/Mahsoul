@@ -676,4 +676,53 @@ class FarmController extends Controller
         );
         return redirect()->route('farm.caisse.index')->with('success', "Paie $mois (" . number_format($total, 0, ',', ' ') . ' DH) enregistrée en caisse.');
     }
+
+    // ---------- EXPORTS CSV ----------
+
+    public function exportTransactions(Request $request)
+    {
+        [$farm, $redir] = $this->farmOrDashboard();
+        if ($redir) return $redir;
+        $mois = $request->input('mois');
+        $query = $farm->transactions()->orderBy('date');
+        if ($mois && preg_match('/^\d{4}-\d{2}$/', $mois)) {
+            $query->where('date', 'like', $mois . '%');
+        }
+        $txs = $query->get();
+        $filename = 'caisse-' . $farm->id . '-' . ($mois ?: 'tout') . '.csv';
+        return response()->streamDownload(function () use ($txs) {
+            $out = fopen('php://output', 'w');
+            fwrite($out, "\xEF\xBB\xBF");
+            fputcsv($out, ['Date', 'Type', 'Categorie', 'Description', 'Reference', 'Montant (DH)'], ';');
+            foreach ($txs as $t) {
+                fputcsv($out, [
+                    $t->date ? $t->date->format('Y-m-d') : '',
+                    $t->type, $t->categorie, $t->description, $t->reference,
+                    number_format($t->montant, 2, ',', ''),
+                ], ';');
+            }
+            fclose($out);
+        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
+
+    public function exportLots()
+    {
+        [$farm, $redir] = $this->farmOrDashboard();
+        if ($redir) return $redir;
+        $lots = $farm->lots()->with('parcel')->orderBy('date_recolte')->get();
+        return response()->streamDownload(function () use ($lots) {
+            $out = fopen('php://output', 'w');
+            fwrite($out, "\xEF\xBB\xBF");
+            fputcsv($out, ['Code', 'Produit', 'Parcelle', 'Quantite', 'Unite', 'Date recolte', 'Calibrage', 'Destination', 'Client', 'Statut'], ';');
+            foreach ($lots as $l) {
+                fputcsv($out, [
+                    $l->code, $l->produit, $l->parcel->nom ?? '',
+                    $l->quantite, $l->unite,
+                    $l->date_recolte ? $l->date_recolte->format('Y-m-d') : '',
+                    $l->calibrage, $l->destination, $l->client_nom, $l->statut,
+                ], ';');
+            }
+            fclose($out);
+        }, 'lots-' . $farm->id . '.csv', ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
 }

@@ -11,6 +11,9 @@
             <a href="{{ route('farm.lots.create') }}" class="inline-block px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
                 <i class="fas fa-plus mr-2"></i>Nouveau lot
             </a>
+            <a href="{{ route('farm.lots.export') }}" class="inline-block px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200 ml-2">
+                <i class="fas fa-download mr-2"></i>CSV
+            </a>
         </div>
         @if(session('success'))
         <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-md">

@@ -4,7 +4,10 @@
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
     <div class="bg-white rounded-lg shadow-md p-6"><p class="text-sm text-gray-600">Recettes totales</p><p class="text-2xl font-bold text-green-600">+{{ number_format($recettes, 0, ',', ' ') }} DH</p></div>
     <div class="bg-white rounded-lg shadow-md p-6"><p class="text-sm text-gray-600">Dépenses totales</p><p class="text-2xl font-bold text-red-600">−{{ number_format($depenses, 0, ',', ' ') }} DH</p></div>
-    <div class="bg-white rounded-lg shadow-md p-6"><p class="text-sm text-gray-600">Solde</p><p class="text-2xl font-bold {{ ($recettes - $depenses) >= 0 ? 'text-green-600' : 'text-red-600' }}">{{ number_format($recettes - $depenses, 0, ',', ' ') }} DH</p></div>
+    <div class="bg-white rounded-lg shadow-md p-6 flex items-center justify-between">
+        <div><p class="text-sm text-gray-600">Solde</p><p class="text-2xl font-bold {{ ($recettes - $depenses) >= 0 ? 'text-green-600' : 'text-red-600' }}">{{ number_format($recettes - $depenses, 0, ',', ' ') }} DH</p></div>
+        <a href="{{ route('farm.caisse.export') }}" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200"><i class="fas fa-download mr-2"></i>CSV</a>
+    </div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <div class="bg-white rounded-lg shadow-md p-6">

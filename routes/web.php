@@ -228,6 +228,8 @@ Route::controller(FarmController::class)->group(function () {
     Route::post('/ferme/parcelles/supprimer', 'parcelDelete')->name('farm.parcels.delete');
     Route::get('/ferme/paie', 'payrollIndex')->name('farm.payroll.index');
     Route::post('/ferme/paie/comptabiliser', 'payrollBook')->name('farm.payroll.book');
+    Route::get('/ferme/caisse/export', 'exportTransactions')->name('farm.caisse.export');
+    Route::get('/ferme/lots/export', 'exportLots')->name('farm.lots.export');
 });
 
 // Dashboard Expert Agricole
