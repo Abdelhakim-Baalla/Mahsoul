@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function __construct(CommentaireRepositoryInterface $commentaireRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, AdminRepositoryInterface $adminRepository, TagRepositoryInterface $tagRepository, ArticleRepositoryInterface $articleRepository, CategorieRepositoryInterface $categorieRepository, UtilisateurRepositoryInterface $utilisateurRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role:admin']);
         $this->tagRepository = $tagRepository;
         $this->articleRepository = $articleRepository;
         $this->categorieRepository = $categorieRepository;

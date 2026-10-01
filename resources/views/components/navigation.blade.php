@@ -14,6 +14,11 @@
                     <a href="{{ route('products.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Marketplace</a>
                     <a href="{{ route('experts.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Consultations</a>
                     <a href="{{ route('articles.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Formation</a>
+                    @auth
+                    @if(in_array(Auth::user()->type, ['agricole', 'admin']))
+                    <a href="{{ route('farm.dashboard') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Ma Ferme</a>
+                    @endif
+                    @endauth
                     <a href="{{ route('about') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">À propos</a>
                     <a href="{{ route('contact') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Contact</a>
                 </div>

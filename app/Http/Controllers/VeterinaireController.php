@@ -16,7 +16,7 @@ class VeterinaireController extends Controller
 
     public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, ClientRepositoryInterface $clientRepository, RendezVousRepositoryInterface $rendezVousRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role:veterinaire,admin']);
         $this->rendezVousRepository = $rendezVousRepository;
         $this->clientRepository = $clientRepository;
         $this->utilisateurRepository = $utilisateurRepository;

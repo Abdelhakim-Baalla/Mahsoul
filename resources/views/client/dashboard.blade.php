@@ -138,6 +138,6 @@
 </script>
 @elseif(Auth::user()->type == 'veterinaire')
 <script>
-    window.location.href = "{{ route('veterinaire.dashboard') }}";
+    window.location.href = "{{ route('vet.dashboard') }}";
 </script>
 @endif

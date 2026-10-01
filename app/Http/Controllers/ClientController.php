@@ -19,7 +19,7 @@ class ClientController extends Controller
 
     public function __construct(DocumentRepositoryInterface $documentRepository, UtilisateurRepositoryInterface $utilisateurRepository, RendezVousRepositoryInterface $rendezVousRepository, CommandeRepositoryInterface $commandeRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role:client,admin']);
         $this->commandeRepository = $commandeRepository;
         $this->rendezVousRepository = $rendezVousRepository;
         $this->utilisateurRepository = $utilisateurRepository;

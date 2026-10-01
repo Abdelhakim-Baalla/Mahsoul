@@ -14,7 +14,7 @@ class AgricoleController extends Controller
 
     public function __construct(UtilisateurRepositoryInterface $utilisateurRepository, RendezVousRepositoryInterface $rendezVousRepository)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role:agricole,admin']);
         $this->rendezVousRepository = $rendezVousRepository; 
         $this->utilisateurRepository = $utilisateurRepository; 
     }

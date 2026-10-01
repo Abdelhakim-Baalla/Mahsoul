@@ -7,6 +7,7 @@ use App\Http\Controllers\AgricoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\FarmController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VeterinaireController;
@@ -105,8 +106,10 @@ Route::controller(ConsultationController::class)->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::view('/appointments', 'appointments.index')->name('appointments.index');
-    Route::view('/appointments/show', 'appointments.show')->name('appointments.show');
+    Route::view('/appointments', 'rendezVous.index')->name('appointments.index');
+    Route::get('/appointments/show', function () {
+        return redirect()->route('profile.consultations');
+    })->name('appointments.show');
     Route::view('/consultations', 'consultations.index')->name('consultations.index');
     Route::view('/consultations/show', 'consultations.show')->name('consultations.show');
 });
@@ -184,12 +187,36 @@ Route::controller(AgricoleController::class)->group(function () {
     Route::get('/agricole/appointments/refuser/annulation', 'agricoleAppointmentsRefuserAnnulation')->name('rendezVous.refuser.annulation');
 });
 
+// Farm OS - Gestion d'exploitation (traçabilité, ouvriers, stocks, caisse)
+Route::controller(FarmController::class)->group(function () {
+    Route::get('/ferme', 'dashboard')->name('farm.dashboard');
+    Route::post('/ferme', 'storeFarm')->name('farm.store');
+    Route::get('/ferme/lots', 'lotsIndex')->name('farm.lots.index');
+    Route::get('/ferme/lots/creer', 'lotCreate')->name('farm.lots.create');
+    Route::post('/ferme/lots', 'lotStore')->name('farm.lots.store');
+    Route::get('/ferme/lots/fiche', 'lotShow')->name('farm.lots.show');
+    Route::post('/ferme/lots/statut', 'lotUpdateStatus')->name('farm.lots.status');
+});
+
 // Dashboard Expert Agricole
 
-Route::middleware('auth')->group(function () {
-    Route::view('/expert/consultations', 'expert.consultations.index')->name('expert.consultations.index');
-    Route::view('/expert/consultations/show', 'expert.consultations.show')->name('expert.consultations.show');
-    Route::view('/expert/consultations/respond', 'expert.consultations.respond')->name('expert.consultations.respond');
+Route::middleware(['auth', 'role:agricole,veterinaire,admin'])->group(function () {
+    Route::view('/expert/consultations', 'agricole.consultations.index')->name('expert.consultations.index');
+    Route::get('/expert/consultations/show', function (\Illuminate\Http\Request $request) {
+        $type = auth()->user()->type ?? null;
+        $target = $type === 'veterinaire' ? 'vet.consultations.show' : 'agricole.appointments.show';
+        $fallback = $type === 'veterinaire' ? 'vet.consultations.index' : 'agricole.appointments.index';
+        if ($request->filled('id') && \App\Models\RendezVous::where('id', $request->id)->exists()) {
+            return redirect()->route($target, ['id' => $request->id]);
+        }
+        return redirect()->route($fallback);
+    })->name('expert.consultations.show');
+    Route::get('/expert/consultations/respond', function () {
+        if ((auth()->user()->type ?? null) === 'veterinaire') {
+            return redirect()->route('vet.consultations.index')->with('info', 'La réponse se fait depuis le détail de la consultation.');
+        }
+        return redirect()->route('agricole.appointments.index')->with('info', 'La réponse se fait depuis le détail du rendez-vous.');
+    })->name('expert.consultations.respond');
 });
 
 
@@ -207,10 +234,17 @@ Route::controller(VeterinaireController::class)->group(function () {
 
 // Dashboard Vétérinaire
 // Route::view('/vet', 'vet.dashboard')->name('vet.dashboard');
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:veterinaire,admin'])->group(function () {
     Route::view('/vet/appointments', 'vet.appointments.index')->name('vet.appointments.index');
-    Route::view('/vet/appointments/show', 'vet.appointments.show')->name('vet.appointments.show');
-    Route::view('/vet/consultations/respond', 'vet.consultations.respond')->name('vet.consultations.respond');
+    Route::get('/vet/appointments/show', function (\Illuminate\Http\Request $request) {
+        if ($request->filled('id') && \App\Models\RendezVous::where('id', $request->id)->exists()) {
+            return redirect()->route('vet.consultations.show', ['id' => $request->id]);
+        }
+        return redirect()->route('vet.consultations.index');
+    })->name('vet.appointments.show');
+    Route::get('/vet/consultations/respond', function () {
+        return redirect()->route('vet.consultations.index')->with('info', 'La réponse se fait depuis le détail de la consultation.');
+    })->name('vet.consultations.respond');
 });
 
 
@@ -223,9 +257,9 @@ Route::controller(ClientController::class)->group(function () {
 });
 
 // Dashboard Client
-Route::middleware('auth')->group(function () {
-    Route::view('/client/appointments', 'client.appointments.index')->name('client.appointments.index');
-    Route::view('/client/orders', 'client.orders.index')->name('client.orders.index');
+Route::middleware(['auth', 'role:client,admin'])->group(function () {
+    Route::redirect('/client/appointments', '/profile/consultations')->name('client.appointments.index');
+    Route::redirect('/client/orders', '/profile/orders')->name('client.orders.index');
 });
 
 
