@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Repositories\Interfaces\ArticleRepositoryInterface;
 use App\Repositories\Interfaces\CommentaireRepositoryInterface;
 use App\Repositories\Interfaces\UtilisateurRepositoryInterface;
@@ -31,12 +32,20 @@ class ArticleController extends Controller
         return $this->articleRepository->getUtilisateurAdminById($id);
     }
 
-    public function articlesIndex()
+    public function articlesIndex(Request $request)
     {
-        $articles = $this->articleRepository->getPublishedArticles();
+        $filters = $request->validate([
+            'q' => 'nullable|string|max:255',
+            'categorie' => 'nullable|string|max:255',
+            'tri' => 'nullable|string|in:recent,az',
+        ]);
+
+        $articles = $this->articleRepository->searchArticles($filters);
+        $categories = Article::where('statut', 'like', 'publié')
+            ->select('categorie')->distinct()->orderBy('categorie')->pluck('categorie');
         // dd($articles);
-        if (empty($articles)) {
-            return view('articles.index', ['articles' => []]);
+        if ($articles->isEmpty()) {
+            return view('articles.index', ['articles' => $articles, 'categories' => $categories, 'filters' => $filters, 'Utilisateuradmin' => null]);
         }
 
         $Utilisateuradmin = null;
@@ -55,7 +64,7 @@ class ArticleController extends Controller
             // dd($article);
         }
 
-        return view('articles.index', compact('articles', 'Utilisateuradmin'));
+        return view('articles.index', compact('articles', 'Utilisateuradmin', 'categories', 'filters'));
     }
 
     public function articlesShow(Request $request)

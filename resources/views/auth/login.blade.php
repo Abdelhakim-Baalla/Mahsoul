@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-primary-50">
     <div class="w-full h-screen flex items-center justify-center mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="rounded-lg shadow-lg overflow-hidden bg-white max-w-4xl w-full mx-auto">
+        <div class="rounded-3xl shadow-xl overflow-hidden bg-white max-w-4xl w-full mx-auto">
             @if($errors->any())
             <div class="px-4 py-2 bg-red-100">
                 @foreach($errors->all() as $error)
@@ -22,7 +22,7 @@
 
                 <div class="md:w-3/5 lg:w-1/2 p-8 md:p-10">
                     <div class="text-center mb-8">
-                        <h2 class="text-2xl font-bold text-gray-800">Connectez-vous à votre compte</h2>
+                        <h2 class="font-display text-2xl font-extrabold text-forest">Connectez-vous à votre compte</h2>
                         <p class="mt-2 text-gray-600">Accédez à votre espace personnel</p>
                     </div>
 
@@ -64,7 +64,7 @@
                             </label>
                         </div>
 
-                        <button type="submit"  onclick="return validateLoginForm()" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-md transition duration-150 ease-in-out">
+                        <button type="submit"  onclick="return validateLoginForm()" class="w-full bg-forest hover:bg-leaf text-white font-display font-bold py-3 px-4 rounded-full transition duration-200">
                             Se connecter
                         </button>
 

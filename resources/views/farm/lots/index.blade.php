@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-primary-800"><i class="fas fa-barcode mr-2"></i>Lots de récolte — {{ $farm->nom }}</h1>
+                <h1 class="font-display text-3xl font-extrabold text-forest"><i class="fas fa-barcode mr-2"></i>Lots de récolte — {{ $farm->nom }}</h1>
                 <p class="mt-2 text-gray-600">Traçabilité complète : parcelle → intrants → récolte → destination</p>
             </div>
             <a href="{{ route('farm.lots.create') }}" class="inline-block px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">

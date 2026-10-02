@@ -1,26 +1,26 @@
-<nav class="bg-white shadow-md">
+<nav class="bg-white/95 backdrop-blur shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('welcome') }}" class="flex items-center">
-                    <img class="h-12 w-auto" src="{{ asset('images/logo-white.png') }}" alt="Mahsoul Logo">
-                        <span class="ml-3 text-2xl font-bold text-primary-700">Mahsoul</span>
+                    <img class="h-12 w-auto rounded-full" src="{{ asset('images/logo-white.png') }}" alt="Mahsoul Logo">
+                        <span class="ml-3 text-2xl font-extrabold text-forest font-display">Mahsoul<span class="text-leaf">.</span></span>
                     </a>
                 </div>
                 
                 <div class="hidden md:ml-10 md:flex md:items-center md:space-x-6">
-                    <a href="{{ route('welcome') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Accueil</a>
-                    <a href="{{ route('products.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Marketplace</a>
-                    <a href="{{ route('experts.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Consultations</a>
-                    <a href="{{ route('articles.index') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Formation</a>
+                    <a href="{{ route('welcome') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Accueil</a>
+                    <a href="{{ route('products.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Marketplace</a>
+                    <a href="{{ route('experts.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Consultations</a>
+                    <a href="{{ route('articles.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Formation</a>
                     @auth
                     @if(in_array(Auth::user()->type, ['agricole', 'admin']))
-                    <a href="{{ route('farm.dashboard') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Ma Ferme</a>
+                    <a href="{{ route('farm.dashboard') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Ma Ferme</a>
                     @endif
                     @endauth
-                    <a href="{{ route('about') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">À propos</a>
-                    <a href="{{ route('contact') }}" class="text-primary-700 hover:text-primary-500 px-3 py-2 font-medium">Contact</a>
+                    <a href="{{ route('about') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">À propos</a>
+                    <a href="{{ route('contact') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Contact</a>
                 </div>
             </div>
             
@@ -157,27 +157,34 @@
 
     /* Boutons connexion/inscription */
     .login-button {
-        color: #047857; /* primary-700 */
-        padding: 0.5rem 1rem;
-        font-weight: 500;
-        transition: color 0.2s;
+        color: #0e2207;
+        padding: 0.6rem 1.25rem;
+        font-weight: 700;
+        font-family: 'Figtree', sans-serif;
+        border: 2px solid #0e2207;
+        border-radius: 9999px;
+        transition: all 0.25s;
     }
 
     .login-button:hover {
-        color: #065f46; /* primary-800 */
+        background: #0e2207;
+        color: #fff;
     }
 
     .register-button {
-        background-color: #059669; /* primary-600 */
+        background-color: #0e2207;
         color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        font-weight: 500;
-        transition: background-color 0.2s;
+        padding: 0.7rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-family: 'Figtree', sans-serif;
+        transition: all 0.25s;
     }
 
     .register-button:hover {
-        background-color: #047857; /* primary-700 */
+        background-color: #1f6306;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px -10px rgba(14,34,7,.5);
     }
 </style>
 

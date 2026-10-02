@@ -5,7 +5,7 @@
 <div class="bg-primary-50 min-h-screen py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-primary-800">Mon profil</h1>
+            <h1 class="font-display text-3xl font-extrabold text-forest">Mon profil</h1>
             <p class="mt-2 text-lg text-gray-600">Gérez vos informations personnelles et vos préférences</p>
         </div>
         @if ($errors->any())

@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-primary-50 py-12">
 
-        <div class="rounded-lg shadow-lg overflow-hidden bg-white">
+        <div class="rounded-3xl shadow-xl overflow-hidden bg-white">
             @if($errors->all())
             <ul class="errorban px-4 py-2 bg-red-100">
                 @foreach($errors->all() as $error)
@@ -84,7 +84,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" onclick="return validateRegisterForm()" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-md transition duration-150 ease-in-out">
+                        <button type="submit" onclick="return validateRegisterForm()" class="w-full bg-forest hover:bg-leaf text-white font-display font-bold py-3 px-4 rounded-full transition duration-200">
                             Créer mon compte
                         </button>
 

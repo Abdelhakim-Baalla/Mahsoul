@@ -26,12 +26,22 @@ class ProductController extends Controller
         $this->orderItem = $orderItem;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->produitRepository->getAllProduitsClient();
+        $filters = $request->validate([
+            'q' => 'nullable|string|max:255',
+            'categorie' => 'nullable|integer|exists:categories,id',
+            'prix_min' => 'nullable|numeric|min:0',
+            'prix_max' => 'nullable|numeric|min:0',
+            'en_stock' => 'nullable|in:1',
+            'tri' => 'nullable|string|in:recent,prix_asc,prix_desc',
+        ]);
+
+        $products = $this->produitRepository->searchProduits($filters);
+        $categories = $this->categorieRepository->getAllCategories();
         // dd($products);
-        if (empty($products)) {
-            return view('products.index', ['products' => []]);
+        if ($products->isEmpty()) {
+            return view('products.index', ['products' => $products, 'categories' => $categories, 'filters' => $filters]);
         }
         foreach ($products as $product) {
             // dd($product->categorie);
@@ -43,7 +53,7 @@ class ProductController extends Controller
             }
             // dd($product->categorie);
         }
-        return view('products.index', compact('products'));
+        return view('products.index', compact('products', 'categories', 'filters'));
     }
 
     public function productShow(Request $request)

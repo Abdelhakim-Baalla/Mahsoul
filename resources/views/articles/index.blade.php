@@ -7,35 +7,36 @@
 <section class="py-12 diagonal-box bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <form action="{{ route('articles.index') }}" method="GET" class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="flex-1 relative">
-                    <input type="text" placeholder="Rechercher un article..."
+                    <input type="text" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Rechercher un article..."
                         class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-3 top-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
-                <div class="flex flex-wrap gap-3">
-                    <select class="border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                <div class="flex flex-wrap gap-3 items-center">
+                    <select name="categorie" onchange="this.form.submit()" class="border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
                         <option value="">Toutes catégories</option>
-                        <option value="agriculture">Agriculture</option>
-                        <option value="elevage">Élevage</option>
-                        <option value="irrigation">Irrigation</option>
-                        <option value="maladies">Maladies</option>
-                        <option value="techniques">Techniques</option>
+                        @foreach($categories as $cat)
+                        <option value="{{ $cat }}" {{ ($filters['categorie'] ?? '') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                        @endforeach
                     </select>
-                    <select class="border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                        <option value="recent">Plus récents</option>
-                        <option value="popular">Plus populaires</option>
-                        <option value="az">A-Z</option>
+                    <select name="tri" onchange="this.form.submit()" class="border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        <option value="recent" {{ ($filters['tri'] ?? 'recent') == 'recent' ? 'selected' : '' }}>Plus récents</option>
+                        <option value="az" {{ ($filters['tri'] ?? '') == 'az' ? 'selected' : '' }}>A-Z</option>
                     </select>
+                    <button type="submit" class="px-5 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-xl">Rechercher</button>
+                    @if(!empty(array_filter($filters ?? [])))
+                    <a href="{{ route('articles.index') }}" class="text-sm text-gray-500 hover:underline">Réinitialiser</a>
+                    @endif
                 </div>
-            </div>
+            </form>
         </div>
 
         <div class="mb-12">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">Tous les articles</h2>
+                <div><span class="eco-eyebrow mb-2">Formation</span><h2 class="font-display text-2xl font-extrabold text-forest">Tous les articles</h2></div>
             </div>
 
             @if($articles->isEmpty())

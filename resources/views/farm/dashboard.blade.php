@@ -5,7 +5,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h1 class="text-3xl font-bold text-primary-800"><i class="fas fa-tractor mr-2"></i>{{ $farm->nom }}</h1>
+                <span class="eco-eyebrow mb-3">Farm OS — pilotage d'exploitation</span>
+                <h1 class="font-display text-3xl font-extrabold text-forest"><i class="fas fa-tractor mr-2"></i>{{ $farm->nom }}</h1>
                 <p class="mt-2 text-gray-600">{{ $farm->region ?? '' }} @if($farm->superficie_totale) — {{ $farm->superficie_totale }} ha @endif</p>
             </div>
             <a href="{{ route('farm.lots.create') }}" class="inline-block px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">

@@ -7,59 +7,10 @@
     <title>@yield('title', 'Espace Vétérinaire - Mahsoul')</title>
     <meta name="description" content="Espace Vétérinaire Mahsoul - Plateforme agricole complète">
     <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f3f9ee',
-                            100: '#e5f2dc',
-                            200: '#cce5bc',
-                            300: '#aad394',
-                            400: '#85bd6d',
-                            500: '#5a9d45',
-                            600: '#4a8339',
-                            700: '#3d692f',
-                            800: '#345429',
-                            900: '#2c4624',
-                        },
-                        secondary: {
-                            50: '#fdf8e9',
-                            100: '#f9edc7',
-                            200: '#f4dc91',
-                            300: '#eec65a',
-                            400: '#e9b033',
-                            500: '#db9418',
-                            600: '#c07513',
-                            700: '#9c5815',
-                            800: '#814518',
-                            900: '#6c3a18',
-                        },
-                        earth: '#795548',
-                        sky: '#1976D2',
-                    },
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    @include('components.eco-head')
     
     <style>
-        .sidebar-active {
-            background-color: rgba(90, 157, 69, 0.1);
-            border-left: 4px solid #5a9d45;
-        }
-    </style>
+</style>
 </head>
 <body class="font-sans bg-gray-100 flex h-screen">
     <div id="sidebar" class="bg-white w-64 shadow-md flex-shrink-0 hidden md:block">

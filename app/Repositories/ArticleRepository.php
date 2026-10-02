@@ -42,6 +42,31 @@ class ArticleRepository implements ArticleRepositoryInterface
         return Article::where('statut', 'like', 'publié')->paginate(9);
     }
 
+    public function searchArticles(array $filters = [])
+    {
+        $query = Article::where('statut', 'like', 'publié');
+
+        if (!empty($filters['q'])) {
+            $q = $filters['q'];
+            $query->where(function ($w) use ($q) {
+                $w->where('titre', 'like', "%{$q}%")
+                  ->orWhere('contenu', 'like', "%{$q}%");
+            });
+        }
+
+        if (!empty($filters['categorie'])) {
+            $query->where('categorie', $filters['categorie']);
+        }
+
+        if (($filters['tri'] ?? 'recent') === 'az') {
+            $query->orderBy('titre', 'asc');
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        return $query->paginate(9)->withQueryString();
+    }
+
     public function getAdminById(int $id)
     {
         return $this->adminRepository->getById($id);

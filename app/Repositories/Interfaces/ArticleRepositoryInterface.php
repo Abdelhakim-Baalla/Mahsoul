@@ -13,5 +13,6 @@ interface ArticleRepositoryInterface
     public function getUtilisateurAdminById(int $id);
     public function getCategorieById(int $id);
     public function getPublishedArticles();
+    public function searchArticles(array $filters = []);
     public function getAdminByUtilisateurId(int $id);
 }

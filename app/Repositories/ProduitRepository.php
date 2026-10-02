@@ -44,6 +44,48 @@ class ProduitRepository implements ProduitRepositoryInterface
     public function getAllProduitsClient(){
         return Produit::paginate(8);
     }
+
+    public function searchProduits(array $filters = [])
+    {
+        $query = Produit::query();
+
+        if (!empty($filters['q'])) {
+            $q = $filters['q'];
+            $query->where(function ($w) use ($q) {
+                $w->where('nom', 'like', "%{$q}%")
+                  ->orWhere('description', 'like', "%{$q}%");
+            });
+        }
+
+        if (!empty($filters['categorie'])) {
+            $query->where('categorie', $filters['categorie']);
+        }
+
+        if (isset($filters['prix_min']) && is_numeric($filters['prix_min'])) {
+            $query->where('prix', '>=', $filters['prix_min']);
+        }
+
+        if (isset($filters['prix_max']) && is_numeric($filters['prix_max'])) {
+            $query->where('prix', '<=', $filters['prix_max']);
+        }
+
+        if (!empty($filters['en_stock'])) {
+            $query->where('en_stock', true)->where('quantite', '>', 0);
+        }
+
+        switch ($filters['tri'] ?? 'recent') {
+            case 'prix_asc':
+                $query->orderBy('prix', 'asc');
+                break;
+            case 'prix_desc':
+                $query->orderBy('prix', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+
+        return $query->paginate(8)->withQueryString();
+    }
     
     public function getProduitsEnStock(){
 

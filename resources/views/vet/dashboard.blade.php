@@ -3,7 +3,8 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Tableau de bord vétérinaire</h1>
+        <span class="eco-eyebrow mb-3">Espace vétérinaire</span>
+        <h1 class="font-display text-3xl font-extrabold text-forest">Tableau de bord vétérinaire</h1>
         <p class="text-gray-600 mt-2">Bienvenue, Dr. {{ auth()->user()->prenom }} {{ auth()->user()->nom }}</p>
     </div>
 

@@ -76,7 +76,8 @@
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-2xl font-bold text-gray-800">Bienvenue, {{Auth::user()->prenom}} {{Auth::user()->nom}} </h1>
+                            <span class="eco-eyebrow mb-3">Espace client</span>
+                            <h1 class="font-display text-3xl font-extrabold text-forest">Bienvenue, {{Auth::user()->prenom}} {{Auth::user()->nom}} </h1>
                             <p class="text-gray-600 mt-1">Voici un aperçu de votre activité sur Mahsoul</p>
                         </div>
                         <div class="hidden md:block">

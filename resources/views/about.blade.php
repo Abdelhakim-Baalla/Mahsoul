@@ -35,7 +35,8 @@
     <section class="py-16 bg-primary-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary-800">Notre équipe</h2>
+                <span class="eco-eyebrow mb-3">L'humain d'abord</span>
+                <h2 class="font-display text-3xl font-extrabold text-forest">Notre équipe</h2>
                 <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
                     Des passionnés d'agriculture et de technologie qui travaillent ensemble pour transformer le secteur agricole.
                 </p>
