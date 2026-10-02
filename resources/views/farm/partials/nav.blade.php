@@ -16,7 +16,7 @@ $items = [
 <div class="bg-white rounded-3xl shadow-md p-4 mb-8 overflow-x-auto">
     <div class="flex gap-2 min-w-max">
         @foreach($items as [$key, $label, $icon, $url])
-        <a href="{{ $url }}" class="px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap {{ $active === $key ? 'bg-forest text-white' : 'text-gray-700 hover:bg-gray-100' }}">
+        <a href="{{ $url }}" class="px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap {{ $active === $key ? 'bg-forest text-white' : 'text-clay hover:bg-cream hover:text-forest' }}">
             <i class="fas {{ $icon }} mr-2"></i>{{ $label }}
         </a>
         @endforeach

@@ -3,191 +3,143 @@
 @section('title', 'Tableau de bord administrateur - Mahsoul')
 
 @section('content')
-<div class="py-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="eco-eyebrow mb-3">Administration</span>
-        <h1 class="font-display text-3xl font-extrabold text-forest">Tableau de bord administrateur</h1>
-        
+<div class="min-h-screen bg-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="mb-8">
+            <span class="eco-eyebrow mb-3">Administration</span>
+            <h1 class="font-display text-3xl font-extrabold text-forest">Tableau de bord administrateur</h1>
+        </div>
+
         <!-- Cartes de statistiques -->
-        <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8">
             <!-- Utilisateurs -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
-                            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">
-                                    Total Utilisateurs
-                                </dt>
-                                <dd>
-                                    <div class="text-lg font-medium text-gray-900">
-                                        {{$statistiques['utilisateurs']}}
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
+            <div class="card-eco bg-white p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-xl bg-leaf/10 flex items-center justify-center">
+                        <i class="fas fa-users text-leaf text-xl"></i>
                     </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-4 sm:px-6">
-                    <div class="text-sm">
-                        <a href="{{ route('admin.users.index') }}" class="font-medium text-green-600 hover:text-green-500">
-                            Voir tous les utilisateurs
-                        </a>
+                    <div class="ml-4">
+                        <p class="text-sm text-clay">Total Utilisateurs</p>
+                        <p class="font-display font-bold text-2xl text-forest">{{ $statistiques['utilisateurs'] }}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Produits -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
-                            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">
-                                    Total Produits
-                                </dt>
-                                <dd>
-                                    <div class="text-lg font-medium text-gray-900">
-                                    {{$statistiques['produits']}}
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
+            <div class="card-eco bg-white p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-xl bg-sun/10 flex items-center justify-center">
+                        <i class="fas fa-box text-sun text-xl"></i>
                     </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-4 sm:px-6">
-                    <div class="text-sm">
-                        <a href="{{ route('admin.products.index') }}" class="font-medium text-green-600 hover:text-green-500">
-                            Voir tous les produits
-                        </a>
+                    <div class="ml-4">
+                        <p class="text-sm text-clay">Total Produits</p>
+                        <p class="font-display font-bold text-2xl text-forest">{{ $statistiques['produits'] }}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Commandes -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
-                            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
-                        </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">
-                                    Commandes
-                                </dt>
-                                <dd>
-                                    <div class="text-lg font-medium text-gray-900">
-                                    {{$statistiques['commandes']}}
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
+            <div class="card-eco bg-white p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-xl bg-forest/10 flex items-center justify-center">
+                        <i class="fas fa-shopping-bag text-forest text-xl"></i>
                     </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-4 sm:px-6">
-                    <div class="text-sm">
-                        <a href="#" class="font-medium text-green-600 hover:text-green-500">
-                            Voir toutes les commandes
-                        </a>
+                    <div class="ml-4">
+                        <p class="text-sm text-clay">Commandes</p>
+                        <p class="font-display font-bold text-2xl text-forest">{{ $statistiques['commandes'] }}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Consultations -->
-            <div class="bg-white overflow-hidden shadow rounded-lg">
-                <div class="px-4 py-5 sm:p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0 bg-green-100 rounded-md p-3">
-                            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <div class="ml-5 w-0 flex-1">
-                            <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">
-                                    Consultations
-                                </dt>
-                                <dd>
-                                    <div class="text-lg font-medium text-gray-900">
-                                    {{$statistiques['consultations']}}
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
+            <div class="card-eco bg-white p-6">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 rounded-xl bg-leaf/10 flex items-center justify-center">
+                        <i class="fas fa-stethoscope text-leaf text-xl"></i>
                     </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-4 sm:px-6">
-                    <div class="text-sm">
-                        <a href="#" class="font-medium text-green-600 hover:text-green-500">
-                            Voir toutes les consultations
-                        </a>
+                    <div class="ml-4">
+                        <p class="text-sm text-clay">Consultations</p>
+                        <p class="font-display font-bold text-2xl text-forest">{{ $statistiques['consultations'] }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="mt-8 bg-white shadow rounded-lg">
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Utilisateurs
-                </h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Liste des Utilisateurs sur la plateforme.
-                </p>
-            </div>
-            <div class="border-t border-gray-200">
-                <ul role="list" class="divide-y divide-gray-200">
-                    @foreach($statistiques['allUtilisateurs'] as $utilisateur)
-                    <li class="px-4 py-4 sm:px-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200">
-                                    <img src="{{$utilisateur->photo}}" alt="{{$utilisateur->nom}} {{$utilisateur->prenom}}" class="h-10 w-10 rounded-full">
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                      {{$utilisateur->prenom}} {{$utilisateur->nom}}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Utilisateurs récents -->
+            <div class="card-eco bg-white overflow-hidden">
+                <div class="p-6 border-b border-earth-200 flex items-center justify-between">
+                    <h2 class="font-display text-xl font-bold text-forest">Utilisateurs récents</h2>
+                    <a href="{{ route('admin.users.index') }}" class="text-sm font-medium text-leaf hover:text-forest">Voir tout <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-earth-200">
+                        <thead class="thead-eco">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-semibold">Utilisateur</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold">Type</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold">Email</th>
+                                <th class="px-6 py-3 text-right text-xs font-semibold">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-earth-100">
+                            @foreach($statistiques['allUtilisateurs'] as $utilisateur)
+                            <tr class="hover:bg-sand/30">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <img src="{{ $utilisateur->photo ?? asset('images/default-avatar.jpg') }}" alt="{{ $utilisateur->nom }}" class="w-10 h-10 rounded-full object-cover">
+                                        <div class="ml-3">
+                                            <div class="font-semibold text-forest">{{ $utilisateur->prenom }} {{ $utilisateur->nom }}</div>
+                                        </div>
                                     </div>
-                                    <div class="text-sm text-gray-500">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     @if($utilisateur->type == 'admin')
-                                        <i class="fas fa-user-shield mr-1"></i> Administrateur
-                                     @elseif($utilisateur->type == 'agricole')
-                                        <i class="fas fa-tractor mr-1"></i> Agricole
-                                     @elseif($utilisateur->type == 'veterinaire')
-                                        <i class="fas fa-stethoscope mr-1"></i> Vétérinaire
-                                     @elseif($utilisateur->type == 'client')
-                                        <i class="fas fa-user mr-1"></i> Client
-                                     @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-forest/10 text-forest"><i class="fas fa-user-shield mr-1"></i>Admin</span>
+                                    @elseif($utilisateur->type == 'agricole')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-leaf/10 text-leaf"><i class="fas fa-tractor mr-1"></i>Agricole</span>
+                                    @elseif($utilisateur->type == 'veterinaire')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-700"><i class="fas fa-stethoscope mr-1"></i>Vétérinaire</span>
+                                    @elseif($utilisateur->type == 'client')
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-sun/20 text-sun-700"><i class="fas fa-user mr-1"></i>Client</span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-clay">{{ $utilisateur->email }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('admin.users.show', $utilisateur->id) }}" class="text-leaf hover:text-forest font-medium">Voir</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="bg-gray-50 px-4 py-4 sm:px-6">
-                <div class="text-sm">
-                    <a href="{{route('admin.users.index')}}" class="font-medium text-green-600 hover:text-green-500">
-                        Voir toutes les Utilisateurs
+
+            <!-- Actions rapides -->
+            <div class="card-eco bg-white overflow-hidden">
+                <div class="p-6 border-b border-earth-200">
+                    <h2 class="font-display text-xl font-bold text-forest">Actions rapides</h2>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6">
+                    <a href="{{ route('admin.users.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
+                        <i class="fas fa-user-plus text-2xl text-leaf mb-2"></i>
+                        <p class="font-semibold text-forest">Nouvel utilisateur</p>
+                    </a>
+                    <a href="{{ route('admin.products.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
+                        <i class="fas fa-plus-circle text-2xl text-sun mb-2"></i>
+                        <p class="font-semibold text-forest">Nouveau produit</p>
+                    </a>
+                    <a href="{{ route('admin.categories.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
+                        <i class="fas fa-tags text-2xl text-leaf mb-2"></i>
+                        <p class="font-semibold text-forest">Nouvelle catégorie</p>
+                    </a>
+                    <a href="{{ route('admin.articles.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
+                        <i class="fas fa-pen-nib text-2xl text-sky-500 mb-2"></i>
+                        <p class="font-semibold text-forest">Nouvel article</p>
                     </a>
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 @endsection

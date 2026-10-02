@@ -328,6 +328,15 @@ Route::middleware(['auth', 'role:client,admin'])->group(function () {
     Route::redirect('/client/orders', '/profile/orders')->name('client.orders.index');
 });
 
+// Chat - Mahsoul Assistant
+Route::middleware('auth')->group(function () {
+    Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chat/create', [App\Http\Controllers\ChatController::class, 'create'])->name('chat.create');
+    Route::post('/chat', [App\Http\Controllers\ChatController::class, 'store'])->name('chat.store');
+    Route::get('/chat/{id}', [App\Http\Controllers\ChatController::class, 'show'])->name('chat.show');
+    Route::put('/chat/{id}', [App\Http\Controllers\ChatController::class, 'updateTitle'])->name('chat.update');
+    Route::delete('/chat/{id}', [App\Http\Controllers\ChatController::class, 'destroy'])->name('chat.destroy');
+});
 
 Route::view('/not-found', 'error.404')->name('error.404');
 Route::fallback(function () {
