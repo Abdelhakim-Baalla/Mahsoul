@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page non trouvée - Mahsoul</title>
     <link rel="shortcut icon" href="{{ asset('images/logo-white.jpg') }}" type="image/x-icon">
-    @include('components.eco-head')
+    @include('components.design-system')
 </head>
 <body class="bg-sand min-h-screen flex flex-col">
     <main class="flex-grow flex items-center">

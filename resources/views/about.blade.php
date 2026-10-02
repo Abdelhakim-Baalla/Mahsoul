@@ -1,285 +1,132 @@
 @extends('layouts.app')
 
+@section('title', 'À propos - Mahsoul')
+
 @section('content')
-    @include('components.page-hero', ['eyebrow' => 'À propos', 'title' => 'La technologie au service des agriculteurs', 'subtitle' => 'Depuis 2024, Mahsoul digitalise le secteur agricole marocain.'])
-    <!-- Our Story Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+@include('components.page-hero', ['eyebrow' => 'À propos', 'title' => 'La technologie au service des agriculteurs', 'subtitle' => 'Depuis 2024, Mahsoul digitalise le secteur agricole marocain.'])
+
+<div class="min-h-screen bg-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Notre histoire -->
+        <section class="mb-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl font-bold text-primary-800">Notre histoire</h2>
-                    <p class="mt-4 text-lg text-gray-600">
-                        Fondée en 2024, Mahsoul est née d'une vision simple mais puissante : révolutionner le secteur agricole en mettant la technologie au service des agriculteurs. Notre fondateur, issu d'une famille d'agriculteurs, a constaté les défis quotidiens auxquels font face les exploitants agricoles.
-                    </p>
-                    <p class="mt-4 text-lg text-gray-600">
-                        Face aux difficultés d'accès aux conseils d'experts, aux produits de qualité et aux connaissances techniques, nous avons créé une plateforme complète qui répond à tous ces besoins en un seul endroit.
-                    </p>
-                    <p class="mt-4 text-lg text-gray-600">
-                        Aujourd'hui, Mahsoul est fière de servir des milliers d'agriculteurs à travers le pays, contribuant à l'amélioration de leur productivité et à la durabilité de leurs pratiques.
-                    </p>
+                    <span class="eco-eyebrow mb-4">Notre histoire</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest mb-6">Digitaliser l'agriculture pour la rendre plus juste</h2>
+                    <div class="space-y-4 text-clay text-lg">
+                        <p>Fondée en 2024, Mahsoul est née d'une vision simple mais puissante : révolutionner le secteur agricole en mettant la technologie au service des agriculteurs. Notre fondateur, issu d'une famille d'agriculteurs, a constaté les défis quotidiens auxquels font face les exploitants agricoles.</p>
+                        <p>Face aux difficultés d'accès aux conseils d'experts, aux produits de qualité et aux connaissances techniques, nous avons créé une plateforme complète qui répond à tous ces besoins en un seul endroit.</                    </div>
                 </div>
                 <div class="relative">
-                    <img src="{{ asset('images/logo-white.jpg') }}" alt="L'équipe Mahsoul" class="rounded-lg shadow-xl">
-                    <div class="absolute -bottom-6 -right-6 bg-secondary-500 rounded-lg p-6 shadow-lg">
+                    <img src="{{ asset('images/farm.jpg') }}" alt="L'équipe Mahsoul" class="rounded-3xl shadow-xl w-full">
+                    <div class="absolute -bottom-6 -right-6 bg-sun rounded-2xl p-6 shadow-xl">
                         <p class="text-white font-bold text-xl">Depuis 2024</p>
-                        <p class="text-white">Au service des agriculteurs</p>
+                        <p class="text-white/90">Au service des agriculteurs</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Team Section -->
-    <section class="py-16 bg-primary-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <span class="eco-eyebrow mb-3">L'humain d'abord</span>
-                <h2 class="font-display text-3xl font-extrabold text-forest">Notre équipe</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                    Des passionnés d'agriculture et de technologie qui travaillent ensemble pour transformer le secteur agricole.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch max-w-5xl mx-auto">
-                <!-- Creative photo collage -->
-                <div class="grid grid-cols-2 grid-rows-2 gap-3 h-full min-h-[420px]">
-                    <div class="row-span-2 rounded-2xl overflow-hidden shadow-lg relative group">
-                        <img src="{{ asset('images/abdelhakim-baalla.jpg') }}" alt="Abdelhakim Baalla - portrait principal"
-                             class="absolute w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
-                             style="object-position: 50% 20%;">
-                        <span class="absolute bottom-3 left-3 bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Fondateur</span>
-                    </div>
-                    <div class="rounded-2xl overflow-hidden shadow-lg relative group min-h-[200px]">
-                        <img src="{{ asset('images/abdelhakim-baalla-2.jpg') }}" alt="Abdelhakim Baalla"
-                             class="absolute w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
-                             style="object-position: 50% 20%;">
-                    </div>
-                    <div class="rounded-2xl overflow-hidden shadow-lg relative group min-h-[200px]">
-                        <img src="{{ asset('images/abdelhakim-baalla-3.jpg') }}" alt="Abdelhakim Baalla"
-                             class="absolute w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
-                             style="object-position: 50% 20%;">
-                    </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="eco-eyebrow mb-4">Notre raison d'être</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest">Notre mission et notre vision</h2>
+                    <p class="mt-4 text-lg text-clay max-w-2xl mx-auto">Guidés par des valeurs fortes, nous travaillons chaque jour pour transformer le secteur agricole.</p>
                 </div>
-                <!-- CEO card -->
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
-                    <div class="p-8 flex-1">
-                        <p class="text-primary-600 font-semibold text-sm uppercase tracking-wide">Fondateur & CEO</p>
-                        <h3 class="mt-2 text-3xl font-bold text-gray-800">Abdelhakim Baalla</h3>
-                        <p class="mt-1 text-gray-500">Développeur Full-Stack — Agadir, Maroc</p>
-                        <p class="mt-4 text-gray-600">Issu d'une famille d'agriculteurs, Abdelhakim a fondé Mahsoul pendant sa formation de Développeur Full-Stack à YouCode UM6P (2024 – 2026) pour digitaliser le secteur agricole marocain : consultations d'experts, marketplace et formation en ligne.</p>
-                        <p class="mt-3 text-gray-600">Passé par Larmo (Nest.js, Next.js, AWS, Docker) et NJT-GROUP (PHP, Laravel), il cumule plus de 50 projets et des certifications Google AI, HackerRank SQL, Microsoft C# et Postman.</p>
-                        <div class="mt-5 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">PHP / Laravel</span>
-                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">React / Next.js</span>
-                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">Node.js / Nest.js</span>
-                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">Docker / AWS</span>
-                            <span class="px-3 py-1 bg-primary-50 text-primary-700 text-xs font-semibold rounded-full">50+ projets</span>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Mission -->
+                    <div class="card-eco bg-cream p-8">
+                        <div class="w-14 h-14 rounded-2xl bg-leaf/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-bullseye text-leaf text-2xl"></i>
                         </div>
-                        <div class="mt-6 flex items-center space-x-4">
-                            <a href="https://www.linkedin.com/in/abdelhakimbaalla/" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://x.com/Abdelhakim99891" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="X / Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://github.com/Abdelhakim-Baalla" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://baalla.tech" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" target="_blank" title="Portfolio">
-                                <i class="fas fa-globe"></i>
-                            </a>
-                            <a href="mailto:abdelhakimbaalla50@gmail.com" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary-600 hover:text-white transition" title="Email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
+                        <h3 class="font-display text-2xl font-bold text-forest mb-4">Notre mission</h3>
+                        <p class="text-clay">Connecter les agriculteurs aux meilleurs experts, produits et connaissances pour une agriculture plus rentable, durable et résiliente.</                        </p>
+                    </div>
+
+                    <!-- Vision -->
+                    <div class="card-eco bg-cream p-8">
+                        <div class="w-14 h-14 rounded-2xl bg-sun/10 flex items-center justify-center mb-6">
+                            <i class="fas fa-eye text-sun text-2xl"></i>
                         </div>
+                        <h3 class="font-display text-2xl font-bold text-forest mb-4">Notre vision</h3>
+                        <p class="text-clay">Devenir la plateforme de référence de l'agriculture digitale au Maroc et en Afrique, où chaque agriculteur trouve l'expertise et les ressources dont il a besoin.</                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Mission & Vision Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary-800">Notre mission et notre vision</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                    Guidés par des valeurs fortes, nous travaillons chaque jour pour transformer le secteur agricole.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Mission -->
-                <div class="bg-primary-50 rounded-lg shadow-md p-8">
-                    <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-bullseye text-white text-2xl"></i>
+        </section>
+
+        <!-- Valeurs -->
+        <section class="py-16 bg-sand/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="eco-eyebrow mb-4">Nos valeurs</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest">Ce qui guide nos actions</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach([
+                        ['icone' => 'fa-handshake', 'titre' => 'Confiance', 'desc' => 'Transparence totale sur les prix, les experts et les produits.'],
+                        ['icone' => 'fa-leaf', 'titre' => 'Durabilité', 'desc' => 'Pratiques respectueuses de l\'environnement et des sols.'],
+                        ['icone' => 'fa-lightbulb', 'titre' => 'Innovation', 'desc' => 'Technologie au service de l\'agriculteur, pas l\'inverse.'],
+                        ['icone' => 'fa-users', 'titre' => 'Proximité', 'desc' => 'Écoute terrain, solutions adaptées à chaque terroir.'],
+                    ] as $v)
+                    <div class="card-eco bg-cream p-8 text-center hover:shadow-xl transition-shadow">
+                        <div class="w-14 h-14 rounded-2xl bg-forest/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas {{ $v['icone'] }} text-forest text-2xl"></i>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-forest mb-2">{{ $v['titre'] }}</h3>
+                        <p class="text-clay">{{ $v['desc'] }}</p>
                     </div>
-                    <h3 class="text-2xl font-bold text-primary-800 mb-4">Notre mission</h3>
-                    <p class="text-gray-600">
-                        Mahsoul a pour mission de démocratiser l'accès aux connaissances, aux produits et aux services agricoles de qualité. Nous voulons donner à chaque agriculteur, quelle que soit la taille de son exploitation, les outils nécessaires pour prospérer dans un environnement en constante évolution.
-                    </p>
-                    <p class="mt-4 text-gray-600">
-                        Nous nous engageons à :
-                    </p>
-                    <ul class="mt-2 space-y-2 text-gray-600">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-primary-600 mt-1 mr-2"></i>
-                            <span>Fournir des conseils d'experts accessibles et personnalisés</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-primary-600 mt-1 mr-2"></i>
-                            <span>Offrir des produits agricoles de qualité à des prix compétitifs</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-primary-600 mt-1 mr-2"></i>
-                            <span>Partager des connaissances et des techniques agricoles modernes</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-primary-600 mt-1 mr-2"></i>
-                            <span>Promouvoir des pratiques agricoles durables et respectueuses de l'environnement</span>
-                        </li>
-                    </ul>
+                    @endforeach
                 </div>
-                
-                <!-- Vision -->
-                <div class="bg-primary-50 rounded-lg shadow-md p-8">
-                    <div class="w-16 h-16 bg-secondary-500 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-eye text-white text-2xl"></i>
+            </div>
+        </section>
+
+        <!-- Équipe -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <span class="eco-eyebrow mb-4">Notre équipe</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest">Des passionnés au service de l'agriculture</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @foreach([
+                        ['nom' => 'Abdelhakim Baalla', 'role' => 'Fondateur & CEO', 'bio' => 'Développeur Full-Stack, passionné AgriTech.', 'photo' => 'abdelhakim-baalla.jpg'],
+                        ['nom' => 'Omar B.', 'role' => 'Directeur Technique', 'bio' => 'Expert Laravel & architecture scalable.', 'photo' => 'personne.jpg'],
+                        ['nom' => 'Yasmine E.', 'role' => 'Responsable Agricole', 'bio' => 'Ingénieure agronome, spécialiste bio.', 'photo' => 'personne.jpg'],
+                        ['nom' => 'Dr. Hassan T.', 'role' => 'Conseiller Vétérinaire', 'bio' => '15 ans d\'expérience élevage bovin.', 'photo' => 'personne.jpg'],
+                    ] as $m)
+                    <div class="card-eco bg-cream text-center p-6">
+                        <img src="{{ asset('images/' . $m['photo']) }}" alt="{{ $m['nom'] }}" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-sun">
+                        <h3 class="font-display font-bold text-forest">{{ $m['nom'] }}</h3>
+                        <p class="text-sun font-semibold text-sm mb-2">{{ $m['role'] }}</p>
+                        <p class="text-clay text-sm">{{ $m['bio'] }}</p>
                     </div>
-                    <h3 class="text-2xl font-bold text-primary-800 mb-4">Notre vision</h3>
-                    <p class="text-gray-600">
-                        Nous aspirons à créer un écosystème agricole connecté, où les agriculteurs, les experts et les fournisseurs collaborent pour construire une agriculture plus productive, plus rentable et plus durable.
-                    </p>
-                    <p class="mt-4 text-gray-600">
-                        Notre vision pour l'avenir :
-                    </p>
-                    <ul class="mt-2 space-y-2 text-gray-600">
-                        <li class="flex items-start">
-                            <i class="fas fa-lightbulb text-secondary-500 mt-1 mr-2"></i>
-                            <span>Une agriculture technologiquement avancée et accessible à tous</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-lightbulb text-secondary-500 mt-1 mr-2"></i>
-                            <span>Des communautés agricoles connectées et collaboratives</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-lightbulb text-secondary-500 mt-1 mr-2"></i>
-                            <span>Une production alimentaire durable qui préserve les ressources naturelles</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-lightbulb text-secondary-500 mt-1 mr-2"></i>
-                            <span>Une valorisation du savoir-faire agricole traditionnel combiné aux innovations modernes</span>
-                        </li>
-                    </ul>
+                    @endforeach
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Partners Section -->
-    <section class="py-16 bg-primary-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary-800">Nos partenaires</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                    Nous collaborons avec des organisations de premier plan pour offrir les meilleurs services à nos utilisateurs.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-1.png" alt="Partenaire 1" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-2.png" alt="Partenaire 2" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-3.png" alt="Partenaire 3" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-4.png" alt="Partenaire 4" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-5.png" alt="Partenaire 5" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-6.png" alt="Partenaire 6" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-7.png" alt="Partenaire 7" class="h-16">
-                </div>
-                <div class="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all">
-                    <img src="/images/partner-8.png" alt="Partenaire 8" class="h-16">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Our Values Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary-800">Nos valeurs</h2>
-                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-                    Les principes qui guident nos actions et nos décisions au quotidien.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Value 1 -->
-                <div class="bg-primary-50 rounded-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-leaf text-white text-2xl"></i>
+        </section>
+
+        <!-- CTA -->
+        @guest
+        <section class="bg-white py-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-forest rounded-[2.5rem] px-8 py-14 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+                    <div>
+                        <h2 class="font-display text-3xl md:text-4xl font-extrabold text-white">Prêt à faire grandir votre exploitation ?</h2>
+                        <p class="text-cream/70 mt-3">Rejoignez Mahsoul et accédez aux experts, à la marketplace et au Farm OS.</                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+                        <a href="{{ route('register') }}" class="btn-sun">S'inscrire gratuitement</a>
+                        <a href="{{ route('experts.index') }}" class="btn-outline-eco !border-sun !text-sun hover:!bg-sun hover:!text-forest">Réserver une consultation</a>
                     </div>
-                    <h3 class="text-xl font-bold text-primary-800 mb-4">Authenticité</h3>
-                    <p class="text-gray-600">
-                        Nous valorisons l'authenticité dans nos relations avec les agriculteurs, nos partenaires et notre équipe. Nous sommes transparents dans nos actions et fidèles à nos engagements.
-                    </p>
-                </div>
-                
-                <!-- Value 2 -->
-                <div class="bg-primary-50 rounded-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-laptop-code text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary-800 mb-4">Innovation</h3>
-                    <p class="text-gray-600">
-                        Nous croyons au pouvoir de l'innovation pour transformer l'agriculture. Nous recherchons constamment de nouvelles solutions pour répondre aux défis du secteur agricole.
-                    </p>
-                </div>
-                
-                <!-- Value 3 -->
-                <div class="bg-primary-50 rounded-lg p-8 text-center">
-                    <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-hands-helping text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary-800 mb-4">Engagement</h3>
-                    <p class="text-gray-600">
-                        Nous sommes engagés envers la réussite des agriculteurs et la durabilité de l'agriculture. Nous mettons tout en œuvre pour avoir un impact positif sur le secteur agricole.
-                    </p>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    @guest
-    <section class="py-16 bg-primary-700 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-bold">Rejoignez la communauté Mahsoul</h2>
-                <p class="mt-4 text-lg text-gray-200 max-w-2xl mx-auto">
-                    Faites partie de notre mission pour transformer l'agriculture et construire un avenir plus durable.
-                </p>
-                <div class="mt-8 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="/register" class="bg-secondary-500 hover:bg-secondary-600 text-white px-6 py-3 rounded-md font-medium text-center">
-                        Créer un compte
-                    </a>
-                    <a href="/contact" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-3 rounded-md font-medium text-center">
-                        Nous contacter
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    @endguest
+        </section>
+        @endguest
+    </div>
+</div>
 @endsection

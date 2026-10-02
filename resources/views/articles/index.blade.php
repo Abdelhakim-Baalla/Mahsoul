@@ -1,109 +1,77 @@
 @extends('layouts.app')
 
-@section('title', 'Articles de Formation')
+@section('title', 'Formation - Mahsoul')
 
 @section('content')
 @include('components.page-hero', ['eyebrow' => 'Formation', 'title' => 'Apprenez, progressez', 'subtitle' => 'Guides pratiques rédigés par nos experts agricoles et vétérinaires.'])
 
-<section class="py-12 diagonal-box bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+<div class="min-h-screen bg-sand">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Filtres -->
+        <div class="card-eco p-5 mb-8">
             <form action="{{ route('articles.index') }}" method="GET" class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="flex-1 relative">
                     <input type="text" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Rechercher un article..."
-                        class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-3 top-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        class="w-full pl-12 pr-4 py-3 input-eco">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 absolute left-3 top-1/2 -translate-y-1/2 text-earth-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
                 <div class="flex flex-wrap gap-3 items-center">
-                    <select name="categorie" onchange="this.form.submit()" class="border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    <select name="categorie" onchange="this.form.submit()" class="border border-earth-300 input-eco px-4 py-2">
                         <option value="">Toutes catégories</option>
                         @foreach($categories as $cat)
                         <option value="{{ $cat }}" {{ ($filters['categorie'] ?? '') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
                         @endforeach
                     </select>
-                    <select name="tri" onchange="this.form.submit()" class="border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    <select name="tri" onchange="this.form.submit()" class="border border-earth-300 input-eco px-4 py-2">
                         <option value="recent" {{ ($filters['tri'] ?? 'recent') == 'recent' ? 'selected' : '' }}>Plus récents</option>
                         <option value="az" {{ ($filters['tri'] ?? '') == 'az' ? 'selected' : '' }}>A-Z</option>
                     </select>
-                    <button type="submit" class="px-5 py-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium rounded-xl">Rechercher</button>
+                    <button type="submit" class="btn-eco text-sm px-4 py-2">Filtrer</button>
                     @if(!empty(array_filter($filters ?? [])))
-                    <a href="{{ route('articles.index') }}" class="text-sm text-gray-500 hover:underline">Réinitialiser</a>
+                    <a href="{{ route('articles.index') }}" class="text-sm text-earth-500 hover:underline">Réinitialiser</a>
                     @endif
                 </div>
             </form>
         </div>
 
-        <div class="mb-12">
-            <div class="flex justify-between items-center mb-6">
-                <div><span class="eco-eyebrow mb-2">Formation</span><h2 class="font-display text-2xl font-extrabold text-forest">Tous les articles</h2></div>
-            </div>
-
-            @if($articles->isEmpty())
-            <div class="text-center py-10">
-                <p class="text-gray-500">Aucun article trouvé.</p>
-            </div>
-            @else
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($articles as $article)
-                <div class="card-eco bg-white shadow-md overflow-hidden group">
-                    <div class="relative h-48">
-                        <img src="{{ $article->photo }}" alt="{{ Str::limit(strip_tags($article->titre), 15) }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex gap-2 mb-3">
-                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">{{ $article->categorie }}</span>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2 text-gray-900 group-hover:text-primary-600 transition duration-300">
-                            {{ Str::limit(strip_tags($article->titre), 40) }}
-                        </h3>
-                        <p class="text-gray-600 mb-4 line-clamp-2">
-                            {{ Str::limit(strip_tags($article->contenu), 30) }}
-                        </p>
-                        
-                        <div class="flex items-center gap-2 mb-4 text-xs text-gray-600">
-                            @if(is_object($article->auteur))
-                                <img src="{{$article->auteur->photo}}" alt="{{$article->auteur->prenom}} {{$article->auteur->nom}}" class="w-6 h-6 rounded-full">
-                                <div>
-                                    <span>{{$article->auteur->prenom}} {{$article->auteur->nom}}</span>
-                                    <small class="text-gray-500 text-[10px] mt-1 italic text-end">Team Mahsoul</small>
-                                </div>
-                            @else
-                                <img src="/path/to/default/photo.jpg" alt="Auteur inconnu" class="w-6 h-6 rounded-full">
-                                <div>
-                                    <span>Auteur inconnu</span>
-                                    <small class="text-gray-500 text-[10px] mt-1 italic text-end">Team Mahsoul</small>
-                                </div>
-                            @endif
-                        </div>
-                        
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500 flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                {{ $article->created_at->format('d/m/Y') }}
-                            </span>
-                            <form action="{{ route('articles.show') }}" method="get">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $article->id }}">
-                                <button type="submit" class="text-primary-600 hover:text-primary-800 font-medium text-sm">
-                                    Lire l'article →
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+        <!-- Articles -->
+        @if($articles->isEmpty())
+        <div class="card-eco bg-cream/50 p-12 text-center">
+            <i class="fas fa-book-open text-forest/30 text-6xl mb-4"></i>
+            <h3 class="font-display text-xl font-bold text-forest mb-2">Aucun article</h3>
+            <p class="text-clay">Aucun article ne correspond à votre recherche.</p>
+        </div>
+        @else
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach($articles as $article)
+            <article class="card-eco overflow-hidden">
+                <div class="relative h-48">
+                    @if($article->photo)
+                    <img src="{{ $article->photo }}" alt="{{ Str::limit(strip_tags($article->titre), 15) }}" class="w-full h-full object-cover">
+                    @else
+                    <div class="w-full h-full flex items-center justify-center text-forest/30"><i class="fas fa-book-open text-4xl"></i></div>
+                    @endif
                 </div>
-                @endforeach
-            </div>
-            @endif
+                <div class="p-5">
+                    <div class="flex gap-2 mb-3">
+                        <span class="px-3 py-1 bg-leaf/10 text-leaf rounded-full text-xs font-medium">{{ $article->categorie }}</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-forest group-hover:text-leaf transition duration-300">{{ Str::limit(strip_tags($article->titre), 40) }}</h3>
+                    <p class="text-clay mb-4 line-clamp-2">{{ Str::limit(strip_tags($article->contenu), 100) }}</p>
+                    <div class="flex items-center gap-2 text-sm text-earth-500">
+                        @include('components.stars', ['note' => $article->avg_note ?? 0, 'count' => $article->nb_comments ?? 0])
+                        <span class="text-earth-500">{{ $article->created_at ? $article->created_at->format('d/m/Y') : '' }}</span>
+                    </div>
+                    <a href="{{ route('articles.show', ['id' => $article->id]) }}" class="mt-3 block text-center btn-eco text-sm">Lire l'article</a>
+                </div>
+            </article>
+            @endforeach
         </div>
+        @endif
 
-        <div class="flex justify-center mt-8">
-            {{ $articles->links('pagination::tailwind') }}
-        </div>
+        {{ $articles->links('pagination::tailwind') }}
     </div>
-</section>
+</div>
 @endsection
