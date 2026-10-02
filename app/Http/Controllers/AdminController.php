@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produit;
 use App\Models\Utilisateur;
-use App\Repositories\Interfaces\AdminRepositoryInterface;
-use App\Repositories\Interfaces\TagRepositoryInterface;
+use App\Repositories\Interfaces\AdminRepositoryInterface;use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\ArticleRepositoryInterface;
 use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
@@ -65,9 +65,25 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('statistiques'));
     }
 
-    public function usersIndex()
+    public function usersIndex(Request $request)
     {
-        $utilisateurs = $this->utilisateurRepository->getAllUtilisateurs();
+        $validated = $request->validate([
+            'q' => 'nullable|string|max:255',
+            'type' => 'nullable|string|in:admin,agricole,veterinaire,client',
+        ]);
+        $query = Utilisateur::query();
+        if (!empty($validated['q'])) {
+            $q = $validated['q'];
+            $query->where(function ($w) use ($q) {
+                $w->where('nom', 'like', "%{$q}%")
+                  ->orWhere('prenom', 'like', "%{$q}%")
+                  ->orWhere('email', 'like', "%{$q}%");
+            });
+        }
+        if (!empty($validated['type'])) {
+            $query->where('type', $validated['type']);
+        }
+        $utilisateurs = $query->latest()->paginate(5)->withQueryString();
         // dd($utilisateurs);
         return view('admin.users.index', compact('utilisateurs'));
     }
@@ -397,8 +413,19 @@ class AdminController extends Controller
         return view('admin.orders.show');
     }
 
-    public function productsIndex (){
-        $produits = $this->produitRepository->getAllProduits();
+    public function productsIndex (Request $request){
+        $validated = $request->validate([
+            'q' => 'nullable|string|max:255',
+        ]);
+        $query = Produit::query();
+        if (!empty($validated['q'])) {
+            $q = $validated['q'];
+            $query->where(function ($w) use ($q) {
+                $w->where('nom', 'like', "%{$q}%")
+                  ->orWhere('description', 'like', "%{$q}%");
+            });
+        }
+        $produits = $query->latest()->paginate(5)->withQueryString();
         $categories = $this->categorieRepository->getAllCategories();
         foreach ($produits as $produit) {
             // dd($produit->categorie);

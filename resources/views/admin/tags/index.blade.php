@@ -20,7 +20,8 @@
     @endif
     <div class="flex justify-between items-center mb-2">
         <div>
-            <h1 class="text-3xl font-bold text-gray-800 flex items-center">
+            <span class="eco-eyebrow mb-2">Administration</span>
+            <h1 class="font-display text-3xl font-extrabold text-forest flex items-center">
                 <i class="fas fa-hashtag text-primary-600 mr-3"></i>
                 Gestion des Tags
             </h1>

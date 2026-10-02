@@ -29,6 +29,11 @@ class ChatController extends Controller
         return view('chat.index', compact('conversations'));
     }
 
+    public function create()
+    {
+        return view('chat.create');
+    }
+
     public function store(Request $request): JsonResponse
     {
         $request->validate([

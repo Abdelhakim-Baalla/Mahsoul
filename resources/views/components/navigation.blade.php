@@ -14,7 +14,9 @@
                     <a href="{{ route('products.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Marketplace</a>
                     <a href="{{ route('experts.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Consultations</a>
                     <a href="{{ route('articles.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Formation</a>
+                    <a href="{{ route('faq') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">FAQ</a>
                     @auth
+                    <a href="{{ route('chat.index') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display"><i class="fas fa-robot mr-1 text-leaf"></i>Assistant IA</a>
                     @if(in_array(Auth::user()->type, ['agricole', 'admin']))
                     <a href="{{ route('farm.dashboard') }}" class="text-forest hover:text-leaf px-3 py-2 font-semibold font-display">Ma Ferme</a>
                     @endif
@@ -74,9 +76,40 @@
                     <a href="{{ route('register') }}" class="register-button">Inscription</a>
                 @endauth
             </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 text-forest self-center" aria-label="Menu">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-forest/10 bg-white px-4 py-3">
+        <div class="flex flex-col gap-1 font-display font-semibold">
+            <a href="{{ route('welcome') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Accueil</a>
+            <a href="{{ route('products.index') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Marketplace</a>
+            <a href="{{ route('experts.index') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Consultations</a>
+            <a href="{{ route('articles.index') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Formation</a>
+            <a href="{{ route('faq') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">FAQ</a>
+            @auth
+            <a href="{{ route('chat.index') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Assistant IA</a>
+            @if(in_array(Auth::user()->type, ['agricole', 'admin']))
+            <a href="{{ route('farm.dashboard') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Ma Ferme</a>
+            @endif
+            <a href="{{ route('profile.show') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Mon profil</a>
+            <a href="{{ route('cart.index') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Panier</a>
+            @else
+            <a href="{{ route('login') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Connexion</a>
+            <a href="{{ route('register') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Inscription</a>
+            @endauth
+            <a href="{{ route('about') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">À propos</a>
+            <a href="{{ route('contact') }}" class="px-3 py-2 text-forest hover:bg-sand rounded-xl">Contact</a>
         </div>
     </div>
 </nav>
+
+<script>
+document.getElementById('mobile-menu-button')?.addEventListener('click', function () {
+    document.getElementById('mobile-menu')?.classList.toggle('hidden');
+});
+</script>
 
 <style>
     /* Styles de base */

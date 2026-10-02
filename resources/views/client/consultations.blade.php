@@ -78,7 +78,8 @@
                     <!-- Orders Stats -->
                     <div class="bg-white rounded-3xl shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-lg font-semibold text-gray-800">Mes Consultations</h2>
+                            <span class="eco-eyebrow mb-2">Espace client</span>
+                            <h2 class="font-display text-2xl font-extrabold text-forest">Mes Consultations</h2>
                             <div class="p-2 bg-primary-100 rounded-full">
                                 <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>

@@ -1,4 +1,4 @@
-@extends('layouts.vet')
+@extends('layouts.farmer')
 
 @section('content')
 <div class="min-h-screen bg-sand">

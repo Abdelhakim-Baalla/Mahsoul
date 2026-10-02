@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4 mb-4 text-2xl font-semibold text-gray-800">Gestion des commandes</h1>
+    <span class="eco-eyebrow mb-2">Administration</span>
+    <h1 class="font-display text-3xl font-extrabold text-forest mb-4">Gestion des commandes</h1>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="bg-primary-600 text-white rounded-3xl shadow-md overflow-hidden">

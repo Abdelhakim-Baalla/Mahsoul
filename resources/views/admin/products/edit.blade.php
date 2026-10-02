@@ -6,7 +6,8 @@
 <div class="py-6 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800">Modifier le produit</h1>
+            <span class="eco-eyebrow mb-2">Administration</span>
+            <h1 class="font-display text-3xl font-extrabold text-forest">Modifier le produit</h1>
             <a href="{{ route('admin.products.index') }}" class="inline-flex items-center px-5 py-3 border border-transparent text-sm font-medium rounded-3xl shadow-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
                 <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

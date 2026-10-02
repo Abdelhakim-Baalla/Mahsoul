@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="container-fluid px-4">
-    <h1 class="mt-4 text-2xl font-semibold text-gray-800">Gestion des commentaires</h1>
+    <span class="eco-eyebrow mb-2">Administration</span>
+    <h1 class="font-display text-3xl font-extrabold text-forest">Gestion des commentaires</h1>
     <nav class="flex mb-4" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
             <li class="inline-flex items-center">

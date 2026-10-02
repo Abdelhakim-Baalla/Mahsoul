@@ -43,6 +43,11 @@ class Utilisateur extends Authenticatable
     {
         return $this->hasOne(Admin::class, 'compte');
     }
+
+    public function chatConversations()
+    {
+        return $this->hasMany(ChatConversation::class, 'user_id');
+    }
   
 }
 

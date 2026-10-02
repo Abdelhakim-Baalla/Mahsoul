@@ -106,7 +106,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-clay">{{ $utilisateur->email }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{{ route('admin.users.show', $utilisateur->id) }}" class="text-leaf hover:text-forest font-medium">Voir</a>
+                                    <a href="{{ route('admin.users.show', ['id' => $utilisateur->id]) }}" class="text-leaf hover:text-forest font-medium">Voir</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -121,15 +121,15 @@
                     <h2 class="font-display text-xl font-bold text-forest">Actions rapides</h2>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6">
-                    <a href="{{ route('admin.users.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
+                    <a href="{{ route('admin.users.index') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
                         <i class="fas fa-user-plus text-2xl text-leaf mb-2"></i>
-                        <p class="font-semibold text-forest">Nouvel utilisateur</p>
+                        <p class="font-semibold text-forest">Utilisateurs</p>
                     </a>
                     <a href="{{ route('admin.products.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
                         <i class="fas fa-plus-circle text-2xl text-sun mb-2"></i>
                         <p class="font-semibold text-forest">Nouveau produit</p>
                     </a>
-                    <a href="{{ route('admin.categories.create') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
+                    <a href="{{ route('admin.categories.add') }}" class="card-eco bg-cream p-5 text-center hover:shadow-lg transition">
                         <i class="fas fa-tags text-2xl text-leaf mb-2"></i>
                         <p class="font-semibold text-forest">Nouvelle catégorie</p>
                     </a>

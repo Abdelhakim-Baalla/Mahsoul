@@ -66,6 +66,7 @@
                     <a href="{{ route('agricole.appointments.index') }}" class="text-leaf hover:text-forest font-medium">+ {{ count($rendezVous) - 3 }} autres rendez-vous</a>
                 </div>
                 @endif
+                @endif
             </div>
         </div>
     </div>

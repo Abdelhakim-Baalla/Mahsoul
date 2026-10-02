@@ -23,7 +23,8 @@
     <!-- En-tête -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 flex items-center">
+            <span class="eco-eyebrow mb-2">Administration</span>
+            <h1 class="font-display text-3xl font-extrabold text-forest flex items-center">
                 <i class="fas fa-newspaper text-primary-600 mr-3"></i>
                 Gestion des Articles
             </h1>

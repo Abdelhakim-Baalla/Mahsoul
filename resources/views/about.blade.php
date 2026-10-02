@@ -85,31 +85,67 @@
             </div>
         </section>
 
-        <!-- Équipe -->
-        <section class="py-16 bg-white">
+        <!-- Fondateur : collage + timeline CV -->
+        <section class="py-16 bg-white overflow-hidden">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-14">
                     <span class="eco-eyebrow mb-4">Notre fondateur</span>
                     <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest">Abdelhakim Baalla</h2>
-                    <p class="text-clay mt-4 max-w-2xl mx-auto">Fondateur & CEO de Mahsoul, développeur Full-Stack passionné par l'AgriTech, issu d'une famille d'agriculteurs marocains.</p>
+                    <p class="text-clay mt-4 max-w-2xl mx-auto">Développeur Full-Stack, fondateur & CEO de Mahsoul — issu d'une famille d'agriculteurs, il met la technologie au service du terroir marocain.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                    @foreach([
-                        ['photo' => 'abdelhakim-baalla.jpg', 'alt' => 'Abdelhakim Baalla - Portrait', 'description' => 'Portrait officiel du fondateur'],
-                        ['photo' => 'abdelhakim-baalla-2.jpg', 'alt' => 'Abdelhakim Baalla - Sur le terrain', 'description' => 'Sur le terrain avec les agriculteurs'],
-                        ['photo' => 'abdelhakim-baalla-3.jpg', 'alt' => 'Abdelhakim Baalla - En consultation', 'description' => 'En consultation avec des experts agricoles'],
-                    ] as $p)
-                    <div class="card-eco bg-cream overflow-hidden relative group">
-                        <div class="aspect-square overflow-hidden">
-                            <img src="{{ asset('images/' . $p['photo']) }}" alt="{{ $p['alt'] }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <!-- Collage 3 photos -->
+                    <div class="relative min-h-[480px]">
+                        <div class="absolute top-0 left-0 w-[62%] rounded-[2rem] overflow-hidden shadow-xl rotate-[-2deg] hover:rotate-0 transition duration-500">
+                            <img src="{{ asset('images/abdelhakim-baalla.jpg') }}" alt="Abdelhakim Baalla — portrait" class="w-full h-[430px] object-cover object-top" style="object-position: 50% 20%;">
+                            <span class="absolute bottom-3 left-3 bg-sun text-forest text-xs font-bold px-3 py-1 rounded-full">Fondateur</span>
                         </div>
-                        <div class="p-6">
-                            <h3 class="font-display font-bold text-forest mb-2">Abdelhakim Baalla</h3>
-                            <p class="text-clay text-sm">{{ $p['description'] }}</p>
+                        <div class="absolute top-6 right-0 w-[42%] rounded-[2rem] overflow-hidden shadow-xl rotate-[3deg] hover:rotate-0 transition duration-500 border-4 border-white">
+                            <img src="{{ asset('images/abdelhakim-baalla-2.jpg') }}" alt="Abdelhakim Baalla — sur le terrain" class="w-full h-[200px] object-cover object-top" style="object-position: 50% 15%;">
+                        </div>
+                        <div class="absolute bottom-0 right-6 w-[46%] rounded-[2rem] overflow-hidden shadow-xl rotate-[-3deg] hover:rotate-0 transition duration-500 border-4 border-white">
+                            <img src="{{ asset('images/abdelhakim-baalla-3.jpg') }}" alt="Abdelhakim Baalla — en consultation" class="w-full h-[210px] object-cover object-top" style="object-position: 50% 15%;">
+                        </div>
+                        <div class="absolute bottom-8 left-4 bg-forest text-white px-5 py-3 rounded-2xl shadow-xl">
+                            <p class="font-display font-extrabold text-sun text-xl">50+ projets</p>
+                            <p class="text-xs text-cream/70">Full-Stack • AgriTech</p>
                         </div>
                     </div>
-                    @endforeach
+
+                    <!-- Timeline issue du CV -->
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-forest mb-6">Parcours</h3>
+                        <ol class="relative border-l-2 border-leaf/20 ml-3 space-y-8">
+                            @foreach([
+                                ['periode' => '2024 — Aujourd\'hui', 'titre' => 'Fondateur & CEO — Mahsoul', 'lieu' => 'Agadir, Maroc', 'desc' => 'Plateforme agricole : rendez-vous experts, marketplace, formation et Farm OS avec traçabilité.'],
+                                ['periode' => '04/2026 — 07/2026', 'titre' => 'Développeur Full-Stack & Mobile — Larmo', 'lieu' => 'Casablanca', 'desc' => 'StoreezCOD : architecture backend scalable (Nest.js, Next.js, TypeScript, Docker, AWS).'],
+                                ['periode' => '11/2025 — 04/2026', 'titre' => 'Projet LBaraka', 'lieu' => 'Maroc', 'desc' => 'App mobile d\'échange d\'équipements : NestJS, Next.js 15, React Native, Redis, Docker.'],
+                                ['periode' => '05/2025 — 07/2025', 'titre' => 'Développeur Full-Stack — NJT-GROUP', 'lieu' => 'Marrakech', 'desc' => 'Gestion de tickets : création, suivi, files de priorité (PHP, Laravel, SQL, Tailwind).'],
+                                ['periode' => '2024 — 2026', 'titre' => 'Formation Full-Stack — YouCode UM6P', 'lieu' => 'Youssoufia', 'desc' => 'Développement web & mobile, design, méthodes Agile/SCRUM.'],
+                                ['periode' => '2023 — 2024', 'titre' => 'Bac Sciences Physiques', 'lieu' => 'Sidi-Bibi', 'desc' => 'Baccalauréat scientifique, institution privée Arij Almaarifa.'],
+                            ] as $e)
+                            <li class="ml-6 relative">
+                                <span class="absolute -left-[33px] top-1 w-4 h-4 rounded-full bg-sun border-4 border-forest"></span>
+                                <p class="text-xs font-bold tracking-widest uppercase text-leaf">{{ $e['periode'] }}</p>
+                                <h4 class="font-display font-bold text-forest mt-1">{{ $e['titre'] }}</h4>
+                                <p class="text-xs text-earth-500">{{ $e['lieu'] }}</p>
+                                <p class="text-sm text-clay mt-1">{{ $e['desc'] }}</p>
+                            </li>
+                            @endforeach
+                        </ol>
+                        <div class="mt-8 flex flex-wrap gap-2">
+                            @foreach(['PHP / Laravel', 'React / Next.js', 'Nest.js / Node.js', 'Docker / AWS', 'Google AI ✓', 'SQL HackerRank ✓'] as $skill)
+                            <span class="px-3 py-1 bg-sand text-forest text-xs font-semibold rounded-full">{{ $skill }}</span>
+                            @endforeach
+                        </div>
+                        <div class="mt-6 flex items-center gap-3">
+                            <a href="https://github.com/Abdelhakim-Baalla" target="_blank" class="w-10 h-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-leaf transition" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/abdelhakimbaalla/" target="_blank" class="w-10 h-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-leaf transition" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://baalla.tech" target="_blank" class="w-10 h-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-leaf transition" title="Portfolio"><i class="fas fa-globe"></i></a>
+                            <a href="mailto:abdelhakimbaalla50@gmail.com" class="w-10 h-10 rounded-full bg-forest text-white flex items-center justify-center hover:bg-leaf transition" title="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
