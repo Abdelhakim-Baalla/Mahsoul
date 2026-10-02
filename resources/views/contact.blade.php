@@ -2,39 +2,53 @@
 
 @section('content')
 
-
+@include('components.page-hero', ['eyebrow' => 'Contact', 'title' => 'Parlons de votre exploitation', 'subtitle' => 'Une question, un partenariat, un problème technique ? Écrivez-nous.'])
 
 <section class="py-16 md:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
             <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 order-2 lg:order-1">
-                <h2 class="text-3xl font-bold text-primary-800 mb-8">Envoyez-nous un message</h2>
+                <h2 class="font-display text-3xl font-extrabold text-forest mb-8">Envoyez-nous un message</h2>
 
-                <form class="space-y-6">
+                @if(session('success'))
+                <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-md">
+                    <p class="text-sm text-green-700">{{ session('success') }}</p>
+                </div>
+                @endif
+                @if($errors->any())
+                <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+                    <ul class="list-disc pl-5 text-sm text-red-700 space-y-1">
+                        @foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
+                    @csrf
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
-                            <input type="text" id="first_name" name="first_name"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out">
+                            <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}"
+                                   class="w-full px-4 py-3 border border-gray-300 input-eco focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out" required>
                         </div>
                         <div>
                             <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Nom</label>
-                            <input type="text" id="last_name" name="last_name"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out">
+                            <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}"
+                                   class="w-full px-4 py-3 border border-gray-300 input-eco focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out">
                         </div>
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" id="email" name="email"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out">
+                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                               class="w-full px-4 py-3 border border-gray-300 input-eco focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out" required>
                     </div>
 
                     <div>
                         <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone <span class="text-gray-400">(Optionnel)</span></label>
-                        <input type="tel" id="phone" name="phone"
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out">
+                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}"
+                               class="w-full px-4 py-3 border border-gray-300 input-eco focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out">
                     </div>
 
                     <div>
@@ -57,7 +71,7 @@
                     <div>
                         <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Votre Message</label>
                         <textarea id="message" name="message" rows="5"
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out"></textarea>
+                                  class="w-full px-4 py-3 border border-gray-300 input-eco focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-200 ease-in-out" required>{{ old('message') }}</textarea>
                     </div>
 
                     <div class="flex items-start">
@@ -73,7 +87,7 @@
                     </div>
 
                     <button type="submit"
-                            class="w-full px-8 py-4 text-center font-medium rounded-full text-white bg-gradient-to-r from-primary-500 to-primary-700 hover:shadow-lg transform hover:-translate-y-1 transition duration-300 inline-flex items-center justify-center">
+                            class="btn-eco w-full">
                  
                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 16.571V11a1 1 0 112 0v5.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />

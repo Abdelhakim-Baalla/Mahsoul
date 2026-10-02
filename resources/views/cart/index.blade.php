@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('components.page-hero', ['eyebrow' => 'Panier', 'title' => 'Votre panier', 'subtitle' => 'Vérifiez vos articles avant de passer commande.'])
 <div class="bg-primary-50 min-h-screen py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex mb-6" aria-label="Breadcrumb">

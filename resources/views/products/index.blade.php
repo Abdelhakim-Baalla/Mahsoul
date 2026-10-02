@@ -19,6 +19,7 @@
 @endsection
 
 @section('content')
+@include('components.page-hero', ['eyebrow' => 'Marketplace', 'title' => 'Produits du terroir', 'subtitle' => 'Des produits frais et authentiques, directement des fermes marocaines.'])
 <div class="min-h-screen bg-gray-50 font-arabic">
 
 

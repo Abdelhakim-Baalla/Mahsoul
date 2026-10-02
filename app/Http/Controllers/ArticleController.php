@@ -85,13 +85,17 @@ class ArticleController extends Controller
 
         $admin = $this->getAdminById($article->auteur);
         $Utilisateuradmin = $this->getUtilisateurAdminById($admin->compte);
+        $related = Article::where('statut', 'like', 'publié')
+            ->where('categorie', $article->categorie)
+            ->where('id', '!=', $article->id)
+            ->take(3)->get();
         $commentaires = $this->commentaireRepository->getCommentairesByArticleId($article->id);
         foreach ($commentaires as $com) {
             $com->utilisateur = $this->utilisateurRepository->getById($com->utilisateur);
         }
         // dd($Utilisateuradmin);
 
-        return view('articles.show', compact('article', 'admin', 'Utilisateuradmin', 'commentaires'));
+        return view('articles.show', compact('article', 'admin', 'Utilisateuradmin', 'commentaires', 'related'));
     }
 
     public function articlesAddComment(Request $request)

@@ -210,6 +210,22 @@
                     </div>
                     <p class="text-gray-700 mb-4">{{$admin->about}}</p>
                 </div>
+                @if($related->isNotEmpty())
+                <div class="bg-white rounded-3xl shadow-md p-6">
+                    <h3 class="font-display text-lg font-bold text-forest mb-4">Articles liés</h3>
+                    <div class="space-y-4">
+                        @foreach($related as $rel)
+                        <a href="{{ route('articles.show', ['id' => $rel->id]) }}" class="flex gap-3 group">
+                            <img src="{{ $rel->photo ?: '/images/farm.jpg' }}" alt="" class="w-20 h-16 rounded-xl object-cover shrink-0">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800 group-hover:text-leaf leading-snug">{{ \Illuminate\Support\Str::limit(strip_tags($rel->titre), 55) }}</p>
+                                <p class="text-xs text-gray-400 mt-1">{{ $rel->created_at ? $rel->created_at->format('d/m/Y') : '' }}</p>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

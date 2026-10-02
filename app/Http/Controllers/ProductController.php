@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductReview;
+use App\Models\Produit;
 use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
 use App\Repositories\Interfaces\OrderItemRepositoryInterface;
@@ -69,11 +70,16 @@ class ProductController extends Controller
         if (empty($product)) {
             return redirect()->route('products.index')->with('error', 'Produit introuvable.');
         }
+        $catId = $product->categorie;
         $categorie = $this->categorieRepository->getCategorieById($product->categorie);
         if ($categorie) {
             $product->categorie = $categorie->nom;
         } else {
             $product->categorie = 'Unknown';
+        }
+        $related = Produit::where('categorie', $catId)->where('id', '!=', $product->id)->take(4)->get();
+        foreach ($related as $rel) {
+            $rel->avg_note = round(ProductReview::where('produit', $rel->id)->avg('note') ?? 0, 1);
         }
         // dd($product->categorie);
         $reviews = ProductReview::with('auteur')->where('produit', $product->id)->latest()->get();
@@ -82,7 +88,7 @@ class ProductController extends Controller
         $myReview = auth()->check()
             ? ProductReview::where('produit', $product->id)->where('utilisateur', auth()->id())->first()
             : null;
-        return view('products.show', compact('product', 'reviews', 'avgNote', 'nbReviews', 'myReview'));
+        return view('products.show', compact('product', 'reviews', 'avgNote', 'nbReviews', 'myReview', 'related'));
     }
 
     public function reviewStore(Request $request)

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('components.page-hero', ['eyebrow' => 'Consultations', 'title' => 'Nos experts à votre écoute', 'subtitle' => 'Vétérinaires et ingénieurs agricoles vérifiés, disponibles en ligne.'])
 <div class="container mx-auto px-4 py-8">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800">Nos Experts</h1>

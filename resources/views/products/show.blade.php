@@ -237,6 +237,29 @@
     </div>
 </div>
 
+@if($related->isNotEmpty())
+<div class="bg-sand py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <h2 class="font-display text-2xl font-extrabold text-forest mb-6">Vous aimerez aussi</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($related as $rel)
+            <div class="card-eco bg-white shadow-sm overflow-hidden">
+                <img src="{{ $rel->image }}" alt="{{ $rel->nom }}" class="w-full h-40 object-cover">
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 text-sm mb-1">{{ $rel->nom }}</h3>
+                    @include('components.stars', ['note' => $rel->avg_note ?? 0])
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="font-bold text-leaf text-sm">{{ number_format($rel->prix, 2) }} DH</span>
+                        <a href="{{ route('products.show', ['id' => $rel->id]) }}" class="text-xs font-bold text-white bg-forest hover:bg-leaf px-3 py-1.5 rounded-full">Voir</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
 <script>
     // Quantity input functionality
     const quantityInput = document.getElementById('quantity-input');

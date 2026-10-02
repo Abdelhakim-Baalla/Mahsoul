@@ -3,6 +3,7 @@
 @section('title', 'Finaliser votre commande - Mahsoul')
 
 @section('content')
+@include('components.page-hero', ['eyebrow' => 'Commande', 'title' => 'Finaliser la commande', 'subtitle' => 'Livraison rapide et paiement 100% sécurisé.'])
 <div class="bg-primary-50 min-h-screen py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumbs -->

@@ -1,5 +1,21 @@
 <footer class="bg-forest text-white pt-14 pb-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 mb-10 border-b border-white/10">
+            <div>
+                <h3 class="font-display text-2xl font-extrabold">Restez informé<span class="text-sun">.</span></h3>
+                <p class="text-cream/60 text-sm mt-1">Conseils agricoles, nouveautés marketplace, 1 email par mois.</p>
+            </div>
+            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex w-full md:w-auto gap-2">
+                @csrf
+                <input type="email" name="email" placeholder="votre@email.ma" required class="flex-1 md:w-72 px-5 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-cream/40 focus:outline-none focus:border-sun text-sm">
+                <button type="submit" class="px-6 py-3 bg-sun hover:bg-yellow-300 text-forest font-display font-bold text-sm rounded-full transition">OK</button>
+            </form>
+        </div>
+        @if(session('newsletter'))
+        <div class="mb-6 bg-sun/15 border border-sun/40 p-4 rounded-2xl">
+            <p class="text-sm text-sun">{{ session('newsletter') }}</p>
+        </div>
+        @endif
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div class="col-span-1">
                 <div class="flex items-center">
@@ -32,6 +48,7 @@
                     <li><a href="{{ route('welcome') }}" class="text-cream/70 hover:text-sun text-sm">Accueil</a></li>
                     <li><a href="{{ route('about') }}" class="text-cream/70 hover:text-sun text-sm">À propos</a></li>
                     <li><a href="{{ route('contact') }}" class="text-cream/70 hover:text-sun text-sm">Contact</a></li>
+                    <li><a href="{{ route('faq') }}" class="text-cream/70 hover:text-sun text-sm">FAQ</a></li>
                     <li><a href="{{ route('farm.dashboard') }}" class="text-cream/70 hover:text-sun text-sm">Ma Ferme (Farm OS)</a></li>
                 </ul>
             </div>

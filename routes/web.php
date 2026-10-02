@@ -11,6 +11,9 @@ use App\Http\Controllers\FarmController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\VeterinaireController;
+use App\Models\ContactMessage;
+use App\Models\NewsletterSubscriber;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +28,35 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome')->name('welcome');
 Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');
+Route::post('/contact', function (Request $request) {
+    $validated = $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'nullable|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'nullable|string|max:20',
+        'subject' => 'nullable|string|max:255',
+        'message' => 'required|string|max:2000',
+        'privacy' => 'required|accepted',
+    ]);
+    ContactMessage::create([
+        'nom' => trim($validated['first_name'] . ' ' . ($validated['last_name'] ?? '')),
+        'email' => $validated['email'],
+        'telephone' => $validated['phone'] ?? null,
+        'sujet' => $validated['subject'] ?? null,
+        'message' => $validated['message'],
+    ]);
+    return back()->with('success', 'Message envoyé ! Notre équipe vous répondra sous 48h.');
+})->name('contact.send');
+Route::post('/newsletter', function (Request $request) {
+    $validated = $request->validate([
+        'email' => 'required|email|max:255|unique:newsletter_subscribers,email',
+    ]);
+    NewsletterSubscriber::create($validated);
+    return back()->with('newsletter', 'Merci ! Vous êtes inscrit à la newsletter Mahsoul.');
+})->name('newsletter.subscribe');
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms', 'terms')->name('terms');
+Route::view('/faq', 'faq')->name('faq');
 
 // Authentification
 Route::controller(AuthController::class)->group(function () {

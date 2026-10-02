@@ -3,6 +3,7 @@
 @section('title', 'Articles de Formation')
 
 @section('content')
+@include('components.page-hero', ['eyebrow' => 'Formation', 'title' => 'Apprenez, progressez', 'subtitle' => 'Guides pratiques rédigés par nos experts agricoles et vétérinaires.'])
 
 <section class="py-12 diagonal-box bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Hero Section -->
-    
-</section>
+    @include('components.page-hero', ['eyebrow' => 'À propos', 'title' => 'La technologie au service des agriculteurs', 'subtitle' => 'Depuis 2024, Mahsoul digitalise le secteur agricole marocain.'])
     <!-- Our Story Section -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
