@@ -3,7 +3,7 @@
 @section('farm_content')
 <div class="flex items-center justify-between mb-6">
     <h2 class="text-xl font-bold text-gray-800">Parcelles</h2>
-    <a href="{{ route('farm.parcels.create') }}" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700"><i class="fas fa-plus mr-2"></i>Ajouter</a>
+    <a href="{{ route('farm.parcels.create') }}" class="px-4 py-2 bg-forest text-white text-sm font-medium rounded-full hover:bg-leaf"><i class="fas fa-plus mr-2"></i>Ajouter</a>
 </div>
 <div class="bg-white rounded-3xl shadow-md overflow-hidden">
     @if($parcels->isEmpty())
@@ -20,11 +20,11 @@
             <p class="text-sm text-gray-600">Superficie : {{ $p->superficie ?? '—' }} ha</p>
             <p class="text-sm text-gray-600">Lots : {{ $p->lots_count }}</p>
             <div class="mt-4 flex gap-2">
-                <a href="{{ route('farm.parcels.edit', ['id' => $p->id]) }}" class="flex-1 text-center px-3 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200">Modifier</a>
+                <a href="{{ route('farm.parcels.edit', ['id' => $p->id]) }}" class="flex-1 text-center px-3 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-full hover:bg-gray-200">Modifier</a>
                 <form action="{{ route('farm.parcels.delete') }}" method="POST" onsubmit="return confirm('Supprimer cette parcelle ?')">
                     @csrf
                     <input type="hidden" name="id" value="{{ $p->id }}">
-                    <button type="submit" class="px-3 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-md hover:bg-red-100"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="px-3 py-2 bg-red-50 text-red-600 text-sm font-medium rounded-full hover:bg-red-100"><i class="fas fa-trash"></i></button>
                 </form>
             </div>
         </div>

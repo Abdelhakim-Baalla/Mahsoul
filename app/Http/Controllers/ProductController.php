@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductReview;
 use App\Repositories\Interfaces\CategorieRepositoryInterface;
 use App\Repositories\Interfaces\CommandeRepositoryInterface;
 use App\Repositories\Interfaces\OrderItemRepositoryInterface;
@@ -19,7 +20,7 @@ class ProductController extends Controller
 
     public function __construct(OrderItemRepositoryInterface $orderItem, CommandeRepositoryInterface $commandeRepository, ProduitRepositoryInterface $produitRepository, CategorieRepositoryInterface $categorieRepository)
     {
-        $this->middleware('auth')->only(['checkoutIndex', 'checkoutpayment', 'ordersIndex', 'ordersShow']);
+        $this->middleware('auth')->only(['checkoutIndex', 'checkoutpayment', 'ordersIndex', 'ordersShow', 'reviewStore']);
         $this->produitRepository = $produitRepository;
         $this->categorieRepository = $categorieRepository;
         $this->commandeRepository = $commandeRepository;
@@ -51,6 +52,8 @@ class ProductController extends Controller
             } else {
                 $product->categorie = 'Unknown';
             }
+            $product->avg_note = round(ProductReview::where('produit', $product->id)->avg('note') ?? 0, 1);
+            $product->nb_reviews = ProductReview::where('produit', $product->id)->count();
             // dd($product->categorie);
         }
         return view('products.index', compact('products', 'categories', 'filters'));
@@ -73,7 +76,29 @@ class ProductController extends Controller
             $product->categorie = 'Unknown';
         }
         // dd($product->categorie);
-        return view('products.show', compact('product'));
+        $reviews = ProductReview::with('auteur')->where('produit', $product->id)->latest()->get();
+        $avgNote = round(ProductReview::where('produit', $product->id)->avg('note') ?? 0, 1);
+        $nbReviews = $reviews->count();
+        $myReview = auth()->check()
+            ? ProductReview::where('produit', $product->id)->where('utilisateur', auth()->id())->first()
+            : null;
+        return view('products.show', compact('product', 'reviews', 'avgNote', 'nbReviews', 'myReview'));
+    }
+
+    public function reviewStore(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:produits,id',
+            'note' => 'required|integer|min:1|max:5',
+            'commentaire' => 'nullable|string|max:1000',
+        ]);
+
+        ProductReview::updateOrCreate(
+            ['produit' => $validated['id'], 'utilisateur' => auth()->id()],
+            ['note' => $validated['note'], 'commentaire' => $validated['commentaire'] ?? null]
+        );
+
+        return redirect()->route('products.show', ['id' => $validated['id']])->with('success', 'Merci pour votre avis !');
     }
 
     public function checkoutIndex(Request $request)

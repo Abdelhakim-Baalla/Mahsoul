@@ -10,10 +10,10 @@
             <p class="mt-1 text-gray-600">Client : <strong>{{ $invoice->client_nom }}</strong></p>
             <p class="text-sm text-gray-500">Échéance : {{ $invoice->date_echeance ? $invoice->date_echeance->format('d/m/Y') : '—' }}</p>
         </div>
-        <button onclick="window.print()" class="px-5 py-2 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700"><i class="fas fa-print mr-2"></i>Imprimer</button>
+        <button onclick="window.print()" class="px-5 py-2 bg-forest text-white font-medium rounded-full hover:bg-leaf"><i class="fas fa-print mr-2"></i>Imprimer</button>
     </div>
     <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
+        <thead class="thead-eco">
             <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Qté</th>
@@ -44,12 +44,12 @@
             @csrf
             <input type="hidden" name="id" value="{{ $invoice->id }}">
             <label class="text-sm font-medium text-gray-700">Statut :</label>
-            <select name="statut" class="px-3 py-2 border border-gray-300 rounded-md text-sm">
+            <select name="statut" class="px-3 py-2 border border-gray-300 input-eco text-sm">
                 @foreach(['brouillon' => 'Brouillon', 'envoyee' => 'Envoyée', 'payee' => 'Payée', 'annulee' => 'Annulée'] as $k => $label)
                 <option value="{{ $k }}" {{ $invoice->statut == $k ? 'selected' : '' }}>{{ $label }}</option>
                 @endforeach
             </select>
-            <button type="submit" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700">OK</button>
+            <button type="submit" class="px-4 py-2 bg-forest text-white text-sm font-medium rounded-full hover:bg-leaf">OK</button>
         </form>
     </div>
 </div>

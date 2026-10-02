@@ -8,10 +8,10 @@
                 <h1 class="font-display text-3xl font-extrabold text-forest"><i class="fas fa-barcode mr-2"></i>Lots de récolte — {{ $farm->nom }}</h1>
                 <p class="mt-2 text-gray-600">Traçabilité complète : parcelle → intrants → récolte → destination</p>
             </div>
-            <a href="{{ route('farm.lots.create') }}" class="inline-block px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">
+            <a href="{{ route('farm.lots.create') }}" class="inline-block px-6 py-3 bg-forest text-white font-medium rounded-full hover:bg-leaf">
                 <i class="fas fa-plus mr-2"></i>Nouveau lot
             </a>
-            <a href="{{ route('farm.lots.export') }}" class="inline-block px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200 ml-2">
+            <a href="{{ route('farm.lots.export') }}" class="inline-block px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-full hover:bg-gray-200 ml-2">
                 <i class="fas fa-download mr-2"></i>CSV
             </a>
         </div>
@@ -26,7 +26,7 @@
             @else
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                    <thead class="thead-eco">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Code lot</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Produit</th>

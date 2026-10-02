@@ -3,7 +3,7 @@
 @section('farm_content')
 <div class="flex items-center justify-between mb-6">
     <h2 class="text-xl font-bold text-gray-800">Tâches</h2>
-    <a href="{{ route('farm.tasks.create') }}" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700"><i class="fas fa-plus mr-2"></i>Nouvelle tâche</a>
+    <a href="{{ route('farm.tasks.create') }}" class="px-4 py-2 bg-forest text-white text-sm font-medium rounded-full hover:bg-leaf"><i class="fas fa-plus mr-2"></i>Nouvelle tâche</a>
 </div>
 <div class="bg-white rounded-3xl shadow-md overflow-hidden">
     @if($tasks->isEmpty())
@@ -29,7 +29,7 @@
                 <form action="{{ route('farm.tasks.delete') }}" method="POST" onsubmit="return confirm('Supprimer cette tâche ?')">
                     @csrf
                     <input type="hidden" name="id" value="{{ $t->id }}">
-                    <button type="submit" class="px-3 py-2 text-red-600 hover:bg-red-50 rounded-md text-sm"><i class="fas fa-trash"></i></button>
+                    <button type="submit" class="px-3 py-2 text-red-600 hover:bg-red-50 rounded-full text-sm"><i class="fas fa-trash"></i></button>
                 </form>
             </div>
         </li>

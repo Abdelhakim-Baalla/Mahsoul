@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consultation;
+use App\Models\ExpertReview;
 use App\Repositories\Interfaces\AgricoleRepositoryInterface;
 use App\Repositories\Interfaces\DocumentRepositoryInterface;
 use App\Repositories\Interfaces\RendezVousRepositoryInterface;
@@ -22,7 +23,7 @@ class ConsultationController extends Controller
 
     public function __construct(DocumentRepositoryInterface $documentRepository, RendezVousRepositoryInterface $rendezVousRepository, VeterinaireRepositoryInterface $veterinaireRepository, UtilisateurRepositoryInterface $utilisateurRepository, AgricoleRepositoryInterface $agricoleRepository)
     {
-        $this->middleware('auth')->only(['createRendezVous', 'payementRendezVous']);
+        $this->middleware('auth')->only(['createRendezVous', 'payementRendezVous', 'expertReviewStore']);
         $this->agricoleRepository = $agricoleRepository; 
         $this->veterinaireRepository = $veterinaireRepository; 
         $this->utilisateurRepository = $utilisateurRepository; 
@@ -64,10 +65,18 @@ class ConsultationController extends Controller
         
         foreach ($agricoles as $agricole) {
             $agricole->compte = $this->utilisateurRepository->getById($agricole->compte);
+            if ($agricole->compte) {
+                $agricole->compte->avg_note = round(ExpertReview::where('expert', $agricole->compte->id)->avg('note') ?? 0, 1);
+                $agricole->compte->nb_reviews = ExpertReview::where('expert', $agricole->compte->id)->count();
+            }
         }
 
         foreach ($veterinaires as $veterinaire) {
             $veterinaire->compte = $this->utilisateurRepository->getById($veterinaire->compte);
+            if ($veterinaire->compte) {
+                $veterinaire->compte->avg_note = round(ExpertReview::where('expert', $veterinaire->compte->id)->avg('note') ?? 0, 1);
+                $veterinaire->compte->nb_reviews = ExpertReview::where('expert', $veterinaire->compte->id)->count();
+            }
         }
 
         // dd($agricoles);
@@ -98,7 +107,33 @@ class ConsultationController extends Controller
         }
 
         // dd($agricole);
-        return view('experts.show', compact('expert', 'agricole', 'veterinaire'));
+        $reviews = ExpertReview::with('clientUser')->where('expert', $expert->id)->latest()->get();
+        $avgNote = round(ExpertReview::where('expert', $expert->id)->avg('note') ?? 0, 1);
+        $nbReviews = $reviews->count();
+        $myReview = auth()->check()
+            ? ExpertReview::where('expert', $expert->id)->where('client', auth()->id())->first()
+            : null;
+        return view('experts.show', compact('expert', 'agricole', 'veterinaire', 'reviews', 'avgNote', 'nbReviews', 'myReview'));
+    }
+
+    public function expertReviewStore(Request $request)
+    {
+        $validated = $request->validate([
+            'expert_id' => 'required|integer|exists:utilisateurs,id',
+            'note' => 'required|integer|min:1|max:5',
+            'commentaire' => 'nullable|string|max:1000',
+        ]);
+
+        if ($validated['expert_id'] === auth()->id()) {
+            return back()->withErrors(['note' => 'Vous ne pouvez pas noter votre propre profil.']);
+        }
+
+        ExpertReview::updateOrCreate(
+            ['expert' => $validated['expert_id'], 'client' => auth()->id()],
+            ['note' => $validated['note'], 'commentaire' => $validated['commentaire'] ?? null]
+        );
+
+        return redirect()->route('experts.show', ['expert_id' => $validated['expert_id']])->with('success', 'Merci pour votre avis !');
     }
 
     public function createRendezVous(Request $request)

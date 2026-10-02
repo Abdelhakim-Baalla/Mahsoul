@@ -3,12 +3,12 @@
 @section('farm_content')
 <div class="flex items-center justify-between mb-6">
     <h2 class="text-xl font-bold text-gray-800">Stocks intrants</h2>
-    <a href="{{ route('farm.inputs.create') }}" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700"><i class="fas fa-plus mr-2"></i>Ajouter un intrant</a>
+    <a href="{{ route('farm.inputs.create') }}" class="px-4 py-2 bg-forest text-white text-sm font-medium rounded-full hover:bg-leaf"><i class="fas fa-plus mr-2"></i>Ajouter un intrant</a>
 </div>
 <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+            <thead class="thead-eco">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Intrant</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
@@ -39,7 +39,7 @@
             @csrf
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Intrant</label>
-                <select name="input_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                <select name="input_id" class="w-full px-4 py-2 border border-gray-300 input-eco focus:ring-primary-500 focus:border-primary-500" required>
                     <option value="">— Choisir —</option>
                     @foreach($inputs as $input)
                     <option value="{{ $input->id }}">{{ $input->nom }} ({{ $input->quantite_stock }} {{ $input->unite }})</option>
@@ -49,17 +49,17 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Quantité</label>
-                    <input type="number" step="0.01" name="quantite" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                    <input type="number" step="0.01" name="quantite" class="w-full px-4 py-2 border border-gray-300 input-eco focus:ring-primary-500 focus:border-primary-500" required>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                    <input type="date" name="date" value="{{ date('Y-m-d') }}" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" required>
+                    <input type="date" name="date" value="{{ date('Y-m-d') }}" class="w-full px-4 py-2 border border-gray-300 input-eco focus:ring-primary-500 focus:border-primary-500" required>
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Parcelle</label>
-                    <select name="parcel_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                    <select name="parcel_id" class="w-full px-4 py-2 border border-gray-300 input-eco focus:ring-primary-500 focus:border-primary-500">
                         <option value="">— Aucune —</option>
                         @foreach($parcels as $p)
                         <option value="{{ $p->id }}">{{ $p->nom }}</option>
@@ -68,7 +68,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Lot (traçabilité)</label>
-                    <select name="lot_id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                    <select name="lot_id" class="w-full px-4 py-2 border border-gray-300 input-eco focus:ring-primary-500 focus:border-primary-500">
                         <option value="">— Aucun —</option>
                         @foreach($lots as $l)
                         <option value="{{ $l->id }}">{{ $l->code }} — {{ $l->produit }}</option>
@@ -78,9 +78,9 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Note</label>
-                <input type="text" name="note" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                <input type="text" name="note" class="w-full px-4 py-2 border border-gray-300 input-eco focus:ring-primary-500 focus:border-primary-500">
             </div>
-            <button type="submit" class="px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">Enregistrer (décrémente le stock)</button>
+            <button type="submit" class="px-6 py-3 bg-forest text-white font-medium rounded-full hover:bg-leaf">Enregistrer (décrémente le stock)</button>
         </form>
     </div>
     <div class="bg-white rounded-3xl shadow-md overflow-hidden">

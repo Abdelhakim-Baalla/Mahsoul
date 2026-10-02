@@ -74,6 +74,7 @@ Route::controller(ProfileController::class)->group(function () {
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
     Route::get('/products/show', 'productShow')->name('products.show');
+    Route::post('/products/avis', 'reviewStore')->name('products.review.store');
     Route::get('/cart/save', 'addToCart')->name('add.cart.save');
     Route::get('/cart', 'cartIndex')->name('cart.index');
     Route::post('/cart/delete', 'cartDeleteItem')->name('cart.delete.product');
@@ -101,6 +102,7 @@ Route::controller(StripePaymentController::class)->group(function () {
 Route::controller(ConsultationController::class)->group(function () {
     Route::get('/experts', 'AfficherExperts')->name('experts.index');
     Route::get('/experts/show', 'expertShow')->name('experts.show');
+    Route::post('/experts/avis', 'expertReviewStore')->name('experts.review.store');
     Route::get('/rendezVous/create', 'createRendezVous')->name('rendezVous.create');
     Route::post('/rendezVous/payemnt', 'payementRendezVous')->name('rendezVous.payement');
 });

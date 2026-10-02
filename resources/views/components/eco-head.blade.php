@@ -92,6 +92,10 @@
     .btn-outline-eco:hover { background: #0e2207; color: #fff; }
     .card-eco { border-radius: 1.5rem; transition: transform .3s ease, box-shadow .3s ease; }
     .card-eco:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -18px rgba(14,34,7,.35); }
+    .input-eco { border-radius: .75rem !important; background: #fff; }
+    .input-eco:focus { --tw-ring-color: #1f6306 !important; border-color: #1f6306 !important; }
+    .thead-eco { background: #fef4d1 !important; }
+    .thead-eco th { color: #0e2207 !important; }
     .marquee-eco { overflow: hidden; white-space: nowrap; }
     .marquee-eco span {
         display: inline-block; padding: 0 1.5rem;

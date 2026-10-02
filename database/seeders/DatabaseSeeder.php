@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             DemoDataSeeder::class,
             DemoFarmSeeder::class,
+            ReviewSeeder::class,
         ]);
     }
 }

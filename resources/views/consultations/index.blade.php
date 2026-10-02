@@ -17,8 +17,10 @@
                         <div class="flex items-center mb-4 md:mb-0">
                             <img src="{{$agricole->compte->photo}}" alt="{{$agricole->compte->nom}} {{$agricole->compte->prenom}}" class="w-12 h-12 rounded-full object-cover mr-4">
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-800">{{$agricole->compte->prenom}} {{$agricole->compte->nom}}</h3>
+                                <h3 class="text-lg font-semibold text-gray-800">{{$agricole->compte->prenom}} {{$agricole->compte->nom}}
+                                    @if($agricole->compte->verifie)<i class="fas fa-badge-check text-sky-500 ml-1" title="Expert vérifié"></i>@endif</h3>
                                 <p class="text-gray-600">{{$agricole->compte->email}}</p>
+                                @include('components.stars', ['note' => $agricole->compte->avg_note ?? 0, 'count' => $agricole->compte->nb_reviews ?? 0])
                             </div>
                         </div>
                         <div class="flex flex-col items-end">
@@ -88,8 +90,10 @@
                         <div class="flex items-center mb-4 md:mb-0">
                             <img src="{{$veterinaire->compte->photo}}" alt="{{$veterinaire->compte->nom}} {{$veterinaire->compte->prenom}}" class="w-12 h-12 rounded-full object-cover mr-4">
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-800">{{$veterinaire->compte->prenom}} {{$veterinaire->compte->nom}}</h3>
+                                <h3 class="text-lg font-semibold text-gray-800">{{$veterinaire->compte->prenom}} {{$veterinaire->compte->nom}}
+                                    @if($veterinaire->compte->verifie)<i class="fas fa-badge-check text-sky-500 ml-1" title="Expert vérifié"></i>@endif</h3>
                                 <p class="text-gray-600">{{$veterinaire->compte->email}}</p>
+                                @include('components.stars', ['note' => $veterinaire->compte->avg_note ?? 0, 'count' => $veterinaire->compte->nb_reviews ?? 0])
                             </div>
                         </div>
                         <div class="flex flex-col items-end">

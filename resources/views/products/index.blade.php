@@ -114,7 +114,8 @@
                         
                         <div class="p-4">
                             <h3 class="font-medium text-gray-900 mb-1">{{ $product->nom }}</h3>
-                            <p class="text-sm text-gray-500 mb-3 line-clamp-2">{{ $product->description }}</p>
+                            <p class="text-sm text-gray-500 mb-2 line-clamp-2">{{ $product->description }}</p>
+                            @include('components.stars', ['note' => $product->avg_note ?? 0, 'count' => $product->nb_reviews ?? 0])
                             
                             <div class="flex items-center mb-3">
                                 @if($product->vendeur == 'Mahsoul Store')

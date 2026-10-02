@@ -169,6 +169,8 @@
 
                     <div class="mt-6 flex items-center justify-center space-x-6 border-t pt-4">
                         <div class="flex items-center">
+                            @include('components.stars', ['note' => $avgNote ?? 0, 'count' => $nbReviews ?? 0])
+                        </div>
                             <svg class="w-5 h-5 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -185,6 +187,53 @@
             </div>
 
         </div>
+    </div>
+</div>
+
+<div class="bg-white py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="font-display text-2xl font-extrabold text-forest mb-2">Avis clients</h2>
+        <div class="mb-6">@include('components.stars', ['note' => $avgNote ?? 0, 'count' => $nbReviews ?? 0])</div>
+        @if(session('success'))
+        <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-md">
+            <p class="text-sm text-green-700">{{ session('success') }}</p>
+        </div>
+        @endif
+        @auth
+        <form action="{{ route('products.review.store') }}" method="POST" class="bg-sand rounded-3xl p-6 mb-8">
+            @csrf
+            <input type="hidden" name="id" value="{{ $product->id }}">
+            <h3 class="font-display font-bold text-forest mb-3">{{ $myReview ? 'Modifier votre avis' : 'Donnez votre avis' }}</h3>
+            <div class="flex items-center gap-3 mb-3">
+                <label for="note" class="text-sm font-medium text-gray-700">Note</label>
+                <select id="note" name="note" class="px-4 py-2 border border-gray-300 input-eco" required>
+                    @for($i = 5; $i >= 1; $i--)
+                    <option value="{{ $i }}" {{ ($myReview->note ?? 5) == $i ? 'selected' : '' }}>{{ $i }} ★</option>
+                    @endfor
+                </select>
+            </div>
+            <textarea name="commentaire" rows="3" placeholder="Votre commentaire (optionnel)" class="w-full px-4 py-2 border border-gray-300 input-eco">{{ old('commentaire', $myReview->commentaire ?? '') }}</textarea>
+            <button type="submit" class="mt-3 px-6 py-2 bg-forest hover:bg-leaf text-white text-sm font-display font-bold rounded-full">Publier</button>
+        </form>
+        @else
+        <p class="mb-8 text-sm text-gray-600"><a href="{{ route('login') }}" class="text-leaf font-semibold hover:underline">Connectez-vous</a> pour laisser un avis.</p>
+        @endauth
+        @if($reviews->isEmpty())
+        <p class="text-gray-500">Aucun avis pour le moment. Soyez le premier !</p>
+        @else
+        <ul class="space-y-4">
+            @foreach($reviews as $r)
+            <li class="border border-gray-100 rounded-2xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="font-semibold text-gray-800">{{ $r->auteur->prenom ?? '' }} {{ $r->auteur->nom ?? '' }}</p>
+                    @include('components.stars', ['note' => $r->note])
+                </div>
+                @if($r->commentaire)<p class="text-gray-600 text-sm">{{ $r->commentaire }}</p>@endif
+                <p class="text-xs text-gray-400 mt-2">{{ $r->created_at ? $r->created_at->format('d/m/Y') : '' }}</p>
+            </li>
+            @endforeach
+        </ul>
+        @endif
     </div>
 </div>
 

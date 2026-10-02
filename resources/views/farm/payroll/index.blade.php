@@ -5,13 +5,13 @@
     <h2 class="text-xl font-bold text-gray-800">Paie mensuelle</h2>
     <form action="{{ route('farm.payroll.index') }}" method="GET" class="flex gap-2">
         <input type="month" name="mois" value="{{ $mois }}" class="px-4 py-2 border border-gray-300 rounded-md">
-        <button type="submit" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200">Afficher</button>
+        <button type="submit" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-full hover:bg-gray-200">Afficher</button>
     </form>
 </div>
 <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+            <thead class="thead-eco">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ouvrier</th>
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Salaire/j</th>
@@ -43,6 +43,6 @@
 <form action="{{ route('farm.payroll.book') }}" method="POST" onsubmit="return confirm('Comptabiliser la paie de {{ $mois }} en caisse ?')">
     @csrf
     <input type="hidden" name="mois" value="{{ $mois }}">
-    <button type="submit" class="px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700"><i class="fas fa-cash-register mr-2"></i>Comptabiliser en caisse (réf. PAIE-{{ $mois }})</button>
+    <button type="submit" class="px-6 py-3 bg-forest text-white font-medium rounded-full hover:bg-leaf"><i class="fas fa-cash-register mr-2"></i>Comptabiliser en caisse (réf. PAIE-{{ $mois }})</button>
 </form>
 @endsection

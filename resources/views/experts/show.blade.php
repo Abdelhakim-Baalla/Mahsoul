@@ -118,4 +118,56 @@
         </div>
     </div>
 </div>
+
+<div class="bg-white py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="font-display text-2xl font-extrabold text-forest mb-2">Avis sur cet expert @if($expert->verifie)<span class="ml-2 text-xs px-2 py-1 rounded-full bg-sky-100 text-sky-700 align-middle"><i class="fas fa-badge-check mr-1"></i>Vérifié</span>@endif</h2>
+        <div class="mb-6">@include('components.stars', ['note' => $avgNote ?? 0, 'count' => $nbReviews ?? 0])</div>
+        @if(session('success'))
+        <div class="mb-6 bg-green-50 border-l-4 border-green-500 p-4 rounded-md">
+            <p class="text-sm text-green-700">{{ session('success') }}</p>
+        </div>
+        @endif
+        @if($errors->any())
+        <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+            <ul class="list-disc pl-5 text-sm text-red-700">@foreach($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul>
+        </div>
+        @endif
+        @auth
+        <form action="{{ route('experts.review.store') }}" method="POST" class="bg-sand rounded-3xl p-6 mb-8">
+            @csrf
+            <input type="hidden" name="expert_id" value="{{ $expert->id }}">
+            <h3 class="font-display font-bold text-forest mb-3">{{ $myReview ? 'Modifier votre avis' : 'Noter cet expert' }}</h3>
+            <div class="flex items-center gap-3 mb-3">
+                <label for="note" class="text-sm font-medium text-gray-700">Note</label>
+                <select id="note" name="note" class="px-4 py-2 border border-gray-300 input-eco" required>
+                    @for($i = 5; $i >= 1; $i--)
+                    <option value="{{ $i }}" {{ ($myReview->note ?? 5) == $i ? 'selected' : '' }}>{{ $i }} ★</option>
+                    @endfor
+                </select>
+            </div>
+            <textarea name="commentaire" rows="3" placeholder="Votre retour d'expérience (optionnel)" class="w-full px-4 py-2 border border-gray-300 input-eco">{{ old('commentaire', $myReview->commentaire ?? '') }}</textarea>
+            <button type="submit" class="mt-3 px-6 py-2 bg-forest hover:bg-leaf text-white text-sm font-display font-bold rounded-full">Publier</button>
+        </form>
+        @else
+        <p class="mb-8 text-sm text-gray-600"><a href="{{ route('login') }}" class="text-leaf font-semibold hover:underline">Connectez-vous</a> pour noter cet expert.</p>
+        @endauth
+        @if($reviews->isEmpty())
+        <p class="text-gray-500">Aucun avis pour le moment.</p>
+        @else
+        <ul class="space-y-4">
+            @foreach($reviews as $r)
+            <li class="border border-gray-100 rounded-2xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="font-semibold text-gray-800">{{ $r->clientUser->prenom ?? '' }} {{ $r->clientUser->nom ?? '' }}</p>
+                    @include('components.stars', ['note' => $r->note])
+                </div>
+                @if($r->commentaire)<p class="text-gray-600 text-sm">{{ $r->commentaire }}</p>@endif
+                <p class="text-xs text-gray-400 mt-2">{{ $r->created_at ? $r->created_at->format('d/m/Y') : '' }}</p>
+            </li>
+            @endforeach
+        </ul>
+        @endif
+    </div>
+</div>
 @endsection

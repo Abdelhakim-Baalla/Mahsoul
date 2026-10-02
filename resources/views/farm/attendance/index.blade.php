@@ -8,7 +8,7 @@
         @csrf
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+                <thead class="thead-eco">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Présent</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Ouvrier</th>
@@ -33,7 +33,7 @@
             </table>
         </div>
         <div class="p-6 border-t border-gray-200">
-            <button type="submit" class="px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">Enregistrer le pointage</button>
+            <button type="submit" class="px-6 py-3 bg-forest text-white font-medium rounded-full hover:bg-leaf">Enregistrer le pointage</button>
         </div>
     </form>
 </div>

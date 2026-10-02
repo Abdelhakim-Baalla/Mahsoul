@@ -49,12 +49,12 @@
                     <form action="{{ route('farm.lots.status') }}" method="POST" class="flex gap-2 mt-1">
                         @csrf
                         <input type="hidden" name="id" value="{{ $lot->id }}">
-                        <select name="statut" class="px-3 py-2 border border-gray-300 rounded-md text-sm">
+                        <select name="statut" class="px-3 py-2 border border-gray-300 input-eco text-sm">
                             @foreach(['recolte' => 'Récolté', 'conditionne' => 'Conditionné', 'expedie' => 'Expédié', 'livre' => 'Livré'] as $k => $label)
                             <option value="{{ $k }}" {{ $lot->statut == $k ? 'selected' : '' }}>{{ $label }}</option>
                             @endforeach
                         </select>
-                        <button type="submit" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700">OK</button>
+                        <button type="submit" class="px-4 py-2 bg-forest text-white text-sm font-medium rounded-full hover:bg-leaf">OK</button>
                     </form>
                 </div>
             </div>
