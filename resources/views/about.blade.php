@@ -89,22 +89,25 @@
         <section class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-14">
-                    <span class="eco-eyebrow mb-4">Notre équipe</span>
-                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest">Des passionnés au service de l'agriculture</h2>
+                    <span class="eco-eyebrow mb-4">Notre fondateur</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-forest">Abdelhakim Baalla</h2>
+                    <p class="text-clay mt-4 max-w-2xl mx-auto">Fondateur & CEO de Mahsoul, développeur Full-Stack passionné par l'AgriTech, issu d'une famille d'agriculteurs marocains.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
                     @foreach([
-                        ['nom' => 'Abdelhakim Baalla', 'role' => 'Fondateur & CEO', 'bio' => 'Développeur Full-Stack, passionné AgriTech.', 'photo' => 'abdelhakim-baalla.jpg'],
-                        ['nom' => 'Omar B.', 'role' => 'Directeur Technique', 'bio' => 'Expert Laravel & architecture scalable.', 'photo' => 'personne.jpg'],
-                        ['nom' => 'Yasmine E.', 'role' => 'Responsable Agricole', 'bio' => 'Ingénieure agronome, spécialiste bio.', 'photo' => 'personne.jpg'],
-                        ['nom' => 'Dr. Hassan T.', 'role' => 'Conseiller Vétérinaire', 'bio' => '15 ans d\'expérience élevage bovin.', 'photo' => 'personne.jpg'],
-                    ] as $m)
-                    <div class="card-eco bg-cream text-center p-6">
-                        <img src="{{ asset('images/' . $m['photo']) }}" alt="{{ $m['nom'] }}" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-sun">
-                        <h3 class="font-display font-bold text-forest">{{ $m['nom'] }}</h3>
-                        <p class="text-sun font-semibold text-sm mb-2">{{ $m['role'] }}</p>
-                        <p class="text-clay text-sm">{{ $m['bio'] }}</p>
+                        ['photo' => 'abdelhakim-baalla.jpg', 'alt' => 'Abdelhakim Baalla - Portrait', 'description' => 'Portrait officiel du fondateur'],
+                        ['photo' => 'abdelhakim-baalla-2.jpg', 'alt' => 'Abdelhakim Baalla - Sur le terrain', 'description' => 'Sur le terrain avec les agriculteurs'],
+                        ['photo' => 'abdelhakim-baalla-3.jpg', 'alt' => 'Abdelhakim Baalla - En consultation', 'description' => 'En consultation avec des experts agricoles'],
+                    ] as $p)
+                    <div class="card-eco bg-cream overflow-hidden relative group">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="{{ asset('images/' . $p['photo']) }}" alt="{{ $p['alt'] }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display font-bold text-forest mb-2">Abdelhakim Baalla</h3>
+                            <p class="text-clay text-sm">{{ $p['description'] }}</p>
+                        </div>
                     </div>
                     @endforeach
                 </div>

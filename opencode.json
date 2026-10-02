@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "skills": [
+    ".opencode/skills",
+    "~/.config/opencode/skills",
+    "https://github.com/jackwener/opencli/skills"
+  ],
+  "permission": {
+    "skill": {
+      "*": "allow",
+      "opencli-*": "allow"
+    }
+  }
+}
