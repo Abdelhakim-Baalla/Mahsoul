@@ -5,7 +5,7 @@
     <h2 class="text-xl font-bold text-gray-800">Ouvriers ({{ $workers->count() }})</h2>
     <a href="{{ route('farm.workers.create') }}" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700"><i class="fas fa-plus mr-2"></i>Ajouter</a>
 </div>
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="bg-white rounded-3xl shadow-md overflow-hidden">
     @if($workers->isEmpty())
     <p class="p-10 text-center text-gray-500">Aucun ouvrier enregistré.</p>
     @else

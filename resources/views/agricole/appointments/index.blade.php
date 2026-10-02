@@ -8,7 +8,7 @@
     </div>
 
     <!-- Filtres -->
-    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div class="bg-white rounded-3xl shadow-md p-4 mb-6">
         <form action="{{ route('agricole.appointments.index.filtreer') }}" method="GET" class="flex flex-wrap gap-4">
             <div class="flex-1 min-w-[200px]">
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
@@ -35,7 +35,7 @@
     <div class="space-y-4">
         @if(count($rendezVous) > 0)
             @foreach($rendezVous as $rendezVou)
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
             <div class="p-6">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div class="flex items-center mb-4 md:mb-0">
@@ -111,7 +111,7 @@
             </div>
             @endforeach
         @else
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+        <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
             <p>Aucun Rendez Vous A éte asigné</p>
         </div>
         @endif

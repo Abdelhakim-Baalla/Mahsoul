@@ -87,7 +87,7 @@
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     @foreach($products as $product)
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow duration-200">
+                    <div class="card-eco bg-white shadow-sm overflow-hidden border border-gray-100">
                        
                         <div class="relative bg-gray-100 h-72">
                             <div class="absolute inset-0 flex items-center justify-center">

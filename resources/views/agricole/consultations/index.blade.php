@@ -8,7 +8,7 @@
     </div>
 
     <!-- Filtres -->
-    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div class="bg-white rounded-3xl shadow-md p-4 mb-6">
         <form action="{{ route('expert.consultations.index') }}" method="GET" class="flex flex-wrap gap-4">
             <div class="flex-1 min-w-[200px]">
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
@@ -43,7 +43,7 @@
 
     <!-- Statistiques -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white rounded-3xl shadow-md p-4">
             <div class="flex items-center">
                 <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white rounded-3xl shadow-md p-4">
             <div class="flex items-center">
                 <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white rounded-3xl shadow-md p-4">
             <div class="flex items-center">
                 <div class="flex-shrink-0 bg-yellow-100 rounded-full p-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-4">
+        <div class="bg-white rounded-3xl shadow-md p-4">
             <div class="flex items-center">
                 <div class="flex-shrink-0 bg-purple-100 rounded-full p-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -99,7 +99,7 @@
     </div>
 
     <!-- Liste des consultations -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-white rounded-3xl shadow-md overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">

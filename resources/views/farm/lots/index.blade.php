@@ -20,7 +20,7 @@
             <p class="text-sm text-green-700">{{ session('success') }}</p>
         </div>
         @endif
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-3xl shadow-md overflow-hidden">
             @if($lots->isEmpty())
             <p class="p-10 text-center text-gray-500">Aucun lot enregistré.</p>
             @else

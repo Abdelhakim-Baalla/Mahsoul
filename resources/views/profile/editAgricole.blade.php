@@ -45,7 +45,7 @@
                             <div class="p-6 border-b border-gray-200">
                                 <h3 class="text-xl font-bold text-gray-800">Modifier mes informations</h3>
                             </div>
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
                                 <div class="p-6">
                                     <form action="/agricole/information/update" method="POST">
                                         @csrf

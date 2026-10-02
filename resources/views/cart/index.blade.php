@@ -27,7 +27,7 @@
 
         <div class="flex flex-col lg:flex-row gap-8">
             <div class="lg:w-2/3">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
                     <div class="p-6 border-b border-gray-200">
                         <div class="flex justify-between items-center">
                             <h2 class="text-xl font-bold text-gray-800">Produits ({{ count($cartItems) }})</h2>
@@ -125,7 +125,7 @@
             </div>
 
             <div class="lg:w-1/3">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden sticky top-6">
+                <div class="bg-white rounded-3xl shadow-md overflow-hidden sticky top-6">
                     <div class="p-6 border-b border-gray-200">
                         <h2 class="text-xl font-bold text-gray-800">Récapitulatif de la commande</h2>
                     </div>
@@ -167,7 +167,7 @@
                         </div>
 
                         <div class="mt-4 flex justify-center">
-                            <img src="{{ asset('images/stripe-logo.png') }}" alt="Méthodes de paiement" class="h-8">
+                            <img src="{{ asset('images/Stripe-logo.png') }}" alt="Méthodes de paiement" class="h-8">
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 @section('farm_content')
 <h2 class="text-xl font-bold text-gray-800 mb-6">{{ isset($worker) ? 'Modifier l’ouvrier' : 'Nouvel ouvrier' }}</h2>
-<div class="bg-white rounded-lg shadow-md p-8 max-w-2xl">
+<div class="bg-white rounded-3xl shadow-md p-8 max-w-2xl">
     <form action="{{ isset($worker) ? route('farm.workers.update') : route('farm.workers.store') }}" method="POST" class="space-y-5">
         @csrf
         @if(isset($worker))

@@ -5,7 +5,7 @@ $link = function ($key, $url, $icon, $label) use ($active) {
     return '<li><a href="' . $url . '" class="flex items-center px-4 py-2 rounded-md ' . ($on ? 'bg-primary-50 text-primary-700 font-medium' : 'text-gray-700 hover:bg-gray-100') . '"><i class="fas ' . $icon . ' mr-3"></i>' . $label . '</a></li>';
 };
 @endphp
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="bg-white rounded-3xl shadow-md overflow-hidden">
     @if(Auth::user()->type == 'agricole')
     <div class="p-6 text-white relative" style="background-image: url('{{ asset('images/agricole-banner.jpg') }}'); background-size: cover; background-position: center;">
         @elseif(Auth::user()->type == 'veterinaire')

@@ -2,7 +2,7 @@
 
 @section('farm_content')
 <a href="{{ route('farm.invoices.index') }}" class="text-primary-600 hover:underline text-sm">← Toutes les factures</a>
-<div class="mt-4 bg-white rounded-lg shadow-md overflow-hidden max-w-3xl">
+<div class="mt-4 bg-white rounded-3xl shadow-md overflow-hidden max-w-3xl">
     <div class="p-8 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
             <p class="text-sm text-gray-500 uppercase">Facture</p>

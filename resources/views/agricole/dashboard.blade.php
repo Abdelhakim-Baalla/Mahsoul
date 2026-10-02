@@ -10,7 +10,7 @@
 
     <!-- Statistiques -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-3xl shadow-md p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -24,7 +24,7 @@
             </div>
         </div>
         
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-3xl shadow-md p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,7 +42,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
         <!-- Rendez-vous à venir -->
         <div class="lg:col-span-2">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h2 class="text-xl font-semibold text-gray-800">Rendez-vous à venir</h2>
                     <a href="{{ route('agricole.appointments.index') }}" class="text-green-600 hover:text-green-700 text-sm font-medium">Voir tous</a>

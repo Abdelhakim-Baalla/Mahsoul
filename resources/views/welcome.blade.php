@@ -150,15 +150,17 @@
     </section>
 
     @guest
-    <section class="bg-forest py-16">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div>
-                <h2 class="font-display text-3xl md:text-4xl font-extrabold text-white">Prêt à faire grandir votre exploitation ?</h2>
-                <p class="text-cream/70 mt-3">Rejoignez Mahsoul et accédez aux experts, à la marketplace et au Farm OS.</p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-4 shrink-0">
-                <a href="{{ route('register') }}" class="btn-sun">S'inscrire gratuitement</a>
-                <a href="{{ route('experts.index') }}" class="btn-outline-eco !border-sun !text-sun hover:!bg-sun hover:!text-forest">Réserver une consultation</a>
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-forest rounded-[2.5rem] px-8 py-14 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+                <div>
+                    <h2 class="font-display text-3xl md:text-4xl font-extrabold text-white">Prêt à faire grandir votre exploitation ?</h2>
+                    <p class="text-cream/70 mt-3">Rejoignez Mahsoul et accédez aux experts, à la marketplace et au Farm OS.</p>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+                    <a href="{{ route('register') }}" class="btn-sun">S'inscrire gratuitement</a>
+                    <a href="{{ route('experts.index') }}" class="btn-outline-eco !border-sun !text-sun hover:!bg-sun hover:!text-forest">Réserver une consultation</a>
+                </div>
             </div>
         </div>
     </section>

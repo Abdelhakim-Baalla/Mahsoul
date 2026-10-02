@@ -8,7 +8,7 @@
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Sidebar -->
             <div class="md:w-1/5">
-                <div class="bg-white rounded-lg shadow-md p-6 h-full">
+                <div class="bg-white rounded-3xl shadow-md p-6 h-full">
                     <div class="flex items-center mb-6">
                         <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                             <img src="{{Auth::user()->photo}}" class="rounded-full" alt="{{Auth::user()->prenom}} {{Auth::user()->nom}}">
@@ -77,7 +77,7 @@
                 <!-- Stats Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-2 mb-6">
                     <!-- Orders Stats -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="bg-white rounded-3xl shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-lg font-semibold text-gray-800">Mes Document</h2>
                             <div class="p-2 bg-primary-100 rounded-full">

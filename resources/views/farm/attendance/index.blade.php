@@ -3,7 +3,7 @@
 @section('farm_content')
 <h2 class="text-xl font-bold text-gray-800 mb-2">Pointage du jour</h2>
 <p class="text-gray-600 mb-6">{{ \Carbon\Carbon::parse($today)->format('d/m/Y') }} — cochez les présents</p>
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="bg-white rounded-3xl shadow-md overflow-hidden">
     <form action="{{ route('farm.attendance.store') }}" method="POST">
         @csrf
         <div class="overflow-x-auto">

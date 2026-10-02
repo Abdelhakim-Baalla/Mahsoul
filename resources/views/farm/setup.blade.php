@@ -3,7 +3,7 @@
 @section('content')
 <div class="bg-primary-50 min-h-screen py-12">
     <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-3xl shadow-md overflow-hidden">
             <div class="p-8">
                 <div class="text-center mb-8">
                     <i class="fas fa-tractor text-primary-600 text-4xl"></i>

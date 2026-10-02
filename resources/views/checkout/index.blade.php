@@ -77,7 +77,7 @@
                 <form action="/checkout/payment" method="POST">
                     @csrf
                     <!-- Shipping Information -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">
                             <h2 class="text-xl font-bold text-gray-800">Informations de livraison</h2>
                         </div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">
                             <h2 class="text-xl font-bold text-gray-800">Méthode de livraison</h2>
                         </div>
@@ -129,7 +129,7 @@
                     </div>
 
                     <!-- Payment Method -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">
                             <h2 class="text-xl font-bold text-gray-800">Méthode de paiement</h2>
                         </div>
@@ -143,7 +143,7 @@
                                             <span class="block text-sm text-gray-500">Paiement par carte via Stripe</span>
                                         </div>
                                         <img
-                                            src="{{ asset('images/stripe-logo.png') }}"
+                                            src="{{ asset('images/Stripe-logo.png') }}"
                                             alt="Stripe"
                                             class="h-8 w-auto"
                                             style="filter: brightness(0) saturate(100%) invert(26%) sepia(89%) saturate(2599%) hue-rotate(215deg) brightness(97%) contrast(91%)">
@@ -154,7 +154,7 @@
                     </div>
 
                     <!-- Order Notes -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
                         <div class="p-6 border-b border-gray-200">
                             <h2 class="text-xl font-bold text-gray-800">Notes de commande (optionnel)</h2>
                         </div>
@@ -165,7 +165,7 @@
                     </div>
 
                     <!-- Terms and Conditions -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
                         <div class="p-6">
                             <div class="flex items-start">
                                 <input id="terms" name="terms" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1" required>
@@ -192,7 +192,7 @@
 
             <!-- Order Summary -->
             <div class="lg:w-1/3">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden sticky top-6">
+                <div class="bg-white rounded-3xl shadow-md overflow-hidden sticky top-6">
                     <div class="p-6 border-b border-gray-200">
                         <h2 class="text-xl font-bold text-gray-800">Récapitulatif de la commande</h2>
                     </div>

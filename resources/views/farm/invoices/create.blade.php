@@ -2,7 +2,7 @@
 
 @section('farm_content')
 <h2 class="text-xl font-bold text-gray-800 mb-6">Nouvelle facture</h2>
-<div class="bg-white rounded-lg shadow-md p-8 max-w-3xl">
+<div class="bg-white rounded-3xl shadow-md p-8 max-w-3xl">
     <form action="{{ route('farm.invoices.store') }}" method="POST" class="space-y-5">
         @csrf
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">

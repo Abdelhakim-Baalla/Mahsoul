@@ -12,7 +12,7 @@
                 @include('profile.partials.sidebar', ['active' => 'notifications'])
             </div>
             <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                     <div class="p-6 border-b border-gray-200">
                         <h2 class="text-xl font-bold text-gray-800">Activité récente ({{ $notifications->count() }})</h2>
                     </div>

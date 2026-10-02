@@ -8,7 +8,7 @@
     </div>
 
     <!-- Filtres -->
-    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div class="bg-white rounded-3xl shadow-md p-4 mb-6">
         <h2 class="text-xl font-semibold mb-4">Filtrer les experts</h2>
         <form action="{{ route('experts.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
@@ -48,7 +48,7 @@
     <!-- Liste des experts -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+        <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
             <div class="relative">
                 <img src="" alt="" class="w-full h-48 object-cover">
                 <div class="absolute top-2 right-2 bg-white px-2 py-1 rounded-full text-sm font-medium ">

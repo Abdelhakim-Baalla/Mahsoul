@@ -46,7 +46,7 @@
             @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($articles as $article)
-                <div class="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-lg transition duration-300">
+                <div class="card-eco bg-white shadow-md overflow-hidden group">
                     <div class="relative h-48">
                         <img src="{{ $article->photo }}" alt="{{ Str::limit(strip_tags($article->titre), 15) }}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>

@@ -37,7 +37,7 @@
         <div class="flex flex-col md:flex-row gap-8">
             <!-- Sidebar -->
             <div class="md:w-1/4">
-                <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="bg-white rounded-3xl shadow-md p-6">
                     <div class="flex items-center mb-6">
                         <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                             <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +94,7 @@
             
             <!-- Main Content -->
             <div class="md:w-3/4">
-                <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="bg-white rounded-3xl shadow-md p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h1 class="text-2xl font-bold text-gray-800">Mes commandes</h1>
                         <div class="flex items-center">

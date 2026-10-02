@@ -53,7 +53,7 @@
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
                 <div class="p-6 border-b border-gray-200">
                     <h2 class="text-xl font-bold text-gray-800">Statut de la commande</h2>
                 </div>

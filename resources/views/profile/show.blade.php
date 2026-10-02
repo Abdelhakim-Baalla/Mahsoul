@@ -56,7 +56,7 @@
                                 </a>
                                 @endif
                             </div>
-                            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                            <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
                                 <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                                     <h3 class="text-xl font-bold text-gray-800">Informations personnelles</h3>
                                     <a href="/profile/edit" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
@@ -102,7 +102,7 @@
 
                     <!-- Farm Information Card -->
                     @if(Auth::user()->type == 'agricole')
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8 mt-5">
                         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                             <h3 class="text-xl font-bold text-gray-800">Informations sur l'exploitation</h3>
                             <a href="/profile/edit/information/agricole" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
@@ -136,7 +136,7 @@
 
                     <!-- Veterinaire Information card -->
                     @if(Auth::user()->type == 'veterinaire')
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8 mt-5">
                         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                             <h3 class="text-xl font-bold text-gray-800">Informations sur Vous</h3>
                             <a href="/profile/edit/information/veterinaire" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
@@ -172,7 +172,7 @@
 
                     <!-- Admin Information card -->
                     @if(Auth::user()->type == 'admin')
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8 mt-5">
                         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                             <h3 class="text-xl font-bold text-gray-800">Informations sur l'admin</h3>
                             <a href="/profile/edit/information/admin" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
@@ -201,7 +201,7 @@
 
                      <!-- Client Information card -->
                      @if(Auth::user()->type == 'client')
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8 mt-5">
+                    <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8 mt-5">
                         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                             <h3 class="text-xl font-bold text-gray-800">Informations sur Vous</h3>
                             <a href="/profile/edit/information/client" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">

@@ -26,14 +26,14 @@
             </h1>
         </div>
         <a href="{{ route('admin.tags.create') }}"
-            class="inline-flex items-center px-6 py-3 border border-transparent text-lg font-medium rounded-lg shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+            class="inline-flex items-center px-6 py-3 border border-transparent text-lg font-medium rounded-3xl shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
             <i class="fas fa-plus-circle mr-2"></i>
             Nouveau Tag
         </a>
     </div>
 
     <!-- Carte principale -->
-    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+    <div class="bg-white rounded-3xl shadow-md border border-gray-200 overflow-hidden">
         <!-- En-tête de tableau -->
         <div class="bg-primary-50 px-6 py-4 border-b border-gray-200">
             <div class="flex items-center">

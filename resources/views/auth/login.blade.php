@@ -68,17 +68,6 @@
                             Se connecter
                         </button>
 
-                        <div class="relative my-6">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-gray-300"></div>
-                            </div>
-                            <div class="relative flex justify-center text-sm">
-                                <span class="px-2 bg-white text-gray-500">
-                                    Ou connectez-vous avec
-                                </span>
-                            </div>
-                        </div>
-
                         <div class="mt-6 text-center">
                             <p class="text-sm text-gray-600">
                                 Vous n'avez pas de compte ? <a href="{{ route('register') }}" class="text-primary-600 hover:text-primary-700 font-medium">Inscrivez-vous</a>

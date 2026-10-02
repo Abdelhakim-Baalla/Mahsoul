@@ -52,7 +52,7 @@
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
                 <div class="p-6 bg-primary-600 text-white text-center">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-check text-primary-600 text-3xl"></i>

@@ -52,7 +52,7 @@
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
                 <div class="p-6 bg-amber-500 text-white text-center">
                     <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-pause-circle text-amber-500 text-3xl"></i>
@@ -101,7 +101,7 @@
                 </div>
             </div>
             
-            <div class="bg-white rounded-lg shadow-md overflow-hidden p-6">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-3">Vous avez des questions ?</h3>
                 <p class="text-gray-700 mb-4">Si vous avez rencontré des difficultés lors du processus de paiement ou si vous avez des questions, notre équipe est là pour vous aider.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">

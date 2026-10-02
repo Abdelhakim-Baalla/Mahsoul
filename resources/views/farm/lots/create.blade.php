@@ -4,7 +4,7 @@
 <div class="bg-primary-50 min-h-screen py-10">
     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold text-primary-800 mb-8">Nouveau lot de récolte</h1>
-        <div class="bg-white rounded-lg shadow-md p-8">
+        <div class="bg-white rounded-3xl shadow-md p-8">
             <form action="{{ route('farm.lots.store') }}" method="POST" class="space-y-6">
                 @csrf
                 @if($errors->any())

@@ -4,7 +4,7 @@
 <div class="bg-primary-50 min-h-screen py-10">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <a href="{{ route('farm.lots.index') }}" class="text-primary-600 hover:underline text-sm">← Tous les lots</a>
-        <div class="mt-4 bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="mt-4 bg-white rounded-3xl shadow-md overflow-hidden">
             <div class="p-8 border-b border-gray-200 bg-gradient-to-r from-primary-600 to-primary-700 text-white">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>

@@ -5,7 +5,7 @@
     <h2 class="text-xl font-bold text-gray-800">Tâches</h2>
     <a href="{{ route('farm.tasks.create') }}" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700"><i class="fas fa-plus mr-2"></i>Nouvelle tâche</a>
 </div>
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
+<div class="bg-white rounded-3xl shadow-md overflow-hidden">
     @if($tasks->isEmpty())
     <p class="p-10 text-center text-gray-500">Aucune tâche.</p>
     @else

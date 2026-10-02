@@ -11,7 +11,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-white rounded-3xl shadow-md overflow-hidden">
         <!-- En-tête -->
         <div class="text-white p-6" style="background-image: url('{{ asset('images/veterinaire-banner.jpg') }}'); background-size: cover; background-position: center;">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">

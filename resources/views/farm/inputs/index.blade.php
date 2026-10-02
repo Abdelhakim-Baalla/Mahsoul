@@ -5,7 +5,7 @@
     <h2 class="text-xl font-bold text-gray-800">Stocks intrants</h2>
     <a href="{{ route('farm.inputs.create') }}" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-md hover:bg-primary-700"><i class="fas fa-plus mr-2"></i>Ajouter un intrant</a>
 </div>
-<div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+<div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
@@ -33,7 +33,7 @@
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white rounded-3xl shadow-md p-6">
         <h3 class="text-lg font-bold text-gray-800 mb-4">Enregistrer une utilisation</h3>
         <form action="{{ route('farm.inputs.use') }}" method="POST" class="space-y-4">
             @csrf
@@ -83,7 +83,7 @@
             <button type="submit" class="px-6 py-3 bg-primary-600 text-white font-medium rounded-md hover:bg-primary-700">Enregistrer (décrémente le stock)</button>
         </form>
     </div>
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-white rounded-3xl shadow-md overflow-hidden">
         <div class="p-6 border-b border-gray-200"><h3 class="text-lg font-bold text-gray-800">Dernières utilisations</h3></div>
         <ul class="divide-y divide-gray-200">
             @forelse($usages as $u)

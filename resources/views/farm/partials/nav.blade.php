@@ -13,7 +13,7 @@ $items = [
     ['invoices', 'Factures', 'fa-file-invoice', route('farm.invoices.index')],
 ];
 @endphp
-<div class="bg-white rounded-lg shadow-md p-4 mb-8 overflow-x-auto">
+<div class="bg-white rounded-3xl shadow-md p-4 mb-8 overflow-x-auto">
     <div class="flex gap-2 min-w-max">
         @foreach($items as [$key, $label, $icon, $url])
         <a href="{{ $url }}" class="px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap {{ $active === $key ? 'bg-primary-600 text-white' : 'text-gray-700 hover:bg-gray-100' }}">

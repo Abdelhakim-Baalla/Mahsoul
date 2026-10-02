@@ -43,7 +43,7 @@
                             <div class="lg:col-span-2">
                            
                                 <!-- Edit Profile Form -->
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                                <div class="bg-white rounded-3xl shadow-md overflow-hidden mb-8">
                                     <div class="p-6 border-b border-gray-200">
                                         <h3 class="text-xl font-bold text-gray-800">Modifier mes informations</h3>
                                     </div>
@@ -115,7 +115,7 @@
                                 </div>
 
                                 <!-- Change Password Form -->
-                                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                                
                                     <div class="p-6 border-b border-gray-200">
                                         <h3 class="text-xl font-bold text-gray-800">Changer le mot de passe</h3>

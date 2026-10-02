@@ -8,7 +8,7 @@
     </div>
 
     <!-- Filtres -->
-    <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+    <div class="bg-white rounded-3xl shadow-md p-4 mb-6">
         <form action="{{ route('vet.appointments.index') }}" method="GET" class="flex flex-wrap gap-4">
             <div class="flex-1 min-w-[200px]">
                 <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
@@ -70,7 +70,7 @@
 
     <!-- Liste des rendez-vous -->
         <div class="space-y-4">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <div class="p-6">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="flex items-center mb-4 md:mb-0">
@@ -134,7 +134,7 @@
         <div class="mt-8">
         </div>
     
-        <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <div class="bg-white rounded-3xl shadow-md p-8 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>

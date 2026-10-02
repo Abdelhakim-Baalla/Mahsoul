@@ -8,7 +8,7 @@
         <button type="submit" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200">Afficher</button>
     </form>
 </div>
-<div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+<div class="bg-white rounded-3xl shadow-md overflow-hidden mb-6">
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">

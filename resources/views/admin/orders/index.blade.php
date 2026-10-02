@@ -7,7 +7,7 @@
     <h1 class="mt-4 mb-4 text-2xl font-semibold text-gray-800">Gestion des commandes</h1>
     
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div class="bg-primary-600 text-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-primary-600 text-white rounded-3xl shadow-md overflow-hidden">
             <div class="p-4">
                 <div class="flex justify-between items-center">
                     <div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-yellow-500 text-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-yellow-500 text-white rounded-3xl shadow-md overflow-hidden">
             <div class="p-4">
                 <div class="flex justify-between items-center">
                     <div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-green-600 text-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-green-600 text-white rounded-3xl shadow-md overflow-hidden">
             <div class="p-4">
                 <div class="flex justify-between items-center">
                     <div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-red-600 text-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-red-600 text-white rounded-3xl shadow-md overflow-hidden">
             <div class="p-4">
                 <div class="flex justify-between items-center">
                     <div>

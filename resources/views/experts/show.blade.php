@@ -11,7 +11,7 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-white rounded-3xl shadow-md overflow-hidden">
         <!-- En-tête du profil -->
         <div class="relative">
             @if($expert->type == 'agricole')

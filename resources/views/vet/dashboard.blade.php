@@ -11,7 +11,7 @@
     <!-- Statistiques -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-8">
         
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-3xl shadow-md p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-3xl shadow-md p-6">
             <div class="flex items-center">
                 <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,7 +43,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Consultations récentes -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-3xl shadow-md overflow-hidden">
             <div class="px-6 py-4 bg-green-600 text-white flex justify-between items-center">
                 <h2 class="text-lg font-semibold">Consultations récentes ({{$countConsultationsRecent}})</h2>
                  @if($countConsultationsRecent > 3)
@@ -89,7 +89,7 @@
         </div>
 
         <!-- Consultations annulés -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-white rounded-3xl shadow-md overflow-hidden">
             <div class="px-6 py-4 bg-red-600 text-white flex justify-between items-center">
                 <h2 class="text-lg font-semibold">Consultations annulés ({{$countConsultationsAnnules}})</h2>
                 @if($countConsultationsAnnules > 3)
@@ -134,7 +134,7 @@
     </div>
 
     <!-- Consultations en attente de réponse -->
-    <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="mt-8 bg-white rounded-3xl shadow-md overflow-hidden">
         <div class="px-6 py-4 bg-yellow-600 text-white flex justify-between items-center">
             <h2 class="text-lg font-semibold">Consultations en attente de réponse ({{$countConsultationsEnAttente}})</h2>
              @if($countConsultationsEnAttente > 3)

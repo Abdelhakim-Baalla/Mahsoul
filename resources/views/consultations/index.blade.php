@@ -9,7 +9,7 @@
 
     <!-- Liste des consultations -->
         <div class="space-y-4 grid grid-cols-2 gap-5">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <h1 class="text-3xl font-bold text-gray-800 px-5 pt-8">Les Experts Agricoles</h1>
                 @foreach($agricoles as $agricole)
                 <div class="p-6">
@@ -80,7 +80,7 @@
 
 
 
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
                 <h1 class="text-3xl font-bold text-gray-800 px-5 pt-8">les Veterinaire</h1>
                 @foreach($veterinaires as $veterinaire)
                 <div class="p-6">

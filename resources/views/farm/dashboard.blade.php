@@ -29,7 +29,7 @@
 
         <!-- KPI cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="bg-white rounded-3xl shadow-md p-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><i class="fas fa-users text-blue-600 text-xl"></i></div>
                     <div class="ml-4">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="bg-white rounded-3xl shadow-md p-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center"><i class="fas fa-tasks text-yellow-600 text-xl"></i></div>
                     <div class="ml-4">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="bg-white rounded-3xl shadow-md p-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 {{ $alertesStock->count() ? 'bg-red-100' : 'bg-green-100' }} rounded-full flex items-center justify-center"><i class="fas fa-boxes text-xl {{ $alertesStock->count() ? 'text-red-600' : 'text-green-600' }}"></i></div>
                     <div class="ml-4">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="bg-white rounded-3xl shadow-md p-6">
                 <div class="flex items-center">
                     <div class="w-12 h-12 {{ ($recettes - $depenses) >= 0 ? 'bg-green-100' : 'bg-red-100' }} rounded-full flex items-center justify-center"><i class="fas fa-wallet text-xl {{ ($recettes - $depenses) >= 0 ? 'text-green-600' : 'text-red-600' }}"></i></div>
                     <div class="ml-4">
@@ -69,7 +69,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Lots récents / traçabilité -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200 flex items-center justify-between">
                     <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-barcode mr-2 text-primary-600"></i>Derniers lots (traçabilité)</h2>
                     <a href="{{ route('farm.lots.index') }}" class="text-primary-600 hover:text-primary-700 text-sm font-medium">Tous les lots →</a>
@@ -92,7 +92,7 @@
             </div>
 
             <!-- Tâches en cours -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-clipboard-list mr-2 text-primary-600"></i>Tâches en cours</h2><a href="{{ route('farm.tasks.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
@@ -114,7 +114,7 @@
             </div>
 
             <!-- Stocks -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-warehouse mr-2 text-primary-600"></i>Stocks intrants</h2><a href="{{ route('farm.inputs.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
@@ -140,7 +140,7 @@
             </div>
 
             <!-- Caisse -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-cash-register mr-2 text-primary-600"></i>Caisse récente</h2><a href="{{ route('farm.caisse.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>
@@ -164,7 +164,7 @@
 
         <!-- Ouvriers + factures -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-hard-hat mr-2 text-primary-600"></i>Ouvriers actifs</h2><div class="flex gap-3"><a href="{{ route('farm.attendance.index') }}" class="text-primary-600 text-sm font-medium">Pointer →</a><a href="{{ route('farm.workers.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div></div>
                 </div>
@@ -184,7 +184,7 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-md overflow-hidden">
                 <div class="p-6 border-b border-gray-200">
                     <div class="flex items-center justify-between"><h2 class="text-xl font-bold text-gray-800"><i class="fas fa-file-invoice mr-2 text-primary-600"></i>Factures en attente</h2><a href="{{ route('farm.invoices.index') }}" class="text-primary-600 text-sm font-medium">Gérer →</a></div>
                 </div>

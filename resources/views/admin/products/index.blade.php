@@ -10,7 +10,7 @@
                 <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Gestion des produits</h1>
                 <p class="text-sm text-gray-600 mt-1">Liste complète de tous vos produits artisanaux</p>
             </div>
-            <a href="{{ route('admin.products.create') }}" class="inline-flex items-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
+            <a href="{{ route('admin.products.create') }}" class="inline-flex items-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-3xl shadow-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
                 <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
@@ -94,7 +94,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
-                                        <img class="h-10 w-10 rounded-md object-cover border border-gray-100" src="{{ $produit->image ?? asset('images/default-product.png') }}" alt="{{ $produit->nom }}">
+                                        <img class="h-10 w-10 rounded-md object-cover border border-gray-100" src="{{ $produit->image ?? asset('images/pattern-leaves.jpg') }}" alt="{{ $produit->nom }}">
                                     </div>
                                     <div class="ml-4">
                                         <div class="font-medium text-gray-900">
