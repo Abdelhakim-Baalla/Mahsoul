@@ -107,4 +107,9 @@
         background-color: rgba(31, 99, 6, 0.1) !important;
         border-left: 4px solid #1f6306 !important;
     }
+    @media print {
+        nav, footer, #navigation, #footer, .no-print { display: none !important; }
+        body { background: #fff !important; }
+        main { padding: 0 !important; }
+    }
 </style>

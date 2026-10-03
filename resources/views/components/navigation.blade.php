@@ -56,6 +56,13 @@
                                 <a href="{{ route('profile.show') }}" class="dropdown-item">
                                     <i class="fas fa-user-circle mr-2"></i> Mon profil
                                 </a>
+                                <a href="{{ route('profile.notifications') }}" class="dropdown-item">
+                                    <i class="fas fa-bell mr-2"></i> Notifications
+                                    @php $unread = Auth::user()->unreadNotifications()->count(); @endphp
+                                    @if($unread > 0)
+                                    <span class="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded-full bg-red-500 text-white text-xs font-bold">{{ $unread }}</span>
+                                    @endif
+                                </a>
                                 <a href="{{ route('orders.index') }}" class="dropdown-item">
                                     <i class="fas fa-shopping-bag mr-2"></i> Mes commandes
                                 </a>

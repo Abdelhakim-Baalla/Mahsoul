@@ -343,6 +343,17 @@ class ProfileController extends Controller
         $user = Auth::user();
         $notifications = collect();
 
+        foreach ($user->unreadNotifications as $n) {
+            $notifications->push([
+                'icon' => 'fa-bell',
+                'color' => 'primary',
+                'title' => $n->data['title'] ?? 'Notification',
+                'body' => $n->data['message'] ?? '',
+                'date' => $n->created_at,
+            ]);
+        }
+        $user->unreadNotifications->markAsRead();
+
         if ($user->type === 'client') {
             $commandes = $this->commandesRepository->getCommandesByClientId($user->id);
             foreach ($commandes as $commande) {

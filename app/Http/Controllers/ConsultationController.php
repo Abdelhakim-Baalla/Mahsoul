@@ -225,6 +225,15 @@ class ConsultationController extends Controller
         $pdfContent = $pdfSave->output();
         $this->documentRepository->uploader($pdfContent, $rendez_vous_id ,$rendez_vous_expert, $rendez_vous_client);
 
+        try {
+            $clientUser = $this->utilisateurRepository->getById($validated['client_id']);
+            if ($clientUser) {
+                $clientUser->notify(new \App\Notifications\RendezVousConfirmation($rendezVous));
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Notification RDV échouée', ['rdv' => $rendez_vous_id, 'erreur' => $e->getMessage()]);
+        }
+
         return redirect()->route('rendezVous.checkout.stripe');
     }
 }

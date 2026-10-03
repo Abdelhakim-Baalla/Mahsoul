@@ -186,6 +186,14 @@ class ProductController extends Controller
 
         session()->forget('cart');
 
+        try {
+            if ($commandeE && auth()->user()) {
+                auth()->user()->notify(new \App\Notifications\OrderConfirmation($commandeE));
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Notification commande échouée', ['commande' => $commandeE->id ?? null, 'erreur' => $e->getMessage()]);
+        }
+
         return redirect()->route('checkout.stripe');
         
     }
