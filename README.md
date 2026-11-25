@@ -1,5 +1,9 @@
 # ![Mahsoul Logo](/public/images/logo-white.jpg) Projet Mahsoul - Plateforme Agricole Intelligente
 
+[Visite en lecture seule](https://baalla-mahsoul-demo.abdelhakimbaalla50.workers.dev) · [Parcours des agriculteurs et des experts](https://github.com/Abdelhakim-Baalla/Mahsoul/blob/main/Docs/Diagrames%20PNG/Diagramme-Cas-Utilisation-Mahsoul.jpg)
+
+Pour reconstruire la démo depuis la racine du dépôt avec PHP, Composer, PDO SQLite et les extensions Laravel, exécuter `composer install && php scripts/export-demo.php`. À la racine, `npx wrangler deploy` publie les fichiers générés.
+
 ---
 
 ## 📌 Avertissement  

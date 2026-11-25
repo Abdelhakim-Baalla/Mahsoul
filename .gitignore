@@ -16,3 +16,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+/demo-dist/
+/.wrangler/
